@@ -1,0 +1,20 @@
+{
+  "name": "Lake Erie College - Primary Site",
+  "description": "The digital home of Lake Erie College",
+  "keywords": [
+    "contentful",
+    "gatsby",
+    "static",
+    "ssg"
+  ],
+  "repository": "https://github.com/Lake-Erie-College/Lake-Erie-College-Primary",
+  "success_url": "/",
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    },
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-static"
+    }
+  ]
+}
