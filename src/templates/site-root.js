@@ -4,6 +4,7 @@ import Helmet from 'react-helmet'
 import get from 'lodash/get'
 import Img from 'gatsby-image'
 import Layout from '../components/layout'
+import PrimaryContent from '../components/primary-content'
 
 class SiteRootTemplate extends React.Component {
   render() {
@@ -13,6 +14,7 @@ class SiteRootTemplate extends React.Component {
     return (
       <Layout location={this.props.location} >
           <Helmet title={`${page.title} | ${siteTitle}`} />
+          <PrimaryContent data={page.primaryContent} />
       </Layout>
     )
   }
@@ -29,6 +31,9 @@ export const pageQuery = graphql`
     }
     contentfulHomepage(slug: { eq: $slug }) {
       title
+      primaryContent {
+        json
+      }
     }
   }
 `

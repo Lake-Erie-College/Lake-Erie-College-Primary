@@ -1,8 +1,11 @@
 import React from 'react'
 import { Link } from 'gatsby'
-import base from './base.css'
 import Container from './container'
 import Navigation from './navigation'
+import NavigationPrimary from './navigation-primary'
+
+// Global App Styles
+import '../styles/styles.scss'
 
 class Template extends React.Component {
   render() {
@@ -17,6 +20,7 @@ class Template extends React.Component {
     return (
       <Container>
         <Navigation />
+        <NavigationPrimary />
         {children}
       </Container>
     )

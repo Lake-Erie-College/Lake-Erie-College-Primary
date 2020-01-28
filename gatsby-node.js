@@ -1,5 +1,6 @@
 const Promise = require('bluebird')
 const path = require('path')
+const linkResolver = require('./src/utils').linkResolver
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
@@ -25,6 +26,7 @@ exports.createPages = ({ graphql, actions }) => {
             node {
               slug
               title
+              hidden
             }
           }
         }
@@ -33,6 +35,7 @@ exports.createPages = ({ graphql, actions }) => {
             node {
               title
               slug
+              hidden
               category {
                 slug
               }
@@ -52,8 +55,10 @@ exports.createPages = ({ graphql, actions }) => {
         const pages = result.data.allContentfulStandardPage.edges
 
         roots.forEach((root, index) => {
+          let path = linkResolver.path(root.node)
+
           createPage({
-            path: `/`,
+            path: path,
             component: siteroot,
             context: {
               slug: root.node.slug
@@ -62,8 +67,10 @@ exports.createPages = ({ graphql, actions }) => {
         })
 
         departments.forEach((page, index) => {
+          let path = linkResolver.path(page.node)
+
           createPage({
-            path: `/${page.node.slug}/`,
+            path: path,
             component: department,
             context: {
               slug: page.node.slug
@@ -72,25 +79,15 @@ exports.createPages = ({ graphql, actions }) => {
         })
 
         pages.forEach((page, index) => {
-          if (page.node.category !== null) {
-            if (page.node.category.slug !== `lake-erie-college`) {
-              createPage({
-                path: `/${page.node.category.slug}/${page.node.slug}/`,
-                component: standardpage,
-                context: {
-                  slug: page.node.slug
-                },
-              })
-            }
-          } else {
-            createPage({
-              path: `/${page.node.slug}/`,
-              component: standardpage,
-              context: {
-                slug: page.node.slug
-              },
-            })
-          }
+          let path = linkResolver.path(page.node)
+
+          createPage({
+            path: path,
+            component: standardpage,
+            context: {
+              slug: page.node.slug
+            },
+          })
         })
 
 
