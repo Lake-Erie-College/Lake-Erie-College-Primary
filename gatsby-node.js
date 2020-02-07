@@ -120,6 +120,10 @@ exports.createPages = ({ graphql, actions }) => {
         })
 
         departments.forEach((page, index) => {
+          if (page.node.hidden) {
+            return
+          }
+
           let path = linkResolver.path(page.node)
 
           createPage({
@@ -132,6 +136,10 @@ exports.createPages = ({ graphql, actions }) => {
         })
 
         pages.forEach((page, index) => {
+          if (page.node.hidden) {
+            return
+          }
+
           let path = linkResolver.path(page.node)
 
           createPage({
@@ -144,6 +152,10 @@ exports.createPages = ({ graphql, actions }) => {
         })
 
         offerings.forEach((page, index) => {
+          if (page.node.hidden) {
+            return
+          }
+
           let path = linkResolver.path(page.node)
 
           createPage({
@@ -156,6 +168,10 @@ exports.createPages = ({ graphql, actions }) => {
         })
 
         locations.forEach((page, index) => {
+          if (page.node.hidden) {
+            return
+          }
+
           let path = linkResolver.path(page.node)
 
           createPage({
@@ -168,6 +184,10 @@ exports.createPages = ({ graphql, actions }) => {
         })
 
         people.forEach((page, index) => {
+          if (page.node.hidden) {
+            return
+          }
+
           let path = linkResolver.path(page.node)
 
           createPage({
@@ -180,6 +200,10 @@ exports.createPages = ({ graphql, actions }) => {
         })
 
         events.forEach((page, index) => {
+          if (page.node.hidden) {
+            return
+          }
+
           let path = linkResolver.path(page.node)
 
           createPage({
