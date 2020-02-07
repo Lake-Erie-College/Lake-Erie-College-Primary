@@ -7,46 +7,34 @@ import Layout from '../components/layout'
 import PrimaryContent from '../components/primary-content'
 import PageHeading from '../components/page-heading'
 
-class StandardPageTemplate extends React.Component {
+class LocationTemplate extends React.Component {
   render() {
-    const page = get(this.props, 'data.contentfulStandardPage')
+    const page = get(this.props, 'data.contentfulLocation')
     const siteTitle = get(this.props, 'data.site.siteMetadata.title')
 
     return (
       <Layout location={this.props.location} >
           <Helmet title={`${page.title} | ${siteTitle}`} />
-          <main>
-            <h1>Standard Page</h1>
-            <PageHeading primary={page.primaryHeading} secondary={page.secondaryHeading} />
-            <PrimaryContent data={page.primaryContent} />
-          </main>
+          <main><h1>Location Page</h1></main>
       </Layout>
     )
   }
 }
 
-export default StandardPageTemplate
+export default LocationTemplate
 
 export const pageQuery = graphql`
-  query StandardPageBySlug($slug: String!) {
+  query LocationBySlug($slug: String!) {
     site {
       siteMetadata {
         title
       }
     }
-    contentfulStandardPage(slug: { eq: $slug }) {
+    contentfulLocation(slug: { eq: $slug }) {
       title
       slug
       description {
         description
-      }
-      pageIcon
-      primaryHeading
-      secondaryHeading
-      isNews
-      publishDate
-      lead {
-        lead
       }
       primaryContent {
         json

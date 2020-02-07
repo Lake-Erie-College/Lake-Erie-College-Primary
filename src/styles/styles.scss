@@ -1,0 +1,11 @@
+@import 'css--reset';
+@import 'typography';
+@import 'colors';
+
+body {
+    @include font-family;
+    font-weight: normal;
+
+    @include typescale('body1');
+    color: $color-text-01;
+}

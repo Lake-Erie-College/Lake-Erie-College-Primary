@@ -1,0 +1,58 @@
+@import '../styles/typography';
+@import '../styles/breakpoint';
+@import '../styles/spacing';
+@import '../styles/colors';
+
+.callToAction {
+    /* Vertically center text in the 'link' area */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    grid-row: page / end;
+    padding: $spacing-sm;
+
+    @include font-family-headings;
+    font-weight: 400;
+    @include line-height('heading');
+    @include font-smoothing;
+    @include letter-spacing;
+    @include typescale('button');
+
+    border: 2px solid currentColor;
+
+    box-shadow:
+        0 0.8px 0.7px rgba(0, 0, 0, 0.028),
+        0 2px 1.8px rgba(0, 0, 0, 0.04),
+        0 3.8px 3.4px rgba(0, 0, 0, 0.05),
+        0 6.7px 6px rgba(0, 0, 0, 0.06),
+        0 12.5px 11.3px rgba(0, 0, 0, 0.072),
+        0 30px 27px rgba(0, 0, 0, 0.1)
+    ;
+
+    overflow: hidden;
+
+    a:link,
+    a:visited {
+        text-decoration: none;
+        color: currentColor;
+    }
+
+    a:hover,
+    a:active {
+        color: currentColor;
+    }
+}
+
+.callToActionMarker {
+    position: absolute;
+    top: -$spacing-sm;
+    bottom: -$spacing-sm;
+    right: -$spacing-sm;
+    width: $spacing-2xl;
+    display: block;
+    background-color: currentColor;
+    transform: rotate(15deg) translateX(.5rem);
+    content: "";
+}

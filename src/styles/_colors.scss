@@ -1,0 +1,58 @@
+// Palette
+$palette-white: white;
+$palette-cyprus: #094A3E;
+$palette-tangerine:#FF8F15;
+$palette-jungle-green:#1F978B;
+$palette-viking:#4197CA;
+$palette-catskill-white:#EAEFE8;
+$palette-beryl-green:#B1BEA5;
+$palette-gondola:#363636;
+$palette-te-papa-green:#2B584E;
+$palette-nobel:#9C9C9C;
+$palette-picton-blue:#4399CC;
+$palette-onahau:#D1E4F2;
+$palette-tawny:#D63300;
+$palette-maya-blue:#6DCFF6;
+$palette-vermilion:#FF4D15;
+$palette-elf-green:#1F974F;
+$palette-malibu:#6DB4F6;
+$palette-link-water: #D1E4F2;
+$palette-lightning-yellow: #FFC115;
+
+// Global - Brand
+$color-brand-01: $palette-cyprus;
+$color-brand-02: $palette-tangerine;
+$color-brand-03: $palette-jungle-green;
+
+// Global - UI
+$color-ui-01: $palette-white;
+$color-ui-02: $palette-viking;
+$color-ui-03: $palette-catskill-white;
+$color-ui-04: $palette-beryl-green;
+$color-ui-05: $palette-gondola;
+
+// Global - Text
+$color-text-01: $palette-gondola;
+$color-text-02: $palette-te-papa-green;
+$color-text-03: $palette-nobel;
+
+// Global - Inverse
+$color-inverse-01: $palette-white;
+$color-inverse-02: $palette-viking;
+
+// Global - Field
+$color-field-01: $palette-picton-blue;
+$color-field-02: $palette-white;
+
+// Global - Hover
+$color-hover-primary: $palette-tangerine;
+$color-hover-text: $palette-jungle-green;
+$color-hover-danger: $palette-tawny;
+$color-hover-secondary: $palette-maya-blue;
+$color-hover-row: transparentize($palette-link-water, .5);
+
+// Global - Suppoert
+$color-support-01: $palette-vermilion;
+$color-support-02: $palette-elf-green;
+$color-support-03: $palette-lightning-yellow;
+$color-support-04: $palette-malibu;

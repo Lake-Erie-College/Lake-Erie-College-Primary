@@ -1,0 +1,97 @@
+$font-family-mono: 'ibm-plex-mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace !default;
+$font-family-sans-serif: 'ibm-plex-sans', Helvetica Neue, Arial, sans-serif !default;
+$font-family-serif: 'ibm-plex-serif', 'Georgia', Times, serif !default;
+$font-family-helvetica: 'IBM Helvetica', Helvetica Neue, HelveticaNeue, Helvetica, sans-serif !default;
+
+$font-family-body: 'Lato', sans-serif !default;
+$font-family-headings: 'Bebas Neue', sans-serif !default;
+
+$base-font-size: 16px !default; // Default, Use with em() and rem() functions
+
+$typescale-map: (
+    'h1': 90.44px,
+    'h2': 63.96px,
+    'h3': 45.23px,
+    'h4': 31.99px,
+    'h5': 22.62px,
+    'h6': 16px,
+    'body1': 16px,
+    'body2': 11.32px,
+    'subtitle1': 16px,
+    'subtitle2': 11.32px,
+    'button': 24px,
+    'caption': 11.32px,
+    'overline': 16px
+);
+
+@mixin typescale($size) {
+    @if map-has-key($typescale-map, $size) {
+        font-size: rem(map-get($typescale-map, $size));
+    }
+    @else {
+        @warn '$size This is not a step of the Type Scale!';
+    }
+}
+
+@function rem($px) {
+    @return ($px / $base-font-size) * 1rem;
+}
+
+@function em($px) {
+    @return ($px / $base-font-size) * 1em;
+}
+
+@mixin font-family {
+    font-family: $font-family-body; 
+}
+
+@mixin font-family-headings {
+    font-family: $font-family-headings;
+}
+
+@mixin font-weight-body {
+    font-weight: 300;
+}
+
+// There are two line heights to choose from. One for headings and one for body text
+@mixin line-height($el) {
+    @if $el == 'heading' {
+        line-height: 1.05;
+    }
+    @else if $el == 'body' {
+        line-height: 1.5;
+    }
+    @else {
+        @warn 'Invalid argument used for @mixin line-height($el) . Please use 'heading' or 'body'.';
+    }
+}
+
+// Only applied to bold weight text
+@mixin font-smoothing {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+@mixin letter-spacing {
+    letter-spacing: -0.5px;
+}
+
+$font-size-map: (
+  '80': 5rem,
+  '66': 2.125rem,
+  '46': 2.875rem,
+  '32': 2rem,
+  '24': 1.5rem,
+  '16': 1rem,
+  '12': .75rem,
+  '10': 0.625rem
+);
+
+@mixin font-size($size) {
+    @if map-has-key($font-size-map, $size) {
+        font-size: map-get($font-size-map, $size);
+    }
+    @else {
+        @warn 'This is not a step of the Type Scale! Valid sizes are 10, 12, 16, 24, 32, 46, 66, and 80';
+    }
+}
