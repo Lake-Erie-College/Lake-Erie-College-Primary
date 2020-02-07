@@ -6,30 +6,85 @@ const NavigationPrimary = () => {
     const data = useStaticQuery(graphql`
     {
         contentfulSiteSettings(slug: {eq: "global-site-settings"}) {
-        navigationPrimary {
-            title
-            navigationItems {
-            title
-            newWindow
-            externalUrl
-            internalLink {
-                title
-                slug
-            }
-            navigationSubmenu {
-                title
+            navigationPrimary {
+                id
                 navigationItems {
-                title
-                newWindow
-                externalUrl
-                internalLink {
-                    slug
+                    id
                     title
-                }
+                    newWindow
+                    externalUrl
+                    internalLink {
+                        ... on ContentfulAcademicOffering {
+                          id
+                          slug
+                        }
+                        ... on ContentfulDepartment {
+                          id
+                          slug
+                        }
+                        ... on ContentfulEvent {
+                          id
+                          slug
+                        }
+                        ... on ContentfulHomepage {
+                          id
+                          slug
+                        }
+                        ... on ContentfulLocation {
+                          id
+                          slug
+                        }
+                        ... on ContentfulPerson {
+                          id
+                          slug
+                        }
+                        ... on ContentfulStandardPage {
+                          id
+                          slug
+                        }
+                    }
+                    navigationSubmenu {
+                        id
+                        title
+                        navigationItems {
+                            id
+                            title
+                            newWindow
+                            externalUrl
+                            internalLink {
+                                ... on ContentfulAcademicOffering {
+                                  id
+                                  slug
+                                }
+                                ... on ContentfulDepartment {
+                                  id
+                                  slug
+                                }
+                                ... on ContentfulEvent {
+                                  id
+                                  slug
+                                }
+                                ... on ContentfulHomepage {
+                                  id
+                                  slug
+                                }
+                                ... on ContentfulLocation {
+                                  id
+                                  slug
+                                }
+                                ... on ContentfulPerson {
+                                  id
+                                  slug
+                                }
+                                ... on ContentfulStandardPage {
+                                  id
+                                  slug
+                                }
+                            }
+                        }
+                    }
                 }
             }
-            }
-        }
         }
     }
     `)
@@ -42,16 +97,16 @@ const NavigationPrimary = () => {
         let submenuItems = get(link, 'navigationSubmenu.navigationItems')
     
         return (
-            <li key={link.title}>
+            <li key={link.id}>
                 {link.title}
             </li>
         )
     }
 
     return (
-        <nav>
+        <nav role="navigation" aria-label='primary-navigation'>
             <ul>
-              { navigationItems.map(( link ) => <NavigationItem link={link} className='test' />) }
+              { navigationItems.map(( link ) => <NavigationItem key={link.id} link={link} className='test' />) }
             </ul>
         </nav>
     )

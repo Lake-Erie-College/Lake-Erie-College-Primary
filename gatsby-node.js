@@ -9,6 +9,10 @@ exports.createPages = ({ graphql, actions }) => {
     const siteroot = path.resolve('./src/templates/site-root.js')
     const department = path.resolve('./src/templates/department.js')
     const standardpage = path.resolve('./src/templates/standard-page.js')
+    const academicOffering = path.resolve('./src/templates/academic-offering.js')
+    const event = path.resolve('./src/templates/event.js')
+    const location = path.resolve('./src/templates/location.js')
+    const person = path.resolve('./src/templates/person.js')
 
     resolve(
       graphql(`
@@ -42,6 +46,51 @@ exports.createPages = ({ graphql, actions }) => {
             }
           }
         }
+        allContentfulAcademicOffering {
+          edges {
+            node {
+              slug
+              title
+              hidden
+              category {
+                slug
+              }
+            }
+          }
+        }
+        allContentfulLocation {
+          edges {
+            node {
+              title
+              slug
+              hidden
+              category {
+                slug
+              }
+            }
+          }
+        }
+        allContentfulPerson {
+          edges {
+            node {
+              title
+              slug
+              hidden
+            }
+          }
+        }
+        allContentfulEvent {
+          edges {
+            node {
+              title
+              slug
+              hidden
+              category {
+                slug
+              }
+            }
+          }
+        }
       }
       `
       ).then(result => {
@@ -53,6 +102,10 @@ exports.createPages = ({ graphql, actions }) => {
         const roots = result.data.allContentfulHomepage.edges
         const departments = result.data.allContentfulDepartment.edges
         const pages = result.data.allContentfulStandardPage.edges
+        const offerings = result.data.allContentfulAcademicOffering.edges
+        const locations = result.data.allContentfulLocation.edges
+        const people = result.data.allContentfulPerson.edges
+        const events = result.data.allContentfulEvent.edges
 
         roots.forEach((root, index) => {
           let path = linkResolver.path(root.node)
@@ -90,6 +143,53 @@ exports.createPages = ({ graphql, actions }) => {
           })
         })
 
+        offerings.forEach((page, index) => {
+          let path = linkResolver.path(page.node)
+
+          createPage({
+            path: path,
+            component: academicOffering,
+            context: {
+              slug: page.node.slug
+            },
+          })
+        })
+
+        locations.forEach((page, index) => {
+          let path = linkResolver.path(page.node)
+
+          createPage({
+            path: path,
+            component: location,
+            context: {
+              slug: page.node.slug
+            },
+          })
+        })
+
+        people.forEach((page, index) => {
+          let path = linkResolver.path(page.node)
+
+          createPage({
+            path: path,
+            component: person,
+            context: {
+              slug: page.node.slug
+            },
+          })
+        })
+
+        events.forEach((page, index) => {
+          let path = linkResolver.path(page.node)
+
+          createPage({
+            path: path,
+            component: event,
+            context: {
+              slug: page.node.slug
+            },
+          })
+        })
 
       })
     )

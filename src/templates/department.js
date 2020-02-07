@@ -14,8 +14,10 @@ class DepartmentTemplate extends React.Component {
     return (
       <Layout location={this.props.location} >
           <Helmet title={`${page.title} | ${siteTitle}`} />
-          <h1>Department Page</h1>
-          <PrimaryContent data={page.primaryContent} />
+          <main>
+            <h1>Department Page</h1>
+            <PrimaryContent data={page.primaryContent} />
+          </main>
       </Layout>
     )
   }

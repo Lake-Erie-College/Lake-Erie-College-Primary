@@ -10,67 +10,69 @@
     grid-row-gap: 0px;
 
     margin: 1rem 0;
+}
 
-    & h1 {
-        @include font-family-headings;
-        font-weight: 400;
-        @include line-height('heading');
-        @include font-smoothing;
-        @include letter-spacing;
-        @include typescale('h1');
-    }
+.h1 {
+    @include font-family-headings;
+    font-weight: 400;
+    @include line-height('heading');
+    @include font-smoothing;
+    @include letter-spacing;
+    @include typescale('h1');
+}
 
-    h2 {
-        @include font-family-headings;
-        font-weight: 400;
-        @include line-height('heading');
-        @include font-smoothing;
-        @include letter-spacing;
-        @include typescale('h2');
-    }
+.h2 {
+    margin-top: .25em;
+    @include font-family-headings;
+    font-weight: 400;
+    @include line-height('heading');
+    @include font-smoothing;
+    @include letter-spacing;
+    @include typescale('h2');
+}
 
-    & h3 {
-        @include font-family-headings;
-        font-weight: 400;
-        @include line-height('heading');
-        @include font-smoothing;
-        @include letter-spacing;
-        @include typescale('h3');
-    }
+.h3 {
+    @include font-family-headings;
+    font-weight: 400;
+    @include line-height('heading');
+    @include font-smoothing;
+    @include letter-spacing;
+    @include typescale('h3');
+}
 
-    & h4 {
-        @include font-family-headings;
-        font-weight: 400;
-        @include line-height('heading');
-        @include font-smoothing;
-        @include letter-spacing;
-        @include typescale('h4');
-    }
+.h4 {
+    @include font-family-headings;
+    font-weight: 400;
+    @include line-height('heading');
+    @include font-smoothing;
+    @include letter-spacing;
+    @include typescale('h4');
+}
 
-    & h5 {
-        @include font-family-headings;
-        font-weight: 400;
-        @include line-height('heading');
-        @include font-smoothing;
-        @include letter-spacing;
-        @include typescale('h5');
-    }
+.h5 {
+    @include font-family-headings;
+    font-weight: 400;
+    @include line-height('heading');
+    @include font-smoothing;
+    @include letter-spacing;
+    @include typescale('h5');
+}
 
-    & h6 {
-        @include font-family-headings;
-        font-weight: 400;
-        @include line-height('heading');
-        @include font-smoothing;
-        @include letter-spacing;
-        @include typescale('h6');
-    }
+.h6 {
+    @include font-family-headings;
+    font-weight: 400;
+    @include line-height('heading');
+    @include font-smoothing;
+    @include letter-spacing;
+    @include typescale('h6');
+}
 
-    & p, li {
-        @include font-family;
-        font-weight: 400;
-        @include line-height('body');
-        @include typescale('body1');
-    }
+.p, .li {
+    margin-bottom: 1em;
+    @include font-family;
+    @include font-weight-body;
+    @include line-height('body');
+    @include typescale('body1');
 }
 
 .image {
@@ -85,4 +87,8 @@
         margin-right: 0;
         grid-column: main;
     }
+}
+
+.embeddedBlock {
+    grid-column: left-gutter / end;
 }

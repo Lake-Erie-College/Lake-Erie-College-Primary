@@ -30,6 +30,10 @@ module.exports = {
     {
       resolve: 'gatsby-source-contentful',
       options: contentfulConfig,
-    }
+    },
+    {
+      resolve: 'gatsby-plugin-react-axe',
+      options: {},
+    },
   ],
 }

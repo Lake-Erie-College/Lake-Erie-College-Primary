@@ -14,7 +14,9 @@ class SiteRootTemplate extends React.Component {
     return (
       <Layout location={this.props.location} >
           <Helmet title={`${page.title} | ${siteTitle}`} />
-          <PrimaryContent data={page.primaryContent} />
+          <main>
+            <PrimaryContent data={page.primaryContent} />
+          </main>
       </Layout>
     )
   }

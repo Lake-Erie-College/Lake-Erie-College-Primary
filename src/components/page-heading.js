@@ -16,4 +16,4 @@ export default ( props ) => (
         )}
         </span>
     </h1>
-  )
+)

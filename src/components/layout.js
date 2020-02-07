@@ -1,8 +1,9 @@
 import React from 'react'
 import { Link } from 'gatsby'
+import Helmet from 'react-helmet'
 import Container from './container'
-import Navigation from './navigation'
 import NavigationPrimary from './navigation-primary'
+import GlobalFooter from './global-footer'
 
 // Global App Styles
 import '../styles/styles.scss'
@@ -19,9 +20,12 @@ class Template extends React.Component {
 
     return (
       <Container>
-        <Navigation />
-        <NavigationPrimary />
+        <Helmet><html lang="en" /></Helmet>
+        <header>
+          <NavigationPrimary />
+        </header>
         {children}
+        <GlobalFooter />
       </Container>
     )
   }

@@ -2,8 +2,10 @@ import React from 'react'
 import { BLOCKS, MARKS, INLINES } from "@contentful/rich-text-types"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import {Link as GatsbyLink} from "gatsby"
-import Image from "gatsby-image";
-import useContentfulImage from "../hooks/useContentfulImage";
+import cx from "classnames";
+import Image from "gatsby-image"
+import useContentfulImage from "../hooks/useContentfulImage"
+import BlockSpotlightContent from './blocks/block-spotlight-content'
 
 const linkResolver = require('../utils').linkResolver
 
@@ -26,13 +28,13 @@ const options = {
     [MARKS.BOLD]: text => <Bold>{text}</Bold>,
   },
   renderNode: {
-    [BLOCKS.PARAGRAPH]: (node, children) => <p className={styles.textBlock}>{children}</p>,
-    [BLOCKS.HEADING_1]: (node, children) => <h1 className={styles.textBlock}>{children}</h1>,
-    [BLOCKS.HEADING_2]: (node, children) => <h2 className={styles.textBlock}>{children}</h2>,
-    [BLOCKS.HEADING_3]: (node, children) => <h3 className={styles.textBlock}>{children}</h3>,
-    [BLOCKS.HEADING_4]: (node, children) => <h4 className={styles.textBlock}>{children}</h4>,
-    [BLOCKS.HEADING_5]: (node, children) => <h5 className={styles.textBlock}>{children}</h5>,
-    [BLOCKS.HEADING_6]: (node, children) => <h6 className={styles.textBlock}>{children}</h6>,
+    [BLOCKS.PARAGRAPH]: (node, children) => <p className={cx(styles.textBlock, styles.p)}>{children}</p>,
+    [BLOCKS.HEADING_1]: (node, children) => <h1 className={cx(styles.textBlock, styles.h1)}>{children}</h1>,
+    [BLOCKS.HEADING_2]: (node, children) => <h2 className={cx(styles.textBlock, styles.h2)}>{children}</h2>,
+    [BLOCKS.HEADING_3]: (node, children) => <h3 className={cx(styles.textBlock, styles.h3)}>{children}</h3>,
+    [BLOCKS.HEADING_4]: (node, children) => <h4 className={cx(styles.textBlock, styles.h4)}>{children}</h4>,
+    [BLOCKS.HEADING_5]: (node, children) => <h5 className={cx(styles.textBlock, styles.h5)}>{children}</h5>,
+    [BLOCKS.HEADING_6]: (node, children) => <h6 className={cx(styles.textBlock, styles.h6)}>{children}</h6>,
     [BLOCKS.OL_LIST]: (node, children) => <ol className={styles.textBlock}>{children}</ol>,
     [BLOCKS.UL_LIST]: (node, children) => <ul className={styles.textBlock}>{children}</ul>,
     [BLOCKS.QUOTE]: (node, children) => <blockquote className={styles.textBlock}>{children}</blockquote>,
@@ -71,10 +73,24 @@ const options = {
   },
 }
 
+const blocksHandlers = {
+    'blockSpotlightContent': value => <BlockSpotlightContent props={value}/>,
+    'blockQuote': value => value,
+    'blockPersonListing': value => value,
+    'blockAcademicOfferingListing': value => value,
+    default: value => value,
+};
+
 function EmbeddedEntry({ node }) {
-    const title = `node.data.target`;
-    // Render the Carousel component from your Component Library
-    return <h1 className={styles.textBlock}>A thing! Test { title }</h1>;
+    const type = node.data.target.sys.contentType.sys.id
+    const value = node.data.target.fields
+    const handler = blocksHandlers[type] || blocksHandlers.default
+    
+    return (
+        <div className={styles.embeddedBlock}>
+            {handler(value)}
+        </div>
+    )
 }
 
 // Taken from: https://www.gatsbyjs.org/docs/gatsby-link/

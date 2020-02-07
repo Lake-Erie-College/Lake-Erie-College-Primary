@@ -1,0 +1,72 @@
+@import '../../styles/typography';
+@import '../../styles/breakpoint';
+@import '../../styles/spacing';
+@import '../../styles/colors';
+
+$navigation-color: $color-inverse-01;
+
+.base {
+    margin: 0;
+    padding: 0;
+}
+
+.navigation {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: 0;
+    grid-row-gap: $spacing-sm;
+
+    @include respond-to('small') {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}
+
+.navigationIcon {
+    margin: auto;
+    grid-row: icon / page;
+    color: inherit;
+}
+
+.navigationItem {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: [icon] 4fr [page] 3fr;
+    grid-column-gap: 0;
+    grid-row-gap: $spacing-sm;
+    padding: $spacing-lg;
+    height: 100%;
+
+    text-align: center;
+    text-decoration: none;
+
+    background-color: #094A3E;
+    color: #65D3FE;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &:nth-child(2n) {
+        background-color: #65D3FE;
+        color: #094A3E;
+    }
+
+    &:nth-child(3n) {
+        background-color: #FF8F15;
+        color: #16405B;
+    }
+
+    &:nth-child(4n) {
+        background-color: #16405B;
+        color: #FF8F15;
+    }
+}
+
+.interstitial {
+
+}
+
+.resources {
+
+}

@@ -24,10 +24,6 @@ $typescale-map: (
     'overline': 16px
 );
 
-@mixin test {
-    font-size: rem(32px);
-}
-
 @mixin typescale($size) {
     @if map-has-key($typescale-map, $size) {
         font-size: rem(map-get($typescale-map, $size));
@@ -51,6 +47,10 @@ $typescale-map: (
 
 @mixin font-family-headings {
     font-family: $font-family-headings;
+}
+
+@mixin font-weight-body {
+    font-weight: 300;
 }
 
 // There are two line heights to choose from. One for headings and one for body text
