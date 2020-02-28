@@ -35,7 +35,7 @@ const options = {
     [BLOCKS.HEADING_4]: (node, children) => <h4 className={cx(styles.textBlock, styles.h4)}>{children}</h4>,
     [BLOCKS.HEADING_5]: (node, children) => <h5 className={cx(styles.textBlock, styles.h5)}>{children}</h5>,
     [BLOCKS.HEADING_6]: (node, children) => <h6 className={cx(styles.textBlock, styles.h6)}>{children}</h6>,
-    [BLOCKS.OL_LIST]: (node, children) => <ol className={styles.textBlock}>{children}</ol>,
+    [BLOCKS.OL_LIST]: (node, children) => <ol className={cx(styles.textBlock, styles.ol)}>{children}</ol>,
     [BLOCKS.UL_LIST]: (node, children) => <ul className={styles.textBlock}>{children}</ul>,
     [BLOCKS.QUOTE]: (node, children) => <blockquote className={styles.textBlock}>{children}</blockquote>,
     [INLINES.ENTRY_HYPERLINK]: (node, children) => {
@@ -105,8 +105,8 @@ const Link = ({children, node, activeClassName, ...other}) => {
     )
 }
 
-export default ({ data }) => (
-    <div className={styles.primaryContent}>
+export default ({ data, isFullWidth }) => (
+    <div className={cx(styles.primaryContent, { [`${styles.fullWidth}`]: isFullWidth })}>
         {documentToReactComponents(data.json, options)}
     </div>
 )

@@ -100,6 +100,10 @@
     @include respond-to('small') {
         grid-column: left-gutter / main;
     }
+
+    @include respond-to('large') {
+        grid-column: left-main / main;
+    }
 }
 
 .navigation {
@@ -141,6 +145,10 @@
 
     @include respond-to('small') {
         grid-column: right-main / end;
+    }
+
+    @include respond-to('large') {
+        grid-column: right-main / right-gutter;
     }
 }
 

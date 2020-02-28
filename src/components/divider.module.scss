@@ -1,0 +1,12 @@
+@import '../styles/typography';
+@import '../styles/breakpoint';
+@import '../styles/spacing';
+@import '../styles/colors';
+
+.divider {
+    margin: $spacing-lg auto;
+    width: 25vw;
+    border-width: $spacing-2xs 0 0 0;
+    border-style: solid;
+    border-color: $color-ui-03;
+}

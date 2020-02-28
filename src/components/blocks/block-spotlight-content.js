@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
-import cx from "classnames";
+import cx from "classnames"
 import { Link as GatsbyLink } from "gatsby"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useSpring, animated, config } from 'react-spring' // https://www.react-spring.io/docs/hooks/basics
+import Image from "gatsby-image"
+import useContentfulImage from "../../hooks/useContentfulImage"
 
 import CallToAction from '../call-to-action'
 
@@ -74,11 +76,36 @@ const Navigation = ({ props, className }) => {
     )
 }
 
-const Interstitial = ({ props, className }) => (
-    <div className={className}>
-        <h1>Interstitial</h1>
-    </div>
-)
+const Interstitial = ({ props, className }) => {
+    const hasRelatedPages = typeof props.relatedPages !== 'undefined' && props.relatedPages[locale].length > 0
+    const primaryHeading = typeof props.primaryHeading !== 'undefined' ? props.primaryHeading[locale] : null
+    const secondaryHeading = typeof props.secondaryHeading !== 'undefined' ? props.secondaryHeading[locale] : null
+    const summary = typeof props.summary !== 'undefined' ? props.summary[locale] : null
+    const primaryImage = typeof props.primaryImage !== 'undefined' ? props.primaryImage[locale] : null
+
+    return (
+        <div className={className}>
+            {primaryImage && (
+                <div className={styles.sectionLead}>
+                    { primaryHeading && (
+                        <Heading heading={primaryHeading} overline={secondaryHeading} />
+                    )}
+                    { summary && (
+                        <Summary summary={summary} />
+                    )}
+                </div>
+            )}
+            <div className={primaryImage ? styles.sectionContent : styles.sectionFull}>
+                { primaryHeading && (
+                    <Heading heading={primaryHeading} overline={secondaryHeading} />
+                )}
+                { summary && (
+                    <Summary summary={summary} />
+                )}
+            </div>
+        </div>
+    )
+}
 
 const Resources = ({ props, className }) => (
     <div className={className}>
@@ -87,13 +114,28 @@ const Resources = ({ props, className }) => (
 )
 
 const Heading = ({heading, overline}) => (
-    <h2>
+    <h2 className={styles.heading}>
         {overline && (
-            <span>{overline}</span>
+            <span className={styles.overline}>{overline}</span>
         )}
         {heading}
     </h2>
 )
+
+const Summary = ({summary}) => (
+    <p className={styles.summary}>
+        {summary}
+    </p>
+)
+
+const PrimaryImage = ({image}) => {
+    const fluid = useContentfulImage(
+        image.data.target.fields.file["en-US"].url
+    )
+    return (
+        <Image className={styles.image} title={image.data.target.fields.title["en-US"]} fluid={fluid} />
+    )
+}
 
 export default ({ props }) => (
     displayComponent(props.displayStyle[locale], props)

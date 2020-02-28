@@ -21,7 +21,7 @@ class Template extends React.Component {
     return (
       <Container>
         <Helmet><html lang="en" /></Helmet>
-        <header>
+        <header style={{visibility: 'hidden'}}>
           <NavigationPrimary />
         </header>
         {children}

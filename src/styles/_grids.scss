@@ -1,0 +1,6 @@
+@mixin content-grid {
+    grid-template-columns: [left-gutter] 2fr [left-main] 1fr [main] 6fr [right-main] 1fr [right-gutter] 2fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: $spacing-sm;
+    grid-row-gap: 0px;
+}

@@ -1,7 +1,7 @@
 import React from 'react'
 import GatsbyImage from "gatsby-image"
 
-const ImageWithSVGSupport = ({ title, fluid, file, ...rest }) => {
+const ImageWithSVGSupport = ({ title, fluid, file }, ...rest) => {
   if (file.contentType === 'image/svg+xml') {
     return <img title={title} src={file.url} {...rest} />
   }

@@ -2,22 +2,11 @@
 @import '../styles/breakpoint';
 @import '../styles/colors';
 @import '../styles/spacing';
+@import '../styles/grids';
 
 .pageHeading {
     display: grid;
-    grid-template-columns: [left-gutter] 1fr [left-main] 2fr [main] 6fr [right-main] 2fr [right-gutter] 1fr;
-    grid-template-rows: 1fr;
-    grid-column-gap: $spacing-sm;
-    grid-row-gap: 0px;
-
-    @include font-family-headings;
-    font-weight: 400;
-    @include line-height('heading');
-    @include font-smoothing;
-    @include letter-spacing;
-    @include typescale('h2');
-
-    color: $color-text-02;
+    @include content-grid;
 
     @include respond-to('small') {
         margin-left: 0;
@@ -25,14 +14,49 @@
     }
 
     & span {
-        grid-column: left-main / right-gutter;
+        margin: 0 $spacing-md;
+        grid-column: left-gutter / end;
+
+        @include font-family-headings;
+        font-weight: 400;
+        @include line-height('heading');
+        @include font-smoothing;
+        @include letter-spacing;
+        @include typescale('h2');
+    
+        color: $color-text-02;
 
         @include respond-to('small') {
-            grid-column: main / right-gutter;
+            margin: 0;
+            grid-column: left-main / right-gutter;
+            @include typescale('h1');
         }
     }
 
     & em {
         color: $color-brand-03;
+    }
+}
+
+.overline {
+    display: block;
+    grid-column: left-gutter / end;
+
+    @include font-family;
+    font-weight: 400;
+    @include line-height('body');
+    @include letter-spacing-wide;
+    @include typescale('overline');
+
+    text-transform: uppercase;
+    color: $color-brand-01;
+
+    @include respond-to('small') {
+        grid-column: left-main / right-gutter;
+    }
+
+    &:after {
+        content: '\A';
+        white-space: pre;
     }
 }

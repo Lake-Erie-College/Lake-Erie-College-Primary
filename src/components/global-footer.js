@@ -51,47 +51,50 @@ const GlobalFooter = () => {
                     title
                     externalUrl
                     internalLink {
-                        ... on ContentfulAcademicOffering {
-                            id
-                            slug
-                            category {
-                            slug
+                        __typename
+                        ... on Node {
+                            ... on ContentfulAcademicOffering {
+                                id
+                                slug
+                                category {
+                                slug
+                                }
                             }
-                        }
-                        ... on ContentfulDepartment {
-                            id
-                            slug
-                            category {
-                            slug
+                            ... on ContentfulDepartment {
+                                id
+                                slug
+                                category {
+                                slug
+                                }
                             }
-                        }
-                        ... on ContentfulEvent {
-                            id
-                            slug
-                            category {
-                            slug
+                            ... on ContentfulEvent {
+                                id
+                                slug
+                                category {
+                                slug
+                                }
                             }
-                        }
-                        ... on ContentfulHomepage {
-                            id
-                            slug
-                        }
-                        ... on ContentfulLocation {
-                            id
-                            slug
-                            category {
-                            slug
+                            ... on ContentfulHomepage {
+                                id
+                                slug
                             }
-                        }
-                        ... on ContentfulPerson {
-                            id
-                            slug
-                        }
-                        ... on ContentfulStandardPage {
-                            id
-                            slug
-                            category {
-                            slug
+                            ... on ContentfulLocation {
+                                id
+                                slug
+                                category {
+                                slug
+                                }
+                            }
+                            ... on ContentfulPerson {
+                                id
+                                slug
+                            }
+                            ... on ContentfulStandardPage {
+                                id
+                                slug
+                                category {
+                                slug
+                                }
                             }
                         }
                     }
@@ -179,7 +182,7 @@ const GlobalFooter = () => {
         const url = link.externalUrl
         const node = link.internalLink
 
-        const to = !url ? linkResolver.path(node) : url;
+        const to = !url ? linkResolver.path(node) : url
 
         return (
             <li key={link.id}>

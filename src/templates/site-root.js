@@ -36,6 +36,68 @@ export const pageQuery = graphql`
       primaryContent {
         json
       }
+      heroCarousel {
+        callToAction
+        externalMediaUrl
+        image {
+          fluid(maxWidth: 1080) {
+            ...GatsbyContentfulFluid_withWebp
+          }
+        }
+        mediaHeading
+        mediaCaption {
+          mediaCaption
+        }
+        title
+        internalLink {
+          __typename
+          ... on Node {
+            ... on ContentfulAcademicOffering {
+                id
+                slug
+                category {
+                slug
+                }
+            }
+            ... on ContentfulDepartment {
+                id
+                slug
+                category {
+                slug
+                }
+            }
+            ... on ContentfulEvent {
+                id
+                slug
+                category {
+                slug
+                }
+            }
+            ... on ContentfulHomepage {
+                id
+                slug
+            }
+            ... on ContentfulLocation {
+                id
+                slug
+                category {
+                slug
+                }
+            }
+            ... on ContentfulPerson {
+                id
+                slug
+            }
+            ... on ContentfulStandardPage {
+                id
+                slug
+                category {
+                slug
+                }
+            }
+          }
+        }
+      }
     }
   }
 `
