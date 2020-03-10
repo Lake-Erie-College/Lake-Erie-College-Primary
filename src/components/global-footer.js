@@ -48,6 +48,7 @@ const GlobalFooter = () => {
             navigationConversions {
                 id
                 navigationItems {
+                    id
                     title
                     externalUrl
                     internalLink {
@@ -103,6 +104,7 @@ const GlobalFooter = () => {
             navigationFooter {
                 id
                 navigationItems {
+                    id
                     title
                     externalUrl
                     internalLink {
@@ -207,11 +209,11 @@ const GlobalFooter = () => {
             {typeof navigationConversionItems !== 'undefined' && (
             <nav className={styles.navigation} role="navigation" aria-label='footer-navigation'>
                 <ul className={styles.conversionLinks}>
-                    { navigationConversionItems.map(( link ) => <NavigationCTAItem key={link.id} link={link} className='test' />) }
+                    { navigationConversionItems.map(( link ) => <NavigationCTAItem key={`footer-nav-cta-${link.id}`} link={link} className='test' />) }
                 </ul>
                 {navigationFooterItems && (
                     <ul className={styles.navigationLinks}>
-                        { navigationFooterItems.map(( link ) => <NavigationItem key={link.id} link={link} className='test' />) }
+                        { navigationFooterItems.map(( link ) => <NavigationItem key={`footer-nav-link-${link.id}`} link={link} className='test' />) }
                     </ul>
                 )}
             </nav>

@@ -10,6 +10,10 @@
 
     margin: 1rem $spacing-md;
 
+    & > :first-child {
+        margin-top: 0;
+    }
+
     @include respond-to('small') {
         margin: 1rem 0;
     }
@@ -184,6 +188,56 @@
             &::before {
                 display: none;
             }
+        }
+    }
+}
+
+.ul {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: stretch;
+    margin: $spacing-sm 0;
+    padding: $spacing-md 0;
+
+    > li {
+        flex: 1 1 auto;
+        flex-basis: auto;
+        margin: $spacing-sm 0 0 0;
+        padding-right: $spacing-md;
+        width: 100%;
+
+        counter-increment: list-counter;
+
+        @include respond-to('small') {
+            width: 50%;
+        }
+    }
+
+    &::after {
+        position: absolute;
+        left: -$spacing-lg;
+        top: 0;
+        right: -$spacing-lg;
+        bottom: 0;
+        pointer-events: none;
+        border: 1px solid $color-brand-02;
+        content: " ";
+    }
+
+    .ul {
+        margin: 0;
+        padding: 0;
+
+        &:after {
+            display: none;
+        }
+
+        > li {
+            margin-top: 0;
         }
     }
 }

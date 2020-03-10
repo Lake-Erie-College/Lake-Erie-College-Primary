@@ -5,29 +5,37 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import GatsbyImage from "gatsby-image"
 import ReactPlayer from 'react-player'
 
-const linkResolver = require('../utils').linkResolver
+const linkResolver = require('../../utils').linkResolver
 
-import styles from "./block-spotlight-content.module.scss";
+import styles from "./block-media-with-caption.module.scss";
 
-const BlockMediaWithCaption = ({ internalMedia, externalMedia, heading, caption, internalLink, callToAction }, ...rest) => {
-    const isVideo = externalMedia !== null
-    
+const BlockMediaWithCaption = ({ internalMedia, externalMedia, heading, caption, internalLink, callToAction, isOverlay }, ...rest) => {
+    const isImage = typeof internalMedia !== 'undefined' && internalMedia !== null
+
+    const video = typeof externalMedia !== 'undefined' && externalMedia !== null ? externalMedia : null
+    const hasRelatedPage = typeof internalLink !== 'undefined' && internalLink.length > 0
+    const primaryHeading = typeof heading !== 'undefined' ? heading : null
+    const summary = typeof caption !== 'undefined' ? caption : null
+    const primaryImage = typeof internalMedia !== 'undefined' ? internalMedia : null
+
+    const overlayClass = typeof isOverlay !== 'undefined' && isOverlay !== null ? styles.overlay : ''
+
     return (
-        <figure>
-            {isVideo && (
-                <VideoPlayer url={externalMedia} />
+        <figure className={cx(styles.blockMedia, overlayClass)}>
+            {video && (
+                <VideoPlayer url={video} />
             )}
-            {!isVideo && (
-                <Image image={internalMedia} />
+            {isImage && (
+                <Image image={primaryImage} />
             )}
-            <figcaption>
+            <figcaption className={styles.mediaCaption}>
                 {heading && (
-                    <h2>{heading}</h2>
+                    <h2 className={styles.heading}>{primaryHeading}</h2>
                 )}
                 {caption && (
-                    <p>{caption}</p>
+                    <p className={styles.summary}>{summary}</p>
                 )}
-                {internalLink && callToAction && (
+                {hasRelatedPage && callToAction && (
                     <Link node={internalLink} cta={callToAction} />
                 )}
             </figcaption>
@@ -36,12 +44,24 @@ const BlockMediaWithCaption = ({ internalMedia, externalMedia, heading, caption,
 }
 
 const Image = (image) => {
-    <GatsbyImage title={image.title} fluid={image.fluid} />
+    const fluid = useContentfulImage(
+        image.data.target.file.url
+    )
+    return (
+        <GatsbyImage className={styles.media} title={image.data.target.title} fluid={fluid} />
+    )
 }
 
-const VideoPlayer = (url) => {
+const VideoPlayer = ({url}) => {
     return (
-        <ReactPlayer url={url} />
+        <div className={styles.media} >
+            <ReactPlayer 
+                className={styles.video}
+                url={url}
+                width='100%'
+                height='100%'
+            />
+        </div>
     )
 }
 
@@ -49,11 +69,14 @@ const Link = ({ node, cta }) => {
     const to = linkResolver.path(node)
 
     return (
-        <GatsbyLink to={to}>
-            <span>
-                {cta}
-            </span>
-        </GatsbyLink>
+        <p className={cx(styles.info, styles.building)}>
+            <GatsbyLink to={to} className={styles.internal}>
+                <FontAwesomeIcon icon='arrow-circle-right' size='sm' className={styles.icon} />
+                <span>
+                    {cta}
+                </span>
+            </GatsbyLink>
+        </p>
     )
 }
 

@@ -6,8 +6,11 @@ import cx from "classnames";
 import Image from "gatsby-image"
 import useContentfulImage from "../hooks/useContentfulImage"
 import BlockSpotlightContent from './blocks/block-spotlight-content'
+import BlockMediaWithCaption from './blocks/block-media-with-caption'
+import ContactPerson from './contact-person'
 
 const linkResolver = require('../utils').linkResolver
+const localeScrubber = require('../utils').localeScrubber
 
 import styles from './primary-content.module.scss'
 
@@ -36,7 +39,7 @@ const options = {
     [BLOCKS.HEADING_5]: (node, children) => <h5 className={cx(styles.textBlock, styles.h5)}>{children}</h5>,
     [BLOCKS.HEADING_6]: (node, children) => <h6 className={cx(styles.textBlock, styles.h6)}>{children}</h6>,
     [BLOCKS.OL_LIST]: (node, children) => <ol className={cx(styles.textBlock, styles.ol)}>{children}</ol>,
-    [BLOCKS.UL_LIST]: (node, children) => <ul className={styles.textBlock}>{children}</ul>,
+    [BLOCKS.UL_LIST]: (node, children) => <ul className={cx(styles.textBlock, styles.ul)}>{children}</ul>,
     [BLOCKS.QUOTE]: (node, children) => <blockquote className={styles.textBlock}>{children}</blockquote>,
     [INLINES.ENTRY_HYPERLINK]: (node, children) => {
         // If you are using contenful.js sdk, the referenced entry is resolved
@@ -74,10 +77,12 @@ const options = {
 }
 
 const blocksHandlers = {
-    'blockSpotlightContent': value => <BlockSpotlightContent props={value}/>,
-    'blockQuote': value => value,
-    'blockPersonListing': value => value,
     'blockAcademicOfferingListing': value => value,
+    'blockMediaWithCaption': value => <MediaWithCaption node={value} />,
+    'blockPersonListing': value => value,
+    'blockQuote': value => value,
+    'blockSpotlightContent': value => <SpotlightContent node={value} />,
+    'person': value => <Person node={value} />,
     default: value => value,
 };
 
@@ -85,7 +90,7 @@ function EmbeddedEntry({ node }) {
     const type = node.data.target.sys.contentType.sys.id
     const value = node.data.target.fields
     const handler = blocksHandlers[type] || blocksHandlers.default
-    
+
     return (
         <div className={styles.embeddedBlock}>
             {handler(value)}
@@ -95,13 +100,57 @@ function EmbeddedEntry({ node }) {
 
 // Taken from: https://www.gatsbyjs.org/docs/gatsby-link/
 // If given link begins with a single `/`, treat as internal Gatsby Link
-const Link = ({children, node, activeClassName, ...other}) => {
+const Link = ({children, node, activeClassName}, ...other) => {
     const to = linkResolver.path(node)
 
     return (
-    <GatsbyLink to={to} activeClassName={activeClassName} {...other}>
-        {children}
-    </GatsbyLink>
+        <GatsbyLink to={to} activeClassName={activeClassName} {...other}>
+            {children}
+        </GatsbyLink>
+    )
+}
+
+const AcademicOfferingListing = ({node}) => {
+
+}
+
+const MediaWithCaption = ({node}) => {
+    const content = localeScrubber.scrub(node)
+
+    return (
+        <BlockMediaWithCaption 
+            internalMedia={content.image} 
+            externalMedia={content.externalMediaUrl} 
+            heading={content.mediaHeading} 
+            caption={content.mediaCaption} 
+            internalLink={content.internaLink} 
+            callToAction={content.callToAction}
+        />
+    )
+}
+
+const PersonListing = ({node}) => {
+
+}
+
+const Quote = ({node}) => {
+
+}
+
+const SpotlightContent = ({node}) => {
+    const content = localeScrubber.scrub(node)
+
+    return (
+        <BlockSpotlightContent node={content} />
+    )
+}
+
+const Person = ({node}) => {
+    const person = localeScrubber.scrub(node)
+
+    console.log(person)
+    return (
+        <ContactPerson person={person} />
     )
 }
 

@@ -2,64 +2,56 @@
 @import '../../styles/breakpoint';
 @import '../../styles/spacing';
 @import '../../styles/colors';
+@import '../../styles/grids';
 
-$navigation-color: $color-inverse-01;
+.blockMedia {
 
-.base {
-    margin: 0;
-    padding: 0;
-}
-
-.navigation {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
-    grid-column-gap: 0;
-    grid-row-gap: $spacing-sm;
+    margin: $spacing-md 0;
 
     @include respond-to('small') {
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+        display: grid;
+        @include content-grid;
+        grid-template-rows: repeat(5, 1fr);
+        margin: 1rem 0;
     }
 }
 
-.navigationIcon {
-    margin: auto;
-    grid-row: icon / page;
-    color: inherit;
-}
-
-.navigationItem {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: [icon] 4fr [page] 3fr;
-    grid-column-gap: 0;
-    grid-row-gap: $spacing-sm;
-    padding: $spacing-lg;
-    height: 100%;
-
+.media {
+    height: 0;
+  overflow: hidden;
+  padding-top: 56.25%;
+  background: white;
+  position: relative;
     text-align: center;
-    text-decoration: none;
 
-    background-color: #094A3E;
-    color: #65D3FE;
-
-    &:hover {
-        cursor: pointer;
+    @include respond-to('small') {
+        margin-left: 0;
+        margin-right: 0;
+        grid-area: 1 / 3 / 6 / 5;
     }
+}
 
-    &:nth-child(2n) {
-        background-color: #65D3FE;
-        color: #094A3E;
-    }
+.video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
 
-    &:nth-child(3n) {
-        background-color: #FF8F15;
-        color: #16405B;
-    }
+.mediaCaption {
+    padding: $spacing-md $spacing-md $spacing-xs $spacing-md;
+    background-color: rgba($color-brand-03, .75);
+    text-align: center;
+    color: $color-inverse-01;
 
-    &:nth-child(4n) {
-        background-color: #16405B;
-        color: #FF8F15;
+    @include respond-to('small') {
+        margin-left: 0;
+        margin-right: 0;
+        grid-area: 1 / 1 / 6 / 3;
+        background-color: rgba($color-brand-03, 0);
+        text-align: right;
+        color: $color-text-01;
     }
 }
 
