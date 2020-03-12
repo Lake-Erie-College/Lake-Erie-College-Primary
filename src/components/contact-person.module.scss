@@ -7,6 +7,7 @@
 .contactPerson {
     display: grid;
     @include content-grid;
+    margin: $spacing-md 0;
 
     @include respond-to('small') {
         margin-left: 0;

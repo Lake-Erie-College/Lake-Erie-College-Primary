@@ -24,8 +24,6 @@ const Text = ({ children }) => <p>{children}</p>
 
 // Inlines - HYPERLINK, ENTRY_HYPERLINK, ASSET_HYPERLINK, EMBEDDED_ENTRY
 
-
-
 const options = {
   renderMark: {
     [MARKS.BOLD]: text => <Bold>{text}</Bold>,
@@ -77,14 +75,34 @@ const options = {
 }
 
 const blocksHandlers = {
-    'blockAcademicOfferingListing': value => value,
+    'blockAcademicOfferingListing': value => <Placeholder value={value} />,
     'blockMediaWithCaption': value => <MediaWithCaption node={value} />,
-    'blockPersonListing': value => value,
-    'blockQuote': value => value,
+    'blockPersonListing': value => <Placeholder value={value} />,
+    'blockQuote': value => <Placeholder value={value} />,
     'blockSpotlightContent': value => <SpotlightContent node={value} />,
     'person': value => <Person node={value} />,
-    default: value => value,
+    default: value => <Placeholder value={value} />,
 };
+
+const Container = ({data, isFullWidth}) => {
+    const hasJSON = data !== null && typeof data.json !== 'undefined' && data.json !== null
+
+    if (!hasJSON) {
+        return null
+    }
+
+    return (
+        <div className={cx(styles.primaryContent, { [`${styles.fullWidth}`]: isFullWidth })}>
+            {documentToReactComponents(data.json, options)}
+        </div>
+    )
+}
+
+const Placeholder = ({value}) => {
+    return (
+        <p>Placeholder Block</p>
+    )
+}
 
 function EmbeddedEntry({ node }) {
     const type = node.data.target.sys.contentType.sys.id
@@ -155,7 +173,5 @@ const Person = ({node}) => {
 }
 
 export default ({ data, isFullWidth }) => (
-    <div className={cx(styles.primaryContent, { [`${styles.fullWidth}`]: isFullWidth })}>
-        {documentToReactComponents(data.json, options)}
-    </div>
+    <Container data={data} isFullWidth={isFullWidth} />
 )

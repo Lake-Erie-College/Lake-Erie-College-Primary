@@ -26,7 +26,7 @@ class AcademicOfferingTemplate extends React.Component {
               </Helmet>
           </HelmetProvider>
           <main>
-            <PageHeading primary={page.title} secondary={page.offeringType} overline={page.category.title} />
+            <PageHeading primary={page.title} secondary={page.offeringType} overline={page.category ? page.category.title : null} />
             {page.lead && (
               <PageLead content={page.lead.lead} />
             )}

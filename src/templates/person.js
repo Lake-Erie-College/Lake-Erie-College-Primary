@@ -6,6 +6,7 @@ import Img from 'gatsby-image'
 import Layout from '../components/layout'
 import PrimaryContent from '../components/primary-content'
 import PageHeading from '../components/page-heading'
+import ContactPerson from '../components/contact-person'
 
 class PersonTemplate extends React.Component {
   render() {
@@ -23,9 +24,11 @@ class PersonTemplate extends React.Component {
             </Helmet>
         </HelmetProvider>
         <main>
-          <h1>Person Page</h1>
           <PageHeading primary={fullName} secondary={page.personType} />
-          <PrimaryContent data={page.primaryContent} />
+          <ContactPerson person={page} displayName={false} />
+          { page.primaryContent && (
+            <PrimaryContent data={page.primaryContent} />
+          )}
         </main>
       </Layout>
     )
