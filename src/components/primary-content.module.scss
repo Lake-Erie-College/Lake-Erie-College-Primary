@@ -1,15 +1,26 @@
 @import '../styles/typography';
 @import '../styles/breakpoint';
 @import '../styles/spacing';
+@import '../styles/colors';
+@import '../styles/grids';
 
 .primaryContent {
     display: grid;
-    grid-template-columns: [left-gutter] 1fr [left-main] 2fr [main] 6fr [right-main] 2fr [right-gutter] 1fr;
-    grid-template-rows: 1fr;
-    grid-column-gap: $spacing-sm;
-    grid-row-gap: 0px;
+    @include content-grid;
 
-    margin: 1rem 0;
+    margin: 1rem $spacing-md;
+
+    & > :first-child {
+        margin-top: 0;
+    }
+
+    @include respond-to('small') {
+        margin: 1rem 0;
+    }
+}
+
+.fullWidth {
+    display: block;
 }
 
 .h1 {
@@ -18,7 +29,11 @@
     @include line-height('heading');
     @include font-smoothing;
     @include letter-spacing;
-    @include typescale('h1');
+    @include typescale('h2');
+
+    @include respond-to('small') {
+        @include typescale('h1');
+    }
 }
 
 .h2 {
@@ -28,7 +43,12 @@
     @include line-height('heading');
     @include font-smoothing;
     @include letter-spacing;
-    @include typescale('h2');
+    @include typescale('h3');
+    color: $color-brand-01;
+
+    @include respond-to('small') {
+        @include typescale('h2');
+    }
 }
 
 .h3 {
@@ -37,7 +57,11 @@
     @include line-height('heading');
     @include font-smoothing;
     @include letter-spacing;
-    @include typescale('h3');
+    @include typescale('h4');
+
+    @include respond-to('small') {
+        @include typescale('h3');
+    }
 }
 
 .h4 {
@@ -46,7 +70,12 @@
     @include line-height('heading');
     @include font-smoothing;
     @include letter-spacing;
-    @include typescale('h4');
+    @include typescale('h5');
+    color: $color-brand-03;
+
+    @include respond-to('small') {
+        @include typescale('h4');
+    }
 }
 
 .h5 {
@@ -55,7 +84,11 @@
     @include line-height('heading');
     @include font-smoothing;
     @include letter-spacing;
-    @include typescale('h5');
+    @include typescale('h6');
+
+    @include respond-to('small') {
+        @include typescale('h5');
+    }
 }
 
 .h6 {
@@ -73,14 +106,144 @@
     @include font-weight-body;
     @include line-height('body');
     @include typescale('body1');
+
+    strong {
+        @include font-weight-body-bold;
+    }
 }
 
 .image {
     grid-column: left-main / right-gutter;
 }
 
+.ol {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: stretch;
+    margin: $spacing-sm 0;
+    padding: $spacing-md 0;
+
+    counter-reset: list-counter;
+
+    > li {
+        flex: 1 1 auto;
+        flex-basis: auto;
+        margin: $spacing-sm 0 0 0;
+        padding-right: $spacing-md;
+        width: 50%;
+
+        counter-increment: list-counter;
+
+        @include respond-to('medium') {
+            width: 33%;
+        }
+
+        &::before {
+            display: block;
+            padding: $spacing-xs;
+            margin-bottom: $spacing-2xs;
+            width: 1em;
+            height: 1em;
+            line-height: 1em;
+            background-color: $color-brand-01;
+            border-radius: 50%;
+            text-align: center;
+    
+            @include font-family;
+            font-weight: 600;
+            @include typescale('body2');
+
+            color: $color-ui-04;
+
+            content: counter(list-counter);
+        }
+    }
+
+    &::after {
+        position: absolute;
+        left: -$spacing-lg;
+        top: 0;
+        right: -$spacing-lg;
+        bottom: 0;
+        pointer-events: none;
+        border: 1px solid $color-brand-02;
+        content: " ";
+    }
+
+    .ol {
+        margin: 0;
+        padding: 0;
+
+        &:after {
+            display: none;
+        }
+
+        > li {
+            margin-top: 0;
+            
+            &::before {
+                display: none;
+            }
+        }
+    }
+}
+
+.ul {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: stretch;
+    margin: $spacing-sm 0;
+    padding: $spacing-md 0;
+
+    > li {
+        flex: 1 1 auto;
+        flex-basis: auto;
+        margin: $spacing-sm 0 0 0;
+        padding-right: $spacing-md;
+        width: 100%;
+
+        counter-increment: list-counter;
+
+        @include respond-to('small') {
+            width: 50%;
+        }
+    }
+
+    &::after {
+        position: absolute;
+        left: -$spacing-lg;
+        top: 0;
+        right: -$spacing-lg;
+        bottom: 0;
+        pointer-events: none;
+        border: 1px solid $color-brand-02;
+        content: " ";
+    }
+
+    .ul {
+        margin: 0;
+        padding: 0;
+
+        &:after {
+            display: none;
+        }
+
+        > li {
+            margin-top: 0;
+        }
+    }
+}
+
 .textBlock {
-    grid-column: left-gutter / right-gutter;
+    grid-column: left-gutter / end;
 
     @include respond-to('small') {
         margin-left: 0;

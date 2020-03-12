@@ -1,0 +1,184 @@
+@import '../styles/typography';
+@import '../styles/breakpoint';
+@import '../styles/colors';
+@import '../styles/spacing';
+@import '../styles/grids';
+
+.contactPerson {
+    display: grid;
+    @include content-grid;
+
+    @include respond-to('small') {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    & span {
+        margin: 0 $spacing-md;
+        grid-column: left-gutter / end;
+
+        @include font-family-headings;
+        font-weight: 400;
+        @include line-height('heading');
+        @include font-smoothing;
+        @include letter-spacing;
+        @include typescale('h2');
+    
+        color: $color-text-02;
+
+        @include respond-to('small') {
+            margin: 0;
+            grid-column: left-main / right-gutter;
+            @include typescale('h1');
+        }
+    }
+
+    & em {
+        color: $color-brand-03;
+    }
+}
+
+.heading {
+    margin: 0 $spacing-md;
+    grid-column: left-gutter / end;
+
+    @include font-family-headings;
+    font-weight: 400;
+    @include line-height('heading');
+    @include font-smoothing;
+    @include letter-spacing;
+    @include typescale('h4');
+
+    color: $color-text-02;
+
+    @include respond-to('small') {
+        margin-left: 0;
+        margin-right: 0;
+        @include typescale('h3');
+        grid-column: main;
+    }
+}
+
+.person {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: 0 $spacing-md;
+    grid-column: left-gutter / end;
+
+    background-color: $color-brand-01;
+
+    color: $color-inverse-01;
+
+    @include respond-to('small') {
+        grid-template-columns: 2fr 3fr;
+        margin-left: 0;
+        margin-right: 0;
+        grid-column: main;
+    }
+}
+
+.details {
+    padding: $spacing-md;
+}
+
+.name {
+    @include font-family-headings;
+    font-weight: 400;
+    @include line-height('heading');
+    @include font-smoothing;
+    @include letter-spacing;
+    @include typescale('h4');
+
+    a:link,
+    a:visited {
+        color: currentColor;
+    }
+
+    a:hover,
+    a:active {
+        color: $color-hover-secondary;
+    }
+
+    .internal {
+        text-decoration: none;
+
+        .icon {
+            margin-left: $spacing-xs;
+        }
+    }
+}
+
+.jobTitle {
+    margin-bottom: $spacing-sm;
+    @include font-family;
+    @include font-weight-body-bold;
+    @include line-height('body');
+    @include typescale('body');
+    font-style: italic;
+}
+
+.info {
+    a:link,
+    a:visited {
+        color: currentColor;
+    }
+
+    a:hover,
+    a:active {
+        color: $color-hover-secondary;
+    }
+
+    .icon {
+        margin-right: $spacing-xs;
+    }
+
+    .external {
+        @include font-weight-body-bold;
+    }
+
+    .internal {
+        @include font-weight-body;
+        text-decoration: none;
+
+        .icon {
+            margin-left: $spacing-xs;
+        }
+    }
+}
+
+.department {
+    margin-top: $spacing-md;
+    @include font-family-headings;
+    font-weight: 400;
+    @include line-height('heading');
+    @include font-smoothing;
+    @include letter-spacing;
+    @include typescale('h5');
+}
+
+.building {
+    @include font-weight-body;
+}
+
+.overline {
+    display: block;
+    grid-column: left-gutter / end;
+
+    @include font-family;
+    font-weight: 400;
+    @include line-height('body');
+    @include letter-spacing-wide;
+    @include typescale('overline');
+
+    text-transform: uppercase;
+    color: $color-brand-01;
+
+    @include respond-to('small') {
+        grid-column: left-main / right-gutter;
+    }
+
+    &:after {
+        content: '\A';
+        white-space: pre;
+    }
+}

@@ -1,0 +1,29 @@
+@import '../styles/typography';
+@import '../styles/breakpoint';
+@import '../styles/colors';
+@import '../styles/spacing';
+@import '../styles/grids';
+
+.pageLead {
+    display: grid;
+    @include content-grid;
+
+    @include font-family;
+    font-weight: 400;
+    @include line-height('heading');
+    @include font-smoothing;
+    @include letter-spacing;
+    @include typescale('h5');
+
+    color: $color-text-02;
+}
+
+.content {
+    margin: 0 $spacing-md;
+    grid-column: left-gutter / end;
+
+    @include respond-to('small') {
+        margin: 0;
+        grid-column: left-main / right-gutter;
+    }
+}

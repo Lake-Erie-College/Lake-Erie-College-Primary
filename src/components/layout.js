@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'gatsby'
-import Helmet from 'react-helmet'
+import { Helmet, HelmetProvider } from "react-helmet-async"
 import Container from './container'
 import NavigationPrimary from './navigation-primary'
 import GlobalFooter from './global-footer'
@@ -20,8 +20,12 @@ class Template extends React.Component {
 
     return (
       <Container>
-        <Helmet><html lang="en" /></Helmet>
-        <header>
+        <HelmetProvider>
+            <Helmet>
+              <html lang="en" />
+            </Helmet>
+        </HelmetProvider>
+        <header style={{visibility: 'hidden'}}>
           <NavigationPrimary />
         </header>
         {children}

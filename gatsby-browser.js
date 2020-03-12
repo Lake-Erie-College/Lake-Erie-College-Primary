@@ -6,8 +6,18 @@ require("typeface-bebas-neue")
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-import { 
+import {
+    faArrowCircleRight,
+    faEnvelope,
+    faExternalLinkSquareAlt,
+    faPhone,
     faSchool
 } from '@fortawesome/free-solid-svg-icons'
  
-library.add(fab, faSchool)
+library.add(fab, 
+    faArrowCircleRight,
+    faExternalLinkSquareAlt,
+    faEnvelope,
+    faPhone,
+    faSchool
+    )

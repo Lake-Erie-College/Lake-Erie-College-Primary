@@ -24,16 +24,31 @@ module.exports = {
   plugins: [
     'gatsby-transformer-remark',
     'gatsby-transformer-sharp',
-    'gatsby-plugin-react-helmet',
+    'gatsby-plugin-react-helmet-async',
     'gatsby-plugin-sharp',
     'gatsby-plugin-sass',
     {
       resolve: 'gatsby-source-contentful',
       options: contentfulConfig,
     },
-    {
+    /*{
       resolve: 'gatsby-plugin-react-axe',
-      options: {},
-    },
+      options: {
+        // Integrate react-axe in production. This defaults to false.
+        showInProduction: false,
+ 
+        // Options to pass to axe-core.
+        // See: https://github.com/dequelabs/axe-core/blob/master/doc/API.md#api-name-axeconfigure
+        axeOptions: {
+          // Your axe-core options.
+        },
+        // Context to pass to axe-core.
+        // See: https://github.com/dequelabs/axe-core/blob/master/doc/API.md#context-parameter
+        axeContext: {
+          // Your axe-core context.
+          include: [['#___gatsby']]
+        }
+      },
+    }, */
   ],
 }

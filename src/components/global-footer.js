@@ -48,50 +48,54 @@ const GlobalFooter = () => {
             navigationConversions {
                 id
                 navigationItems {
+                    id
                     title
                     externalUrl
                     internalLink {
-                        ... on ContentfulAcademicOffering {
-                            id
-                            slug
-                            category {
-                            slug
+                        __typename
+                        ... on Node {
+                            ... on ContentfulAcademicOffering {
+                                id
+                                slug
+                                category {
+                                slug
+                                }
                             }
-                        }
-                        ... on ContentfulDepartment {
-                            id
-                            slug
-                            category {
-                            slug
+                            ... on ContentfulDepartment {
+                                id
+                                slug
+                                category {
+                                slug
+                                }
                             }
-                        }
-                        ... on ContentfulEvent {
-                            id
-                            slug
-                            category {
-                            slug
+                            ... on ContentfulEvent {
+                                id
+                                slug
+                                category {
+                                slug
+                                }
                             }
-                        }
-                        ... on ContentfulHomepage {
-                            id
-                            slug
-                        }
-                        ... on ContentfulLocation {
-                            id
-                            slug
-                            category {
-                            slug
+                            ... on ContentfulHomepage {
+                                id
+                                slug
                             }
-                        }
-                        ... on ContentfulPerson {
-                            id
-                            slug
-                        }
-                        ... on ContentfulStandardPage {
-                            id
-                            slug
-                            category {
-                            slug
+                            ... on ContentfulLocation {
+                                id
+                                slug
+                                category {
+                                slug
+                                }
+                            }
+                            ... on ContentfulPerson {
+                                id
+                                slug
+                            }
+                            ... on ContentfulStandardPage {
+                                id
+                                slug
+                                category {
+                                slug
+                                }
                             }
                         }
                     }
@@ -100,6 +104,7 @@ const GlobalFooter = () => {
             navigationFooter {
                 id
                 navigationItems {
+                    id
                     title
                     externalUrl
                     internalLink {
@@ -179,7 +184,7 @@ const GlobalFooter = () => {
         const url = link.externalUrl
         const node = link.internalLink
 
-        const to = !url ? linkResolver.path(node) : url;
+        const to = !url ? linkResolver.path(node) : url
 
         return (
             <li key={link.id}>
@@ -204,11 +209,11 @@ const GlobalFooter = () => {
             {typeof navigationConversionItems !== 'undefined' && (
             <nav className={styles.navigation} role="navigation" aria-label='footer-navigation'>
                 <ul className={styles.conversionLinks}>
-                    { navigationConversionItems.map(( link ) => <NavigationCTAItem key={link.id} link={link} className='test' />) }
+                    { navigationConversionItems.map(( link ) => <NavigationCTAItem key={`footer-nav-cta-${link.id}`} link={link} className='test' />) }
                 </ul>
                 {navigationFooterItems && (
                     <ul className={styles.navigationLinks}>
-                        { navigationFooterItems.map(( link ) => <NavigationItem key={link.id} link={link} className='test' />) }
+                        { navigationFooterItems.map(( link ) => <NavigationItem key={`footer-nav-link-${link.id}`} link={link} className='test' />) }
                     </ul>
                 )}
             </nav>

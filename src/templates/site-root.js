@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import Helmet from 'react-helmet'
+import { Helmet, HelmetProvider } from "react-helmet-async"
 import get from 'lodash/get'
 import Img from 'gatsby-image'
 import Layout from '../components/layout'
@@ -13,10 +13,14 @@ class SiteRootTemplate extends React.Component {
 
     return (
       <Layout location={this.props.location} >
-          <Helmet title={`${page.title} | ${siteTitle}`} />
-          <main>
-            <PrimaryContent data={page.primaryContent} />
-          </main>
+        <HelmetProvider>
+            <Helmet>
+              <title>{`${page.title} | ${siteTitle}`}</title>
+            </Helmet>
+        </HelmetProvider>
+        <main>
+          <PrimaryContent data={page.primaryContent} />
+        </main>
       </Layout>
     )
   }
@@ -35,6 +39,68 @@ export const pageQuery = graphql`
       title
       primaryContent {
         json
+      }
+      heroCarousel {
+        callToAction
+        externalMediaUrl
+        image {
+          fluid(maxWidth: 1080) {
+            ...GatsbyContentfulFluid_withWebp
+          }
+        }
+        mediaHeading
+        mediaCaption {
+          mediaCaption
+        }
+        title
+        internalLink {
+          __typename
+          ... on Node {
+            ... on ContentfulAcademicOffering {
+                id
+                slug
+                category {
+                slug
+                }
+            }
+            ... on ContentfulDepartment {
+                id
+                slug
+                category {
+                slug
+                }
+            }
+            ... on ContentfulEvent {
+                id
+                slug
+                category {
+                slug
+                }
+            }
+            ... on ContentfulHomepage {
+                id
+                slug
+            }
+            ... on ContentfulLocation {
+                id
+                slug
+                category {
+                slug
+                }
+            }
+            ... on ContentfulPerson {
+                id
+                slug
+            }
+            ... on ContentfulStandardPage {
+                id
+                slug
+                category {
+                slug
+                }
+            }
+          }
+        }
       }
     }
   }
