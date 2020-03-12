@@ -7,6 +7,7 @@ import Image from "gatsby-image"
 import useContentfulImage from "../hooks/useContentfulImage"
 import BlockSpotlightContent from './blocks/block-spotlight-content'
 import BlockMediaWithCaption from './blocks/block-media-with-caption'
+import BlockPersonListing from './blocks/block-person-listing'
 import ContactPerson from './contact-person'
 
 const linkResolver = require('../utils').linkResolver
@@ -77,7 +78,7 @@ const options = {
 const blocksHandlers = {
     'blockAcademicOfferingListing': value => <Placeholder value={value} />,
     'blockMediaWithCaption': value => <MediaWithCaption node={value} />,
-    'blockPersonListing': value => <Placeholder value={value} />,
+    'blockPersonListing': value => <PersonListing node={value} />,
     'blockQuote': value => <Placeholder value={value} />,
     'blockSpotlightContent': value => <SpotlightContent node={value} />,
     'person': value => <Person node={value} />,
@@ -148,7 +149,11 @@ const MediaWithCaption = ({node}) => {
 }
 
 const PersonListing = ({node}) => {
+    const content = localeScrubber.scrub(node)
 
+    return (
+        <BlockPersonListing title={content.title} primaryHeading={content.primaryHeading} people={content.relatedPeople} />
+    )
 }
 
 const Quote = ({node}) => {
@@ -166,7 +171,6 @@ const SpotlightContent = ({node}) => {
 const Person = ({node}) => {
     const person = localeScrubber.scrub(node)
 
-    console.log(person)
     return (
         <ContactPerson person={person} />
     )
