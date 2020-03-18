@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import cx from "classnames"
 import { Link as GatsbyLink } from "gatsby"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import Person from '../person'
 import GatsbyImage from "gatsby-image"
 
 const linkResolver = require('../../utils').linkResolver
@@ -27,12 +28,6 @@ const BlockPersonListing = ({ title, primaryHeading, people }, ...rest) => {
                 )}
             </ul>
         </section>
-    )
-}
-
-const Person = ({person}) => {
-    return (
-        <p>{person.firstName}</p>
     )
 }
 

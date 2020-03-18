@@ -10,6 +10,7 @@ import PageHeading from '../components/page-heading'
 import Divider from '../components/divider'
 import ContactPerson from '../components/contact-person'
 import RelatedOfferings from '../components/related-offerings'
+import BlockPersonListing from '../components/blocks/block-person-listing'
 
 class AcademicOfferingTemplate extends React.Component {
   render() {
@@ -17,6 +18,7 @@ class AcademicOfferingTemplate extends React.Component {
     const siteTitle = get(this.props, 'data.site.siteMetadata.title')
     const relatedOfferings = page.relatedOfferings
     const primaryContact = page.primaryContact
+    const relatedPeople = page.relatedFaculty
 
     return (
       <Layout location={this.props.location} >
@@ -26,7 +28,7 @@ class AcademicOfferingTemplate extends React.Component {
               </Helmet>
           </HelmetProvider>
           <main>
-            <PageHeading primary={page.title} secondary={page.offeringType} overline={page.category ? page.category.title : null} />
+            <PageHeading primary={page.title} secondary={page.offeringType} overline={page.category ? page.category.title : null} linkTo={page.category} />
             {page.lead && (
               <PageLead content={page.lead.lead} />
             )}
@@ -38,6 +40,12 @@ class AcademicOfferingTemplate extends React.Component {
               <div>
                   <Divider />
                   <RelatedOfferings offerings={relatedOfferings} heading={page.relatedOfferingsHeading} />
+              </div>
+            )}
+            { relatedPeople && (
+              <div>
+                <Divider />
+                <BlockPersonListing title={page.title} primaryHeading={`${page.title} Faculty`} people={relatedPeople} />
               </div>
             )}
           </main>
@@ -61,6 +69,7 @@ export const pageQuery = graphql`
       category {
         title
         shortTitle
+        slug
       }
       lead {
         lead
@@ -113,6 +122,7 @@ export const pageQuery = graphql`
           lead
         }
         offeringType
+        hidden
       }
       primaryContent {
         json

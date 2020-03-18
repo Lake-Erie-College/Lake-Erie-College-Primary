@@ -29,10 +29,6 @@
     }
 }
 
-.offering {
-
-}
-
 .heading {
     margin: 0 $spacing-md;
     grid-column: left-gutter / end;
@@ -92,8 +88,18 @@
 }
 
 .courseSummary {
+    margin-bottom: 1em;
     @include font-family;
     @include font-weight-body;
     @include line-height('body');
     @include typescale('body2');
+}
+
+.internal {
+    text-decoration: none;
+
+    .icon {
+        margin-left: $spacing-xs;
+        font-size: .5em;
+    }
 }

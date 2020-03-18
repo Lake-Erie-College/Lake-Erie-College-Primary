@@ -1,11 +1,11 @@
 import React from 'react'
 import GatsbyImage from "gatsby-image"
 
-const ImageWithSVGSupport = ({ title, fluid, file }, ...rest) => {
+const ImageWithSVGSupport = ({ className, title, fluid, file }, ...rest) => {
   if (file.contentType === 'image/svg+xml') {
-    return <img title={title} src={file.url} />
+    return <img className={className} title={title} src={file.url} />
   }
-  return <GatsbyImage title={title} fluid={fluid} {...rest} />
+  return <GatsbyImage className={className} title={title} fluid={fluid} {...rest} />
 }
 
 export default ImageWithSVGSupport

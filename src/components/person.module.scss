@@ -4,70 +4,10 @@
 @import '../styles/spacing';
 @import '../styles/grids';
 
-.contactPerson {
-    display: grid;
-    @include content-grid;
-
-    @include respond-to('small') {
-        margin-left: 0;
-        margin-right: 0;
-    }
-
-    & span {
-        margin: 0 $spacing-md;
-        grid-column: left-gutter / end;
-
-        @include font-family-headings;
-        font-weight: 400;
-        @include line-height('heading');
-        @include font-smoothing;
-        @include letter-spacing;
-        @include typescale('h2');
-    
-        color: $color-text-02;
-
-        @include respond-to('small') {
-            margin: 0;
-            grid-column: left-main / right-gutter;
-            @include typescale('h1');
-        }
-    }
-
-    & em {
-        color: $color-brand-03;
-    }
-}
-
-.heading {
+.person {
     margin: 0 $spacing-md;
-    grid-column: left-gutter / end;
-
-    @include font-family-headings;
-    font-weight: 400;
-    @include line-height('heading');
-    @include font-smoothing;
-    @include letter-spacing;
-    @include typescale('h4');
 
     color: $color-text-02;
-
-    @include respond-to('small') {
-        margin-left: 0;
-        margin-right: 0;
-        @include typescale('h3');
-        grid-column: main;
-    }
-}
-
-.person {
-    display: grid;
-    grid-template-columns: 1fr;
-    margin: 0 $spacing-md;
-    grid-column: left-gutter / end;
-
-    background-color: $color-brand-01;
-
-    color: $color-inverse-01;
 
     @include respond-to('small') {
         grid-template-columns: 2fr 3fr;
@@ -79,6 +19,21 @@
 
 .details {
     padding: $spacing-md;
+}
+
+.image {
+    position: relative;
+
+    &::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: $color-brand-03;
+        mix-blend-mode: soft-light;
+        content: "";
+    }
 }
 
 .name {

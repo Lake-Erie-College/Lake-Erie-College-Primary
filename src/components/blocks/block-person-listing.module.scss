@@ -5,14 +5,10 @@
 @import '../../styles/grids';
 
 .blockPersonListing {
+    display: grid;
+    @include content-grid;
 
     margin: $spacing-md 0;
-
-    @include respond-to('small') {
-        display: grid;
-        @include content-grid;
-        margin: 1rem 0;
-    }
 }
 
 .heading {
@@ -56,14 +52,13 @@
     justify-content: flex-start;
     align-items: stretch;
     align-content: stretch;
-    grid-column: left-gutter / end;
+    margin: $spacing-md 0;
 
-    @include respond-to('small') {
-        grid-column: main;
-    }
+    grid-column: left-main / right-gutter;
 }
 
 .listingItem {
-    flex: 0 1 25%;
-    margin-right: $spacing-md;
+    flex: 1 1 25%;
+    padding-right: $spacing-md;
+    max-width: 25%;
 }

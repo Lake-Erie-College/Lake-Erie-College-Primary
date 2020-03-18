@@ -7,17 +7,53 @@ require("typeface-bebas-neue")
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import {
+    faAddressBook,
     faArrowCircleRight,
+    faAtlas,
+    faBook,
+    faBookMedical,
+    faBriefcase,
+    faChalkboard,
+    faComment,
     faEnvelope,
+    faEnvelopeOpenText,
     faExternalLinkSquareAlt,
+    faGraduationCap,
+    faHorse,
+    faHorseHead,
+    faInfoCircle,
+    faMap,
+    faMapMarkedAlt,
+    faMapMarkerAlt,
+    faMapSigns,
     faPhone,
-    faSchool
+    faQuestionCircle,
+    faSchool,
+    faUsers
 } from '@fortawesome/free-solid-svg-icons'
  
 library.add(fab, 
+    faAddressBook,
     faArrowCircleRight,
-    faExternalLinkSquareAlt,
+    faAtlas,
+    faBook,
+    faBookMedical,
+    faBriefcase,
+    faChalkboard,
+    faComment,
     faEnvelope,
+    faEnvelopeOpenText,
+    faExternalLinkSquareAlt,
+    faGraduationCap,
+    faHorse,
+    faHorseHead,
+    faInfoCircle,
+    faMap,
+    faMapMarkedAlt,
+    faMapMarkerAlt,
+    faMapSigns,
     faPhone,
-    faSchool
+    faQuestionCircle,
+    faSchool,
+    faUsers
     )
