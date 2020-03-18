@@ -5,12 +5,15 @@ import get from 'lodash/get'
 import Img from 'gatsby-image'
 import Layout from '../components/layout'
 import PrimaryContent from '../components/primary-content'
+import LeadImage from '../components/lead-image'
+import PageLead from '../components/page-lead'
 import PageHeading from '../components/page-heading'
 
 class StandardPageTemplate extends React.Component {
   render() {
     const page = get(this.props, 'data.contentfulStandardPage')
     const siteTitle = get(this.props, 'data.site.siteMetadata.title')
+    const hasLeadImage = page.leadImage !== null
 
     return (
       <Layout location={this.props.location} >
@@ -20,7 +23,13 @@ class StandardPageTemplate extends React.Component {
             </Helmet>
         </HelmetProvider>
         <main>
-          <PageHeading primary={page.primaryHeading} secondary={page.secondaryHeading} />
+          { hasLeadImage && (
+            <LeadImage title={page.leadImage.title} fluid={page.leadImage.fluid} file={page.leadImage.file} />
+          )}
+          <PageHeading primary={page.primaryHeading} secondary={page.secondaryHeading} overline={page.category ? page.category.title : null} linkTo={page.category} />
+          {page.lead && (
+            <PageLead content={page.lead.lead} />
+          )}
           <PrimaryContent data={page.primaryContent} />
         </main>
       </Layout>
@@ -43,11 +52,26 @@ export const pageQuery = graphql`
       description {
         description
       }
+      category {
+        title
+        shortTitle
+        slug
+      }
       pageIcon
       primaryHeading
       secondaryHeading
       isNews
       publishDate
+      leadImage {
+        title
+        fluid(maxWidth: 2160) {
+            ...GatsbyContentfulFluid_withWebp
+        }
+        file {
+          url
+          contentType
+        }
+      }
       lead {
         lead
       }

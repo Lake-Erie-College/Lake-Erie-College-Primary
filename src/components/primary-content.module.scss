@@ -100,6 +100,29 @@
     @include typescale('h6');
 }
 
+.h1 > i, 
+.h2 > i, 
+.h3 > i, 
+.h4 > i, 
+.h5 > i, 
+.h6 > i {
+    display: block;
+
+    @include font-family;
+    font-weight: 400;
+    @include line-height('body');
+    @include letter-spacing-wide;
+    @include typescale('overline');
+
+    text-transform: uppercase;
+    color: $color-brand-01;
+
+    &:after {
+        content: '\A';
+        white-space: pre;
+    }
+} 
+
 .p, .li {
     margin-bottom: 1em;
     @include font-family;
@@ -113,6 +136,7 @@
 }
 
 .image {
+    margin: 0 0 $spacing-md 0;
     grid-column: left-main / right-gutter;
 }
 

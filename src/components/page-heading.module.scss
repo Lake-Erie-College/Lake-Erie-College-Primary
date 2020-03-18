@@ -36,6 +36,16 @@
     & em {
         color: $color-brand-03;
     }
+
+    a:link,
+    a:visited {
+        color: currentColor;
+    }
+
+    a:hover,
+    a:active {
+        color: $color-hover-secondary;
+    }
 }
 
 .overline {
@@ -58,5 +68,13 @@
     &:after {
         content: '\A';
         white-space: pre;
+    }
+}
+
+.internal {
+    text-decoration: none;
+
+    .icon {
+        margin-left: $spacing-xs;
     }
 }

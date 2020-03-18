@@ -5,9 +5,13 @@ import {Link as GatsbyLink} from "gatsby"
 import cx from "classnames";
 import Image from "gatsby-image"
 import useContentfulImage from "../hooks/useContentfulImage"
+import ImageWithSVGSupport from './image-with-svg-support'
+import BlockAcademicOfferingListing from './blocks/block-academic-offering-listing'
 import BlockSpotlightContent from './blocks/block-spotlight-content'
 import BlockMediaWithCaption from './blocks/block-media-with-caption'
+import BlockPersonListing from './blocks/block-person-listing'
 import ContactPerson from './contact-person'
+import Divider from './divider'
 
 const linkResolver = require('../utils').linkResolver
 const localeScrubber = require('../utils').localeScrubber
@@ -39,6 +43,7 @@ const options = {
     [BLOCKS.OL_LIST]: (node, children) => <ol className={cx(styles.textBlock, styles.ol)}>{children}</ol>,
     [BLOCKS.UL_LIST]: (node, children) => <ul className={cx(styles.textBlock, styles.ul)}>{children}</ul>,
     [BLOCKS.QUOTE]: (node, children) => <blockquote className={styles.textBlock}>{children}</blockquote>,
+    [BLOCKS.HR]: (node, children) => <div className={styles.textBlock}><Divider /></div>,
     [INLINES.ENTRY_HYPERLINK]: (node, children) => {
         // If you are using contenful.js sdk, the referenced entry is resolved
         // automatically and is available at `node.data.target`.
@@ -49,23 +54,25 @@ const options = {
     },
     [BLOCKS.EMBEDDED_ENTRY]: node => <EmbeddedEntry node={node} />,
     [BLOCKS.EMBEDDED_ASSET]: (node) => {
-        const { title, description, file } = node.data.target.fields;
-        const mimeType = file['en-US'].contentType
+        const content = localeScrubber.scrub(node)
+
+        const { title, description, file } = content.data.target;
+        const mimeType = file.contentType
         const mimeGroup = mimeType.split('/')[0]
   
         switch (mimeGroup) {
             case 'image':
                 const fluid = useContentfulImage(
-                    node.data.target.fields.file["en-US"].url
+                    content.data.target.file.url
                 )
                 return (
-                    <Image className={styles.image} title={node.data.target.fields.title["en-US"]} fluid={fluid} />
+                    <ImageWithSVGSupport className={styles.image} title={content.data.target.title} fluid={fluid} file={file} />
                 )
             case 'application':
                 return <a
-                    alt={description ?  description['en-US'] : null}
-                    href={file['en-US'].url}
-                    >{ title ? title['en-US'] : file['en-US'].details.fileName }
+                    alt={description ?  description : null}
+                    href={file.url}
+                    >{ title ? title : file.details.fileName }
                 </a>
             default:
                 return <span style={{backgroundColor: 'red', color: 'white'}}> {mimeType} embedded asset </span>
@@ -75,9 +82,9 @@ const options = {
 }
 
 const blocksHandlers = {
-    'blockAcademicOfferingListing': value => <Placeholder value={value} />,
+    'blockAcademicOfferingListing': value => <AcademicOfferingListing node={value} />,
     'blockMediaWithCaption': value => <MediaWithCaption node={value} />,
-    'blockPersonListing': value => <Placeholder value={value} />,
+    'blockPersonListing': value => <PersonListing node={value} />,
     'blockQuote': value => <Placeholder value={value} />,
     'blockSpotlightContent': value => <SpotlightContent node={value} />,
     'person': value => <Person node={value} />,
@@ -129,7 +136,12 @@ const Link = ({children, node, activeClassName}, ...other) => {
 }
 
 const AcademicOfferingListing = ({node}) => {
-
+    const content = localeScrubber.scrub(node)
+    
+    return (
+        <BlockAcademicOfferingListing category={content.relatedAcademicCategory} offeringType={content.offeringType} />
+    )
+    
 }
 
 const MediaWithCaption = ({node}) => {
@@ -148,7 +160,11 @@ const MediaWithCaption = ({node}) => {
 }
 
 const PersonListing = ({node}) => {
+    const content = localeScrubber.scrub(node)
 
+    return (
+        <BlockPersonListing title={content.title} primaryHeading={content.primaryHeading} people={content.relatedPeople} />
+    )
 }
 
 const Quote = ({node}) => {
@@ -166,7 +182,6 @@ const SpotlightContent = ({node}) => {
 const Person = ({node}) => {
     const person = localeScrubber.scrub(node)
 
-    console.log(person)
     return (
         <ContactPerson person={person} />
     )

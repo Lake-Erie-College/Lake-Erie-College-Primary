@@ -1,0 +1,64 @@
+@import '../../styles/typography';
+@import '../../styles/breakpoint';
+@import '../../styles/spacing';
+@import '../../styles/colors';
+@import '../../styles/grids';
+
+.blockPersonListing {
+    display: grid;
+    @include content-grid;
+
+    margin: $spacing-md 0;
+}
+
+.heading {
+    grid-column: left-gutter / end;
+
+    @include font-family-headings;
+    font-weight: 400;
+    @include line-height('heading');
+    @include font-smoothing;
+    @include letter-spacing;
+    @include typescale('h4');
+
+    @include respond-to('small') {
+        @include typescale('h3');
+        grid-column: main;
+    }
+}
+
+.overline {
+    display: block;
+
+    @include font-family;
+    font-weight: 400;
+    @include line-height('body');
+    @include letter-spacing-wide;
+    @include typescale('overline');
+
+    text-transform: uppercase;
+    color: $color-brand-01;
+
+    &:after {
+        content: '\A';
+        white-space: pre;
+    }
+}
+
+.listing {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: stretch;
+    margin: $spacing-md 0;
+
+    grid-column: left-main / right-gutter;
+}
+
+.listingItem {
+    flex: 1 1 25%;
+    padding-right: $spacing-md;
+    max-width: 25%;
+}
