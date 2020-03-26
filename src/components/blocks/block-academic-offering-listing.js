@@ -4,8 +4,6 @@ import { useStaticQuery, graphql } from "gatsby"
 import get from 'lodash/get'
 import RelatedOfferings from '../related-offerings'
 
-import styles from "./block-academic-offering-listing.module.scss";
-
 const BlockAcademicOfferingListing = ({ category, offeringType }, ...rest) => {
     const data = useStaticQuery(graphql`
         {
@@ -39,21 +37,14 @@ const BlockAcademicOfferingListing = ({ category, offeringType }, ...rest) => {
     const FilterOfferings = (offering) => {
         return (offering.category.slug === category.slug && offering.offeringType === offeringType);
     }
-
-    const hasHeading = typeof primaryHeading !== 'undefined' && primaryHeading !== null
     
     const filteredOfferings = offerings.filter(FilterOfferings)
 
-    return (
-        <section className={styles.blockAcademicOfferingListing}>
-            { hasHeading && (
-                <h2 className={styles.heading}>{primaryHeading}</h2>
-            )}
-            { filteredOfferings != null && filteredOfferings.length > 0 && (
-                <RelatedOfferings offerings={filteredOfferings} />
-            )}
-        </section>
-    )
+    if (filteredOfferings != null && filteredOfferings.length > 0) {
+        return <RelatedOfferings offerings={filteredOfferings} />
+    } else {
+        return
+    }
 }
 
 export default BlockAcademicOfferingListing

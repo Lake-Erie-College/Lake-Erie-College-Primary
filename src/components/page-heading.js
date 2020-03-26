@@ -43,7 +43,7 @@ const LinkHeading = ({ primary, secondary, overline, linkTo }) => {
             <span>
                 {primary}
                 {secondary && (
-                    <em> | {secondary}</em>
+                    <em>| {secondary}</em>
                 )}
             </span>
         </h1>

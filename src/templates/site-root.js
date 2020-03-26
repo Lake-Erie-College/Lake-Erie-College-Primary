@@ -5,6 +5,8 @@ import get from 'lodash/get'
 import Img from 'gatsby-image'
 import Layout from '../components/layout'
 import PrimaryContent from '../components/primary-content'
+import RelatedEvents from '../components/related-events'
+import RelatedNews from '../components/related-news'
 
 class SiteRootTemplate extends React.Component {
   render() {
@@ -20,6 +22,8 @@ class SiteRootTemplate extends React.Component {
         </HelmetProvider>
         <main>
           <PrimaryContent data={page.primaryContent} />
+          <RelatedNews />
+          <RelatedEvents />
         </main>
       </Layout>
     )

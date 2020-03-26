@@ -7,9 +7,10 @@ import Image from "gatsby-image"
 import useContentfulImage from "../hooks/useContentfulImage"
 import ImageWithSVGSupport from './image-with-svg-support'
 import BlockAcademicOfferingListing from './blocks/block-academic-offering-listing'
-import BlockSpotlightContent from './blocks/block-spotlight-content'
+import BlockEventListing from './blocks/block-event-listing'
 import BlockMediaWithCaption from './blocks/block-media-with-caption'
 import BlockPersonListing from './blocks/block-person-listing'
+import BlockSpotlightContent from './blocks/block-spotlight-content'
 import ContactPerson from './contact-person'
 import Divider from './divider'
 
@@ -83,6 +84,7 @@ const options = {
 
 const blocksHandlers = {
     'blockAcademicOfferingListing': value => <AcademicOfferingListing node={value} />,
+    'blockEventListing': value => <EventListing node={value} />,
     'blockMediaWithCaption': value => <MediaWithCaption node={value} />,
     'blockPersonListing': value => <PersonListing node={value} />,
     'blockQuote': value => <Placeholder value={value} />,
@@ -142,6 +144,14 @@ const AcademicOfferingListing = ({node}) => {
         <BlockAcademicOfferingListing category={content.relatedAcademicCategory} offeringType={content.offeringType} />
     )
     
+}
+
+const EventListing = ({node}) => {
+    const content = localeScrubber.scrub(node)
+
+    return (
+        <BlockEventListing category={content.relatedCategory} />
+    )
 }
 
 const MediaWithCaption = ({node}) => {
