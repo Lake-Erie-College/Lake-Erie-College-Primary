@@ -43,14 +43,12 @@ const Person = ({ person, displayName }, ...rest) => {
 
                 <h4 className={cx(styles.info, styles.department)}>
                     <GatsbyLink to={departmentTo} className={styles.internal}>
-                        {person.department.title}
-                        <FontAwesomeIcon icon='external-link-square-alt' size='xs' className={styles.icon} />
+                        {person.department.title}<nobr><FontAwesomeIcon icon='external-link-square-alt' size='xs' className={styles.icon} /></nobr>
                     </GatsbyLink>
                 </h4>
                 <p className={cx(styles.info, styles.building)}>
                     <GatsbyLink to={buildingTo} className={styles.internal}>
-                        {person.building.title}
-                        <FontAwesomeIcon icon='external-link-square-alt' size='xs' className={styles.icon} />
+                        {person.building.title}<nobr><FontAwesomeIcon icon='external-link-square-alt' size='xs' className={styles.icon} /></nobr>
                     </GatsbyLink>
                 </p>
                 <p className={cx(styles.info, styles.office)}>{person.office}</p>

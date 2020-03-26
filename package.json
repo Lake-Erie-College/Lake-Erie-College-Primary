@@ -24,6 +24,7 @@
     "gatsby-transformer-remark": "^2.6.56",
     "gatsby-transformer-sharp": "^2.3.18",
     "lodash": "^4.17.11",
+    "moment": "^2.24.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-helmet-async": "^1.0.4",

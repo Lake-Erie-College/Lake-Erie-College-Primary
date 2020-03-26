@@ -7,7 +7,7 @@ import ReactPlayer from 'react-player'
 
 const linkResolver = require('../../utils').linkResolver
 
-import styles from "./block-media-with-caption.module.scss";
+import styles from "./block-media-with-caption.module.scss"
 
 const BlockMediaWithCaption = ({ internalMedia, externalMedia, heading, caption, internalLink, callToAction, isOverlay }, ...rest) => {
     const isImage = typeof internalMedia !== 'undefined' && internalMedia !== null

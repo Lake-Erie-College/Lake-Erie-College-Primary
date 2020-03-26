@@ -4,13 +4,14 @@
 @import '../styles/spacing';
 @import '../styles/grids';
 
-.relatedOfferings {
-    display: grid;
-    @include content-grid;
+.relatedNews {
+    padding: 0;
 
     @include respond-to('small') {
-        margin-left: 0;
-        margin-right: 0;
+        padding: $spacing-md $spacing-md 0 $spacing-md;
+        border-width: 0 0 0 1px;
+        border-style: solid;
+        border-color: $color-ui-05;
     }
 
     a:link,
@@ -24,24 +25,38 @@
     }
 }
 
-.offeringsList {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-    grid-column-gap: $spacing-lg;
-    grid-row-gap: $spacing-md;
+.newsList {
+    display: block;
+}
 
-    grid-column: left-gutter / end;
+.empty {
+    margin-bottom: 1em;
+    @include font-family;
+    @include font-weight-body;
+    @include line-height('body');
+    @include typescale('body1');
 
-    @include respond-to('small') {
-        grid-template-columns: 1fr 1fr;
-        grid-column: left-main / right-gutter;
+    strong {
+        @include font-weight-body-bold;
     }
+}
+
+.news {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    align-content: flex-start;
+}
+
+.image {
+    margin: 0 $spacing-md;
+    max-width: 100%;
+    border-radius: 4px;
 }
 
 .heading {
     margin: 0 $spacing-md;
-    grid-column: left-gutter / end;
 
     @include font-family-headings;
     font-weight: 400;
@@ -64,14 +79,12 @@
 
 .overline {
     display: inline;
-    padding: $spacing-2xs $spacing-xs;
+    padding: $spacing-2xs 0;
     @include font-family;
     font-weight: 400;
     @include line-height('body');
     @include letter-spacing-wide;
     @include typescale('overline');
-    background-color: $color-ui-04;
-    border-radius: 4px;
     text-transform: uppercase;
     color: $color-brand-01;
 
@@ -81,30 +94,34 @@
     }
 }
 
-.courseHeading {
+.newsHeading {
     margin: 0 $spacing-md;
+    padding: $spacing-2xs 0;
+    flex: 1 1 25%;
     @include font-family-headings;
     font-weight: 400;
     @include line-height('heading');
     @include font-smoothing;
     @include letter-spacing;
-    @include typescale('h4');
+    @include typescale('h5');
 
     @include respond-to('small') {
         margin-left: 0;
         margin-right: 0;
-        @include typescale('h3');
+        @include typescale('h4');
     }
 }
 
-.courseSummary {
-    margin-left: $spacing-md;
-    margin-right: $spacing-md;
-    margin-bottom: $spacing-xs;
-    @include font-family;
-    @include font-weight-body;
-    @include line-height('body');
-    @include typescale('body2');
+.listItem {
+    margin-bottom: $spacing-md;
+    padding: 0 0 $spacing-xs 0;
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    border-color: $color-ui-05;
+
+    &:last-child {
+        border-width: 0;
+    }
 }
 
 .internal {

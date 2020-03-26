@@ -11,8 +11,7 @@ $navigation-color: $color-inverse-01;
 }
 
 .navigation {
-    display: flex;
-    flex-wrap: wrap;
+    display: block;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
     grid-column-gap: 0;
@@ -21,6 +20,8 @@ $navigation-color: $color-inverse-01;
     margin: 0 0 $spacing-md 0;
 
     @include respond-to('small') {
+        display: flex;
+        flex-wrap: wrap;
         grid-template-columns: 1fr 1fr 1fr 1fr;
     }
 }

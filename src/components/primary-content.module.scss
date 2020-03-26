@@ -8,7 +8,7 @@
     display: grid;
     @include content-grid;
 
-    margin: 1rem $spacing-md;
+    margin: 1rem 0;
 
     & > :first-child {
         margin-top: 0;
@@ -137,7 +137,11 @@
 
 .image {
     margin: 0 0 $spacing-md 0;
-    grid-column: left-main / right-gutter;
+    grid-column: left-gutter / end;
+
+    @include respond-to('small') {
+        grid-column: left-main / right-gutter;
+    }
 }
 
 .ol {
@@ -158,9 +162,13 @@
         flex-basis: auto;
         margin: $spacing-sm 0 0 0;
         padding-right: $spacing-md;
-        width: 50%;
+        width: 100%;
 
         counter-increment: list-counter;
+
+        @include respond-to('small') {
+            width: 50%;
+        }
 
         @include respond-to('medium') {
             width: 33%;
@@ -195,6 +203,7 @@
         bottom: 0;
         pointer-events: none;
         border: 1px solid $color-brand-02;
+        border-radius: 4px;
         content: " ";
     }
 
@@ -217,56 +226,92 @@
 }
 
 .ul {
-    position: relative;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: stretch;
     align-content: stretch;
-    margin: $spacing-sm 0;
-    padding: $spacing-md 0;
+    margin: 0;
+    padding: $spacing-md 0 0 0;
+
+    @include respond-to('small') {
+        padding: $spacing-md 0;
+    }
 
     > li {
+        position: relative;
         flex: 1 1 auto;
         flex-basis: auto;
-        margin: $spacing-sm 0 0 0;
-        padding-right: $spacing-md;
+        margin: $spacing-sm 0 $spacing-sm 0;
         width: 100%;
-
-        counter-increment: list-counter;
+        padding-right: 0;
 
         @include respond-to('small') {
             width: 50%;
+            padding-right: $spacing-2xl;
         }
-    }
 
-    &::after {
-        position: absolute;
-        left: -$spacing-lg;
-        top: 0;
-        right: -$spacing-lg;
-        bottom: 0;
-        pointer-events: none;
-        border: 1px solid $color-brand-02;
-        content: " ";
+        &::after {
+            position: absolute;
+            left: -$spacing-sm;
+            top: -$spacing-sm;
+            right: -$spacing-sm;
+            bottom: 0;
+            pointer-events: none;
+            border: 1px solid $color-brand-02;
+            border-radius: 4px;
+            content: " ";
+
+            @include respond-to('small') {
+                left: -$spacing-sm;
+                top: -$spacing-sm;
+                right: $spacing-lg;
+                bottom: 0;
+            }
+        }
+
+        &::before {
+            position: absolute;
+            left: -$spacing-xs;
+            top: -$spacing-xs;
+            right: -$spacing-sm;
+            bottom: -$spacing-2xs;
+            pointer-events: none;
+            border: 1px solid $color-ui-04;
+            border-radius: 4px;
+            content: " ";
+
+            @include respond-to('small') {
+                left: -$spacing-xs;
+                top: -$spacing-xs;
+                right: $spacing-lg;
+                bottom: -$spacing-2xs;
+            }
+        }
     }
 
     .ul {
         margin: 0;
         padding: 0;
 
-        &:after {
-            display: none;
-        }
-
         > li {
             margin-top: 0;
+
+            &::after {
+                display: none;
+            }
+
+            &::before {
+                display: none;
+            }
         }
     }
 }
 
 .textBlock {
+    margin-left: $spacing-md;
+    margin-right: $spacing-md;
     grid-column: left-gutter / end;
 
     @include respond-to('small') {
