@@ -23,8 +23,7 @@ const CourseHeadingWithLink = ({heading, overline, to}) => {
                 <span className={styles.overline}>{overline}</span>
             )}
             <GatsbyLink to={to} className={styles.internal}>
-                {heading}
-                <FontAwesomeIcon icon='external-link-square-alt' size='xs' className={styles.icon} />
+                {heading}<nobr><FontAwesomeIcon icon='external-link-square-alt' size='xs' className={styles.icon} /></nobr>
             </GatsbyLink>
         </h2>
     )

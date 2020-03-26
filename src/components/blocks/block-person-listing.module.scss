@@ -7,8 +7,11 @@
 .blockPersonListing {
     display: grid;
     @include content-grid;
+    margin: $spacing-md;
 
-    margin: $spacing-md 0;
+    @include respond-to('small') {
+        margin: $spacing-md 0;
+    }
 }
 
 .heading {
@@ -54,11 +57,21 @@
     align-content: stretch;
     margin: $spacing-md 0;
 
-    grid-column: left-main / right-gutter;
+    grid-column: left-gutter / end;
+
+    @include respond-to('small') {
+        grid-column: left-main / right-gutter;
+    }
 }
 
 .listingItem {
-    flex: 1 1 25%;
+    flex: 1 1 100%;
     padding-right: $spacing-md;
-    max-width: 25%;
+    max-width: 100%;
+
+    @include respond-to('small') {
+        flex: 1 1 25%;
+        padding-right: $spacing-md;
+        max-width: 25%;
+    }
 }
