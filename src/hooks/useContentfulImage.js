@@ -5,7 +5,7 @@ export default assetUrl => {
   const { allContentfulAsset } = useStaticQuery(
     graphql`
       query CONTENTFUL_IMAGE_QUERY {
-        allContentfulAsset {
+        allContentfulAsset(filter: {file: {url: {ne: ""}}}) {
           nodes {
             file {
               url
@@ -18,5 +18,6 @@ export default assetUrl => {
       }
     `
   );
+
   return allContentfulAsset.nodes.find(n => n.file.url === assetUrl).fluid;
 };
