@@ -104,7 +104,7 @@
     @include font-family;
     @include font-weight-body;
     @include line-height('body');
-    @include typescale('body2');
+    @include typescale('body1');
 }
 
 .internal {
