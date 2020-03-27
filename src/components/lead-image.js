@@ -1,4 +1,5 @@
 import React from 'react'
+import ImageWithSVGSupport from '../components/image-with-svg-support'
 import styles from "./lead-image.module.scss";
 
 const LeadImage = ({ title, fluid, file }, ...rest) => {
