@@ -22,7 +22,7 @@
         @include line-height('heading');
         @include font-smoothing;
         @include letter-spacing;
-        @include typescale('h2');
+        @include typescale('h3');
     
         color: $color-text-02;
 
