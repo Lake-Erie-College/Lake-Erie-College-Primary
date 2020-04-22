@@ -31,7 +31,7 @@ const CourseHeadingWithLink = ({heading, overline, to}) => {
 
 const Offering = ({offering}) => {
     const hasPrimaryContent = typeof offering.primaryContent !== 'undefined' && offering.primaryContent !== null
-    const hasDescription = typeof offering.description !== 'undefined' && offering.description.description !== null
+    const hasDescription = typeof offering.description !== 'undefined' && offering.description !== null && offering.description.description !== null
     const isHidden = typeof offering.hidden !== 'undefined' && offering.hidden === true
 
     const offeringTo = !isHidden ? linkResolver.path(offering) : null

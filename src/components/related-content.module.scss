@@ -1,0 +1,33 @@
+@import '../styles/typography';
+@import '../styles/breakpoint';
+@import '../styles/colors';
+@import '../styles/spacing';
+@import '../styles/grids';
+
+.relatedContent {
+    display: grid;
+    @include content-grid;
+
+    background-color: $color-ui-04;
+
+    @include respond-to('small') {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    > *:nth-child(2n+1) {
+        grid-column: left-gutter / end;
+
+        @include respond-to('small') {
+            grid-column: left-main / half-main;
+        }
+    }
+
+    > *:nth-child(2n) {
+        grid-column: left-gutter / end;
+
+        @include respond-to('small') {
+            grid-column: half-main / right-gutter;
+        }
+    }
+}

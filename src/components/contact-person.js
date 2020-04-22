@@ -26,7 +26,7 @@ const ContactPerson = ({ heading, person, displayName }, ...rest) => {
     const hasHeadshot = typeof person.headshot !== 'undefined' && person.headshot !== null
 
     if (hasHeadshot && typeof person.headshot.fluid === 'undefined') {
-        person.headshot.fluid = useContentfulImage(
+        person.headshot = useContentfulImage(
             person.headshot.file.url
         )
     }

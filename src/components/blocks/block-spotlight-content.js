@@ -129,11 +129,11 @@ const Summary = ({summary}) => (
 )
 
 const PrimaryImage = ({image}) => {
-    const fluid = useContentfulImage(
+    const contentfulImage = useContentfulImage(
         image.data.target.file.url
     )
     return (
-        <Image className={styles.image} title={image.data.target.title} fluid={fluid} />
+        <Image className={styles.image} title={image.data.target.title} fluid={contentfulImage.fluid} svg={contentfulImage.svg} />
     )
 }
 

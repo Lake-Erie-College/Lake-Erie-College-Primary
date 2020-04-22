@@ -44,11 +44,11 @@ const BlockMediaWithCaption = ({ internalMedia, externalMedia, heading, caption,
 }
 
 const Image = (image) => {
-    const fluid = useContentfulImage(
+    const contentfulImage = useContentfulImage(
         image.data.target.file.url
     )
     return (
-        <GatsbyImage className={styles.media} title={image.data.target.title} fluid={fluid} />
+        <GatsbyImage className={styles.media} title={image.data.target.title} fluid={contentfulImage.fluid} svg={contentfulImage.svg} />
     )
 }
 

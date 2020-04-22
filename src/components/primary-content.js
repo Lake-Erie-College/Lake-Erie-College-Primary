@@ -63,11 +63,11 @@ const options = {
   
         switch (mimeGroup) {
             case 'image':
-                const fluid = useContentfulImage(
+                const contentfulImage = useContentfulImage(
                     content.data.target.file.url
                 )
                 return (
-                    <ImageWithSVGSupport className={styles.image} title={content.data.target.title} fluid={fluid} file={file} />
+                    <ImageWithSVGSupport className={styles.image} title={content.data.target.title} fluid={contentfulImage.fluid} file={file} svg={contentfulImage.svg} />
                 )
             case 'application':
                 return <a

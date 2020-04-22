@@ -98,8 +98,8 @@
 }
 
 .courseSummary {
-    margin-left: $spacing-md;
-    margin-right: $spacing-md;
+    margin-left: 0;
+    margin-right: 0;
     margin-bottom: $spacing-xs;
     @include font-family;
     @include font-weight-body;
