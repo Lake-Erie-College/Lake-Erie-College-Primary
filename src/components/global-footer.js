@@ -24,6 +24,14 @@ const GlobalFooter = () => {
                   url
                   contentType
                 }
+                ... on ContentfulAsset {
+                    svg {
+                        content # SVG content optimized with SVGO
+                        dataURI # Optimized SVG as compact dataURI
+                        absolutePath #
+                        relativePath #
+                    }
+                }
             }
             footerImage {
                 title
@@ -33,6 +41,14 @@ const GlobalFooter = () => {
                 file {
                   url
                   contentType
+                }
+                ... on ContentfulAsset {
+                    svg {
+                        content # SVG content optimized with SVGO
+                        dataURI # Optimized SVG as compact dataURI
+                        absolutePath #
+                        relativePath #
+                    }
                 }
             }
             facebook
@@ -203,7 +219,7 @@ const GlobalFooter = () => {
     return (
         <footer className={styles.globalFooter}>
             <div className={styles.map} >
-                <ImageWithSVGSupport title={page.footerImage.title} fluid={page.footerImage.fluid} file={page.footerImage.file}  />
+                <ImageWithSVGSupport title={page.footerImage.title} fluid={page.footerImage.fluid} file={page.footerImage.file} svg={page.footerImage.svg} />
             </div>
 
             {typeof navigationConversionItems !== 'undefined' && (
@@ -220,7 +236,7 @@ const GlobalFooter = () => {
             )}
 
             <div className={styles.logo}>
-                <ImageWithSVGSupport title={page.footerLogo.title} fluid={page.footerLogo.fluid} file={page.footerLogo.file} />
+                <ImageWithSVGSupport title={page.footerLogo.title} fluid={page.footerLogo.fluid} file={page.footerLogo.file} svg={page.footerLogo.svg} />
             </div>
 
             <section className={styles.contact}>

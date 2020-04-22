@@ -82,23 +82,23 @@
 }
 
 .heading {
-    margin: 0 $spacing-md;
+    margin: 0 $spacing-md $spacing-sm $spacing-md;
 
     @include font-family-headings;
     font-weight: 400;
     @include line-height('heading');
     @include font-smoothing;
     @include letter-spacing;
-    @include typescale('h3');
+    @include typescale('h4');
 
-    text-align: center;
+    text-align: left;
 
     color: $color-text-02;
 
     @include respond-to('small') {
         margin-left: 0;
         margin-right: 0;
-        @include typescale('h2');
+        @include typescale('h3');
         grid-column: main;
     }
 }

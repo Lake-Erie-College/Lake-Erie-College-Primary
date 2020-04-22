@@ -7,8 +7,22 @@ export default assetUrl => {
             query CONTENTFUL_IMAGE_QUERY {
                 allContentfulAsset(filter: { file: { url: { ne: "" } } }) {
                     nodes {
+                        svg {
+                            content # SVG content optimized with SVGO
+                            dataURI # Optimized SVG as compact dataURI
+                            absolutePath #
+                            relativePath #
+                        }
                         file {
+                            contentType
                             url
+                            fileName
+                            details {
+                                image {
+                                    width
+                                    height
+                                }
+                            }
                         }
                         fluid(maxWidth: 1050, quality: 85) {
                             ...GatsbyContentfulFluid_withWebp
@@ -27,5 +41,5 @@ export default assetUrl => {
         }
     }
 
-    return allContentfulAsset.nodes.find(isMatchedUrl).fluid
+    return allContentfulAsset.nodes.find(isMatchedUrl)
 }

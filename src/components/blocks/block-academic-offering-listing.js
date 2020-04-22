@@ -43,7 +43,7 @@ const BlockAcademicOfferingListing = ({ category, offeringType }, ...rest) => {
     if (filteredOfferings != null && filteredOfferings.length > 0) {
         return <RelatedOfferings offerings={filteredOfferings} />
     } else {
-        return
+        return null
     }
 }
 
