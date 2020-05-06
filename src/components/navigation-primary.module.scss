@@ -1,0 +1,121 @@
+@import '../styles/typography';
+@import '../styles/breakpoint';
+@import '../styles/colors';
+@import '../styles/spacing';
+@import '../styles/grids';
+
+.navigationMenu {
+    display: flex;
+    margin: 0;
+    padding: 0;
+
+    &.navigationPrimaryLevel {
+        position: relative;
+        display: flex;
+        align-items: flex-end;
+        height: 100%;
+        z-index: 1000;
+
+        & .navigationMenu {
+            position: absolute;
+            left: 0;
+            right: 0;
+            display: none;
+            padding: $spacing-xs 0;
+            background-color: $color-ui-03;
+
+            box-shadow:
+                0 0.8px 0.7px rgba(0, 0, 0, 0.028),
+                0 2px 1.8px rgba(0, 0, 0, 0.04),
+                0 3.8px 3.4px rgba(0, 0, 0, 0.05),
+                0 6.7px 6px rgba(0, 0, 0, 0.06),
+                0 12.5px 11.3px rgba(0, 0, 0, 0.072),
+                0 30px 27px rgba(0, 0, 0, 0.1)
+            ;
+        }
+    }
+}
+
+.navigationItem {
+    display: block;
+    margin: 0;
+    padding: 0;
+
+    &.navigationItemOpen {
+        background-color: $color-ui-03;
+
+        & .navigationMenu {
+            display: block;
+        }
+    }
+
+    &.navigationItemPrimaryLevel {
+        flex: 1 1 33.333%;
+    }
+
+    &.navigationItemPrimaryLevel:nth-child(n) {
+        .navigationLinkPrimaryLevel {
+            border-color: $color-brand-01;
+        }
+    }
+    &.navigationItemPrimaryLevel:nth-child(2n) {
+        .navigationLinkPrimaryLevel {
+            border-color: $color-brand-02;
+        }
+    }
+    &.navigationItemPrimaryLevel:nth-child(3n) {
+        .navigationLinkPrimaryLevel {
+            border-color: $color-brand-03;
+        }
+    }
+}
+
+.navigationLink {
+    display: block;
+    padding: $spacing-xs $spacing-sm;
+
+    @include font-family;
+    @include font-weight-body;
+    @include line-height('body');
+    @include typescale('body1');
+
+    text-decoration: none;
+
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    border-color: transparentize($color: ($color-ui-01), $amount: .25);
+
+    &:hover,
+    &:active {
+        background-color: transparentize($color: ($color-ui-01), $amount: .25);
+    }
+
+    &.navigationLinkPrimaryLevel {
+        padding: $spacing-sm 0;
+
+        border-width: 0 0 6px 0;
+        border-style: solid;
+
+        @include font-family-headings;
+        font-weight: 400;
+        @include line-height('heading');
+        @include font-smoothing;
+        @include letter-spacing;
+        @include typescale('h5');
+        text-align: center;
+        text-decoration: none;
+
+        @include respond-to('small') {
+            padding: $spacing-2xl 0 $spacing-sm 0;
+        }
+
+        &:hover,
+        &:active {
+            background-color: transparent;
+        }
+    }
+}
+
+.navigationItem a {
+    color: currentColor;
+}

@@ -1,0 +1,59 @@
+@import '../styles/typography';
+@import '../styles/breakpoint';
+@import '../styles/spacing';
+@import '../styles/colors';
+@import '../styles/grids';
+
+.globalHeader {
+    display: grid;
+    grid-template-columns: [left-gutter] 1fr [left-main] 0fr [main] 3fr [half-main] 3fr [right-main] 0fr [right-gutter] 1fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: $spacing-sm;
+    grid-row-gap: 0px;
+
+    margin: 0;
+
+    color: #16405B;
+
+    @include respond-to('small') {
+        grid-template-columns: [left-gutter] 2fr [left-main] 1fr [main] 3fr [half-main] 3fr [right-main] 1fr [right-gutter] 2fr;
+    }
+}
+
+.logo {
+    grid-column: left-gutter / end;
+
+    @include respond-to('small') {
+        grid-column: left-gutter / half-main;
+    }
+
+    @include respond-to('medium') {
+        grid-column: left-main / half-main;
+    }
+}
+
+.primaryNavigation {
+    grid-column: left-gutter / end;
+
+    @include respond-to('small') {
+        grid-column: half-main / end;
+    }
+
+    @include respond-to('medium') {
+        grid-column: half-main / right-main;
+    }
+}
+
+.search {
+    grid-column: left-gutter / end;
+
+    background-color: $color-ui-03;
+
+    @include respond-to('small') {
+        grid-column: half-main / end;
+    }
+
+    @include respond-to('medium') {
+        grid-column: right-main / end;
+    }
+}
