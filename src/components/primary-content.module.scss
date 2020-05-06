@@ -144,6 +144,23 @@
     }
 }
 
+.inlineImage {
+    margin: 0 0 $spacing-sm 0;
+
+    @include respond-to('small') {
+        grid-column: left-main / half-main;
+    }
+}
+
+.microImage {
+    margin: 0 0 $spacing-sm 0;
+
+    @include respond-to('small') {
+        grid-column: main / half-main;
+        width: 50%;
+    }
+}
+
 .ol {
     position: relative;
     display: flex;

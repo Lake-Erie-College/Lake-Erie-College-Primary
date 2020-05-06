@@ -5,7 +5,7 @@
 @import '../styles/grids';
 
 .relatedNews {
-    padding: 0;
+    padding: $spacing-md 0 0 0;
 
     @include respond-to('small') {
         padding: $spacing-md $spacing-md 0 $spacing-md;

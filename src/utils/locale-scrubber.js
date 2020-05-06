@@ -7,13 +7,15 @@ function scrubber(node) {
                 node[index] = scrubber(item)
             })
         } else {
-            Object.keys(node).forEach(function(key) {
-                if (key !== 'en-US' && key !== 'fields') {
-                    node[key] = scrubber(node[key])
-                } else {
-                    node = scrubber(node[key])
-                }
-            })
+            if (node !== null) {
+                Object.keys(node).forEach(function(key) {
+                    if (key !== 'en-US' && key !== 'fields') {
+                        node[key] = scrubber(node[key])
+                    } else {
+                        node = scrubber(node[key])
+                    }
+                })
+            }
         }
     }
 

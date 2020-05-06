@@ -7,10 +7,12 @@
 .relatedEvents {
     padding: $spacing-md $spacing-md 0 $spacing-md;
 
+    border-width: 1px 0 0 0;
+    border-style: solid;
+    border-color: $color-ui-05;
+
     @include respond-to('small') {
         border-width: 0 0 0 1px;
-        border-style: solid;
-        border-color: $color-ui-05;
     }
 
     a:link,
@@ -82,7 +84,7 @@
 }
 
 .heading {
-    margin: 0 $spacing-md $spacing-sm $spacing-md;
+    margin: 0 0 $spacing-sm 0;
 
     @include font-family-headings;
     font-weight: 400;

@@ -30,6 +30,7 @@ module.exports = {
     'gatsby-plugin-sharp',
     'gatsby-plugin-sass',
     'gatsby-transformer-inline-svg',
+    'gatsby-plugin-use-query-params',
     {
       resolve: 'gatsby-source-contentful',
       options: contentfulConfig,
