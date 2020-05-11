@@ -19,7 +19,7 @@ const Person = ({ person, displayName }, ...rest) => {
 
     const hasHeadshot = typeof person.headshot !== 'undefined' && person.headshot !== null
 
-    const hasJobTitles = typeof person.jobTitles === 'undefined' && person.jobTitles !== null ? false : true
+    const hasJobTitles = typeof person.jobTitles !== 'undefined' && person.jobTitles !== null
 
     if (hasHeadshot && typeof person.headshot.fluid === 'undefined') {
         person.headshot = useContentfulImage(
