@@ -5,7 +5,6 @@ import ImageWithSVGSupport from './image-with-svg-support'
 import { Link as GatsbyLink } from "gatsby"
 import CallToAction from './call-to-action'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-
 import styles from './global-footer.module.scss'
 
 const linkResolver = require('../utils').linkResolver

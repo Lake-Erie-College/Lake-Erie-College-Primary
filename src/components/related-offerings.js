@@ -2,7 +2,6 @@ import React from 'react'
 import PrimaryContent from '../components/primary-content'
 import { Link as GatsbyLink } from "gatsby"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-
 import styles from "./related-offerings.module.scss"
 
 const linkResolver = require('../utils').linkResolver
@@ -36,13 +35,15 @@ const Offering = ({offering}) => {
 
     const offeringTo = !isHidden ? linkResolver.path(offering) : null
 
+    const offeringTitle = typeof offering.shortTitle !== 'undefined' && offering.shortTitle !== null ? offering.shortTitle : offering.title
+
     return (
         <div className={styles.offering}>
             {isHidden && (
-                <CourseHeading heading={offering.shortTitle} overline={offering.offeringType} />
+                <CourseHeading heading={offeringTitle} overline={offering.offeringType} />
             )}
             {!isHidden && (
-                <CourseHeadingWithLink heading={offering.shortTitle} overline={offering.offeringType} to={offeringTo} />
+                <CourseHeadingWithLink heading={offeringTitle} overline={offering.offeringType} to={offeringTo} />
             )}
 
             {hasPrimaryContent && (

@@ -5,7 +5,6 @@ import ImageWithSVGSupport from './image-with-svg-support'
 import { Link as GatsbyLink } from 'gatsby'
 import NavigationPrimary from './navigation-primary'
 import SearchBox from './search/search-box'
-
 import styles from './global-header.module.scss'
 
 const linkResolver = require('../utils').linkResolver
@@ -47,7 +46,7 @@ const GlobalHeader = () => {
     return (
         <header className={styles.globalHeader}>
             <div className={styles.logo}>
-                <GatsbyLink to={`/`}>
+                <GatsbyLink to={`/`} aria-label={`Navigate to the Homepage`}>
                     <ImageWithSVGSupport
                         title={page.headerLogo.title}
                         fluid={page.headerLogo.fluid}

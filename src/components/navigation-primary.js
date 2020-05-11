@@ -4,11 +4,9 @@ import cx from 'classnames'
 import get from 'lodash/get'
 import FocusLock from 'react-focus-lock'
 import { Link as GatsbyLink } from 'gatsby'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import styles from './navigation-primary.module.scss'
 
 const linkResolver = require('../utils').linkResolver
-
-import styles from './navigation-primary.module.scss'
 
 const NavigationPrimary = () => {
     const data = useStaticQuery(graphql`
@@ -274,7 +272,6 @@ const NavigationPrimary = () => {
                 className={cx(styles.navigationMenu, {
                     [`${styles.navigationPrimaryLevel}`]: level === 0,
                 })}
-                role="menubar"
                 aria-label={label}
             >
                 {links.map(link => (

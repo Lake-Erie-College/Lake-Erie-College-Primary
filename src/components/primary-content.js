@@ -3,7 +3,6 @@ import { BLOCKS, MARKS, INLINES } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { Link as GatsbyLink } from 'gatsby'
 import cx from 'classnames'
-import Image from 'gatsby-image'
 import useContentfulImage from '../hooks/useContentfulImage'
 import ImageWithSVGSupport from './image-with-svg-support'
 import BlockAcademicOfferingListing from './blocks/block-academic-offering-listing'
@@ -14,11 +13,10 @@ import BlockSearchResults from './blocks/block-search-results'
 import BlockSpotlightContent from './blocks/block-spotlight-content'
 import ContactPerson from './contact-person'
 import Divider from './divider'
+import styles from './primary-content.module.scss'
 
 const linkResolver = require('../utils').linkResolver
 const localeScrubber = require('../utils').localeScrubber
-
-import styles from './primary-content.module.scss'
 
 const Bold = ({ children }) => <strong>{children}</strong>
 const Text = ({ children }) => <p>{children}</p>
@@ -101,7 +99,7 @@ const options = {
                     const width = contentfulImage.file.details.image.width
                     const height = contentfulImage.file.details.image.height
 
-                    const ratio = height / width
+                    const ratio = width / height
                     const micro = height < 200 || width < 400
 
                     return (

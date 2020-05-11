@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link as GatsbyLink } from "gatsby"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-
 import styles from "./page-heading.module.scss";
 
 const linkResolver = require('../utils').linkResolver

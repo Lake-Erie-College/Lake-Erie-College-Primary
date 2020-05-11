@@ -4,10 +4,9 @@ import Image from "gatsby-image"
 import { Link as GatsbyLink } from "gatsby"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import useContentfulImage from "../hooks/useContentfulImage"
+import styles from "./contact-person.module.scss";
 
 const linkResolver = require('../utils').linkResolver
-
-import styles from "./contact-person.module.scss";
 
 const ContactPerson = ({ heading, person, displayName }, ...rest) => {
     const hasOverline = typeof overline !== 'undefined'
