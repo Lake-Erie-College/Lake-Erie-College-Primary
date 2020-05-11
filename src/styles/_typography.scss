@@ -29,7 +29,7 @@ $typescale-map: (
         font-size: rem(map-get($typescale-map, $size));
     }
     @else {
-        @warn '$size This is not a step of the Type Scale!';
+        @warn '#{$size} This is not a step of the Type Scale!';
     }
 }
 
@@ -66,7 +66,7 @@ $typescale-map: (
         line-height: 1.5;
     }
     @else {
-        @warn 'Invalid argument used for @mixin line-height($el) . Please use 'heading' or 'body'.';
+        @warn 'Invalid argument used for @mixin line-height(#{$el}) . Please use 'heading' or 'body'.';
     }
 }
 
@@ -100,6 +100,6 @@ $font-size-map: (
         font-size: map-get($font-size-map, $size);
     }
     @else {
-        @warn 'This is not a step of the Type Scale! Valid sizes are 10, 12, 16, 24, 32, 46, 66, and 80';
+        @warn '#{$size} This is not a step of the Type Scale! Valid sizes are 10, 12, 16, 24, 32, 46, 66, and 80';
     }
 }

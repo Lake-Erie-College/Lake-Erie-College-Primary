@@ -46,7 +46,6 @@ module.exports = {
       },
     }
     */
-    /*
     {
       resolve: 'gatsby-plugin-react-axe',
       options: {
@@ -65,7 +64,6 @@ module.exports = {
           include: [['#___gatsby']]
         }
       },
-    }, 
-    */
+    },
   ],
 }

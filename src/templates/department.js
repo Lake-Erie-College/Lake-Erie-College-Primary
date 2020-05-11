@@ -48,6 +48,15 @@ export const pageQuery = graphql`
     }
     contentfulDepartment(slug: { eq: $slug }) {
       title
+      slug
+      description {
+        description
+      }
+      category {
+        title
+        shortTitle
+        slug
+      }
       lead {
         lead
       }

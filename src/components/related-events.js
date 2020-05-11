@@ -7,7 +7,6 @@ import sortBy from 'lodash/sortBy'
 import take from 'lodash/take'
 import moment from 'moment'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-
 import styles from "./related-events.module.scss"
 
 const linkResolver = require('../utils').linkResolver

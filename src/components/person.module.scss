@@ -68,7 +68,7 @@
     @include font-family;
     @include font-weight-body-bold;
     @include line-height('body');
-    @include typescale('body');
+    @include typescale('body1');
     font-style: italic;
 }
 
