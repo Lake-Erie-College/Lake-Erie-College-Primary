@@ -50,7 +50,7 @@ const ContactPerson = ({ heading, person, displayName }, ...rest) => {
                         </h3>
                     )}
 
-                    { hasJobTitles && person.jobTitles.jobTitles !== null && (
+                    { hasJobTitles && (
                         <p className={styles.jobTitle}>{person.jobTitles.jobTitles || person.jobTitles}</p>
                     )}
 
