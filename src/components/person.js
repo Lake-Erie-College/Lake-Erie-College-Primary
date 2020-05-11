@@ -19,6 +19,8 @@ const Person = ({ person, displayName }, ...rest) => {
 
     const hasHeadshot = typeof person.headshot !== 'undefined' && person.headshot !== null
 
+    const hasJobTitles = typeof person.jobTitles === 'undefined' && person.jobTitles !== null ? false : true
+
     if (hasHeadshot && typeof person.headshot.fluid === 'undefined') {
         person.headshot = useContentfulImage(
             person.headshot.file.url
@@ -38,8 +40,9 @@ const Person = ({ person, displayName }, ...rest) => {
                         </GatsbyLink>
                     </h3>
                 )}
-                <p className={styles.jobTitle}>{person.jobTitles.jobTitles || person.jobTitles}</p>
-
+                { hasJobTitles && (
+                    <p className={styles.jobTitle}>{person.jobTitles.jobTitles || person.jobTitles}</p>
+                )}
                 <h4 className={cx(styles.info, styles.department)}>
                     <GatsbyLink to={departmentTo} className={styles.internal}>
                         {person.department.title}<nobr><FontAwesomeIcon icon='external-link-square-alt' size='xs' className={styles.icon} /></nobr>

@@ -24,6 +24,8 @@ const ContactPerson = ({ heading, person, displayName }, ...rest) => {
 
     const hasHeadshot = typeof person.headshot !== 'undefined' && person.headshot !== null
 
+    const hasJobTitles = typeof person.jobTitles === 'undefined' && person.jobTitles !== null ? false : true
+
     if (hasHeadshot && typeof person.headshot.fluid === 'undefined') {
         person.headshot = useContentfulImage(
             person.headshot.file.url
@@ -48,7 +50,7 @@ const ContactPerson = ({ heading, person, displayName }, ...rest) => {
                         </h3>
                     )}
 
-                    { person.jobTitles && (
+                    { hasJobTitles && person.jobTitles.jobTitles !== null && (
                         <p className={styles.jobTitle}>{person.jobTitles.jobTitles || person.jobTitles}</p>
                     )}
 
