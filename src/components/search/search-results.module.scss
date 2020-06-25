@@ -1,0 +1,65 @@
+@import '../../styles/typography';
+@import '../../styles/breakpoint';
+@import '../../styles/colors';
+@import '../../styles/spacing';
+@import '../../styles/grids';
+
+.searchResults {
+    display: grid;
+    @include content-grid;
+    margin: $spacing-md;
+
+    @include respond-to('small') {
+        margin: $spacing-md 0;
+    }
+}
+
+.heading {
+    margin: 0 $spacing-md;
+    grid-column: left-gutter / end;
+
+    @include font-family-headings;
+    font-weight: 400;
+    @include line-height('heading');
+    @include font-smoothing;
+    @include letter-spacing;
+    @include typescale('h4');
+
+    color: $color-text-02;
+
+    @include respond-to('small') {
+        margin-left: 0;
+        margin-right: 0;
+        @include typescale('h3');
+        grid-column: main / right-main;
+    }
+}
+
+.hits {
+    margin: 0 $spacing-md;
+    grid-column: left-gutter / end;
+
+    @include respond-to('small') {
+        margin-left: 0;
+        margin-right: 0;
+        grid-column: main / right-main;
+    }
+}
+
+.query {
+    display: inline-block;
+    padding: 0 $spacing-xs;
+    background-color: $color-ui-04;
+    color: $color-text-01;
+}
+
+.pagination {
+    margin: 0 $spacing-md;
+    grid-column: left-gutter / end;
+
+    @include respond-to('small') {
+        margin-left: 0;
+        margin-right: 0;
+        grid-column: main / right-main;
+    }
+}

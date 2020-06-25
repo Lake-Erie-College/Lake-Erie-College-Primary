@@ -3,6 +3,7 @@ import { BLOCKS, MARKS, INLINES } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { Link as GatsbyLink } from 'gatsby'
 import cx from 'classnames'
+import get from 'lodash/get'
 import useContentfulImage from '../hooks/useContentfulImage'
 import ImageWithSVGSupport from './image-with-svg-support'
 import BlockAcademicOfferingListing from './blocks/block-academic-offering-listing'
@@ -175,8 +176,8 @@ const Placeholder = ({ value }) => {
 }
 
 function EmbeddedEntry({ node }) {
-    const type = node.data.target.sys.contentType.sys.id
-    const value = node.data.target.fields
+    const type = typeof node.data.target.sys.contentType === 'undefined' ? node.data.target.sys.type : node.data.target.sys.contentType.sys.id
+    const value = get(node, 'data.target.fields')
     const handler = blocksHandlers[type] || blocksHandlers.default
 
     return <div className={styles.embeddedBlock}>{handler(value)}</div>

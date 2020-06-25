@@ -2,9 +2,14 @@ import React, { useState, useEffect, createRef } from 'react'
 import {
     InstantSearch,
     Index,
+    Configure,
+    SearchBox,
     Hits,
+    Highlight,
+    Pagination,
     connectStateResults,
 } from 'react-instantsearch-dom'
+import qs from 'qs'
 import algoliasearch from 'algoliasearch/lite'
 import {
     useQueryParam,
@@ -14,10 +19,16 @@ import {
     withDefault,
 } from 'use-query-params'
 import * as hitComps from './hit-comps'
+import styles from './search-results.module.scss'
+
+const searchClient = algoliasearch(
+    process.env.GATSBY_ALGOLIA_APP_ID,
+    process.env.GATSBY_ALGOLIA_SEARCH_KEY
+)
 
 const Results = connectStateResults(
     ({ searchState: state, searchResults: res, children }) =>
-        res && res.nbHits > 0 ? children : `No results for '${state.query}'`
+        res && res.nbHits > 0 ? children : `Your search did not return any results.`
 )
 
 const Stats = connectStateResults(
@@ -27,38 +38,27 @@ const Stats = connectStateResults(
         `${res.nbHits} result${res.nbHits > 1 ? `s` : ``}`
 )
 
-const useClickOutside = (ref, handler, events) => {
-    if (!events) events = [`mousedown`, `touchstart`]
-    const detectClickOutside = event =>
-        !ref.current.contains(event.target) && handler()
-    useEffect(() => {
-        for (const event of events)
-            document.addEventListener(event, detectClickOutside)
-        return () => {
-            for (const event of events)
-                document.removeEventListener(event, detectClickOutside)
-        }
-    })
-}
-
 export default function SearchResults({ indices, collapse, hitsAsGrid }) {
     const [query, setQuery] = useQueryParam('query', StringParam)
     const [focus, setFocus] = useState(false)
-    const searchClient = algoliasearch(
-        process.env.GATSBY_ALGOLIA_APP_ID,
-        process.env.GATSBY_ALGOLIA_SEARCH_KEY
-    )
 
     const indexName = indices[0].name
+    const hitComp = indices[0].hitComp
 
     return (
-        <div>
+        <div className={styles.searchResults}>
             <InstantSearch
                 searchClient={searchClient}
                 indexName={indexName}
                 // onSearchStateChange={({ query }) => setQuery(query)}
             >
-                <p>Instant Search Results - {query}</p>
+                <Configure hitsPerPage={10} query={query}/>
+                <h2 className={styles.heading}>Your search for <mark className={styles.query}>{query}</mark> returned <Stats />.</h2>
+                
+                <Results>
+                    <Hits className={styles.hits} hitComponent={hitComps[hitComp]} />
+                    <Pagination className={styles.pagination} />
+                </Results>
             </InstantSearch>
         </div>
     )
