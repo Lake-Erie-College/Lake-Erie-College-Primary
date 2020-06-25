@@ -39,7 +39,7 @@ const GlobalHeader = () => {
     const page = get(data, 'contentfulSiteSettings')
 
     const searchIndices = [
-        { name: `prod_LEC_Content`, title: `Pages`, hitComp: `PageHit` },
+        { name: `prod_LEC_Pages`, title: `Pages`, hitComp: `TestHit` },
         // { name: `Posts`, title: `Blog Posts`, hitComp: `PostHit` },
     ]
 
@@ -62,6 +62,7 @@ const GlobalHeader = () => {
                 <NavigationPrimary />
             </nav>
             <div className={styles.search}>
+                <SearchBox indices={searchIndices} />
             </div>
         </header>
     )

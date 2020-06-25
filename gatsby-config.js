@@ -1,8 +1,8 @@
+const queries = require("./src/utils/algolia")
+
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`
 })
-
-const queries = require("./src/utils/algolia")
 
 const contentfulConfig = {
   spaceId: process.env.CONTENTFUL_SPACE_ID,
@@ -35,7 +35,6 @@ module.exports = {
       resolve: 'gatsby-source-contentful',
       options: contentfulConfig,
     },
-    /*
     {
       resolve: `gatsby-plugin-algolia`,
       options: {
@@ -44,9 +43,8 @@ module.exports = {
         queries,
         chunkSize: 10000, // default: 1000
       },
-    }
-    */
-    {
+    },
+    /*{
       resolve: 'gatsby-plugin-react-axe',
       options: {
         // Integrate react-axe in production. This defaults to false.
@@ -64,6 +62,6 @@ module.exports = {
           include: [['#___gatsby']]
         }
       },
-    },
+    },*/
   ],
 }

@@ -2,17 +2,17 @@ import React, { useState, useEffect, createRef } from 'react'
 
 import {
     InstantSearch,
-    Index,
-    Hits,
     connectStateResults,
+    Configure
 } from 'react-instantsearch-dom'
 import algoliasearch from 'algoliasearch/lite'
 import SearchInput from './input'
+import {
+    useQueryParam,
+    StringParam,
+} from 'use-query-params'
 
-const Results = connectStateResults(
-    ({ searchState: state, searchResults: res, children }) =>
-        res && res.nbHits > 0 ? children : `No results for '${state.query}'`
-)
+
 
 const Stats = connectStateResults(
     ({ searchResults: res }) =>
@@ -21,23 +21,9 @@ const Stats = connectStateResults(
         `${res.nbHits} result${res.nbHits > 1 ? `s` : ``}`
 )
 
-const useClickOutside = (ref, handler, events) => {
-    if (!events) events = [`mousedown`, `touchstart`]
-    const detectClickOutside = event =>
-        !ref.current.contains(event.target) && handler()
-    useEffect(() => {
-        for (const event of events)
-            document.addEventListener(event, detectClickOutside)
-        return () => {
-            for (const event of events)
-                document.removeEventListener(event, detectClickOutside)
-        }
-    })
-}
-
 export default function SearchBox({ indices, collapse, hitsAsGrid }) {
-    const [query, setQuery] = useState(``)
-    const [focus, setFocus] = useState(false)
+    const [query, setQuery] = useQueryParam('query', StringParam)
+    
     const searchClient = algoliasearch(
         process.env.GATSBY_ALGOLIA_APP_ID,
         process.env.GATSBY_ALGOLIA_SEARCH_KEY
@@ -52,11 +38,7 @@ export default function SearchBox({ indices, collapse, hitsAsGrid }) {
                 indexName={indexName}
                 // onSearchStateChange={({ query }) => setQuery(query)}
             >
-                <p>Instant Search - {query}</p>
-                <SearchInput
-                    onFocus={() => setFocus(true)}
-                    {...{ collapse, focus }}
-                />
+                <SearchInput />
             </InstantSearch>
         </div>
     )
