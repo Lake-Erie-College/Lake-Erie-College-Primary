@@ -1,0 +1,133 @@
+@import '../styles/typography';
+@import '../styles/breakpoint';
+@import '../styles/colors';
+@import '../styles/spacing';
+@import '../styles/grids';
+
+.tabularContent {
+    margin: $spacing-sm 0;
+    width: 100%;
+
+    thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+
+        @include respond-to('small') {
+            clip: none;
+            position: relative;
+            margin: 0;
+            width: auto;
+            height: auto;
+            overflow: visible;
+        }
+
+        tr {
+            border-bottom: 4px solid $color-ui-05;
+        }
+    }
+
+    tbody {
+
+        tr {
+            border-top: 4px solid $color-ui-05;
+
+            @include respond-to('small') {
+                border-top: none;
+            }
+
+            &:hover {
+                background-color: $color-hover-row;
+            }
+        }
+    }
+
+    caption {
+        padding: $spacing-2xs 0;
+        @include font-family-headings;
+        font-weight: 400;
+        @include line-height('heading');
+        @include font-smoothing;
+        @include letter-spacing;
+        @include typescale('h5');
+        text-align: left;
+        color: $color-brand-03;
+
+        @include respond-to('small') {
+            padding: $spacing-2xs $spacing-xs;
+            @include typescale('h4');
+        }
+    }
+
+    th {
+        padding: $spacing-2xs 0;
+        @include font-family-headings;
+        font-weight: 400;
+        @include line-height('heading');
+        @include font-smoothing;
+        @include letter-spacing;
+        @include typescale('h6');
+        text-align: left;
+        color: $color-brand-03;
+
+        @include respond-to('small') {
+            padding: $spacing-2xs $spacing-xs;
+            @include typescale('h5');
+        }
+    }
+
+    td {
+        clear: both;
+        display: block;
+        padding: $spacing-xs 0;
+        border-bottom: 1px solid $color-ui-03;
+
+        @include font-family;
+        @include font-weight-body;
+        @include line-height('body');
+        @include typescale('body1');
+        text-align: right;
+
+        overflow: hidden;
+
+        @include respond-to('small') {
+            display: table-cell;
+            padding: $spacing-xs $spacing-xs;
+            text-align: left;
+        }
+
+        &:last-child {
+            padding-bottom: $spacing-lg;
+            border-bottom: none;
+
+            @include respond-to('small') {
+                padding-bottom: $spacing-xs;
+                border-bottom: 1px solid $color-ui-03;
+            }
+        }
+
+        &::before {
+            float: left;
+            max-width: 50vw;
+            padding: 0;
+            font-weight: 600;
+            text-align: left;
+            color: $color-brand-03;
+            content: attr(data-header);
+
+            @include respond-to('small') {
+                display: none;
+            }
+          }
+    }
+}
+
+/*
+    td::before {
+        content: attr(data-header);
+    }	*/

@@ -35,6 +35,7 @@
     "react-focus-lock": "^2.3.1",
     "react-helmet-async": "^1.0.4",
     "react-instantsearch-dom": "^6.4.0",
+    "react-papaparse": "^3.3.0",
     "react-player": "^1.15.2",
     "react-sled": "^2.0.4",
     "react-spring": "^8.0.27",
