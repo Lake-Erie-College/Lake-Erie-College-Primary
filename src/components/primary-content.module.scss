@@ -144,6 +144,16 @@
     }
 }
 
+.csv {
+    margin-left: $spacing-md;
+    margin-right: $spacing-md;
+    grid-column: left-gutter / end;
+
+    @include respond-to('small') {
+        grid-column: left-main / right-gutter;
+    }
+}
+
 .inlineImage {
     margin: 0 0 $spacing-sm 0;
 

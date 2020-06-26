@@ -14,6 +14,7 @@ import BlockSearchResults from './blocks/block-search-results'
 import BlockSpotlightContent from './blocks/block-spotlight-content'
 import ContactPerson from './contact-person'
 import Divider from './divider'
+import TabularContent from './tabular-content'
 import styles from './primary-content.module.scss'
 
 const linkResolver = require('../utils').linkResolver
@@ -88,8 +89,14 @@ const options = {
             const content = localeScrubber.scrub(node)
 
             const { title, description, file } = content.data.target
+
+            if (typeof file === 'undefined') {
+                return <p>Asset Error</p>
+            }
+
             const mimeType = file.contentType
             const mimeGroup = mimeType.split('/')[0]
+            const mimeSet = mimeType.split('/')[1]
 
             switch (mimeGroup) {
                 case 'image':
@@ -124,6 +131,15 @@ const options = {
                             {title ? title : file.details.fileName}
                         </a>
                     )
+                case 'text':
+                    if (mimeSet === 'csv') {
+                        console.log(description)
+                        return (
+                            <div className={styles.csv}>
+                                <TabularContent fileUrl={file.url} caption={description} />
+                            </div>
+                        )
+                    }
                 default:
                     return (
                         <span

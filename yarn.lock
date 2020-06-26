@@ -2010,6 +2010,13 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.10.61.tgz#d299136ce54bcaf1abaa4a487f9e4bedf6b0d393"
   integrity sha512-l+zSbvT8TPRaCxL1l9cwHCb0tSqGAGcjPJFItGGYat5oCTiq1uQQKYg5m7AF1mgnEBzFXGLJ2LRmNjtreRX76Q==
 
+"@types/papaparse@^5.0.3":
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/@types/papaparse/-/papaparse-5.0.4.tgz#70792c74d9932bcc0bfa945ae7dacfef67f4ee57"
+  integrity sha512-jFv9NcRddMiW4+thmntwZ1AhvMDAX4+tAUDkWWbNcIzgqyjjkuSHOEUPoVh1/gqJTWfDOD1tvl+hSp88W3UtqA==
+  dependencies:
+    "@types/node" "*"
+
 "@types/parse-json@^4.0.0":
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@types/parse-json/-/parse-json-4.0.0.tgz#2f8bb441434d163b35fb8ffdccd7138927ffb8c0"
@@ -11378,6 +11385,11 @@ pako@^1.0.5, pako@~1.0.5:
   resolved "https://registry.yarnpkg.com/pako/-/pako-1.0.11.tgz#6c9599d340d54dfd3946380252a35705a6b992bf"
   integrity sha512-4hLB8Py4zZce5s4yd9XzopqwVv/yGNhV1Bl8NTmCq1763HeK2+EwVTv+leGeL13Dnh2wfbqowVPXCIO0z4taYw==
 
+papaparse@^5.1.1:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/papaparse/-/papaparse-5.2.0.tgz#97976a1b135c46612773029153dc64995caa3b7b"
+  integrity sha512-ylq1wgUSnagU+MKQtNeVqrPhZuMYBvOSL00DHycFTCxownF95gpLAk1HiHdUW77N8yxRq1qHXLdlIPyBSG9NSA==
+
 parallel-transform@^1.1.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/parallel-transform/-/parallel-transform-1.2.0.tgz#9049ca37d6cb2182c3b1d2c720be94d14a5814fc"
@@ -12634,6 +12646,14 @@ react-lifecycles-compat@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
+
+react-papaparse@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/react-papaparse/-/react-papaparse-3.3.0.tgz#22e983abf08b59d1d0f1a19c7a07d6ba7eb01b46"
+  integrity sha512-xDG1tHCOW0Dc6M7qWn4KJJyb9ozaiX6CW1NYjiuvCkOn2DPdrThdt0AWnGG0ochtBZw4We/IK687p6/P1dZM0g==
+  dependencies:
+    "@types/papaparse" "^5.0.3"
+    papaparse "^5.1.1"
 
 react-player@^1.15.2:
   version "1.15.3"
