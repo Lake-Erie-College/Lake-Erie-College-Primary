@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BLOCKS, MARKS, INLINES } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { Link as GatsbyLink } from 'gatsby'
@@ -15,6 +15,9 @@ import BlockSpotlightContent from './blocks/block-spotlight-content'
 import ContactPerson from './contact-person'
 import Divider from './divider'
 import TabularContent from './tabular-content'
+import TextLink from './text-link'
+
+import { useSpring, animated, config } from 'react-spring' // https://www.react-spring.io/docs/hooks/basics
 import styles from './primary-content.module.scss'
 
 const linkResolver = require('../utils').linkResolver
@@ -76,12 +79,23 @@ const options = {
             // const referencedEntry = getEntryWithId(node.data.target.sys.id);
             // <a href={`/pages/${referencedEntry.fields.slug}`}>{children}</a>
             // return 'test';
+
             return (
-                <Link
+                <TextLink
                     children={children}
                     node={node.data.target.fields}
                     activeClassName="active"
                 />
+            )
+        },
+        [INLINES.HYPERLINK]: (node, children) => {
+            // If you are using contenful.js sdk, the referenced entry is resolved
+            // automatically and is available at `node.data.target`.
+            // const referencedEntry = getEntryWithId(node.data.target.sys.id);
+            // <a href={`/pages/${referencedEntry.fields.slug}`}>{children}</a>
+            // return 'test';
+            return (
+                <TextLink uri={node.data.uri} children={children} />
             )
         },
         [BLOCKS.EMBEDDED_ENTRY]: node => <EmbeddedEntry node={node} />,
@@ -136,7 +150,10 @@ const options = {
                         console.log(description)
                         return (
                             <div className={styles.csv}>
-                                <TabularContent fileUrl={file.url} caption={description} />
+                                <TabularContent
+                                    fileUrl={file.url}
+                                    caption={description}
+                                />
                             </div>
                         )
                     }
@@ -192,7 +209,10 @@ const Placeholder = ({ value }) => {
 }
 
 function EmbeddedEntry({ node }) {
-    const type = typeof node.data.target.sys.contentType === 'undefined' ? node.data.target.sys.type : node.data.target.sys.contentType.sys.id
+    const type =
+        typeof node.data.target.sys.contentType === 'undefined'
+            ? node.data.target.sys.type
+            : node.data.target.sys.contentType.sys.id
     const value = get(node, 'data.target.fields')
     const handler = blocksHandlers[type] || blocksHandlers.default
 
