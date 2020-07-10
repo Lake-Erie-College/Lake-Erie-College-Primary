@@ -2,6 +2,7 @@
 @import '../../styles/breakpoint';
 @import '../../styles/spacing';
 @import '../../styles/colors';
+@import '../../styles/grids';
 
 $navigation-color: $color-inverse-01;
 
@@ -46,8 +47,8 @@ $navigation-color: $color-inverse-01;
     text-align: center;
     text-decoration: none;
 
-    background-color: #094A3E;
-    color: #65D3FE;
+    background-color: $color-brand-01;
+    color: $color-ui-02;
 
     @include respond-to('medium') {
         flex: 1 1 20%;
@@ -58,18 +59,18 @@ $navigation-color: $color-inverse-01;
     }
 
     &:nth-child(2n) {
-        background-color: #65D3FE;
-        color: #094A3E;
+        background-color: $color-ui-02;
+        color: $color-brand-01;
     }
 
     &:nth-child(3n) {
-        background-color: #FF8F15;
-        color: #16405B;
+        background-color: $color-brand-02;
+        color: $color-ui-05;
     }
 
     &:nth-child(4n) {
-        background-color: #16405B;
-        color: #FF8F15;
+        background-color: $color-ui-05;
+        color: $color-brand-02;
     }
 }
 
@@ -96,7 +97,6 @@ $navigation-color: $color-inverse-01;
     @include typescale('overline');
 
     text-transform: uppercase;
-    color: $color-brand-01;
 
     &:after {
         content: '\A';
@@ -128,7 +128,19 @@ $navigation-color: $color-inverse-01;
 }
 
 .sectionContent {
+    padding: $spacing-md $spacing-md $spacing-xs $spacing-md;
+    grid-column: left-gutter / end;
+    background-color: $color-brand-01;
+    text-align: left;
+    color: $color-inverse-01;
 
+    @include respond-to('small') {
+        margin-left: 0;
+        margin-right: 0;
+        padding: $spacing-md;
+        grid-column: half-main / right-gutter;
+        order: 2;
+    }
 }
 
 .sectionFull {
@@ -145,5 +157,48 @@ $navigation-color: $color-inverse-01;
 }
 
 .resources {
+    display: grid;
+    @include content-grid;
+    margin: $spacing-sm 0;
+    color: $color-brand-01;
+}
 
+.resourceLinks {
+    position: relative;
+    padding: $spacing-md $spacing-md $spacing-md $spacing-md;
+    grid-column: left-gutter / end;
+    background-color: $color-ui-01;
+    border: 1px solid $color-brand-01;
+    text-align: left;
+    color: $color-brand-01;
+
+    overflow: hidden;
+
+    &::after {
+        position: absolute;
+        top: -$spacing-sm;
+        bottom: -$spacing-sm;
+        right: -$spacing-sm;
+        width: $spacing-lg;
+        display: block;
+        background-color: currentColor;
+        transform: rotate(5deg);
+        content: "";
+    }
+
+    @include respond-to('small') {
+        margin-left: 0;
+        margin-right: 0;
+        padding: $spacing-md;
+        grid-column: left-main / half-main;
+        order: 1;
+    }
+}
+
+.resourceLink {
+    margin: 0 0 $spacing-sm 0;
+}
+
+.resourceIcon {
+    margin-right: $spacing-xs;
 }

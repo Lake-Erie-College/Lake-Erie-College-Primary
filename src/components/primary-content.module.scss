@@ -133,41 +133,6 @@
     strong {
         @include font-weight-body-bold;
     }
-
-    a {
-        position: relative;
-        display: inline-block;
-        @include font-weight-body-bold;
-        text-decoration: none;
-
-        &::after {
-            position: absolute;
-            left: -2px;
-            right: -2px;
-            bottom: 0px;
-            height: 2px;
-            background-color: $color-hover-text;
-            border-radius: 2px;
-            transition: transform 200ms ease 150ms, opacity 350ms ease 150ms;
-            content: "";
-        }
-
-        &:link,
-        &:visited {
-            color: $color-text-01;
-        }
-
-        &:hover,
-        &:active {
-            color: $color-hover-text;
-
-            &::after {
-                transform: translateY(-0.25em);
-                opacity: 0;
-                transition: transform 200ms ease 0s, opacity 350ms ease 0s;
-            }
-        }
-    }
 }
 
 .image {

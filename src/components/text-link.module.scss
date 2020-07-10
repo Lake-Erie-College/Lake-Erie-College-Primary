@@ -1,0 +1,47 @@
+@import '../styles/typography';
+@import '../styles/breakpoint';
+@import '../styles/colors';
+@import '../styles/spacing';
+@import '../styles/grids';
+
+.textLink {
+    position: relative;
+    display: inline-block;
+    @include font-weight-body-bold;
+    @include line-height('body');
+    text-decoration: none;
+
+    u {
+        text-decoration: none;
+    }
+
+    .linkMainText {
+        display: inline-block;
+        position: relative;
+        z-index: 1;
+        color: hsl(222deg, 22%, 5%);
+        text-decoration: none;
+        color: $color-text-01;
+    }
+
+    .linkHoverText {
+        display: inline-block;
+        position: absolute;
+        z-index: 2;
+        left: 0px;
+        font-weight: inherit;
+        user-select: none;
+        color: $color-hover-text;
+    }
+
+    .linkHoverUnderline {
+        position: absolute;
+        left: -2px;
+        right: -2px;
+        bottom: 0px;
+        height: 2px;
+        background-color: $color-hover-text;
+        border-radius: 2px;
+        content: "";
+    }
+}

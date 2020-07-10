@@ -8,6 +8,7 @@ import PrimaryContent from '../components/primary-content'
 import RelatedEvents from '../components/related-events'
 import RelatedNews from '../components/related-news'
 import RelatedContent from '../components/related-content'
+import Carousel from '../components/carousel'
 
 class SiteRootTemplate extends React.Component {
     render() {
@@ -22,6 +23,7 @@ class SiteRootTemplate extends React.Component {
                     </Helmet>
                 </HelmetProvider>
                 <main>
+                    <Carousel content={page.heroCarousel} />
                     <PrimaryContent data={page.primaryContent} />
                     <RelatedContent>
                         <RelatedNews heading={`News & Announcements`} />
@@ -51,8 +53,21 @@ export const pageQuery = graphql`
                 callToAction
                 externalMediaUrl
                 image {
+                    file {
+                        url
+                        fileName
+                        contentType
+                    }
                     fluid(maxWidth: 1080) {
                         ...GatsbyContentfulFluid_withWebp
+                    }
+                    title
+                    svg {
+                        content
+                        originalContent
+                        dataURI
+                        absolutePath
+                        relativePath
                     }
                 }
                 mediaHeading
