@@ -64,11 +64,32 @@ const Navigation = ({ props, className }) => {
                 <Heading heading={primaryHeading} overline={secondaryHeading} />
             )}
             {hasRelatedPages &&
-                props.relatedPages.map(fields => {
+                props.relatedPages.map(node => {
+                    let fields = {}
+                    
+                    const modCount = props.relatedPages.length % 3
+                    let navClassName = styles.navigationItem
+
+                    if (modCount === 0) {
+                        navClassName = cx(styles.navigationItem, styles.mod0)
+                    }
+                    if (modCount === 1) {
+                        navClassName = cx(styles.navigationItem, styles.mod1)
+                    }
+
                     const name =
-                        typeof fields.shortTitle !== 'undefined'
-                            ? fields.shortTitle
-                            : fields.title
+                        typeof node.displayTitle !== 'undefined'
+                            ? node.displayTitle
+                            : node.title
+
+                    const isExternal = typeof node.externalUrl !== 'undefined' && node.externalUrl !== null
+
+                    if (typeof node.internalLink !== 'undefined' && node.internalLink !== null) {
+                        fields = node.internalLink
+                    } else if (isExternal) {
+                        fields = node.externalUrl
+                    }
+
                     const icon =
                         typeof fields.pageIcon !== 'undefined'
                             ? fields.pageIcon.toLowerCase().replace(' ', '-')
@@ -85,7 +106,7 @@ const Navigation = ({ props, className }) => {
 
                     return (
                         <div
-                            className={styles.navigationItem}
+                            className={navClassName}
                             onMouseEnter={() => toggleHover(true)}
                             onMouseLeave={() => toggleHover(false)}
                             key={fields.slug}
@@ -93,6 +114,22 @@ const Navigation = ({ props, className }) => {
                             {icon && (
                                 <FontAwesomeIcon
                                     icon={icon}
+                                    size="2x"
+                                    className={styles.navigationIcon}
+                                />
+                            )}
+
+                            {!icon && !isExternal && (
+                                <FontAwesomeIcon
+                                    icon="link"
+                                    size="2x"
+                                    className={styles.navigationIcon}
+                                />
+                            )}
+
+                            {!icon && isExternal && (
+                                <FontAwesomeIcon
+                                    icon="external-link-square-alt"
                                     size="2x"
                                     className={styles.navigationIcon}
                                 />

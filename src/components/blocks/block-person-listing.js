@@ -11,6 +11,7 @@ import styles from "./block-person-listing.module.scss";
 
 const BlockPersonListing = ({ title, primaryHeading, people }, ...rest) => {
     const hasHeading = typeof primaryHeading !== 'undefined' && primaryHeading !== null
+
     return (
         <section className={styles.blockPersonListing}>
             { hasHeading && (

@@ -114,6 +114,7 @@ export const pageQuery = graphql`
       relatedOfferings {
         id
         slug
+        title
         shortTitle
         primaryContent {
           json
@@ -122,6 +123,7 @@ export const pageQuery = graphql`
           lead
         }
         offeringType
+        additionalTags
         hidden
       }
       primaryContent {

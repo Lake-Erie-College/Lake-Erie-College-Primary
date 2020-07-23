@@ -48,7 +48,7 @@
     @include line-height('heading');
     @include font-smoothing;
     @include letter-spacing;
-    @include typescale('h3');
+    @include typescale('h4');
 
     text-align: center;
 
@@ -57,7 +57,7 @@
     @include respond-to('small') {
         margin-left: 0;
         margin-right: 0;
-        @include typescale('h2');
+        @include typescale('h3');
         grid-column: main / right-main;
     }
 }
