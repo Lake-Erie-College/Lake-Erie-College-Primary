@@ -66,7 +66,7 @@ const Navigation = ({ props, className }) => {
             {hasRelatedPages &&
                 props.relatedPages.map(node => {
                     let fields = {}
-                    
+
                     const modCount = props.relatedPages.length % 3
                     let navClassName = styles.navigationItem
 
@@ -82,12 +82,22 @@ const Navigation = ({ props, className }) => {
                             ? node.displayTitle
                             : node.title
 
-                    const isExternal = typeof node.externalUrl !== 'undefined' && node.externalUrl !== null
+                    const isExternal =
+                        typeof node.externalUrl !== 'undefined' &&
+                        node.externalUrl !== null
+                    const isEmbed =
+                        typeof node.sourceUrl !== 'undefined' &&
+                        node.sourceUrl !== null
 
-                    if (typeof node.internalLink !== 'undefined' && node.internalLink !== null) {
+                    if (
+                        typeof node.internalLink !== 'undefined' &&
+                        node.internalLink !== null
+                    ) {
                         fields = node.internalLink
                     } else if (isExternal) {
                         fields = node.externalUrl
+                    } else if (isEmbed) {
+                        fields = node.sourceUrl
                     }
 
                     const icon =
@@ -101,8 +111,6 @@ const Navigation = ({ props, className }) => {
                             ? 'translate3d(1rem,0,0) rotate(15deg)'
                             : 'translate3d(3rem,0,0) rotate(15deg)',
                     })
-
-                    const to = linkResolver.path(fields)
 
                     return (
                         <div
@@ -135,11 +143,21 @@ const Navigation = ({ props, className }) => {
                                 />
                             )}
 
-                            <CallToAction
-                                name={name}
-                                node={fields}
-                                isHovered={hover}
-                            />
+                            {!isEmbed && (
+                                <CallToAction
+                                    name={name}
+                                    node={fields}
+                                    isHovered={hover}
+                                />
+                            )}
+
+                            {isEmbed && (
+                                <CallToAction
+                                    name={name}
+                                    formUrl={fields}
+                                    isHovered={hover}
+                                />
+                            )}
                         </div>
                     )
                 })}
@@ -188,6 +206,66 @@ const Interstitial = ({ props, className }) => {
                     />
                 )}
                 {summary && <Summary summary={summary} />}
+
+                {hasRelatedPages && (
+                    <div className={styles.interstitialLinks}>
+                        {hasRelatedPages &&
+                            props.relatedPages.map(node => {
+                                let fields = {}
+
+                                const name =
+                                    typeof node.displayTitle !== 'undefined'
+                                        ? node.displayTitle
+                                        : node.title
+
+                                const isExternal =
+                                    typeof node.externalUrl !== 'undefined' &&
+                                    node.externalUrl !== null
+                                const isEmbed =
+                                    typeof node.sourceUrl !== 'undefined' &&
+                                    node.sourceUrl !== null
+
+                                if (
+                                    typeof node.internalLink !== 'undefined' &&
+                                    node.internalLink !== null
+                                ) {
+                                    fields = node.internalLink
+                                } else if (isExternal) {
+                                    fields = node.externalUrl
+                                } else if (isEmbed) {
+                                    fields = node.sourceUrl
+                                }
+
+                                return (
+                                    <div
+                                        className={styles.interstitialLink}
+                                        key={`spotlight-interstitial-cta-${node.title}`}
+                                    >
+                                        {!isEmbed && !isExternal && (
+                                            <CallToAction
+                                                name={name}
+                                                node={fields}
+                                            />
+                                        )}
+
+                                        {!isEmbed && isExternal && (
+                                            <CallToAction
+                                                name={name}
+                                                url={fields}
+                                            />
+                                        )}
+
+                                        {isEmbed && (
+                                            <CallToAction
+                                                name={name}
+                                                formUrl={node.sourceUrl}
+                                            />
+                                        )}
+                                    </div>
+                                )
+                            })}
+                    </div>
+                )}
             </div>
         </div>
     )
@@ -249,7 +327,10 @@ const Resources = ({ props, className }) => {
                                 : false
 
                         return (
-                            <li className={styles.resourceLink} key={fields.slug}>
+                            <li
+                                className={styles.resourceLink}
+                                key={fields.slug}
+                            >
                                 {icon && (
                                     <FontAwesomeIcon
                                         icon={icon}
@@ -260,7 +341,7 @@ const Resources = ({ props, className }) => {
 
                                 {!icon && (
                                     <FontAwesomeIcon
-                                        icon='arrow-circle-right'
+                                        icon="arrow-circle-right"
                                         size="xs"
                                         className={styles.resourceIcon}
                                     />
@@ -275,9 +356,12 @@ const Resources = ({ props, className }) => {
                         const name = fields.title
 
                         return (
-                            <li className={styles.resourceLink} key={`related-media-${name}`}>
+                            <li
+                                className={styles.resourceLink}
+                                key={`related-media-${name}`}
+                            >
                                 <FontAwesomeIcon
-                                    icon='arrow-circle-right'
+                                    icon="arrow-circle-right"
                                     size="xs"
                                     className={styles.resourceIcon}
                                 />

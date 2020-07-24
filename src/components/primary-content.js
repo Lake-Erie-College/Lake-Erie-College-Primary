@@ -8,6 +8,7 @@ import useContentfulImage from '../hooks/useContentfulImage'
 import ImageWithSVGSupport from './image-with-svg-support'
 import BlockAcademicOfferingListing from './blocks/block-academic-offering-listing'
 import BlockEventListing from './blocks/block-event-listing'
+import BlockExternalEmbed from './blocks/block-external-embed'
 import BlockMediaWithCaption from './blocks/block-media-with-caption'
 import BlockPersonListing from './blocks/block-person-listing'
 import BlockSearchResults from './blocks/block-search-results'
@@ -176,6 +177,7 @@ const blocksHandlers = {
         <AcademicOfferingListing node={value} />
     ),
     blockEventListing: value => <EventListing node={value} />,
+    blockExternalEmbed: value => <ExternalEmbed node={value} />,
     blockMediaWithCaption: value => <MediaWithCaption node={value} />,
     blockPersonListing: value => <PersonListing node={value} />,
     blockQuote: value => <Placeholder value={value} />,
@@ -246,6 +248,12 @@ const EventListing = ({ node }) => {
     const content = localeScrubber.scrub(node)
 
     return <BlockEventListing category={content.relatedCategory} />
+}
+
+const ExternalEmbed = ({node}) => {
+    const content = localeScrubber.scrub(node)
+
+    return <BlockExternalEmbed url={content.sourceUrl} html={content.sourceHtml} />
 }
 
 const MediaWithCaption = ({ node }) => {
