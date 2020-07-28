@@ -13,17 +13,16 @@ $navigation-color: $color-inverse-01;
 
 .navigation {
     display: block;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
-    grid-column-gap: 0;
-    grid-row-gap: $spacing-sm;
 
     margin: 0 0 $spacing-md 0;
 
     @include respond-to('small') {
         display: flex;
         flex-wrap: wrap;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+
+    @include respond-to('large') {
+        margin: 0 $spacing-lg;
     }
 }
 
@@ -42,6 +41,7 @@ $navigation-color: $color-inverse-01;
 
     flex: 1 1 33.333%;
 
+    margin: 0 0 $spacing-md 0;
     padding: $spacing-lg;
 
     text-align: center;
