@@ -69,7 +69,7 @@
     font-weight: 400;
     @include line-height('body');
     @include letter-spacing-wide;
-    @include typescale('overline');
+    @include typescale('body2');
     background-color: $color-ui-04;
     border-radius: 4px;
     text-transform: uppercase;
@@ -78,6 +78,10 @@
     &:after {
         content: '\A';
         white-space: pre;
+    }
+
+    @include respond-to('small') {
+        @include typescale('overline');
     }
 }
 
@@ -98,13 +102,16 @@
 }
 
 .courseSummary {
-    margin-left: 0;
-    margin-right: 0;
-    margin-bottom: $spacing-xs;
+    margin: 0 $spacing-md $spacing-xs $spacing-md;
     @include font-family;
     @include font-weight-body;
     @include line-height('body');
     @include typescale('body1');
+
+    @include respond-to('small') {
+        margin-left: 0;
+        margin-right: 0;
+    }
 }
 
 .internal {
@@ -112,6 +119,6 @@
 
     .icon {
         margin-left: $spacing-xs;
-        font-size: .5em;
+        font-size: .45em;
     }
 }
