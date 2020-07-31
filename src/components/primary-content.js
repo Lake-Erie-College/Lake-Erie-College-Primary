@@ -7,6 +7,7 @@ import get from 'lodash/get'
 import useContentfulImage from '../hooks/useContentfulImage'
 import ImageWithSVGSupport from './image-with-svg-support'
 import BlockAcademicOfferingListing from './blocks/block-academic-offering-listing'
+import BlockCarousel from './blocks/block-carousel'
 import BlockEventListing from './blocks/block-event-listing'
 import BlockExternalEmbed from './blocks/block-external-embed'
 import BlockMediaWithCaption from './blocks/block-media-with-caption'
@@ -176,6 +177,7 @@ const blocksHandlers = {
     blockAcademicOfferingListing: value => (
         <AcademicOfferingListing node={value} />
     ),
+    blockCarousel: value => <Carousel node={value} />,
     blockEventListing: value => <EventListing node={value} />,
     blockExternalEmbed: value => <ExternalEmbed node={value} />,
     blockMediaWithCaption: value => <MediaWithCaption node={value} />,
@@ -242,6 +244,12 @@ const AcademicOfferingListing = ({ node }) => {
             offeringType={content.offeringType}
         />
     )
+}
+
+const Carousel = ({node}) => {
+    const content = localeScrubber.scrub(node)
+
+    return <BlockCarousel media={content.relatedMedia} displayArrows={content.displayArrows} displayDots={content.displayDots} />
 }
 
 const EventListing = ({ node }) => {

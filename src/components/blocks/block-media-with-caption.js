@@ -43,7 +43,7 @@ const BlockMediaWithCaption = (
 
     return (
         <figure className={cx(styles.blockMedia, overlayClass)}>
-            {video && <VideoPlayer url={video} />}
+            {!isImage && video && <VideoPlayer url={video} />}
             {isImage && <Image image={primaryImage} />}
             <figcaption className={styles.mediaCaption}>
                 {heading && (
@@ -61,7 +61,7 @@ const BlockMediaWithCaption = (
 const Image = ({ image }) => {
     const contentfulImage =
         typeof image.fluid === 'undefined'
-            ? useContentfulImage(image.data.target.file.url)
+            ? useContentfulImage(typeof image.data !== 'undefined' ? image.data.target.file.url : image.file.url)
             : image
 
     const title =
@@ -88,7 +88,7 @@ const Image = ({ image }) => {
 
 const VideoPlayer = ({ url }) => {
     return (
-        <div className={styles.media}>
+        <div className={styles.mediaEmbed}>
             <ReactPlayer
                 className={styles.video}
                 url={url}

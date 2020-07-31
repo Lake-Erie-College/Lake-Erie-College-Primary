@@ -118,7 +118,9 @@
     text-decoration: none;
 
     .icon {
+        position: relative;
+        top: -.2em;
         margin-left: $spacing-xs;
-        font-size: .45em;
+        font-size: .4em;
     }
 }
