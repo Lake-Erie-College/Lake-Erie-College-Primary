@@ -31,6 +31,9 @@ exports.createPages = ({ graphql, actions }) => {
               slug
               title
               hidden
+              category {
+                slug
+              }
             }
           }
         }

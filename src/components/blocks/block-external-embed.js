@@ -1,16 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import * as typeformEmbed from '@typeform/embed' // https://www.npmjs.com/package/@typeform/embed
+
+import styles from './block-external-embed.module.scss'
 
 const BlockExternalEmbed = ({ url, html, popup }) => {
     const hasSource = typeof url !== 'undefined' && url !== null
     const hasHTML = typeof html !== 'undefined' && html !== null
     const isPopup = typeof popup !== 'undefined' && popup === true
 
-    console.log(hasSource)
-
     if (hasSource) {
         if (url.includes('typeform.com/to/') && isPopup) {
-            const popup = typeformEmbed.makePopup(url, {
+            const popup = typeformEmbed.makeWidget(url, {
                 mode: 'drawer_right',
                 // open: 'scroll',
                 // openValue: 30,
@@ -28,8 +28,28 @@ const BlockExternalEmbed = ({ url, html, popup }) => {
             })
 
             popup.open()
-        }
-        else {
+        } else if (url.includes('typeform.com/to/') && !isPopup) {
+            const embedRef = useCallback(node => {
+                if (node !== null) {
+                    const embed = typeformEmbed.makeWidget(
+                        node,
+                        url,
+                        {
+                            opacity: 0,
+                            hideScrollbars: true,
+                            onSubmit: function() {
+                                // console.log('Typeform successfully submitted')
+                            },
+                            onReady: function() {
+                                console.log('Typeform is ready')
+                            },
+                        }
+                    )
+                }
+            }, [])
+
+            return <div className={styles.embed} ref={embedRef}></div>
+        } else {
             return <iframe src={url} />
         }
     }
@@ -39,7 +59,7 @@ const BlockExternalEmbed = ({ url, html, popup }) => {
     }
 }
 
-const TypeFormPopup = ( url ) => {
+const TypeFormPopup = url => {
     const hasSource = typeof url !== 'undefined' && url !== null
 
     if (hasSource) {
@@ -66,4 +86,4 @@ const TypeFormPopup = ( url ) => {
     }
 }
 
-export { BlockExternalEmbed as default, TypeFormPopup as TypeFormPopup }
+export { BlockExternalEmbed as default, TypeFormPopup }

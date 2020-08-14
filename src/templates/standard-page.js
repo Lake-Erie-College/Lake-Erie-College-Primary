@@ -54,6 +54,9 @@ export const pageQuery = graphql`
       }
       category {
         title
+        category {
+            slug
+        }
         shortTitle
         slug
       }

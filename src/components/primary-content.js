@@ -90,6 +90,16 @@ const options = {
                 />
             )
         },
+        [INLINES.ASSET_HYPERLINK]: (node, children) => {
+            const content = localeScrubber.scrub(node)
+            return (
+                <TextLink
+                    children={children}
+                    uri={node.data.target.file.url}
+                    activeClassName="active"
+                />
+            )
+        },
         [INLINES.HYPERLINK]: (node, children) => {
             // If you are using contenful.js sdk, the referenced entry is resolved
             // automatically and is available at `node.data.target`.
@@ -209,6 +219,8 @@ const Container = ({ data, isFullWidth }) => {
 }
 
 const Placeholder = ({ value }) => {
+    console.log(value)
+    
     return <p>Placeholder Block</p>
 }
 

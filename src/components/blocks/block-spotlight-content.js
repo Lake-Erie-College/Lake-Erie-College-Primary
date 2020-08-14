@@ -290,6 +290,8 @@ const Resources = ({ props, className }) => {
     const primaryImage =
         typeof props.primaryImage !== 'undefined' ? props.primaryImage : null
 
+    console.log(summary)
+
     return (
         <div className={className}>
             {primaryImage && (
@@ -316,8 +318,8 @@ const Resources = ({ props, className }) => {
                 {hasRelatedPages &&
                     props.relatedPages.map(fields => {
                         const name =
-                            typeof fields.shortTitle !== 'undefined'
-                                ? fields.shortTitle
+                            typeof fields.displayTitle !== 'undefined'
+                                ? fields.displayTitle
                                 : fields.title
                         const icon =
                             typeof fields.pageIcon !== 'undefined'
@@ -325,7 +327,14 @@ const Resources = ({ props, className }) => {
                                       .toLowerCase()
                                       .replace(' ', '-')
                                 : false
-
+                        const internal = 
+                            typeof fields.internalLink !== 'undefined'
+                                ? fields.internalLink
+                                : false
+                        const external = 
+                            typeof fields.externalLink !== 'undefined'
+                                ? fields.externalLink
+                                : false
                         return (
                             <li
                                 className={styles.resourceLink}
@@ -347,7 +356,14 @@ const Resources = ({ props, className }) => {
                                     />
                                 )}
 
-                                <TextLink children={name} node={fields} />
+                                {internal && (
+                                    <TextLink children={name} node={internal} />
+                                )}
+
+                                {external && (
+                                    <TextLink children={name} uri={external} />
+                                )}
+                                
                             </li>
                         )
                     })}
@@ -385,7 +401,9 @@ const Heading = ({ heading, overline }) => (
     </h2>
 )
 
-const Summary = ({ summary }) => <p className={styles.summary}>{summary}</p>
+const Summary = ({ summary }) => {
+    return <p className={styles.summary}>{summary}</p>
+}
 
 const PrimaryImage = ({ image }) => {
     const contentfulImage = useContentfulImage(image.data.target.file.url)

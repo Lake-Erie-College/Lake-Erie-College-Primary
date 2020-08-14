@@ -28,7 +28,7 @@ const RegularHeading = ({ primary, secondary, overline }) => {
 const LinkHeading = ({ primary, secondary, overline, linkTo }) => {
     const hasOverline = typeof overline !== 'undefined'
     const to = linkResolver.path(linkTo)
-    
+
     return (
         <h1 className={styles.pageHeading}>
             { hasOverline && (
