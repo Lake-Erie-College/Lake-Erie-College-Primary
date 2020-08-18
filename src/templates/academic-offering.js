@@ -119,6 +119,11 @@ export const pageQuery = graphql`
         slug
         title
         shortTitle
+        category {
+          title
+          shortTitle
+          slug
+        }
         primaryContent {
           json
         }

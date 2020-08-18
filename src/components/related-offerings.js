@@ -7,13 +7,12 @@ import styles from './related-offerings.module.scss'
 const linkResolver = require('../utils').linkResolver
 
 const CourseHeading = ({ heading, overline, tags }) => {
-    console.log(tags)
     return (
         <h2 className={styles.courseHeading}>
-            {overline && (
-                <span className={styles.overline}>
-                    {overline}
-                    {tags && tags.map(tagName => <span> | {tagName}</span>)}
+            {overline && <span className={styles.overline}>{overline}</span>}
+            {tags && (
+                <span className={styles.tags}>
+                    {tags && tags.map(tagName => <span>{tagName}</span>)}
                 </span>
             )}
             {heading}
@@ -24,10 +23,10 @@ const CourseHeading = ({ heading, overline, tags }) => {
 const CourseHeadingWithLink = ({ heading, overline, to, tags }) => {
     return (
         <h2 className={styles.courseHeading}>
-            {overline && (
-                <span className={styles.overline}>
-                    {overline}
-                    {tags && tags.map(tagName => <span> | {tagName}</span>)}
+            {overline && <span className={styles.overline}>{overline}</span>}
+            {tags && (
+                <span className={styles.tags}>
+                    {tags && tags.map(tagName => <span>{tagName}</span>)}
                 </span>
             )}
             <GatsbyLink to={to} className={styles.internal}>

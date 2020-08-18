@@ -99,10 +99,10 @@
     @include line-height('heading');
     @include font-smoothing;
     @include letter-spacing;
-    @include typescale('h4');
+    @include typescale('h5');
 
     @include respond-to('small') {
-        @include typescale('h3');
+        @include typescale('h4');
     }
 }
 

@@ -134,7 +134,7 @@ const options = {
                     const height = contentfulImage.file.details.image.height
 
                     const ratio = width / height
-                    const micro = height < 200 || width < 400
+                    const micro = height <= 200 || width <= 400
 
                     return (
                         <ImageWithSVGSupport

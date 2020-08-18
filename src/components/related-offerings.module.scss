@@ -85,6 +85,35 @@
     }
 }
 
+.tags {
+    display: block;
+    padding: $spacing-xs 0;
+    @include font-family;
+    font-weight: 400;
+    @include line-height('body');
+    @include letter-spacing-wide;
+    @include typescale('body2');
+    background-color: $color-ui-01;
+    border-radius: 0;
+    text-transform: uppercase;
+    color: $color-brand-01;
+
+    &:after {
+        content: '\A';
+        white-space: pre;
+    }
+
+    span {
+        margin-right: $spacing-xs;
+        padding-right: $spacing-xs;
+        border-right: 1px solid currentColor;
+    }
+
+    span:last-child {
+        border-right: none;
+    }
+}
+
 .courseHeading {
     margin: 0 $spacing-md;
     @include font-family-headings;

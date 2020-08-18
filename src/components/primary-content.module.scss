@@ -148,6 +148,7 @@
     margin-left: $spacing-md;
     margin-right: $spacing-md;
     grid-column: left-gutter / end;
+    overflow-x: scroll;
 
     @include respond-to('small') {
         grid-column: left-main / right-gutter;
@@ -163,11 +164,12 @@
 }
 
 .microImage {
-    margin: 0 0 $spacing-sm 0;
+    margin: 0 auto $spacing-sm auto;
+    width: 100%;
+    max-width: 200px;
 
     @include respond-to('small') {
-        grid-column: main / half-main;
-        width: 50%;
+        grid-column: main / span 2;
     }
 }
 

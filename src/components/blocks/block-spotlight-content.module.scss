@@ -11,18 +11,60 @@ $navigation-color: $color-inverse-01;
     padding: 0;
 }
 
-.navigation {
+.heading {
+    @include font-family-headings;
+    font-weight: 400;
+    @include line-height('heading');
+    @include font-smoothing;
+    @include letter-spacing;
+    @include typescale('h4');
+
+    @include respond-to('small') {
+        @include typescale('h3');
+    }
+}
+
+.overline {
     display: block;
 
-    margin: 0 0 $spacing-md 0;
+    @include font-family;
+    font-weight: 400;
+    @include line-height('body');
+    @include letter-spacing-wide;
+    @include typescale('overline');
+
+    text-transform: uppercase;
+
+    &:after {
+        content: '\A';
+        white-space: pre;
+    }
+}
+
+.summary {
+    margin-bottom: $spacing-sm;
+    @include font-family;
+    @include font-weight-body;
+    @include line-height('body');
+    @include typescale('body1');
+    white-space: pre-wrap;
+}
+
+.navigation {
+    display: grid;
+    @include content-grid;
+
+    margin: 0;
+}
+
+.navigationList {
+    display: block;
+    margin: 0 $spacing-md $spacing-sm $spacing-md;
+    grid-column: left-gutter / end;
 
     @include respond-to('small') {
         display: flex;
         flex-wrap: wrap;
-    }
-
-    @include respond-to('large') {
-        margin: 0 $spacing-lg;
     }
 }
 
@@ -86,45 +128,6 @@ $navigation-color: $color-inverse-01;
     }
 }
 
-.heading {
-    @include font-family-headings;
-    font-weight: 400;
-    @include line-height('heading');
-    @include font-smoothing;
-    @include letter-spacing;
-    @include typescale('h4');
-
-    @include respond-to('small') {
-        @include typescale('h3');
-    }
-}
-
-.overline {
-    display: block;
-
-    @include font-family;
-    font-weight: 400;
-    @include line-height('body');
-    @include letter-spacing-wide;
-    @include typescale('overline');
-
-    text-transform: uppercase;
-
-    &:after {
-        content: '\A';
-        white-space: pre;
-    }
-}
-
-.summary {
-    margin-bottom: $spacing-sm;
-    @include font-family;
-    @include font-weight-body;
-    @include line-height('body');
-    @include typescale('body1');
-    white-space: pre-wrap;
-}
-
 .interstitial {
     display: grid;
     grid-template-columns: [left-gutter] 1fr [left-main] 2fr [main] 6fr [right-main] 2fr [right-gutter] 1fr;
@@ -154,7 +157,15 @@ $navigation-color: $color-inverse-01;
 }
 
 .sectionLead {
+    margin: 0 $spacing-md;
+    grid-column: left-gutter / end;
+    text-align: left;
+    color: $color-text-01;
 
+    @include respond-to('small') {
+        margin: 0;
+        grid-column: main / right-gutter;
+    }
 }
 
 .sectionContent {

@@ -57,12 +57,20 @@ const Navigation = ({ props, className }) => {
         typeof props.secodnaryHeading !== 'undefined'
             ? props.secodnaryHeading
             : null
+    const summary = typeof props.summary !== 'undefined' ? props.summary : null
 
     return (
         <nav className={className}>
             {primaryHeading && (
-                <Heading heading={primaryHeading} overline={secondaryHeading} />
+                <div className={styles.sectionLead}>
+                    <Heading
+                        heading={primaryHeading}
+                        overline={secondaryHeading}
+                    />
+                    {summary && <Summary summary={summary} />}
+                </div>
             )}
+            <ul className={styles.navigationList}>
             {hasRelatedPages &&
                 props.relatedPages.map(node => {
                     let fields = {}
@@ -113,7 +121,7 @@ const Navigation = ({ props, className }) => {
                     })
 
                     return (
-                        <div
+                        <li
                             className={navClassName}
                             onMouseEnter={() => toggleHover(true)}
                             onMouseLeave={() => toggleHover(false)}
@@ -158,9 +166,10 @@ const Navigation = ({ props, className }) => {
                                     isHovered={hover}
                                 />
                             )}
-                        </div>
+                        </li>
                     )
                 })}
+                </ul>
         </nav>
     )
 }
@@ -327,11 +336,11 @@ const Resources = ({ props, className }) => {
                                       .toLowerCase()
                                       .replace(' ', '-')
                                 : false
-                        const internal = 
+                        const internal =
                             typeof fields.internalLink !== 'undefined'
                                 ? fields.internalLink
                                 : false
-                        const external = 
+                        const external =
                             typeof fields.externalLink !== 'undefined'
                                 ? fields.externalLink
                                 : false
@@ -363,7 +372,6 @@ const Resources = ({ props, className }) => {
                                 {external && (
                                     <TextLink children={name} uri={external} />
                                 )}
-                                
                             </li>
                         )
                     })}
