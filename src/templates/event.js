@@ -4,13 +4,17 @@ import { Helmet, HelmetProvider } from "react-helmet-async"
 import get from 'lodash/get'
 import Img from 'gatsby-image'
 import Layout from '../components/layout'
-import PrimaryContent from '../components/primary-content'
+import PageDate from '../components/page-date'
 import PageHeading from '../components/page-heading'
+import PrimaryContent from '../components/primary-content'
+import LeadImage from '../components/lead-image'
 
 class EventTemplate extends React.Component {
   render() {
     const page = get(this.props, 'data.contentfulEvent')
     const siteTitle = get(this.props, 'data.site.siteMetadata.title')
+    const hasLeadImage = typeof page.leadImage !== 'undefined' && page.leadImage !== null
+    console.log(page.leadImage)
 
     return (
       <Layout location={this.props.location} >
@@ -20,7 +24,21 @@ class EventTemplate extends React.Component {
             </Helmet>
         </HelmetProvider>
           <main>
-            <h1>Event Page</h1>
+                    {hasLeadImage && (
+                        <LeadImage
+                            title={page.leadImage.title}
+                            fluid={page.leadImage.fluid}
+                            file={page.leadImage.file}
+                        />
+                    )}
+                    <PageHeading
+                        primary={page.shortTitle}
+                        secondary={'Event'}
+                        overline={page.category ? page.category.title : null}
+                        linkTo={page.category}
+                    />
+                    {page.startDateAndTime && <PageDate startDate={page.startDateAndTime} endDate={page.endDateAndTime} />}
+                    <PrimaryContent data={page.primaryContent} />
           </main>
       </Layout>
     )
@@ -38,13 +56,37 @@ export const pageQuery = graphql`
     }
     contentfulEvent(slug: { eq: $slug }) {
       title
+      shortTitle
       slug
       description {
-        description
+          description
       }
+      category {
+          title
+          category {
+              slug
+          }
+          shortTitle
+          slug
+      }
+      startDateAndTime
+      endDateAndTime
       primaryContent {
         json
       }
+      mapLocation {
+        lat
+        lon
+      }
+      campusLocation {
+        slug
+        category {
+          title
+          slug
+          shortTitle
+        }
+      }
+      hidden
     }
   }
 `

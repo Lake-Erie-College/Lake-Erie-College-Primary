@@ -162,10 +162,10 @@ export default ({ category, heading, limit, showViewAll }) => {
             {heading && <h2 className={styles.heading}>{heading}</h2>}
             {limitedNewsPages.length > 0 && (
                 <ul className={styles.newsList}>
-                    {limitedNewsPages.map(event => (
+                    {limitedNewsPages.map(node => (
                         <News
-                            key={'related-events-' + event.id}
-                            newsItem={event}
+                            key={'related-news-' + node.id}
+                            newsItem={node}
                         />
                     ))}
                 </ul>
