@@ -130,13 +130,14 @@ $navigation-color: $color-inverse-01;
 
 .interstitial {
     display: grid;
-    grid-template-columns: [left-gutter] 1fr [left-main] 2fr [main] 6fr [right-main] 2fr [right-gutter] 1fr;
-    grid-template-rows: 1fr;
-    grid-column-gap: $spacing-sm;
-    grid-row-gap: 0px;
+    @include content-grid;
     margin: $spacing-sm 0;
     background-color: $color-ui-02;
     color: $color-brand-01;
+
+    .sectionImage {
+        height: 100%;
+    }
 }
 
 .interstitialLinks {
@@ -156,6 +157,26 @@ $navigation-color: $color-inverse-01;
     }
 }
 
+.sectionImage {
+    position: relative;
+    grid-column: left-gutter / end;
+
+    @include respond-to('small') {
+        grid-column: left-gutter / half-main;
+
+        &::after {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: $spacing-md;
+            display: block;
+            background: linear-gradient(to right bottom, transparent 49%, currentColor 50%), linear-gradient(-50deg, transparent 16px, transparent 0);
+            content: "";
+        }
+    }
+}
+
 .sectionLead {
     margin: 0 $spacing-md;
     grid-column: left-gutter / end;
@@ -169,6 +190,10 @@ $navigation-color: $color-inverse-01;
 }
 
 .sectionContent {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
     padding: $spacing-md $spacing-md $spacing-xs $spacing-md;
     grid-column: left-gutter / end;
     background-color: $color-brand-01;
@@ -193,7 +218,7 @@ $navigation-color: $color-inverse-01;
         margin-left: 0;
         margin-right: 0;
         padding: $spacing-md 0 $spacing-xs 0;
-        grid-column: main;
+        grid-column: left-main / right-gutter;
     }
 }
 

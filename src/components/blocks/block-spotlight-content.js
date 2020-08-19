@@ -71,105 +71,113 @@ const Navigation = ({ props, className }) => {
                 </div>
             )}
             <ul className={styles.navigationList}>
-            {hasRelatedPages &&
-                props.relatedPages.map(node => {
-                    let fields = {}
+                {hasRelatedPages &&
+                    props.relatedPages.map(node => {
+                        let fields = {}
 
-                    const modCount = props.relatedPages.length % 3
-                    let navClassName = styles.navigationItem
+                        const modCount = props.relatedPages.length % 3
+                        let navClassName = styles.navigationItem
 
-                    if (modCount === 0) {
-                        navClassName = cx(styles.navigationItem, styles.mod0)
-                    }
-                    if (modCount === 1) {
-                        navClassName = cx(styles.navigationItem, styles.mod1)
-                    }
+                        if (modCount === 0) {
+                            navClassName = cx(
+                                styles.navigationItem,
+                                styles.mod0
+                            )
+                        }
+                        if (modCount === 1) {
+                            navClassName = cx(
+                                styles.navigationItem,
+                                styles.mod1
+                            )
+                        }
 
-                    const name =
-                        typeof node.displayTitle !== 'undefined'
-                            ? node.displayTitle
-                            : node.title
+                        const name =
+                            typeof node.displayTitle !== 'undefined'
+                                ? node.displayTitle
+                                : node.title
 
-                    const isExternal =
-                        typeof node.externalUrl !== 'undefined' &&
-                        node.externalUrl !== null
-                    const isEmbed =
-                        typeof node.sourceUrl !== 'undefined' &&
-                        node.sourceUrl !== null
+                        const isExternal =
+                            typeof node.externalUrl !== 'undefined' &&
+                            node.externalUrl !== null
+                        const isEmbed =
+                            typeof node.sourceUrl !== 'undefined' &&
+                            node.sourceUrl !== null
 
-                    if (
-                        typeof node.internalLink !== 'undefined' &&
-                        node.internalLink !== null
-                    ) {
-                        fields = node.internalLink
-                    } else if (isExternal) {
-                        fields = node.externalUrl
-                    } else if (isEmbed) {
-                        fields = node.sourceUrl
-                    }
+                        if (
+                            typeof node.internalLink !== 'undefined' &&
+                            node.internalLink !== null
+                        ) {
+                            fields = node.internalLink
+                        } else if (isExternal) {
+                            fields = node.externalUrl
+                        } else if (isEmbed) {
+                            fields = node.sourceUrl
+                        }
 
-                    const icon =
-                        typeof fields.pageIcon !== 'undefined'
-                            ? fields.pageIcon.toLowerCase().replace(' ', '-')
-                            : false
+                        const icon =
+                            typeof fields.pageIcon !== 'undefined'
+                                ? fields.pageIcon
+                                      .toLowerCase()
+                                      .replace(' ', '-')
+                                : false
 
-                    const [hover, toggleHover] = useState(false)
-                    const springProps = useSpring({
-                        transform: hover
-                            ? 'translate3d(1rem,0,0) rotate(15deg)'
-                            : 'translate3d(3rem,0,0) rotate(15deg)',
-                    })
+                        const [hover, toggleHover] = useState(false)
+                        const springProps = useSpring({
+                            transform: hover
+                                ? 'translate3d(1rem,0,0) rotate(15deg)'
+                                : 'translate3d(3rem,0,0) rotate(15deg)',
+                        })
 
-                    return (
-                        <li
-                            className={navClassName}
-                            onMouseEnter={() => toggleHover(true)}
-                            onMouseLeave={() => toggleHover(false)}
-                            key={fields.slug}
-                        >
-                            {icon && (
-                                <FontAwesomeIcon
-                                    icon={icon}
-                                    size="2x"
-                                    className={styles.navigationIcon}
-                                />
-                            )}
+                        return (
+                            <li
+                                className={navClassName}
+                                onMouseEnter={() => toggleHover(true)}
+                                onMouseLeave={() => toggleHover(false)}
+                                key={fields.slug}
+                            >
+                                {icon && (
+                                    <FontAwesomeIcon
+                                        icon={icon}
+                                        size="2x"
+                                        className={styles.navigationIcon}
+                                    />
+                                )}
 
-                            {!icon && !isExternal && (
-                                <FontAwesomeIcon
-                                    icon="link"
-                                    size="2x"
-                                    className={styles.navigationIcon}
-                                />
-                            )}
+                                {!icon && !isExternal && (
+                                    <FontAwesomeIcon
+                                        icon="link"
+                                        size="2x"
+                                        className={styles.navigationIcon}
+                                    />
+                                )}
 
-                            {!icon && isExternal && (
-                                <FontAwesomeIcon
-                                    icon="external-link-square-alt"
-                                    size="2x"
-                                    className={styles.navigationIcon}
-                                />
-                            )}
+                                {!icon && isExternal && (
+                                    <FontAwesomeIcon
+                                        icon="external-link-square-alt"
+                                        size="2x"
+                                        className={styles.navigationIcon}
+                                    />
+                                )}
 
-                            {!isEmbed && (
-                                <CallToAction
-                                    name={name}
-                                    node={fields}
-                                    isHovered={hover}
-                                />
-                            )}
+                                {!isEmbed && (
+                                    <CallToAction
+                                        name={name}
+                                        node={fields}
+                                        isHovered={hover}
+                                    />
+                                )}
 
-                            {isEmbed && (
-                                <CallToAction
-                                    name={name}
-                                    formUrl={fields}
-                                    isHovered={hover}
-                                />
-                            )}
-                        </li>
-                    )
-                })}
-                </ul>
+                                {isEmbed && (
+                                    <CallToAction
+                                        name={name}
+                                        formUrl={fields}
+                                        isHovered={hover}
+                                    />
+                                )}
+                            </li>
+                        )
+                    })}
+            </ul>
         </nav>
     )
 }
@@ -193,14 +201,8 @@ const Interstitial = ({ props, className }) => {
     return (
         <div className={className}>
             {primaryImage && (
-                <div className={styles.sectionLead}>
-                    {primaryHeading && (
-                        <Heading
-                            heading={primaryHeading}
-                            overline={secondaryHeading}
-                        />
-                    )}
-                    {summary && <Summary summary={summary} />}
+                <div className={styles.sectionImage}>
+                    <PrimaryImage image={primaryImage} />
                 </div>
             )}
             <div
@@ -299,21 +301,8 @@ const Resources = ({ props, className }) => {
     const primaryImage =
         typeof props.primaryImage !== 'undefined' ? props.primaryImage : null
 
-    console.log(summary)
-
     return (
         <div className={className}>
-            {primaryImage && (
-                <div className={styles.sectionLead}>
-                    {primaryHeading && (
-                        <Heading
-                            heading={primaryHeading}
-                            overline={secondaryHeading}
-                        />
-                    )}
-                    {summary && <Summary summary={summary} />}
-                </div>
-            )}
             <div className={styles.sectionContent}>
                 {primaryHeading && (
                     <Heading
@@ -322,6 +311,7 @@ const Resources = ({ props, className }) => {
                     />
                 )}
                 {summary && <Summary summary={summary} />}
+                {primaryImage && <PrimaryImage image={primaryImage} />}
             </div>
             <ul className={styles.resourceLinks}>
                 {hasRelatedPages &&
@@ -414,11 +404,11 @@ const Summary = ({ summary }) => {
 }
 
 const PrimaryImage = ({ image }) => {
-    const contentfulImage = useContentfulImage(image.data.target.file.url)
+    const contentfulImage = useContentfulImage(image.file.url)
     return (
         <Image
             className={styles.image}
-            title={image.data.target.title}
+            title={image.title}
             fluid={contentfulImage.fluid}
             svg={contentfulImage.svg}
         />

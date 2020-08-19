@@ -18,7 +18,7 @@ $palette-elf-green:#1F974F;
 $palette-malibu:#6DB4F6;
 $palette-link-water: #D1E4F2;
 $palette-lightning-yellow: #FFC115;
-$palette-tea-green: #D2F2C2;
+$palette-tea-green: #e4f3dd;
 $palette-capital-blue: #16405B;
 
 // Global - Brand
@@ -28,7 +28,7 @@ $color-brand-03: $palette-jungle-green;
 
 // Global - UI
 $color-ui-01: $palette-white;
-$color-ui-02: $palette-maya-blue;
+$color-ui-02: lighten($palette-maya-blue, 20%);
 $color-ui-03: $palette-catskill-white;
 $color-ui-04: $palette-tea-green;
 $color-ui-05: $palette-capital-blue;
@@ -50,7 +50,7 @@ $color-field-02: $palette-white;
 $color-hover-primary: $palette-tangerine;
 $color-hover-text: $palette-jungle-green;
 $color-hover-danger: $palette-tawny;
-$color-hover-secondary: $palette-maya-blue;
+$color-hover-secondary: darken($palette-maya-blue, 50%);
 $color-hover-row: transparentize($palette-link-water, .5);
 
 // Global - Suppoert
