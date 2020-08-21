@@ -334,6 +334,10 @@ const Resources = ({ props, className }) => {
                             typeof fields.externalLink !== 'undefined'
                                 ? fields.externalLink
                                 : false
+                        const isEmbed =
+                            typeof fields.sourceUrl !== 'undefined' &&
+                            fields.sourceUrl !== null
+
                         return (
                             <li
                                 className={styles.resourceLink}
@@ -361,6 +365,10 @@ const Resources = ({ props, className }) => {
 
                                 {external && (
                                     <TextLink children={name} uri={external} />
+                                )}
+
+                                {isEmbed && (
+                                     <TextLink children={name} formUrl={fields.sourceUrl} />
                                 )}
                             </li>
                         )

@@ -12,3 +12,18 @@
         grid-column: left-main / right-main;
     }
 }
+
+.contentEmbed {
+    display: grid;
+    @include content-grid;
+    grid-column: left-gutter / end;
+
+    .embed {
+        height: auto;
+
+        @include respond-to('small') {
+            height: auto;
+            grid-column: main / right-main;
+        }
+    }
+}

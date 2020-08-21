@@ -67,6 +67,8 @@
     grid-column: left-gutter / end;
 
     background-color: $color-brand-01;
+    border-radius: 4px;
+    overflow: hidden;
 
     color: $color-inverse-01;
 
@@ -124,6 +126,8 @@
 }
 
 .info {
+    margin-bottom: $spacing-2xs;
+
     a:link,
     a:visited {
         color: currentColor;

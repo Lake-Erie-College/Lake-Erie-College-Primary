@@ -73,6 +73,8 @@
 }
 
 .info {
+    margin-bottom: $spacing-2xs;
+    
     a:link,
     a:visited {
         color: currentColor;

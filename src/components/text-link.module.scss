@@ -10,6 +10,7 @@
     @include font-weight-body-bold;
     @include line-height('body');
     text-decoration: none;
+    cursor: pointer;
 
     u {
         text-decoration: none;

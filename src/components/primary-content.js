@@ -92,6 +92,11 @@ const options = {
         },
         [INLINES.ASSET_HYPERLINK]: (node, children) => {
             const content = localeScrubber.scrub(node)
+            
+            if (typeof node.data.target.file === 'undefined') {
+                return <span></span>
+            }
+
             return (
                 <TextLink
                     children={children}
@@ -218,8 +223,6 @@ const Container = ({ data, isFullWidth }) => {
 }
 
 const Placeholder = ({ value }) => {
-    console.log(value)
-    
     return <p>Placeholder Block</p>
 }
 
@@ -274,7 +277,7 @@ const EventListing = ({ node }) => {
 const ExternalEmbed = ({node}) => {
     const content = localeScrubber.scrub(node)
 
-    return <BlockExternalEmbed url={content.sourceUrl} html={content.sourceHtml} />
+    return <BlockExternalEmbed url={content.sourceUrl} html={content.sourceHtml} blackbaud={content.blackbaudFormId} />
 }
 
 const MediaWithCaption = ({ node }) => {
