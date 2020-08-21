@@ -159,7 +159,6 @@ const options = {
                     )
                 case 'text':
                     if (mimeSet === 'csv') {
-                        console.log(description)
                         return (
                             <div className={styles.csv}>
                                 <TabularContent
@@ -225,6 +224,8 @@ const Placeholder = ({ value }) => {
 }
 
 function EmbeddedEntry({ node }) {
+    console.log(node)
+
     const type =
         typeof node.data.target.sys.contentType === 'undefined'
             ? node.data.target.sys.type
