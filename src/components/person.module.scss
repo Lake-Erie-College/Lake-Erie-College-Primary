@@ -70,6 +70,7 @@
     @include line-height('body');
     @include typescale('body1');
     font-style: italic;
+    white-space: pre-wrap;
 }
 
 .info {
