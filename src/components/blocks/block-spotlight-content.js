@@ -330,9 +330,13 @@ const Resources = ({ props, className }) => {
                             typeof fields.internalLink !== 'undefined'
                                 ? fields.internalLink
                                 : false
+                        const internalMedia =
+                            typeof fields.internalMedia !== 'undefined'
+                                ? fields.internalMedia
+                                : false
                         const external =
-                            typeof fields.externalLink !== 'undefined'
-                                ? fields.externalLink
+                            typeof fields.externalUrl !== 'undefined'
+                                ? fields.externalUrl
                                 : false
                         const isEmbed =
                             typeof fields.sourceUrl !== 'undefined' &&
@@ -361,6 +365,10 @@ const Resources = ({ props, className }) => {
 
                                 {internal && (
                                     <TextLink children={name} node={internal} />
+                                )}
+
+                                {internalMedia && (
+                                    <TextLink children={name} uri={internalMedia.file.url} />
                                 )}
 
                                 {external && (
