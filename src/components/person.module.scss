@@ -70,9 +70,12 @@
     @include line-height('body');
     @include typescale('body1');
     font-style: italic;
+    white-space: pre-wrap;
 }
 
 .info {
+    margin-bottom: $spacing-2xs;
+    
     a:link,
     a:visited {
         color: currentColor;

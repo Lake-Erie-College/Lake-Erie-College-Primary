@@ -1,0 +1,93 @@
+@import '../styles/typography';
+@import '../styles/breakpoint';
+@import '../styles/colors';
+@import '../styles/spacing';
+@import '../styles/grids';
+
+.carousel {
+    position: relative;
+    display: grid;
+    @include content-grid;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+
+    > div:first-child {
+        position: relative;
+        margin: 0;
+        grid-column: left-gutter / end;
+        user-select: none;
+        overflow: hidden;
+    
+        @include respond-to('large') {
+            border-radius: 6px;
+            grid-column: left-main / right-gutter;
+        }
+    }
+}
+
+.controls {
+    position: absolute;
+    left: 0;
+    top: 70%;
+    right: 0;
+    text-align: right;
+    z-index: 100;
+
+    @include respond-to('small') {
+        padding: 0 $spacing-md;
+        top: 80%;
+    }
+    
+    @include respond-to('large') {
+        grid-column: left-main / right-gutter;
+    }
+
+    & > div {
+        display: inline-block;
+        margin: $spacing-xs $spacing-2xs;
+    }
+}
+
+.icon {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    box-shadow: none;
+    border: none;
+    transition: opacity 0.5s, transform 0.5s;
+    color: $color-brand-03;
+}
+
+div[aria-disabled="true"] .icon {
+    opacity: .65;
+}
+
+.iconFlip {
+    transform: rotate(180deg);
+}
+
+.iconInverse {
+    opacity: .65;
+    color: $color-inverse-01;
+}
+
+div[aria-disabled="true"] .iconInverse {
+    opacity: 1;
+}
+
+.arrowPrev {
+    position: absolute;
+    top: 50%;
+    left: $spacing-md;
+    transform: translateY(-50%);
+}
+
+.arrowNext {
+    position: absolute;
+    top: 50%;
+    right: $spacing-md;
+    transform: translateY(-50%);
+}

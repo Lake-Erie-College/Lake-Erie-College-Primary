@@ -17,6 +17,7 @@ const NavigationPrimary = () => {
                     navigationItems {
                         id
                         title
+                        displayTitle
                         newWindow
                         externalUrl
                         internalLink {
@@ -67,6 +68,7 @@ const NavigationPrimary = () => {
                             navigationItems {
                                 id
                                 title
+                                displayTitle
                                 newWindow
                                 externalUrl
                                 internalLink {
@@ -185,7 +187,7 @@ const NavigationPrimary = () => {
                     aria-expanded={isExpanded}
                     tabIndex={tabIndex}
                 >
-                    {link.title}
+                    {link.displayTitle ? link.displayTitle : link.title}
                 </span>
             )
         }
@@ -199,7 +201,7 @@ const NavigationPrimary = () => {
                 <NavigationExternalLink
                     level={level}
                     url={to}
-                    name={link.title}
+                    name={link.displayTitle ? link.displayTitle : link.title}
                     hasPopup={hasPopup}
                     isExpanded={isExpanded}
                     tabIndex={tabIndex}
@@ -210,7 +212,7 @@ const NavigationPrimary = () => {
                 <NavigationInternalLink
                     level={level}
                     url={to}
-                    name={link.title}
+                    name={link.displayTitle ? link.displayTitle : link.title}
                     hasPopup={hasPopup}
                     isExpanded={isExpanded}
                     tabIndex={tabIndex}

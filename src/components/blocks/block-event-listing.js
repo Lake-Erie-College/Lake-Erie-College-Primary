@@ -6,7 +6,7 @@ import RelatedEvents from '../related-events'
 import moment from 'moment'
 import Divider from '../divider'
 
-import styles from "./block-event-listing.module.scss";
+import styles from './block-event-listing.module.scss'
 
 const BlockEventListing = ({ category, limit, showViewAll }, ...rest) => {
     return (

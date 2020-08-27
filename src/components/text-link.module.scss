@@ -10,6 +10,16 @@
     @include font-weight-body-bold;
     @include line-height('body');
     text-decoration: none;
+    cursor: pointer;
+
+    &:link,
+    &:active {
+        color: currentColor;
+    }
+
+    &:visited {
+        color: currentColor;
+    }
 
     u {
         text-decoration: none;
@@ -21,7 +31,7 @@
         z-index: 1;
         color: hsl(222deg, 22%, 5%);
         text-decoration: none;
-        color: $color-text-01;
+        color: currentColor;
     }
 
     .linkHoverText {

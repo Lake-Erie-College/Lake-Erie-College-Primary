@@ -7,7 +7,9 @@ import get from 'lodash/get'
 import useContentfulImage from '../hooks/useContentfulImage'
 import ImageWithSVGSupport from './image-with-svg-support'
 import BlockAcademicOfferingListing from './blocks/block-academic-offering-listing'
+import BlockCarousel from './blocks/block-carousel'
 import BlockEventListing from './blocks/block-event-listing'
+import BlockExternalEmbed from './blocks/block-external-embed'
 import BlockMediaWithCaption from './blocks/block-media-with-caption'
 import BlockPersonListing from './blocks/block-person-listing'
 import BlockSearchResults from './blocks/block-search-results'
@@ -88,6 +90,21 @@ const options = {
                 />
             )
         },
+        [INLINES.ASSET_HYPERLINK]: (node, children) => {
+            const content = localeScrubber.scrub(node)
+            
+            if (typeof node.data.target.file === 'undefined') {
+                return <span></span>
+            }
+
+            return (
+                <TextLink
+                    children={children}
+                    uri={node.data.target.file.url}
+                    activeClassName="active"
+                />
+            )
+        },
         [INLINES.HYPERLINK]: (node, children) => {
             // If you are using contenful.js sdk, the referenced entry is resolved
             // automatically and is available at `node.data.target`.
@@ -122,7 +139,7 @@ const options = {
                     const height = contentfulImage.file.details.image.height
 
                     const ratio = width / height
-                    const micro = height < 200 || width < 400
+                    const micro = height <= 200 || width <= 400
 
                     return (
                         <ImageWithSVGSupport
@@ -147,7 +164,6 @@ const options = {
                     )
                 case 'text':
                     if (mimeSet === 'csv') {
-                        console.log(description)
                         return (
                             <div className={styles.csv}>
                                 <TabularContent
@@ -175,7 +191,9 @@ const blocksHandlers = {
     blockAcademicOfferingListing: value => (
         <AcademicOfferingListing node={value} />
     ),
+    blockCarousel: value => <Carousel node={value} />,
     blockEventListing: value => <EventListing node={value} />,
+    blockExternalEmbed: value => <ExternalEmbed node={value} />,
     blockMediaWithCaption: value => <MediaWithCaption node={value} />,
     blockPersonListing: value => <PersonListing node={value} />,
     blockQuote: value => <Placeholder value={value} />,
@@ -209,6 +227,8 @@ const Placeholder = ({ value }) => {
 }
 
 function EmbeddedEntry({ node }) {
+    console.log(node)
+
     const type =
         typeof node.data.target.sys.contentType === 'undefined'
             ? node.data.target.sys.type
@@ -242,10 +262,22 @@ const AcademicOfferingListing = ({ node }) => {
     )
 }
 
+const Carousel = ({node}) => {
+    const content = localeScrubber.scrub(node)
+
+    return <BlockCarousel media={content.relatedMedia} displayArrows={content.displayArrows} displayDots={content.displayDots} />
+}
+
 const EventListing = ({ node }) => {
     const content = localeScrubber.scrub(node)
 
     return <BlockEventListing category={content.relatedCategory} />
+}
+
+const ExternalEmbed = ({node}) => {
+    const content = localeScrubber.scrub(node)
+
+    return <BlockExternalEmbed url={content.sourceUrl} html={content.sourceHtml} blackbaud={content.blackbaudFormId} />
 }
 
 const MediaWithCaption = ({ node }) => {

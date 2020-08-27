@@ -23,7 +23,7 @@ class SiteRootTemplate extends React.Component {
                     </Helmet>
                 </HelmetProvider>
                 <main>
-                    <Carousel content={page.heroCarousel} />
+                    <Carousel content={page.heroCarousel} displayDots={true} />
                     <PrimaryContent data={page.primaryContent} />
                     <RelatedContent>
                         <RelatedNews heading={`News & Announcements`} />

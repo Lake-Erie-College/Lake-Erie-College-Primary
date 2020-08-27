@@ -33,14 +33,18 @@
 
     overflow: hidden;
 
-    a:link,
-    a:visited {
+    .link,
+    .link:link,
+    .link:visited {
+        display: inline-block;
+        width: 100%;
         text-decoration: none;
         color: currentColor;
+        cursor: pointer;
     }
 
-    a:hover,
-    a:active {
+    .link:hover,
+    .link:active {
         color: currentColor;
     }
 }

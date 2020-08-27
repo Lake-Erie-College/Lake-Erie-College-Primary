@@ -68,6 +68,9 @@ export const pageQuery = graphql`
       offeringType
       category {
         title
+        category {
+            slug
+        }
         shortTitle
         slug
       }
@@ -114,7 +117,13 @@ export const pageQuery = graphql`
       relatedOfferings {
         id
         slug
+        title
         shortTitle
+        category {
+          title
+          shortTitle
+          slug
+        }
         primaryContent {
           json
         }
@@ -122,6 +131,7 @@ export const pageQuery = graphql`
           lead
         }
         offeringType
+        additionalTags
         hidden
       }
       primaryContent {

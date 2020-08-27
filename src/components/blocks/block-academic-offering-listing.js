@@ -15,6 +15,7 @@ const BlockAcademicOfferingListing = ({ category, offeringType }, ...rest) => {
                         slug
                         shortTitle
                         offeringType
+                        additionalTags
                         description {
                             description
                         }

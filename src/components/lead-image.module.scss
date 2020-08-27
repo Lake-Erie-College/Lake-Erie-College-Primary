@@ -5,8 +5,19 @@
 @import '../styles/grids';
 
 .leadImage {
-    margin: 0 0 $spacing-md 0;
+    display: grid;
+    @include content-grid;
+    margin: 0;
     padding: 0;
     width: 100%;
     height: auto;
+}
+
+.image {
+    grid-column: left-gutter / end;
+
+    @include respond-to('large') {
+        border-radius: 6px;
+        grid-column: left-main / right-gutter;
+    }
 }

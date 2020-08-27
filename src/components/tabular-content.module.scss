@@ -5,8 +5,9 @@
 @import '../styles/grids';
 
 .tabularContent {
-    margin: $spacing-sm 0;
+    margin: $spacing-sm 0 0;
     width: 100%;
+    overflow-x: auto;
 
     thead {
         border: none;

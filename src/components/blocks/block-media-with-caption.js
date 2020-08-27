@@ -4,6 +4,7 @@ import { Link as GatsbyLink } from 'gatsby'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ImageWithSVGSupport from '../image-with-svg-support'
 import ReactPlayer from 'react-player'
+import TextLink from '../text-link'
 import useContentfulImage from '../../hooks/useContentfulImage'
 
 const linkResolver = require('../../utils').linkResolver
@@ -17,6 +18,7 @@ const BlockMediaWithCaption = (
         heading,
         caption,
         internalLink,
+        externalUrl,
         callToAction,
         isOverlay,
     },
@@ -29,8 +31,9 @@ const BlockMediaWithCaption = (
         typeof externalMedia !== 'undefined' && externalMedia !== null
             ? externalMedia
             : null
+    const isExteranl = typeof externalUrl !== 'undefined' && externalUrl !== null
     const hasRelatedPage =
-        typeof internalLink !== 'undefined' && internalLink.length > 0
+        ( typeof internalLink !== 'undefined' && internalLink !== null ) || isExteranl
     const primaryHeading = typeof heading !== 'undefined' ? heading : null
     const summary = typeof caption !== 'undefined' ? caption : null
     const primaryImage =
@@ -43,17 +46,19 @@ const BlockMediaWithCaption = (
 
     return (
         <figure className={cx(styles.blockMedia, overlayClass)}>
-            {video && <VideoPlayer url={video} />}
+            {!isImage && video && <VideoPlayer url={video} />}
             {isImage && <Image image={primaryImage} />}
-            <figcaption className={styles.mediaCaption}>
-                {heading && (
-                    <h2 className={styles.heading}>{primaryHeading}</h2>
-                )}
-                {summary && <p className={styles.summary}>{summary}</p>}
-                {hasRelatedPage && callToAction && (
-                    <Link node={internalLink} cta={callToAction} />
-                )}
-            </figcaption>
+            { (heading || summary) && (
+                <figcaption className={styles.mediaCaption}>
+                    {heading && (
+                        <h2 className={styles.heading}>{primaryHeading}</h2>
+                    )}
+                    {summary && <p className={styles.summary}>{summary}</p>}
+                    {hasRelatedPage && callToAction && (
+                        <Link node={internalLink} cta={callToAction} uri={externalUrl} />
+                    )}
+                </figcaption>
+            )}
         </figure>
     )
 }
@@ -61,7 +66,7 @@ const BlockMediaWithCaption = (
 const Image = ({ image }) => {
     const contentfulImage =
         typeof image.fluid === 'undefined'
-            ? useContentfulImage(image.data.target.file.url)
+            ? useContentfulImage(typeof image.data !== 'undefined' ? image.data.target.file.url : image.file.url)
             : image
 
     const title =
@@ -88,7 +93,7 @@ const Image = ({ image }) => {
 
 const VideoPlayer = ({ url }) => {
     return (
-        <div className={styles.media}>
+        <div className={styles.mediaEmbed}>
             <ReactPlayer
                 className={styles.video}
                 url={url}
@@ -99,19 +104,22 @@ const VideoPlayer = ({ url }) => {
     )
 }
 
-const Link = ({ node, cta }) => {
-    const to = linkResolver.path(node)
+const Link = ({ node, cta, uri }) => {
+    const isExternal = typeof uri !== 'undefined' && uri !== null
 
     return (
-        <p className={cx(styles.info, styles.building)}>
-            <GatsbyLink to={to} className={styles.internal}>
-                <FontAwesomeIcon
-                    icon="arrow-circle-right"
-                    size="sm"
-                    className={styles.icon}
-                />
-                <span>{cta}</span>
-            </GatsbyLink>
+        <p className={cx(styles.info)}>
+            {!isExternal && (
+                <TextLink node={node} children={cta} />
+            )}
+            {isExternal && (
+                <TextLink uri={uri} children={cta} /> 
+            )}
+            <FontAwesomeIcon
+                icon="arrow-circle-right"
+                size="sm"
+                className={styles.icon}
+            />
         </p>
     )
 }
