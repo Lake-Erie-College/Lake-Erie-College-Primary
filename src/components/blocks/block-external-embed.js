@@ -9,6 +9,7 @@ const BlockExternalEmbed = ({ url, html, popup, blackbaud }) => {
     const hasHTML = typeof html !== 'undefined' && html !== null
     const isPopup = typeof popup !== 'undefined' && popup === true
     const isBlackbaud = typeof blackbaud !== 'undefined' && blackbaud !== null
+    const isAcuity = hasSource && url.includes('app.acuityscheduling.com')
 
     if (isBlackbaud) {
         if (typeof window !== 'undefined') {
@@ -21,14 +22,30 @@ const BlockExternalEmbed = ({ url, html, popup, blackbaud }) => {
             <div className={styles.contentEmbed}>
                 <HelmetProvider>
                     <Helmet>
-                        <script src='https://bbox.blackbaudhosting.com/webforms/bbox-min.js' type='text/javascript' />
+                        <script
+                            src="https://bbox.blackbaudhosting.com/webforms/bbox-min.js"
+                            type="text/javascript"
+                        />
                     </Helmet>
                 </HelmetProvider>
                 <div id={'bbox-root'} className={styles.embed}></div>
             </div>
         )
-    }
-    else if (hasSource) {
+    } else if (isAcuity) {
+        return (
+            <div className={styles.contentEmbed}>
+                <HelmetProvider>
+                    <Helmet>
+                        <script
+                            src="https://embed.acuityscheduling.com/js/embed.js"
+                            type="text/javascript"
+                        />
+                    </Helmet>
+                </HelmetProvider>
+                <iframe className={styles.embed} src={url} width='100%'></iframe>
+            </div>
+        )
+    } else if (hasSource) {
         if (url.includes('typeform.com/to/') && isPopup) {
             const popup = typeformEmbed.makeWidget(url, {
                 mode: 'drawer_right',
@@ -68,11 +85,14 @@ const BlockExternalEmbed = ({ url, html, popup, blackbaud }) => {
         } else {
             return <iframe className={styles.contentEmbed} src={url} />
         }
-    }
-    else if (hasHTML) {
-        return <div className={styles.contentEmbed} dangerouslySetInnerHTML={{ __html: html }}></div>
-    }
-    else {
+    } else if (hasHTML) {
+        return (
+            <div
+                className={styles.contentEmbed}
+                dangerouslySetInnerHTML={{ __html: html }}
+            ></div>
+        )
+    } else {
         return <span></span>
     }
 }
