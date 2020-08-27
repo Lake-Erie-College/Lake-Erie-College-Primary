@@ -48,8 +48,6 @@ const createUrl = (imgUrl, options = {}) => {
 export const getFluidGatsbyImage = (image, options) => {
     if (!isImage(image)) return null
 
-    console.log(image)
-
     const { baseUrl, width, aspectRatio } = getBasicImageProps(image, options)
 
     let desiredAspectRatio = aspectRatio

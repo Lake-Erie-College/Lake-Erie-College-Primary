@@ -22,7 +22,6 @@ export default connectSearchBox(({ refine }, ...rest) => {
 
         setDebouncedSetQuery(
             setTimeout(() => {
-                console.log(updatedSearchQuery)
                 setQuery(updatedSearchQuery)
             }, DEBOUNCE_TIME)
         )

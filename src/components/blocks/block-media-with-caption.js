@@ -44,8 +44,6 @@ const BlockMediaWithCaption = (
             ? styles.overlay
             : ''
 
-            console.log(internalLink, callToAction)
-
     return (
         <figure className={cx(styles.blockMedia, overlayClass)}>
             {!isImage && video && <VideoPlayer url={video} />}

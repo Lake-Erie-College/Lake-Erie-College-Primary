@@ -75,7 +75,7 @@ const BlockExternalEmbed = ({ url, html, popup, blackbaud }) => {
                             // console.log('Typeform successfully submitted')
                         },
                         onReady: function() {
-                            console.log('Typeform is ready')
+                            // console.log('Typeform is ready')
                         },
                     })
                 }

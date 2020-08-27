@@ -15,7 +15,6 @@ class EventTemplate extends React.Component {
         const siteTitle = get(this.props, 'data.site.siteMetadata.title')
         const hasLeadImage =
             typeof page.leadImage !== 'undefined' && page.leadImage !== null
-        console.log(page.leadImage)
 
         return (
             <Layout location={this.props.location}>
