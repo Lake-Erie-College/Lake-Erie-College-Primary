@@ -227,8 +227,6 @@ const Placeholder = ({ value }) => {
 }
 
 function EmbeddedEntry({ node }) {
-    console.log(node)
-
     const type =
         typeof node.data.target.sys.contentType === 'undefined'
             ? node.data.target.sys.type
@@ -237,6 +235,8 @@ function EmbeddedEntry({ node }) {
     const handler = blocksHandlers[type] || blocksHandlers.default
 
     return <div className={styles.embeddedBlock}>{handler(value)}</div>
+
+    // Inconsequential Edit
 }
 
 // Taken from: https://www.gatsbyjs.org/docs/gatsby-link/

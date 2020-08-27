@@ -1,0 +1,12 @@
+diff --git a/node_modules/@react-spring/konva/package.json b/node_modules/@react-spring/konva/package.json
+index 99d6910..325fedf 100644
+--- a/node_modules/@react-spring/konva/package.json
++++ b/node_modules/@react-spring/konva/package.json
+@@ -22,7 +22,6 @@
+   "contributors": [
+     "Alec Larson (https://github.com/aleclarson)"
+   ],
+-  "sideEffects": false,
+   "main": "index.cjs.js",
+   "module": "index.js",
+   "types": "index.d.ts",
