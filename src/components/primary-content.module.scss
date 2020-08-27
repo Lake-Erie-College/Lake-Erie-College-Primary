@@ -8,14 +8,10 @@
     display: grid;
     @include content-grid;
 
-    margin: 1rem 0;
+    margin: $spacing-sm 0 0 0;
 
     & > :first-child {
         margin-top: 0;
-    }
-
-    @include respond-to('small') {
-        margin: 1rem 0;
     }
 }
 

@@ -5,32 +5,43 @@
 @import '../styles/grids';
 
 .carousel {
+    position: relative;
     display: grid;
     @include content-grid;
     margin: 0;
     padding: 0;
     width: 100%;
-    height: auto;
-}
 
-.slides {
-    position: relative;
-    grid-column: left-gutter / end;
-    user-select: none;
-    overflow: hidden;
-
-    @include respond-to('large') {
-        border-radius: 6px;
-        grid-column: left-main / right-gutter;
+    > div:first-child {
+        position: relative;
+        margin: 0;
+        grid-column: left-gutter / end;
+        user-select: none;
+        overflow: hidden;
+    
+        @include respond-to('large') {
+            border-radius: 6px;
+            grid-column: left-main / right-gutter;
+        }
     }
 }
 
 .controls {
     position: absolute;
     left: 0;
+    top: 70%;
     right: 0;
-    bottom: 0;
-    text-align: center;
+    text-align: right;
+    z-index: 100;
+
+    @include respond-to('small') {
+        padding: 0 $spacing-md;
+        top: 80%;
+    }
+    
+    @include respond-to('large') {
+        grid-column: left-main / right-gutter;
+    }
 
     & > div {
         display: inline-block;

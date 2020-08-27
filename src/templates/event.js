@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { Helmet, HelmetProvider } from "react-helmet-async"
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 import get from 'lodash/get'
 import Img from 'gatsby-image'
 import Layout from '../components/layout'
@@ -10,20 +10,21 @@ import PrimaryContent from '../components/primary-content'
 import LeadImage from '../components/lead-image'
 
 class EventTemplate extends React.Component {
-  render() {
-    const page = get(this.props, 'data.contentfulEvent')
-    const siteTitle = get(this.props, 'data.site.siteMetadata.title')
-    const hasLeadImage = typeof page.leadImage !== 'undefined' && page.leadImage !== null
-    console.log(page.leadImage)
+    render() {
+        const page = get(this.props, 'data.contentfulEvent')
+        const siteTitle = get(this.props, 'data.site.siteMetadata.title')
+        const hasLeadImage =
+            typeof page.leadImage !== 'undefined' && page.leadImage !== null
+        console.log(page.leadImage)
 
-    return (
-      <Layout location={this.props.location} >
-        <HelmetProvider>
-            <Helmet>
-              <title>{`${page.title} | ${siteTitle}`}</title>
-            </Helmet>
-        </HelmetProvider>
-          <main>
+        return (
+            <Layout location={this.props.location}>
+                <HelmetProvider>
+                    <Helmet>
+                        <title>{`${page.title} | ${siteTitle}`}</title>
+                    </Helmet>
+                </HelmetProvider>
+                <main>
                     {hasLeadImage && (
                         <LeadImage
                             title={page.leadImage.title}
@@ -32,61 +33,66 @@ class EventTemplate extends React.Component {
                         />
                     )}
                     <PageHeading
-                        primary={page.shortTitle}
+                        primary={page.shortTitle ? page.shortTitle : page.title}
                         secondary={'Event'}
                         overline={page.category ? page.category.title : null}
                         linkTo={page.category}
                     />
-                    {page.startDateAndTime && <PageDate startDate={page.startDateAndTime} endDate={page.endDateAndTime} />}
+                    {page.startDateAndTime && (
+                        <PageDate
+                            startDate={page.startDateAndTime}
+                            endDate={page.endDateAndTime}
+                        />
+                    )}
                     <PrimaryContent data={page.primaryContent} />
-          </main>
-      </Layout>
-    )
-  }
+                </main>
+            </Layout>
+        )
+    }
 }
 
 export default EventTemplate
 
 export const pageQuery = graphql`
-  query EventBySlug($slug: String!) {
-    site {
-      siteMetadata {
-        title
-      }
-    }
-    contentfulEvent(slug: { eq: $slug }) {
-      title
-      shortTitle
-      slug
-      description {
-          description
-      }
-      category {
-          title
-          category {
-              slug
-          }
-          shortTitle
-          slug
-      }
-      startDateAndTime
-      endDateAndTime
-      primaryContent {
-        json
-      }
-      mapLocation {
-        lat
-        lon
-      }
-      campusLocation {
-        slug
-        category {
-          title
-          slug
-          shortTitle
+    query EventBySlug($slug: String!) {
+        site {
+            siteMetadata {
+                title
+            }
         }
-      }
-      hidden
+        contentfulEvent(slug: { eq: $slug }) {
+            title
+            shortTitle
+            slug
+            description {
+                description
+            }
+            category {
+                title
+                category {
+                    slug
+                }
+                shortTitle
+                slug
+            }
+            startDateAndTime
+            endDateAndTime
+            primaryContent {
+                json
+            }
+            mapLocation {
+                lat
+                lon
+            }
+            campusLocation {
+                slug
+                category {
+                    title
+                    slug
+                    shortTitle
+                }
+            }
+            hidden
+        }
     }
-  }
 `

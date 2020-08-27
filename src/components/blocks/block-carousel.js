@@ -4,7 +4,6 @@ import Carousel from '../carousel'
 import styles from './block-carousel.module.scss'
 
 const BlockCarousel = ({ media, displayArrows, displayDots }) => {
-    console.log(displayDots)
     return (
         <div>
             <Carousel content={media} displayArrows={displayArrows} displayDots={displayDots} />

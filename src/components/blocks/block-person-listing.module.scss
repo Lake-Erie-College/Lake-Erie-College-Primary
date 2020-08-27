@@ -65,12 +65,12 @@
 }
 
 .listingItem {
-    flex: 1 1 100%;
+    flex: 0 1 100%;
     padding-right: $spacing-md;
     max-width: 100%;
 
     @include respond-to('small') {
-        flex: 1 1 25%;
+        flex: 0 1 25%;
         padding-right: $spacing-md;
         max-width: 50%;
     }

@@ -4,6 +4,7 @@ import get from 'lodash/get'
 import ImageWithSVGSupport from './image-with-svg-support'
 import { Link as GatsbyLink } from 'gatsby'
 import NavigationPrimary from './navigation-primary'
+import PrimaryContent from './primary-content'
 import SearchBox from './search/search-box'
 import styles from './global-header.module.scss'
 
@@ -32,6 +33,9 @@ const GlobalHeader = () => {
                         }
                     }
                 }
+                siteAnnouncement {
+                    json
+                }
             }
         }
     `)
@@ -43,8 +47,18 @@ const GlobalHeader = () => {
         // { name: `Posts`, title: `Blog Posts`, hitComp: `PostHit` },
     ]
 
+    const announcement =
+        typeof page.siteAnnouncement !== 'undefined'
+            ? page.siteAnnouncement
+            : false
+
     return (
         <header className={styles.globalHeader}>
+            {announcement && (
+                <div className={styles.announcement}>
+                    <PrimaryContent data={announcement} />
+                </div>
+            )}
             <div className={styles.logo}>
                 <GatsbyLink to={`/`} aria-label={`Navigate to the Homepage`}>
                     <ImageWithSVGSupport

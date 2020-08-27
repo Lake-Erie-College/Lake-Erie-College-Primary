@@ -10,7 +10,7 @@
     @include respond-to('small') {
         display: grid;
         @include content-grid;
-        grid-template-rows: repeat(5, 1fr);
+        // grid-template-rows: repeat(5, 1fr);
     }
 }
 
@@ -22,7 +22,8 @@
     @include respond-to('small') {
         margin-left: 0;
         margin-right: 0;
-        grid-area: 1 / 3 / 6 / 5;
+        grid-column: left-main / right-gutter;
+        // grid-area: 1 / 3 / 6 / 5;
     }
 }
 
@@ -37,7 +38,8 @@
     @include respond-to('small') {
         margin-left: 0;
         margin-right: 0;
-        grid-area: 1 / 3 / 6 / 5;
+        grid-column: main / right-gutter;
+        order: 2;
     }
 }
 
@@ -58,20 +60,29 @@
     @include respond-to('small') {
         margin-left: 0;
         margin-right: 0;
-        grid-area: 1 / 1 / 6 / 3;
+        grid-column: left-gutter / main;
         background-color: rgba($color-brand-03, 0);
         text-align: right;
         color: $color-text-01;
+        order: 1;
     }
 }
 
 .overlay {
+    position: relative;
+    display: block;
+    margin: 0;
+    overflow: hidden;
+    
+    @include respond-to('large') {
+        border-radius: 6px;
+    }
+
     .media {
-        position: relative;
-        padding-top: 0;
-        height: auto;
-        background: white;
+        margin: 0;
+        padding: 0;
         text-align: center;
+        pointer-events: none;
         overflow: visible;
         
         @include respond-to('small') {
@@ -80,15 +91,59 @@
     }
 
     .mediaCaption {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        flex-direction: column;
+        margin: 0;
+        padding: $spacing-md $spacing-lg $spacing-md $spacing-lg;
+        width: 100%;
+
         @include respond-to('small') {
-            margin-left: 0;
-            margin-right: 0;
-            grid-row-start: 2;
-            grid-row-end: 4;
-            background-color: rgba($color-brand-03, .75);
+            width: 40%;
+            background-color: rgba($color-brand-01, .75);
             text-align: left;
             color: $color-inverse-01;
             z-index: 20;
+        }
+
+        &::after {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: -$spacing-lg;
+            width: $spacing-lg;
+            display: block;
+            background: linear-gradient(to right bottom, rgba($color-brand-01, .75) 49%, transparent 50%), linear-gradient(-50deg, transparent 16px, transparent 0);
+            content: "";
+        }
+    }
+
+    .heading {
+        @include typescale('h4');
+    
+        @include respond-to('small') {
+            @include typescale('h2');
+        }
+    }
+
+    .summary {
+        display: none;
+        margin-bottom: $spacing-sm;
+        @include font-family;
+        @include font-weight-body;
+        @include line-height('body');
+
+        @include respond-to('small') {
+            display: block;
+            @include typescale('h6');
+        }
+
+        @include respond-to('medium') {
+            @include typescale('h5');
         }
     }
 }
@@ -130,4 +185,8 @@
     @include font-weight-body;
     @include line-height('body');
     @include typescale('body1');
+}
+
+.icon {
+    margin: 0 0 0 $spacing-2xs;
 }

@@ -7,7 +7,7 @@ export default ({ startDate, endDate }) => {
         <p className={styles.pageDate}>
             <span className={styles.content}>
                 {startDate && <StartDate date={startDate} />}
-                {endDate && <EndDate date={endDate} />}
+                {endDate && <EndDate startDate={startDate} date={endDate} />}
             </span>
         </p>
     )
@@ -17,16 +17,35 @@ const StartDate = ({ date }) => {
     const momentStartDate = moment(date)
 
     const dateText = `${momentStartDate.format('MMMM DD, YYYY')}`
-    const dateTime = `${momentStartDate.format('YYYY-mm-DD')}`
+    const dateTime = `${momentStartDate.format('YYYY-mm-DD h:mm A')}`
 
-    return <time datetime={dateTime}>{dateText}</time>
+    const time = `${momentStartDate.format('h:mm A')}`
+    const isValidTime = time !== '12:00 AM'
+
+    return (
+        <time datetime={dateTime}>
+            {dateText}
+            {isValidTime && <span> {time} </span>}
+        </time>
+    )
 }
 
-const EndDate = ({ date }) => {
-    const momentStartDate = moment(date)
+const EndDate = ({ startDate, date }) => {
+    const momentEndDate = moment(date)
+    const momentStartDate = moment(startDate)
 
-    const dateText = `${momentStartDate.format('MMMM DD, YYYY')}`
-    const dateTime = `${momentStartDate.format('YYYY-mm-DD')}`
+    const dateText = `${momentEndDate.format('MMMM DD, YYYY')}`
+    const dateTime = `${momentEndDate.format('YYYY-mm-DD h:mm A')}`
 
-    return <time datetime={dateTime}> - {dateText}</time>
+    const isSameDay = momentEndDate.isSame(momentStartDate, 'date')
+
+    const time = `${momentEndDate.format('h:mm A')}`
+    const isValidTime = time !== '12:00 AM'
+
+    return (
+        <time datetime={dateTime}>
+            - {!isSameDay && <span>{dateText}</span>}
+            {isValidTime && <span> {time}</span>}
+        </time>
+    )
 }
