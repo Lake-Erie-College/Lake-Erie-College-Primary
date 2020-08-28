@@ -10,6 +10,10 @@ exports.path = function(node) {
         return node
     }
 
+    if (node === null) {
+        return '/'
+    }
+
     const slug = typeof node.slug !== 'undefined' ? node.slug : null
     const category = typeof node.category !== 'undefined' ? node.category : null
 

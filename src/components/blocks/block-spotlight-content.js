@@ -115,10 +115,11 @@ const Navigation = ({ props, className }) => {
                         }
 
                         const icon =
-                            typeof fields.pageIcon !== 'undefined'
-                                ? fields.pageIcon
+                            typeof node.pageIcon !== 'undefined'
+                                ? node.pageIcon
                                       .toLowerCase()
-                                      .replace(' ', '-')
+                                      .split(' ')
+                                      .join('-')
                                 : false
 
                         const [hover, toggleHover] = useState(false)
@@ -368,7 +369,10 @@ const Resources = ({ props, className }) => {
                                 )}
 
                                 {internalMedia && (
-                                    <TextLink children={name} uri={internalMedia.file.url} />
+                                    <TextLink
+                                        children={name}
+                                        uri={internalMedia.file.url}
+                                    />
                                 )}
 
                                 {external && (
@@ -376,7 +380,10 @@ const Resources = ({ props, className }) => {
                                 )}
 
                                 {isEmbed && (
-                                     <TextLink children={name} formUrl={fields.sourceUrl} />
+                                    <TextLink
+                                        children={name}
+                                        formUrl={fields.sourceUrl}
+                                    />
                                 )}
                             </li>
                         )

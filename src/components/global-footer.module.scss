@@ -125,20 +125,6 @@
     }
 }
 
-.navigationLinks {
-    font-weight: bold;
-
-    a:link,
-    a:visited {
-        text-decoration: none;
-    }
-
-    a:hover,
-    a:active {
-        text-decoration: underline;
-    }
-}
-
 .logo {
     grid-column: left-gutter / end;
     padding: $spacing-md;

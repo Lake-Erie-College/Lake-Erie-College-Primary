@@ -2,8 +2,8 @@ import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import get from 'lodash/get'
 import ImageWithSVGSupport from './image-with-svg-support'
-import { Link as GatsbyLink } from "gatsby"
 import CallToAction from './call-to-action'
+import TextLink from './text-link'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import styles from './global-footer.module.scss'
 
@@ -65,6 +65,7 @@ const GlobalFooter = () => {
                 navigationItems {
                     id
                     title
+                    displayTitle
                     externalUrl
                     internalLink {
                         __typename
@@ -121,6 +122,7 @@ const GlobalFooter = () => {
                 navigationItems {
                     id
                     title
+                    displayTitle
                     externalUrl
                     internalLink {
                         ... on ContentfulAcademicOffering {
@@ -195,7 +197,7 @@ const GlobalFooter = () => {
 
     const NavigationItem = ({link, className}) => {
         const isExternal = typeof link.externalUrl !== 'undefined' || link.externalUrl !== null;
-        const name = link.title
+        const name = link.displayTitle ? link.displayTitle : link.title
         const url = link.externalUrl
         const node = link.internalLink
 
@@ -204,12 +206,10 @@ const GlobalFooter = () => {
         return (
             <li key={link.id}>
                 {isExternal && (
-                    <a href={to} rel='external'>{name}</a>
+                    <TextLink children={name} uri={to} />
                 )}
                 {!isExternal && (
-                    <GatsbyLink to={to}>
-                        {name}
-                    </GatsbyLink>
+                    <TextLink children={name} node={to} />
                 )}
             </li>
         )
