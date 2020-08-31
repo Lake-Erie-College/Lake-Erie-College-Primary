@@ -38,14 +38,7 @@ export default function SearchBox({ indices, collapse, hitsAsGrid }) {
                 indexName={indexName}
                 // onSearchStateChange={({ query }) => setQuery(query)}
             >
-                <Configure hitsPerPage={10} query={query}/>
                 <SearchInput />
-                <h2 className={styles.heading}>Your search for <mark className={styles.query}>{query}</mark> returned <Stats />.</h2>
-                
-                <Results>
-                    <Hits className={styles.hits} hitComponent={hitComps[hitComp]} />
-                    <Pagination className={styles.pagination} />
-                </Results>
             </InstantSearch>
         </div>
     )
