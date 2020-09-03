@@ -84,6 +84,7 @@ const options = {
 
             return (
                 <TextLink
+                    className={styles.link}
                     children={children}
                     node={node.data.target.fields}
                     activeClassName="active"
@@ -92,13 +93,14 @@ const options = {
         },
         [INLINES.ASSET_HYPERLINK]: (node, children) => {
             const content = localeScrubber.scrub(node)
-            
+
             if (typeof node.data.target.file === 'undefined') {
                 return <span></span>
             }
 
             return (
                 <TextLink
+                    className={styles.link}
                     children={children}
                     uri={node.data.target.file.url}
                     activeClassName="active"
@@ -112,7 +114,11 @@ const options = {
             // <a href={`/pages/${referencedEntry.fields.slug}`}>{children}</a>
             // return 'test';
             return (
-                <TextLink uri={node.data.uri} children={children} />
+                <TextLink
+                    className={styles.link}
+                    uri={node.data.uri}
+                    children={children}
+                />
             )
         },
         [BLOCKS.EMBEDDED_ENTRY]: node => <EmbeddedEntry node={node} />,
@@ -262,10 +268,17 @@ const AcademicOfferingListing = ({ node }) => {
     )
 }
 
-const Carousel = ({node}) => {
+const Carousel = ({ node }) => {
     const content = localeScrubber.scrub(node)
 
-    return <BlockCarousel media={content.relatedMedia} displayArrows={content.displayArrows} displayDots={content.displayDots} />
+    return (
+        <BlockCarousel
+            media={content.relatedMedia}
+            images={content.relatedImages}
+            displayArrows={content.displayArrows}
+            displayDots={content.displayDots}
+        />
+    )
 }
 
 const EventListing = ({ node }) => {
@@ -274,10 +287,16 @@ const EventListing = ({ node }) => {
     return <BlockEventListing category={content.relatedCategory} />
 }
 
-const ExternalEmbed = ({node}) => {
+const ExternalEmbed = ({ node }) => {
     const content = localeScrubber.scrub(node)
 
-    return <BlockExternalEmbed url={content.sourceUrl} html={content.sourceHtml} blackbaud={content.blackbaudFormId} />
+    return (
+        <BlockExternalEmbed
+            url={content.sourceUrl}
+            html={content.sourceHtml}
+            blackbaud={content.blackbaudFormId}
+        />
+    )
 }
 
 const MediaWithCaption = ({ node }) => {

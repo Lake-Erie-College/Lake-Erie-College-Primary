@@ -2,13 +2,14 @@ import React, { useState } from 'react'
 import { Link as GatsbyLink } from 'gatsby'
 import { useSpring, config } from '@react-spring/core'
 import { a } from '@react-spring/web'
+import cx from 'classnames'
 import { TypeFormPopup } from './blocks/block-external-embed'
 
 import styles from './text-link.module.scss'
 
 const linkResolver = require('../utils').linkResolver
 
-export default ({ node, uri, children, formUrl }) => {
+export default ({ node, uri, children, formUrl, className }) => {
     const isExternal = typeof uri !== 'undefined' && uri !== null
     const [hover, toggleHover] = useState(0)
     const hoverState = typeof isHovered === 'undefined' ? hover : isHovered
@@ -24,7 +25,7 @@ export default ({ node, uri, children, formUrl }) => {
         return (
             <a
                 rel="noopener noreferrer"
-                className={styles.textLink}
+                className={cx(styles.textLink, className)}
                 href={to}
                 onMouseEnter={() => toggleHover(1)}
                 onMouseLeave={() => toggleHover(0)}
@@ -72,7 +73,7 @@ export default ({ node, uri, children, formUrl }) => {
         return (
             <GatsbyLink
                 to={to}
-                className={styles.textLink}
+                className={cx(styles.textLink, className)}
                 onMouseEnter={() => toggleHover(1)}
                 onMouseLeave={() => toggleHover(0)}
             >
@@ -118,7 +119,7 @@ export default ({ node, uri, children, formUrl }) => {
     } else if (!isExternal && isForm) {
         return (
             <span
-                className={styles.textLink}
+                className={cx(styles.textLink, className)}
                 onMouseEnter={() => toggleHover(1)}
                 onMouseLeave={() => toggleHover(0)}
                 onClick={() => TypeFormPopup(formUrl)}

@@ -7,8 +7,6 @@
 .textLink {
     position: relative;
     display: inline-block;
-    @include font-weight-body-bold;
-    @include line-height('body');
     text-decoration: none;
     cursor: pointer;
 

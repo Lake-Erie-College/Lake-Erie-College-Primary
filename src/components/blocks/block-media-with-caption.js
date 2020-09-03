@@ -108,7 +108,7 @@ const Link = ({ node, cta, uri }) => {
     const isExternal = typeof uri !== 'undefined' && uri !== null
 
     return (
-        <p className={cx(styles.info)}>
+        <p className={styles.info}>
             {!isExternal && (
                 <TextLink node={node} children={cta} />
             )}

@@ -8,73 +8,146 @@ import { Sled, Views, Progress, Control } from 'react-sled'
 
 import styles from './carousel.module.scss'
 
-const Carousel = ({ content, displayDots, displayArrows }) => {
+const Carousel = ({ content, images, displayDots, displayArrows }) => {
     const hasControls =
         typeof displayDots !== 'undefined' && displayDots === true
     const hasArrows =
         typeof displayArrows !== 'undefined' && displayArrows === true
 
+    const hasContent = typeof content !== 'undefined' && content !== null
+    const hasImages = typeof images !== 'undefined' && images !== null
+
     return (
         <div className={styles.carousel}>
-            <Sled>
-                <Views showElements='1' width='100%' direction='horizontal'>
-                    {content.map((media, index) => (
-                        <BlockMediaWithCaption
-                            key={`carousel-${media.title}`}
-                            internalMedia={media.image}
-                            externalMedia={media.externalMediaUrl}
-                            heading={media.mediaHeading}
-                            caption={media.mediaCaption.mediaCaption}
-                            internalLink={media.internalLink}
-                            externalLink={media.externalUrl}
-                            callToAction={media.callToAction}
-                            isOverlay={true}
-                        />
-                    ))}
-                </Views>
-                {hasArrows && (
-                    <div>
-                        <div className={styles.arrowPrev}>
-                            <Control select="prev">
-                                <FontAwesomeIcon
-                                    icon="arrow-circle-right"
-                                    size="lg"
-                                    className={cx(styles.icon, styles.iconFlip)}
-                                />
-                            </Control>
-                        </div>
-                        <div className={styles.arrowNext}>
-                            <Control select="next">
-                                <FontAwesomeIcon
-                                    icon="arrow-circle-right"
-                                    size="lg"
-                                    className={styles.icon}
-                                />
-                            </Control>
-                        </div>
-                    </div>
-                )}
-                {hasControls && (
-                    <div className={styles.controls}>
-                        {content.map((media, index) => (
-                            <Control
-                                key={`carousel-control-${media.title}`}
-                                select={index}
-                            >
-                                <FontAwesomeIcon
-                                    icon="circle"
-                                    size="1x"
-                                    className={cx(
-                                        styles.icon,
-                                        styles.iconInverse
-                                    )}
-                                />
-                            </Control>
-                        ))}
-                    </div>
-                )}
-            </Sled>
+            {hasContent && (
+                <CarouselMediaWithCaptions
+                    content={content}
+                    hasControls={hasControls}
+                    hasArrows={hasArrows}
+                />
+            )}
+            {hasImages && (
+                <CarouselImages
+                    images={images}
+                    hasControls={hasControls}
+                    hasArrows={hasArrows}
+                />
+            )}
         </div>
+    )
+}
+
+const CarouselMediaWithCaptions = ({ content, hasControls, hasArrows }) => {
+    return (
+        <Sled>
+            <Views showElements="1" width="100%" direction="horizontal">
+                {content.map((media, index) => (
+                    <BlockMediaWithCaption
+                        key={`carousel-${media.title}`}
+                        internalMedia={media.image}
+                        externalMedia={media.externalMediaUrl}
+                        heading={media.mediaHeading}
+                        caption={media.mediaCaption.mediaCaption}
+                        internalLink={media.internalLink}
+                        externalLink={media.externalUrl}
+                        callToAction={media.callToAction}
+                        isOverlay={true}
+                    />
+                ))}
+            </Views>
+            {hasArrows && (
+                <div>
+                    <div className={styles.arrowPrev}>
+                        <Control select="prev">
+                            <FontAwesomeIcon
+                                icon="arrow-circle-right"
+                                size="lg"
+                                className={cx(styles.icon, styles.iconFlip)}
+                            />
+                        </Control>
+                    </div>
+                    <div className={styles.arrowNext}>
+                        <Control select="next">
+                            <FontAwesomeIcon
+                                icon="arrow-circle-right"
+                                size="lg"
+                                className={styles.icon}
+                            />
+                        </Control>
+                    </div>
+                </div>
+            )}
+            {hasControls && (
+                <div className={styles.controls}>
+                    {content.map((media, index) => (
+                        <Control
+                            key={`carousel-control-${media.title}`}
+                            select={index}
+                        >
+                            <FontAwesomeIcon
+                                icon="circle"
+                                size="1x"
+                                className={cx(styles.icon, styles.iconInverse)}
+                            />
+                        </Control>
+                    ))}
+                </div>
+            )}
+        </Sled>
+    )
+}
+
+const CarouselImages = ({ images, hasControls, hasArrows }) => {
+    return (
+        <Sled>
+            <Views showElements="1" width="100%" direction="horizontal">
+                {images.map((media, index) => (
+                    <BlockMediaWithCaption
+                        key={`carousel-${media.title}`}
+                        internalMedia={media}
+                        isOverlay={true}
+                    />
+                ))}
+            </Views>
+            {hasArrows && (
+                <div>
+                    <div className={styles.arrowPrev}>
+                        <Control select="prev">
+                            <FontAwesomeIcon
+                                icon="arrow-circle-right"
+                                size="lg"
+                                className={cx(styles.icon, styles.iconFlip)}
+                            />
+                        </Control>
+                    </div>
+                    <div className={styles.arrowNext}>
+                        <Control select="next">
+                            <FontAwesomeIcon
+                                icon="arrow-circle-right"
+                                size="lg"
+                                className={styles.icon}
+                            />
+                        </Control>
+                    </div>
+                </div>
+            )}
+            {hasControls && (
+                <div className={styles.controls}>
+                    {content.map((media, index) => (
+                        <Control
+                            key={`carousel-control-${media.title}`}
+                            select={index}
+                        >
+                            <FontAwesomeIcon
+                                icon="circle"
+                                size="1x"
+                                className={cx(styles.icon, styles.iconInverse)}
+                            />
+                        </Control>
+                    ))}
+                </div>
+            )}
+        </Sled>
     )
 }
 

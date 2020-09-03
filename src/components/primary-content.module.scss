@@ -131,6 +131,10 @@
     }
 }
 
+.link {
+    @include font-weight-body-bold;
+}
+
 .image {
     margin: 0 0 $spacing-md 0;
     grid-column: left-gutter / end;
