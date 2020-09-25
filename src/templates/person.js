@@ -48,7 +48,11 @@ export const pageQuery = graphql`
       title
       slug
       primaryContent {
-        json
+        raw
+        references {
+          # contentful_id is required to resolve the references
+          contentful_id
+        }
       }
       jobTitles {
         jobTitles

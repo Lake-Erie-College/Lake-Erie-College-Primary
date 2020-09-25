@@ -77,7 +77,11 @@ export const pageQuery = graphql`
             startDateAndTime
             endDateAndTime
             primaryContent {
-                json
+              raw
+              references {
+                # contentful_id is required to resolve the references
+                contentful_id
+              }
             }
             mapLocation {
                 lat

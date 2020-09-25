@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { BLOCKS, MARKS, INLINES } from '@contentful/rich-text-types'
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
+import { renderRichText } from 'gatsby-source-contentful/rich-text'
 import { Link as GatsbyLink } from 'gatsby'
 import cx from 'classnames'
 import get from 'lodash/get'
@@ -211,11 +211,13 @@ const blocksHandlers = {
 
 const Container = ({ data, isFullWidth }) => {
     const hasJSON =
-        data !== null && typeof data.json !== 'undefined' && data.json !== null
+        data !== null && typeof data !== 'undefined'
 
     if (!hasJSON) {
         return null
     }
+
+    console.log(data)
 
     return (
         <div
@@ -223,7 +225,7 @@ const Container = ({ data, isFullWidth }) => {
                 [`${styles.fullWidth}`]: isFullWidth,
             })}
         >
-            {documentToReactComponents(data.json, options)}
+            {renderRichText(data, options)}
         </div>
     )
 }

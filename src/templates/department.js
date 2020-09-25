@@ -71,7 +71,11 @@ export const pageQuery = graphql`
           }
       }
       primaryContent {
-        json
+        raw
+        references {
+          # contentful_id is required to resolve the references
+          contentful_id
+        }
       }
     }
   }

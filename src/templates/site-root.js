@@ -47,7 +47,11 @@ export const pageQuery = graphql`
         contentfulHomepage(slug: { eq: $slug }) {
             title
             primaryContent {
-                json
+              raw
+              references {
+                # contentful_id is required to resolve the references
+                contentful_id
+              }
             }
             heroCarousel {
                 callToAction

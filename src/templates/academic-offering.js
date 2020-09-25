@@ -125,7 +125,11 @@ export const pageQuery = graphql`
           slug
         }
         primaryContent {
-          json
+          raw
+          references {
+            # contentful_id is required to resolve the references
+            contentful_id
+          }
         }
         lead {
           lead
@@ -135,7 +139,11 @@ export const pageQuery = graphql`
         hidden
       }
       primaryContent {
-        json
+        raw
+        references {
+          # contentful_id is required to resolve the references
+          contentful_id
+        }
       }
       relatedFaculty {
         firstName
