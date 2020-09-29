@@ -57,7 +57,7 @@ const Navigation = ({ props, className }) => {
         typeof props.secodnaryHeading !== 'undefined'
             ? props.secodnaryHeading
             : null
-    const summary = typeof props.summary !== 'undefined' ? props.summary : null
+    const summary = typeof props.summary !== 'undefined' && props.summary !== null ? props.summary.summary : null
 
     return (
         <nav className={className}>
@@ -115,7 +115,7 @@ const Navigation = ({ props, className }) => {
                         }
 
                         const icon =
-                            typeof node.pageIcon !== 'undefined'
+                            typeof node.pageIcon !== 'undefined' && node.pageIcon !== null
                                 ? node.pageIcon
                                       .toLowerCase()
                                       .split(' ')
@@ -188,16 +188,16 @@ const Interstitial = ({ props, className }) => {
         typeof props.relatedPages !== 'undefined' &&
         props.relatedPages.length > 0
     const primaryHeading =
-        typeof props.primaryHeading !== 'undefined'
+        typeof props.primaryHeading !== 'undefined' && props.primaryHeading !== null
             ? props.primaryHeading
             : null
     const secondaryHeading =
-        typeof props.secondaryHeading !== 'undefined'
+        typeof props.secondaryHeading !== 'undefined' && props.secondaryHeading !== null
             ? props.secondaryHeading
             : null
-    const summary = typeof props.summary !== 'undefined' ? props.summary : null
+    const summary = typeof props.summary !== 'undefined' && props.summary !== null ? props.summary.summary : null
     const primaryImage =
-        typeof props.primaryImage !== 'undefined' ? props.primaryImage : null
+        typeof props.primaryImage !== 'undefined' && props.primaryImage !== null ? props.primaryImage : null
 
     return (
         <div className={className}>
@@ -298,7 +298,7 @@ const Resources = ({ props, className }) => {
         typeof props.secondaryHeading !== 'undefined'
             ? props.secondaryHeading
             : null
-    const summary = typeof props.summary !== 'undefined' ? props.summary : null
+    const summary = typeof props.summary !== 'undefined' && props.summary !== null ? props.summary.summary : null
     const primaryImage =
         typeof props.primaryImage !== 'undefined' ? props.primaryImage : null
 

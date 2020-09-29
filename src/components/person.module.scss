@@ -23,17 +23,6 @@
 
 .image {
     position: relative;
-
-    &::after {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        background-color: $color-brand-03;
-        mix-blend-mode: soft-light;
-        content: "";
-    }
 }
 
 .name {

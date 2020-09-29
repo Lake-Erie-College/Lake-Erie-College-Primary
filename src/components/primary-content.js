@@ -194,17 +194,17 @@ const options = {
 }
 
 const blocksHandlers = {
-    blockAcademicOfferingListing: value => (
+    ContentfulBlockAcademicOfferingListing: value => (
         <AcademicOfferingListing node={value} />
     ),
-    blockCarousel: value => <Carousel node={value} />,
-    blockEventListing: value => <EventListing node={value} />,
-    blockExternalEmbed: value => <ExternalEmbed node={value} />,
-    blockMediaWithCaption: value => <MediaWithCaption node={value} />,
-    blockPersonListing: value => <PersonListing node={value} />,
-    blockQuote: value => <Placeholder value={value} />,
-    blockSearchResults: value => <SearchResults node={value} />,
-    blockSpotlightContent: value => <SpotlightContent node={value} />,
+    ContentfulBlockCarousel: value => <Carousel node={value} />,
+    ContentfulBlockEventListing: value => <EventListing node={value} />,
+    ContentfulBlockExternalEmbed: value => <ExternalEmbed node={value} />,
+    ContentfulBlockMediaWithCaption: value => <MediaWithCaption node={value} />,
+    ContentfulBlockPersonListing: value => <PersonListing node={value} />,
+    ContentfulBlockQuote: value => <Placeholder value={value} />,
+    ContentfulBlockSearchResults: value => <SearchResults node={value} />,
+    ContentfulBlockSpotlightContent: value => <SpotlightContent node={value} />,
     person: value => <Person node={value} />,
     default: value => <Placeholder value={value} />,
 }
@@ -216,8 +216,6 @@ const Container = ({ data, isFullWidth }) => {
     if (!hasJSON) {
         return null
     }
-
-    console.log(data)
 
     return (
         <div
@@ -235,16 +233,17 @@ const Placeholder = ({ value }) => {
 }
 
 function EmbeddedEntry({ node }) {
+    console.log('Embedded Entry', node)
+    console.log(node.data.target.__typename)
+
     const type =
         typeof node.data.target.sys.contentType === 'undefined'
-            ? node.data.target.sys.type
+            ? node.data.target.__typename
             : node.data.target.sys.contentType.sys.id
-    const value = get(node, 'data.target.fields')
+    const value = get(node, 'data.target')
     const handler = blocksHandlers[type] || blocksHandlers.default
 
     return <div className={styles.embeddedBlock}>{handler(value)}</div>
-
-    // Inconsequential Edit
 }
 
 // Taken from: https://www.gatsbyjs.org/docs/gatsby-link/
@@ -337,6 +336,7 @@ const SearchResults = ({ node }) => {
 }
 
 const SpotlightContent = ({ node }) => {
+    console.log('Spotlight Content', node)
     const content = localeScrubber.scrub(node)
 
     return <BlockSpotlightContent node={content} />

@@ -92,6 +92,7 @@ export const pageQuery = graphql`
               references {
                 # contentful_id is required to resolve the references
                 contentful_id
+                ...BlockSpotlightContent
               }
             }
         }

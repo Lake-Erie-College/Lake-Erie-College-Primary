@@ -30,3 +30,344 @@ export const _ContentfulImage100px = graphql`
     }
   }
 `
+
+export const _Asset = graphql`
+fragment Asset on ContentfulAsset {
+    id
+    svg {
+      content
+      dataURI
+      absolutePath
+      relativePath
+    }
+    file {
+      contentType
+      url
+      fileName
+      details {
+        image {
+          height
+          width
+        }
+      }
+    }
+    sizes(maxWidth: 1200, quality: 75) {
+      ...GatsbyContentfulSizes_withWebp
+    }
+    fluid {
+      ...GatsbyContentfulFluid_withWebp
+    }
+    description
+  }
+`
+
+export const _StandardPage = graphql`
+fragment StandardPage on ContentfulStandardPage {
+    id
+    category {
+        category {
+            slug
+        }
+        slug
+    }
+    slug
+}
+`
+
+export const _AcademicOffering = graphql`
+fragment AcademicOffering on ContentfulAcademicOffering {
+    id
+    category {
+        category {
+            slug
+        }
+        slug
+    }
+    slug
+}
+`
+
+export const _Department = graphql`
+fragment Department on ContentfulDepartment {
+    id
+    category {
+        category {
+            slug
+        }
+        slug
+    }
+    slug
+}
+`
+
+export const _Homepage = graphql`
+fragment Homepage on ContentfulHomepage {
+    id
+}
+`
+
+export const _Person = graphql`
+fragment Person on ContentfulPerson {
+    id
+    slug
+}
+`
+
+export const _Location = graphql`
+fragment Location on ContentfulLocation {
+    id
+    category {
+        category {
+            slug
+        }
+        slug
+    }
+    slug
+}
+`
+
+export const _Event = graphql`
+fragment Event on ContentfulEvent {
+    id
+    category {
+        category {
+            slug
+        }
+        slug
+    }
+    slug
+}
+`
+
+export const _NavigationItem = graphql`
+fragment NavigationItem on ContentfulNavigationItem {
+    id
+    title
+    internalLink {
+      ...AcademicOffering
+      ...Department
+      ...Homepage
+      ...Location
+      ...Person
+      ...Event
+      ...StandardPage
+    }
+    externalUrl
+    displayTitle
+    pageIcon
+    newWindow
+}`
+
+export const _BlockExternalEmbed = graphql`
+fragment BlockExternalEmbed on ContentfulBlockExternalEmbed {
+    id
+    blackbaudFormId
+    displayTitle
+    pageIcon
+    sourceHtml {
+        sourceHtml
+    }
+    sourceUrl
+    title
+}`
+
+export const _BlockSpotlightContent = graphql`
+fragment BlockSpotlightContent on ContentfulBlockSpotlightContent {
+    id
+    callToAction
+    displayStyle
+    externalLink
+    internalLink {
+        slug
+    }
+    primaryHeading
+    primaryImage {
+        ...Asset
+    }
+    relatedMedia {
+        ...Asset
+    }
+    secondaryHeading
+    title
+    summary {
+        summary
+    }
+    relatedPages {
+        ...AcademicOffering
+        ...BlockExternalEmbed
+        ...NavigationItem
+        ...Person
+    }
+    sys {
+        type
+        contentType {
+            sys {
+                type
+                contentful_id
+            }
+        }
+    }
+}`
+
+export const _BlockAcademicOfferingListing = graphql`
+fragment BlockAcademicOfferingListing on ContentfulBlockAcademicOfferingListing {
+    id
+    relatedAcademicCategory {
+        slug
+        category {
+            slug
+        }
+    }
+    offeringType
+}`
+
+export const _BlockCarousel = graphql`
+fragment BlockCarousel on ContentfulBlockCarousel {
+    id
+    displayArrows
+    displayDots
+    title
+    relatedImages {
+        description
+        file {
+            contentType
+            details {
+                image {
+                    height
+                    width
+                }
+            }
+            fileName
+            url
+        }
+        sizes(maxWidth: 1200, quality: 75) {
+            ...GatsbyContentfulSizes_withWebp
+        }
+        fluid {
+            ...GatsbyContentfulFluid_withWebp
+        }
+    }
+}`
+
+export const _BlockEventListing = graphql`
+fragment BlockEventListing on ContentfulBlockEventListing {
+    id
+    relatedCategory {
+        slug
+    }
+    title
+    viewAll
+}`
+
+export const _BlockMediaWithCaption = graphql`
+fragment BlockMediaWithCaption on ContentfulBlockMediaWithCaption {
+    id
+    callToAction
+    externalMediaUrl
+    image {
+      file {
+        contentType
+        details {
+            image {
+                height
+                width
+            }
+        }
+        fileName
+        url
+      }
+      fluid {
+          ...GatsbyContentfulFluid_withWebp
+      }
+    }
+    internalLink {
+      ...StandardPage
+      ...Person
+      ...Event
+      ...AcademicOffering
+    }
+    mediaCaption {
+      mediaCaption
+    }
+    mediaHeading
+  }`
+
+export const _BlockPersonListing = graphql`
+fragment BlockPersonListing on ContentfulBlockPersonListing {
+    id
+    primaryHeading
+    title
+    relatedPeople {
+      department {
+        category {
+          slug
+        }
+        shortTitle
+        slug
+        title
+      }
+      emailAddress
+      firstName
+      headshot {
+        file {
+            contentType
+            details {
+                image {
+                    height
+                    width
+                }
+            }
+            fileName
+            url
+        }
+        fluid {
+            ...GatsbyContentfulFluid_withWebp
+        }
+      }
+      jobTitles {
+        jobTitles
+      }
+      lastName
+      office
+      personType
+      phoneNumber
+      preferredFullName
+      shortTitle
+      slug
+      title
+    }
+}`
+
+export const _BlockQuote = graphql`
+fragment BlockQuote on ContentfulBlockQuote {
+    id
+    associatedMedia {
+      file {
+        contentType
+        details {
+            image {
+                height
+                width
+            }
+        }
+        fileName
+        url
+      }
+      fluid {
+          ...GatsbyContentfulFluid_withWebp
+      }
+    }
+    displayType
+    personName
+    quoteCopy {
+      quoteCopy
+    }
+    quoteHeading
+    title
+}`
+
+export const _BlockSearchResults = graphql`
+fragment BlockSearchResults on ContentfulBlockSearchResults {
+    id
+    title
+}`
