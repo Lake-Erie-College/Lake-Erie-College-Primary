@@ -30,6 +30,10 @@
     }
 }
 
+.footerResourceLink {
+    @include line-height('body');
+}
+
 .h1 {
     @include font-family-headings;
     font-weight: 400;

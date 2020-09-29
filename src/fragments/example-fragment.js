@@ -111,6 +111,43 @@ export const _Person = graphql`
 fragment Person on ContentfulPerson {
     id
     slug
+    department {
+        category {
+          slug
+        }
+        shortTitle
+        slug
+        title
+      }
+      emailAddress
+      firstName
+      headshot {
+            title
+            file {
+                contentType
+                details {
+                    image {
+                        height
+                        width
+                    }
+                }
+                fileName
+                url
+            }
+            fluid {
+                ...GatsbyContentfulFluid_withWebp
+            }
+      }
+      jobTitles {
+        jobTitles
+      }
+      lastName
+      office
+      personType
+      phoneNumber
+      preferredFullName
+      shortTitle
+      title
 }
 `
 
@@ -301,44 +338,7 @@ fragment BlockPersonListing on ContentfulBlockPersonListing {
     primaryHeading
     title
     relatedPeople {
-      department {
-        category {
-          slug
-        }
-        shortTitle
-        slug
-        title
-      }
-      emailAddress
-      firstName
-      headshot {
-            title
-            file {
-                contentType
-                details {
-                    image {
-                        height
-                        width
-                    }
-                }
-                fileName
-                url
-            }
-            fluid {
-                ...GatsbyContentfulFluid_withWebp
-            }
-      }
-      jobTitles {
-        jobTitles
-      }
-      lastName
-      office
-      personType
-      phoneNumber
-      preferredFullName
-      shortTitle
-      slug
-      title
+      ...Person
     }
 }`
 
