@@ -36,7 +36,7 @@ const pageQuery = `{
                 slug
                 title
                 primaryContent {
-                  raw
+                  id
                 }
             }
         }
@@ -98,7 +98,7 @@ const pageQuery = `{
               description
             }
             primaryContent {
-              raw
+              id
             }
             shortTitle
             slug
@@ -137,7 +137,7 @@ const pageQuery = `{
             slug
             shortTitle
             primaryContent {
-              raw
+              id
             }
             title
           }
@@ -172,7 +172,7 @@ const pageQuery = `{
               }
             }
             primaryContent {
-              raw
+              id
             }
             primaryEmail
             primaryPhone
@@ -197,7 +197,7 @@ const pageQuery = `{
               lead
             }
             primaryContent {
-              raw
+              id
             }
             category {
                 title
@@ -214,7 +214,7 @@ const pageQuery = `{
               shortTitle
               offeringType
               primaryContent {
-                raw
+                id
               }
               lead {
                 lead
@@ -246,7 +246,7 @@ const offeringQuery = `{
               lead
             }
             primaryContent {
-              raw
+              id
             }
             category {
                 title
@@ -263,7 +263,7 @@ const offeringQuery = `{
               shortTitle
               offeringType
               primaryContent {
-                raw
+                id
               }
               lead {
                 lead
