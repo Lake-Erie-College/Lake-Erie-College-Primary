@@ -23,7 +23,7 @@
 
         @include respond-to('small') {
             height: auto;
-            grid-column: main / right-main;
+            grid-column: left-main / right-gutter;
         }
     }
 }

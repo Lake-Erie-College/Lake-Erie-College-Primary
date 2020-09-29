@@ -12,9 +12,15 @@ const BlockExternalEmbed = ({ url, html, popup, blackbaud }) => {
     const isAcuity = hasSource && url.includes('app.acuityscheduling.com')
 
     if (isBlackbaud) {
+        console.log('Blackbaud', blackbaud)
+
         if (typeof window !== 'undefined') {
-            window.bboxInit = function() {
+            if (typeof bbox !== 'undefined') {
                 bbox.showForm(blackbaud)
+            } else {
+                window.bboxInit = function() {
+                    bbox.showForm(blackbaud)
+                }
             }
         }
 
