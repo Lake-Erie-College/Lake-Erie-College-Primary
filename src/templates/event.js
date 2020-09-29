@@ -79,8 +79,26 @@ export const pageQuery = graphql`
             primaryContent {
               raw
               references {
-                # contentful_id is required to resolve the references
-                contentful_id
+                  # contentful_id is required to resolve the references
+                  contentful_id
+                  ...AcademicOffering
+                  ...Asset
+                  ...Department
+                  ...Event
+                  ...Homepage
+                  ...Location
+                  ...Person
+                  ...NavigationItem
+                  ...StandardPage
+                  ...BlockAcademicOfferingListing
+                  ...BlockCarousel
+                  ...BlockEventListing
+                  ...BlockExternalEmbed
+                  ...BlockMediaWithCaption
+                  ...BlockPersonListing
+                  ...BlockQuote
+                  ...BlockSearchResults
+                  ...BlockSpotlightContent
               }
             }
             mapLocation {

@@ -205,7 +205,7 @@ const blocksHandlers = {
     ContentfulBlockQuote: value => <Placeholder value={value} />,
     ContentfulBlockSearchResults: value => <SearchResults node={value} />,
     ContentfulBlockSpotlightContent: value => <SpotlightContent node={value} />,
-    person: value => <Person node={value} />,
+    ContentfulPerson: value => <Person node={value} />,
     default: value => <Placeholder value={value} />,
 }
 

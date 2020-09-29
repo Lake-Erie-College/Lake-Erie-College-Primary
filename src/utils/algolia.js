@@ -36,11 +36,7 @@ const pageQuery = `{
                 slug
                 title
                 primaryContent {
-                    content {
-                      content {
-                        value
-                      }
-                    }
+                  raw
                 }
             }
         }
@@ -102,11 +98,7 @@ const pageQuery = `{
               description
             }
             primaryContent {
-                content {
-                  content {
-                    value
-                  }
-                }
+              raw
             }
             shortTitle
             slug
@@ -145,11 +137,7 @@ const pageQuery = `{
             slug
             shortTitle
             primaryContent {
-                content {
-                  content {
-                    value
-                  }
-                }
+              raw
             }
             title
           }
@@ -184,11 +172,7 @@ const pageQuery = `{
               }
             }
             primaryContent {
-                content {
-                  content {
-                    value
-                  }
-                }
+              raw
             }
             primaryEmail
             primaryPhone
@@ -213,11 +197,7 @@ const pageQuery = `{
               lead
             }
             primaryContent {
-                content {
-                  content {
-                    value
-                  }
-                }
+              raw
             }
             category {
                 title
@@ -234,11 +214,7 @@ const pageQuery = `{
               shortTitle
               offeringType
               primaryContent {
-                content {
-                  content {
-                    value
-                  }
-                }
+                raw
               }
               lead {
                 lead
@@ -270,11 +246,7 @@ const offeringQuery = `{
               lead
             }
             primaryContent {
-                content {
-                  content {
-                    value
-                  }
-                }
+              raw
             }
             category {
                 title
@@ -291,11 +263,7 @@ const offeringQuery = `{
               shortTitle
               offeringType
               primaryContent {
-                content {
-                  content {
-                    value
-                  }
-                }
+                raw
               }
               lead {
                 lead

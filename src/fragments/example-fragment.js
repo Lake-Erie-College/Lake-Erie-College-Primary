@@ -19,11 +19,11 @@ export const _ContentfulImage = graphql`
 
 export const _ContentfulImage100px = graphql`
   fragment ContentfulImage100px on ContentfulAsset {
+    title
     file {
       url
       fileName
     }
-    title
     description
     sizes(maxWidth: 100, quality: 75) {
       ...GatsbyContentfulSizes_withWebp
@@ -34,6 +34,7 @@ export const _ContentfulImage100px = graphql`
 export const _Asset = graphql`
 fragment Asset on ContentfulAsset {
     id
+    title
     svg {
       content
       dataURI
@@ -228,6 +229,7 @@ fragment BlockCarousel on ContentfulBlockCarousel {
     displayDots
     title
     relatedImages {
+        title
         description
         file {
             contentType
@@ -265,20 +267,21 @@ fragment BlockMediaWithCaption on ContentfulBlockMediaWithCaption {
     callToAction
     externalMediaUrl
     image {
-      file {
-        contentType
-        details {
-            image {
-                height
-                width
+        title
+        file {
+            contentType
+            details {
+                image {
+                    height
+                    width
+                }
             }
+            fileName
+            url
         }
-        fileName
-        url
-      }
-      fluid {
-          ...GatsbyContentfulFluid_withWebp
-      }
+        fluid {
+            ...GatsbyContentfulFluid_withWebp
+        }
     }
     internalLink {
       ...StandardPage
@@ -309,20 +312,21 @@ fragment BlockPersonListing on ContentfulBlockPersonListing {
       emailAddress
       firstName
       headshot {
-        file {
-            contentType
-            details {
-                image {
-                    height
-                    width
+            title
+            file {
+                contentType
+                details {
+                    image {
+                        height
+                        width
+                    }
                 }
+                fileName
+                url
             }
-            fileName
-            url
-        }
-        fluid {
-            ...GatsbyContentfulFluid_withWebp
-        }
+            fluid {
+                ...GatsbyContentfulFluid_withWebp
+            }
       }
       jobTitles {
         jobTitles
@@ -342,20 +346,21 @@ export const _BlockQuote = graphql`
 fragment BlockQuote on ContentfulBlockQuote {
     id
     associatedMedia {
-      file {
-        contentType
-        details {
-            image {
-                height
-                width
+        title
+        file {
+            contentType
+            details {
+                image {
+                    height
+                    width
+                }
             }
+            fileName
+            url
         }
-        fileName
-        url
-      }
-      fluid {
-          ...GatsbyContentfulFluid_withWebp
-      }
+        fluid {
+            ...GatsbyContentfulFluid_withWebp
+        }
     }
     displayType
     personName

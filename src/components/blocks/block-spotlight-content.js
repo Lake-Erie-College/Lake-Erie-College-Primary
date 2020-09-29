@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import cx from 'classnames'
-import { Link as GatsbyLink } from 'gatsby'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useSpring, animated, config } from 'react-spring' // https://www.react-spring.io/docs/hooks/basics
 import Image from 'gatsby-image'
@@ -11,11 +10,8 @@ import CallToAction from '../call-to-action'
 
 import styles from './block-spotlight-content.module.scss'
 
-const linkResolver = require('../../utils').linkResolver
 
 // Display Types - Navigation, Interstitial, Resource Links
-
-const locale = 'en-US'
 
 const typeClasses = {
     Navigation: 'navigation',
@@ -57,7 +53,10 @@ const Navigation = ({ props, className }) => {
         typeof props.secodnaryHeading !== 'undefined'
             ? props.secodnaryHeading
             : null
-    const summary = typeof props.summary !== 'undefined' && props.summary !== null ? props.summary.summary : null
+    const summary =
+        typeof props.summary !== 'undefined' && props.summary !== null
+            ? props.summary.summary
+            : null
 
     return (
         <nav className={className}>
@@ -115,7 +114,8 @@ const Navigation = ({ props, className }) => {
                         }
 
                         const icon =
-                            typeof node.pageIcon !== 'undefined' && node.pageIcon !== null
+                            typeof node.pageIcon !== 'undefined' &&
+                            node.pageIcon !== null
                                 ? node.pageIcon
                                       .toLowerCase()
                                       .split(' ')
@@ -123,18 +123,13 @@ const Navigation = ({ props, className }) => {
                                 : false
 
                         const [hover, toggleHover] = useState(false)
-                        const springProps = useSpring({
-                            transform: hover
-                                ? 'translate3d(1rem,0,0) rotate(15deg)'
-                                : 'translate3d(3rem,0,0) rotate(15deg)',
-                        })
 
                         return (
                             <li
                                 className={navClassName}
                                 onMouseEnter={() => toggleHover(true)}
                                 onMouseLeave={() => toggleHover(false)}
-                                key={fields.slug}
+                                key={`spotlight-navigation-${node.title}`}
                             >
                                 {icon && (
                                     <FontAwesomeIcon
@@ -185,19 +180,26 @@ const Navigation = ({ props, className }) => {
 
 const Interstitial = ({ props, className }) => {
     const hasRelatedPages =
-        typeof props.relatedPages !== 'undefined' &&
+        props.relatedPages !== null &&
         props.relatedPages.length > 0
     const primaryHeading =
-        typeof props.primaryHeading !== 'undefined' && props.primaryHeading !== null
+        props.primaryHeading !== null &&
+        props.primaryHeading !== null
             ? props.primaryHeading
             : null
     const secondaryHeading =
-        typeof props.secondaryHeading !== 'undefined' && props.secondaryHeading !== null
+        props.secondaryHeading !== null &&
+        props.secondaryHeading !== null
             ? props.secondaryHeading
             : null
-    const summary = typeof props.summary !== 'undefined' && props.summary !== null ? props.summary.summary : null
+    const summary =
+        props.summary !== null
+            ? props.summary.summary
+            : null
     const primaryImage =
-        typeof props.primaryImage !== 'undefined' && props.primaryImage !== null ? props.primaryImage : null
+        props.primaryImage !== null
+            ? props.primaryImage
+            : null
 
     return (
         <div className={className}>
@@ -285,20 +287,23 @@ const Interstitial = ({ props, className }) => {
 
 const Resources = ({ props, className }) => {
     const hasRelatedPages =
-        typeof props.relatedPages !== 'undefined' &&
+        props.relatedPages !== null &&
         props.relatedPages.length > 0
     const hasRelatedMedia =
-        typeof props.relatedMedia !== 'undefined' &&
+        props.relatedMedia !== null &&
         props.relatedMedia.length > 0
     const primaryHeading =
-        typeof props.primaryHeading !== 'undefined'
+        props.primaryHeading !== null
             ? props.primaryHeading
             : null
     const secondaryHeading =
-        typeof props.secondaryHeading !== 'undefined'
+        props.secondaryHeading !== null
             ? props.secondaryHeading
             : null
-    const summary = typeof props.summary !== 'undefined' && props.summary !== null ? props.summary.summary : null
+    const summary =
+        typeof props.summary !== 'undefined' && props.summary !== null
+            ? props.summary.summary
+            : null
     const primaryImage =
         typeof props.primaryImage !== 'undefined' ? props.primaryImage : null
 
@@ -317,36 +322,35 @@ const Resources = ({ props, className }) => {
             <ul className={styles.resourceLinks}>
                 {hasRelatedPages &&
                     props.relatedPages.map(fields => {
+
                         const name =
-                            typeof fields.displayTitle !== 'undefined'
+                            fields.displayTitle !== null
                                 ? fields.displayTitle
                                 : fields.title
                         const icon =
-                            typeof fields.pageIcon !== 'undefined'
+                            fields.pageIcon !== null
                                 ? fields.pageIcon
                                       .toLowerCase()
                                       .replace(' ', '-')
                                 : false
                         const internal =
-                            typeof fields.internalLink !== 'undefined'
+                            fields.internalLink !== null
                                 ? fields.internalLink
                                 : false
                         const internalMedia =
-                            typeof fields.internalMedia !== 'undefined'
+                            fields.internalMedia !== null
                                 ? fields.internalMedia
                                 : false
                         const external =
-                            typeof fields.externalUrl !== 'undefined'
+                            fields.externalUrl !== null
                                 ? fields.externalUrl
                                 : false
-                        const isEmbed =
-                            typeof fields.sourceUrl !== 'undefined' &&
-                            fields.sourceUrl !== null
+                        const isEmbed = fields.sourceUrl !== null
 
                         return (
                             <li
                                 className={styles.resourceLink}
-                                key={fields.slug}
+                                key={`spotlight-resource-link-${fields.title}`}
                             >
                                 {icon && (
                                     <FontAwesomeIcon
