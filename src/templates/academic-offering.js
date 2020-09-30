@@ -161,6 +161,9 @@ export const pageQuery = graphql`
                     shortTitle
                     slug
                 }
+                summary {
+                    summary
+                }
                 primaryContent {
                     raw
                     references {
