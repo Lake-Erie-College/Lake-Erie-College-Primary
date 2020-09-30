@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import cx from "classnames"
+import React from 'react'
 import { useStaticQuery, graphql } from "gatsby"
 import get from 'lodash/get'
 import RelatedOfferings from '../related-offerings'
