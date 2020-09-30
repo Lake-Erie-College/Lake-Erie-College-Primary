@@ -265,26 +265,11 @@ fragment BlockCarousel on ContentfulBlockCarousel {
     displayArrows
     displayDots
     title
+    relatedMedia {
+        ...BlockMediaWithCaption
+    }
     relatedImages {
-        title
-        description
-        file {
-            contentType
-            details {
-                image {
-                    height
-                    width
-                }
-            }
-            fileName
-            url
-        }
-        sizes(maxWidth: 1200, quality: 75) {
-            ...GatsbyContentfulSizes_withWebp
-        }
-        fluid {
-            ...GatsbyContentfulFluid_withWebp
-        }
+        ...Asset
     }
 }`
 
@@ -301,6 +286,7 @@ fragment BlockEventListing on ContentfulBlockEventListing {
 export const _BlockMediaWithCaption = graphql`
 fragment BlockMediaWithCaption on ContentfulBlockMediaWithCaption {
     id
+    title
     callToAction
     externalMediaUrl
     image {

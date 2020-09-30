@@ -31,7 +31,7 @@ const BlockMediaWithCaption = (
     const hasRelatedPage =
         ( typeof internalLink !== 'undefined' && internalLink !== null ) || isExteranl
     const primaryHeading = typeof heading !== 'undefined' ? heading : null
-    const summary = typeof caption !== 'undefined' && caption !== null ? caption.caption : null
+    const summary = typeof caption !== 'undefined' && caption !== null ? caption : null
     const primaryImage =
         typeof internalMedia !== 'undefined' ? internalMedia : null
 
