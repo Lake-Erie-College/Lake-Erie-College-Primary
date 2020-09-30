@@ -23,6 +23,9 @@ const BlockAcademicOfferingListing = ({ category, offeringType }, ...rest) => {
                             id
                             slug
                         }
+                        summary {
+                            summary
+                        }
                     }
                 }
             }

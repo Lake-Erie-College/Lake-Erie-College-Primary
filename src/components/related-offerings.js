@@ -62,6 +62,11 @@ const Offering = ({ offering }) => {
             ? offering.shortTitle
             : offering.title
 
+    const summary =
+        typeof offering.summary !== 'undefined' && offering.summary !== null
+            ? offering.summary.summary
+            : null
+
     return (
         <div className={styles.offering}>
             {isHidden && (
@@ -80,16 +85,22 @@ const Offering = ({ offering }) => {
                 />
             )}
 
-            {hasPrimaryContent && (
+            {!summary && hasPrimaryContent && (
                 <PrimaryContent
                     data={offering.primaryContent}
                     isFullWidth={true}
                 />
             )}
 
-            {!hasPrimaryContent && hasDescription && (
+            {!summary && !hasPrimaryContent && hasDescription && (
                 <p className={styles.courseSummary}>
                     {offering.description.description}
+                </p>
+            )}
+
+            {summary && (
+                <p className={styles.courseSummary}>
+                    {summary}
                 </p>
             )}
         </div>

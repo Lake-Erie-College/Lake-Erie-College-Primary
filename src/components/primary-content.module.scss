@@ -342,13 +342,16 @@
     margin-left: $spacing-md;
     margin-right: $spacing-md;
     grid-column: left-gutter / end;
-    white-space: pre-wrap;
 
     @include respond-to('small') {
         margin-left: 0;
         margin-right: 0;
         grid-column: main / right-main;
     }
+}
+
+p.textBlock {
+    white-space: pre-wrap;
 }
 
 .embeddedBlock {
