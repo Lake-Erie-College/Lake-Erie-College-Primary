@@ -289,9 +289,11 @@ const ExternalEmbed = ({ node }) => {
 
     return (
         <BlockExternalEmbed
+            displayTitle={content.displayTitle}
             url={content.sourceUrl}
             html={content.sourceHtml !== null ? content.sourceHtml.sourceHtml : null}
             blackbaud={content.blackbaudFormId}
+            simpleCheckout={content.simpleCheckoutPaymentId}
             externalScript={content.externalJavaScript}
         />
     )

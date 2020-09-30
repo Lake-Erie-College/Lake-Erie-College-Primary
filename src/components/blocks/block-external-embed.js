@@ -1,15 +1,30 @@
 import React, { useState, useCallback } from 'react'
 import * as typeformEmbed from '@typeform/embed' // https://www.npmjs.com/package/@typeform/embed
 import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import styles from './block-external-embed.module.scss'
 
-const BlockExternalEmbed = ({ url, html, popup, blackbaud, externalScript }) => {
+const BlockExternalEmbed = ({
+    displayTitle,
+    url,
+    html,
+    popup,
+    blackbaud,
+    simpleCheckout,
+    externalScript,
+}) => {
     const hasSource = typeof url !== 'undefined' && url !== null
     const hasHTML = typeof html !== 'undefined' && html !== null
     const isPopup = typeof popup !== 'undefined' && popup === true
     const isBlackbaud = typeof blackbaud !== 'undefined' && blackbaud !== null
+    const isSimpleCheckout =
+        typeof simpleCheckout !== 'undefined' && simpleCheckout !== null
     const isAcuity = hasSource && url.includes('app.acuityscheduling.com')
+    const callToAction =
+        typeof displayTitle !== 'undefined' && displayTitle !== null
+            ? displayTitle
+            : 'Submit'
 
     if (isBlackbaud) {
         if (typeof window !== 'undefined') {
@@ -34,6 +49,13 @@ const BlockExternalEmbed = ({ url, html, popup, blackbaud, externalScript }) => 
                 </HelmetProvider>
                 <div id={'bbox-root'} className={styles.embed}></div>
             </div>
+        )
+    } else if (isSimpleCheckout) {
+        return (
+            <SimpleCheckoutButton
+                uniqueId={simpleCheckout}
+                callToAction={callToAction}
+            />
         )
     } else if (isAcuity) {
         return (
@@ -61,12 +83,9 @@ const BlockExternalEmbed = ({ url, html, popup, blackbaud, externalScript }) => 
                 // openValue: 30,
                 // autoClose: 3,
                 hideScrollbars: true,
-                onSubmit: function() {
-                },
-                onReady: function() {
-                },
-                onClose: function() {
-                },
+                onSubmit: function() {},
+                onReady: function() {},
+                onClose: function() {},
             })
 
             popup.open()
@@ -76,10 +95,8 @@ const BlockExternalEmbed = ({ url, html, popup, blackbaud, externalScript }) => 
                     const embed = typeformEmbed.makeWidget(node, url, {
                         opacity: 0,
                         hideScrollbars: true,
-                        onSubmit: function() {
-                        },
-                        onReady: function() {
-                        },
+                        onSubmit: function() {},
+                        onReady: function() {},
                     })
                 }
             }, [])
@@ -89,7 +106,8 @@ const BlockExternalEmbed = ({ url, html, popup, blackbaud, externalScript }) => 
             return <iframe className={styles.contentEmbed} src={url} />
         }
     } else if (hasHTML) {
-        const hasScript = typeof externalScript !== 'undefined' && externalScript !== null
+        const hasScript =
+            typeof externalScript !== 'undefined' && externalScript !== null
         return (
             <div className={styles.contentEmbed}>
                 {hasScript && (
@@ -110,6 +128,33 @@ const BlockExternalEmbed = ({ url, html, popup, blackbaud, externalScript }) => 
     }
 }
 
+const SimpleCheckoutButton = ({ uniqueId, callToAction }) => {
+    return (
+        <form
+            action="https://Simplecheckout.authorize.net/payment/CatalogPayment.aspx"
+            method="post"
+            className={styles.container}
+        >
+            <input name="LinkId" type="hidden" value={uniqueId} />
+            <button type="submit" className={styles.button}>
+                <span>{callToAction}</span>
+                <span
+                    className={styles.button}
+                    onClick={() =>
+                        onSearchQueryChange(targetElement.current.value)
+                    }
+                >
+                    <FontAwesomeIcon
+                        className={styles.icon}
+                        icon="chevron-right"
+                        size="lg"
+                    />
+                </span>
+            </button>
+        </form>
+    )
+}
+
 const TypeFormPopup = url => {
     const hasSource = typeof url !== 'undefined' && url !== null
 
@@ -121,12 +166,9 @@ const TypeFormPopup = url => {
                 // openValue: 30,
                 // autoClose: 3,
                 hideScrollbars: true,
-                onSubmit: function() {
-                },
-                onReady: function() {
-                },
-                onClose: function() {
-                },
+                onSubmit: function() {},
+                onReady: function() {},
+                onClose: function() {},
             })
 
             popup.open()

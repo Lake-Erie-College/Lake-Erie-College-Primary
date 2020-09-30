@@ -41,8 +41,6 @@ class AcademicOfferingTemplate extends React.Component {
             ? `${page.category.title} ${facultyType}`
             : `${page.title} ${facultyType}`
 
-        console.log(page.showAllDepartmentFaculty, relatedPeople)
-
         return (
             <Layout location={this.props.location}>
                 <HelmetProvider>

@@ -218,6 +218,7 @@ fragment BlockExternalEmbed on ContentfulBlockExternalEmbed {
     }
     sourceUrl
     title
+    simpleCheckoutPaymentId
     externalJavaScript
 }`
 
