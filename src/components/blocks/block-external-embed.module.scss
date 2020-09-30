@@ -17,9 +17,19 @@
     display: grid;
     @include content-grid;
     grid-column: left-gutter / end;
+    margin: 0 auto $spacing-sm auto;
 
     .embed {
         height: auto;
+
+        @include respond-to('small') {
+            height: auto;
+            grid-column: left-main / right-gutter;
+        }
+    }
+
+    div {
+        margin: 0 auto;
 
         @include respond-to('small') {
             height: auto;

@@ -4,7 +4,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async'
 
 import styles from './block-external-embed.module.scss'
 
-const BlockExternalEmbed = ({ url, html, popup, blackbaud }) => {
+const BlockExternalEmbed = ({ url, html, popup, blackbaud, externalScript }) => {
     const hasSource = typeof url !== 'undefined' && url !== null
     const hasHTML = typeof html !== 'undefined' && html !== null
     const isPopup = typeof popup !== 'undefined' && popup === true
@@ -12,8 +12,6 @@ const BlockExternalEmbed = ({ url, html, popup, blackbaud }) => {
     const isAcuity = hasSource && url.includes('app.acuityscheduling.com')
 
     if (isBlackbaud) {
-        console.log('Blackbaud', blackbaud)
-
         if (typeof window !== 'undefined') {
             if (typeof bbox !== 'undefined') {
                 bbox.showForm(blackbaud)
@@ -48,7 +46,11 @@ const BlockExternalEmbed = ({ url, html, popup, blackbaud }) => {
                         />
                     </Helmet>
                 </HelmetProvider>
-                <iframe className={styles.embed} src={url} width='100%'></iframe>
+                <iframe
+                    className={styles.embed}
+                    src={url}
+                    width="100%"
+                ></iframe>
             </div>
         )
     } else if (hasSource) {
@@ -60,13 +62,10 @@ const BlockExternalEmbed = ({ url, html, popup, blackbaud }) => {
                 // autoClose: 3,
                 hideScrollbars: true,
                 onSubmit: function() {
-                    // console.log('Typeform successfully submitted')
                 },
                 onReady: function() {
-                    // console.log('Typeform is ready')
                 },
                 onClose: function() {
-                    // console.log('Typeform is closed')
                 },
             })
 
@@ -78,10 +77,8 @@ const BlockExternalEmbed = ({ url, html, popup, blackbaud }) => {
                         opacity: 0,
                         hideScrollbars: true,
                         onSubmit: function() {
-                            // console.log('Typeform successfully submitted')
                         },
                         onReady: function() {
-                            // console.log('Typeform is ready')
                         },
                     })
                 }
@@ -92,11 +89,21 @@ const BlockExternalEmbed = ({ url, html, popup, blackbaud }) => {
             return <iframe className={styles.contentEmbed} src={url} />
         }
     } else if (hasHTML) {
+        const hasScript = typeof externalScript !== 'undefined' && externalScript !== null
         return (
-            <div
-                className={styles.contentEmbed}
-                dangerouslySetInnerHTML={{ __html: html }}
-            ></div>
+            <div className={styles.contentEmbed}>
+                {hasScript && (
+                    <HelmetProvider>
+                        <Helmet>
+                            <script
+                                src={externalScript}
+                                type="text/javascript"
+                            />
+                        </Helmet>
+                    </HelmetProvider>
+                )}
+                <div dangerouslySetInnerHTML={{ __html: html }}></div>
+            </div>
         )
     } else {
         return <span></span>
@@ -115,13 +122,10 @@ const TypeFormPopup = url => {
                 // autoClose: 3,
                 hideScrollbars: true,
                 onSubmit: function() {
-                    // console.log('Typeform successfully submitted')
                 },
                 onReady: function() {
-                    // console.log('Typeform is ready')
                 },
                 onClose: function() {
-                    // console.log('Typeform is closed')
                 },
             })
 

@@ -232,9 +232,6 @@ const Placeholder = ({ value }) => {
 }
 
 function EmbeddedEntry({ node }) {
-    console.log('Embedded Entry', node)
-    console.log(node.data.target.__typename)
-
     const type =
         typeof node.data.target.sys.contentType === 'undefined'
             ? node.data.target.__typename
@@ -293,8 +290,9 @@ const ExternalEmbed = ({ node }) => {
     return (
         <BlockExternalEmbed
             url={content.sourceUrl}
-            html={content.sourceHtml}
+            html={content.sourceHtml !== null ? content.sourceHtml.sourceHtml : null}
             blackbaud={content.blackbaudFormId}
+            externalScript={content.externalJavaScript}
         />
     )
 }
@@ -339,7 +337,6 @@ const SearchResults = ({ node }) => {
 }
 
 const SpotlightContent = ({ node }) => {
-    console.log('Spotlight Content', node)
     const content = localeScrubber.scrub(node)
 
     return <BlockSpotlightContent node={content} />

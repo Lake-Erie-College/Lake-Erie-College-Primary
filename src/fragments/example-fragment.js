@@ -218,6 +218,7 @@ fragment BlockExternalEmbed on ContentfulBlockExternalEmbed {
     }
     sourceUrl
     title
+    externalJavaScript
 }`
 
 export const _BlockSpotlightContent = graphql`
