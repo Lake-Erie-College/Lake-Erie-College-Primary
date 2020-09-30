@@ -305,7 +305,7 @@ const MediaWithCaption = ({ node }) => {
             internalMedia={content.image}
             externalMedia={content.externalMediaUrl}
             heading={content.mediaHeading}
-            caption={content.mediaCaption.mediaCaption}
+            caption={content.mediaCaption !== null ? content.mediaCaption.mediaCaption : null}
             internalLink={content.internaLink}
             callToAction={content.callToAction}
         />
