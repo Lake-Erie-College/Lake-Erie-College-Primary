@@ -85,7 +85,7 @@ const options = {
                 <TextLink
                     className={styles.link}
                     children={children}
-                    node={node.data.target.fields}
+                    node={node.data.target}
                     activeClassName="active"
                 />
             )
@@ -305,7 +305,7 @@ const MediaWithCaption = ({ node }) => {
             internalMedia={content.image}
             externalMedia={content.externalMediaUrl}
             heading={content.mediaHeading}
-            caption={content.mediaCaption}
+            caption={content.mediaCaption.mediaCaption}
             internalLink={content.internaLink}
             callToAction={content.callToAction}
         />

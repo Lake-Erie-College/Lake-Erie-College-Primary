@@ -340,10 +340,14 @@ const Resources = ({ props, className }) => {
                                 ? fields.internalMedia
                                 : false
                         const external =
-                            fields.externalUrl !== null
+                            fields.externalUrl !== null & fields.externalUrl !== ''
                                 ? fields.externalUrl
                                 : false
-                        const isEmbed = fields.sourceUrl !== null
+                        const isEmbed = typeof fields.sourceUrl !== 'undefined' && fields.sourceUrl !== null
+
+                        if (!isEmbed && !external && !internal && !internalMedia) {
+                            return <span></span>
+                        }
 
                         return (
                             <li
