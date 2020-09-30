@@ -14,7 +14,7 @@ class StandardPageTemplate extends React.Component {
     render() {
         const page = get(this.props, 'data.contentfulStandardPage')
         const siteTitle = get(this.props, 'data.site.siteMetadata.title')
-        const hasLeadImage = page.leadImage !== null
+        const hasLeadImage = typeof page.leadImage !== 'undefined' && page.leadImage !== null
 
         return (
             <Layout location={this.props.location}>

@@ -1,0 +1,155 @@
+@import '../styles/typography';
+@import '../styles/breakpoint';
+@import '../styles/colors';
+@import '../styles/spacing';
+@import '../styles/grids';
+
+.location {
+    display: grid;
+    @include content-grid;
+    margin: $spacing-md 0;
+
+    @include respond-to('small') {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    color: $color-text-02;
+}
+
+.locationInfo {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: 0 $spacing-md;
+    grid-column: left-gutter / end;
+
+    border-width: 1px;
+    border-style: solid;
+    border-color: $color-brand-01;
+    border-radius: 4px;
+    overflow: hidden;
+
+    @include respond-to('small') {
+        grid-template-columns: 2fr 3fr;
+        margin-left: 0;
+        margin-right: 0;
+        grid-column: main / right-main;
+    }
+}
+
+.image {
+    position: relative;
+}
+
+.details {
+    padding: $spacing-md;
+
+    &:first-child {
+        /* Handles lack of person headshot */
+        grid-column: 1 / span 2;
+    }
+}
+
+.name {
+    margin: 0;
+    grid-column: left-gutter / end;
+    @include font-family-headings;
+    font-weight: 400;
+    @include line-height('heading');
+    @include font-smoothing;
+    @include letter-spacing;
+    @include typescale('h4');
+
+    a:link,
+    a:visited {
+        color: currentColor;
+    }
+
+    a:hover,
+    a:active {
+        color: $color-hover-secondary;
+    }
+
+    .internal {
+        text-decoration: none;
+
+        .icon {
+            margin-left: $spacing-xs;
+        }
+    }
+}
+
+.summary {
+    margin-bottom: $spacing-sm;
+    @include font-family;
+    @include line-height('body');
+    @include typescale('body1');
+}
+
+.info {
+    margin-bottom: $spacing-2xs;
+    
+    a:link,
+    a:visited {
+        color: currentColor;
+    }
+
+    a:hover,
+    a:active {
+        color: $color-hover-secondary;
+    }
+
+    .icon {
+        margin-right: $spacing-xs;
+    }
+
+    .external {
+        @include font-weight-body-bold;
+    }
+
+    .internal {
+        @include font-weight-body;
+        text-decoration: none;
+
+        .icon {
+            margin-left: $spacing-xs;
+        }
+    }
+}
+
+.department {
+    margin-top: $spacing-md;
+    @include font-family-headings;
+    font-weight: 400;
+    @include line-height('heading');
+    @include font-smoothing;
+    @include letter-spacing;
+    @include typescale('h5');
+}
+
+.building {
+    @include font-weight-body;
+}
+
+.overline {
+    display: block;
+    grid-column: left-gutter / end;
+
+    @include font-family;
+    font-weight: 400;
+    @include line-height('body');
+    @include letter-spacing-wide;
+    @include typescale('overline');
+
+    text-transform: uppercase;
+    color: $color-brand-01;
+
+    @include respond-to('small') {
+        grid-column: left-main / right-gutter;
+    }
+
+    &:after {
+        content: '\A';
+        white-space: pre;
+    }
+}

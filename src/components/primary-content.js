@@ -15,6 +15,7 @@ import BlockSearchResults from './blocks/block-search-results'
 import BlockSpotlightContent from './blocks/block-spotlight-content'
 import ContactPerson from './contact-person'
 import Divider from './divider'
+import LocationEmbed from './location'
 import TabularContent from './tabular-content'
 import TextLink from './text-link'
 
@@ -203,6 +204,7 @@ const blocksHandlers = {
     ContentfulBlockSearchResults: value => <SearchResults node={value} />,
     ContentfulBlockSpotlightContent: value => <SpotlightContent node={value} />,
     ContentfulPerson: value => <Person node={value} />,
+    ContentfulLocation: value => <Location node={value} />,
     default: value => <Placeholder value={value} />,
 }
 
@@ -295,6 +297,10 @@ const ExternalEmbed = ({ node }) => {
             blackbaud={content.blackbaudFormId}
         />
     )
+}
+const Location = ({ node }) => {
+    const summary = typeof node.summary !== 'undefined' && node.summary !== null ? node.summary.summary : null
+    return <LocationEmbed name={node.title} photo={node.photo} summary={summary} slug={node.slug} category={node.category} />
 }
 
 const MediaWithCaption = ({ node }) => {

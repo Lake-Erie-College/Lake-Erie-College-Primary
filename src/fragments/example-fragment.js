@@ -154,6 +154,11 @@ fragment Person on ContentfulPerson {
 export const _Location = graphql`
 fragment Location on ContentfulLocation {
     id
+    title
+    shortTitle
+    summary {
+        summary
+    }
     category {
         category {
             slug
@@ -161,6 +166,9 @@ fragment Location on ContentfulLocation {
         slug
     }
     slug
+    photo {
+        ...Asset
+    }
 }
 `
 
