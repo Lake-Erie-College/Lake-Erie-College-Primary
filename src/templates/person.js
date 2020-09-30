@@ -77,10 +77,7 @@ export const pageQuery = graphql`
       }
       id
       headshot {
-        title
-        file {
-          url
-        }
+        ...Asset
       }
       firstName
       emailAddress

@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
 import cx from 'classnames'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useSpring, animated, config } from 'react-spring' // https://www.react-spring.io/docs/hooks/basics
 import Image from 'gatsby-image'
-import useContentfulImage from '../../hooks/useContentfulImage'
 
 import TextLink from '../text-link'
 import CallToAction from '../call-to-action'
@@ -431,13 +429,12 @@ const Summary = ({ summary }) => {
 }
 
 const PrimaryImage = ({ image }) => {
-    const contentfulImage = useContentfulImage(image.file.url)
     return (
         <Image
             className={styles.image}
             title={image.title}
-            fluid={contentfulImage.fluid}
-            svg={contentfulImage.svg}
+            fluid={image.fluid}
+            svg={image.svg}
         />
     )
 }

@@ -4,7 +4,6 @@ import { renderRichText } from 'gatsby-source-contentful/rich-text'
 import { Link as GatsbyLink } from 'gatsby'
 import cx from 'classnames'
 import get from 'lodash/get'
-import useContentfulImage from '../hooks/useContentfulImage'
 import ImageWithSVGSupport from './image-with-svg-support'
 import BlockAcademicOfferingListing from './blocks/block-academic-offering-listing'
 import BlockCarousel from './blocks/block-carousel'
@@ -137,9 +136,7 @@ const options = {
 
             switch (mimeGroup) {
                 case 'image':
-                    const contentfulImage = useContentfulImage(
-                        content.data.target.file.url
-                    )
+                    const contentfulImage = content.data.target
 
                     const width = contentfulImage.file.details.image.width
                     const height = contentfulImage.file.details.image.height
