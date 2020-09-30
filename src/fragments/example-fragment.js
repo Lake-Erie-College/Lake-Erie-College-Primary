@@ -191,6 +191,9 @@ fragment NavigationItem on ContentfulNavigationItem {
       ...StandardPage
     }
     externalUrl
+    internalMedia {
+        ...Asset
+    }
     displayTitle
     pageIcon
     newWindow

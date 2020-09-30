@@ -36,7 +36,7 @@
 
     @include respond-to('small') {
         padding: 0 $spacing-md;
-        top: 80%;
+        top: 83%;
     }
     
     @include respond-to('large') {

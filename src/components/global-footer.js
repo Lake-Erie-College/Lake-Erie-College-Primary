@@ -97,13 +97,19 @@ const GlobalFooter = () => {
         const name = link.displayTitle ? link.displayTitle : link.title
         const isExternal =
             typeof link.externalUrl !== 'undefined' && link.externalUrl !== null
+        const isEmbed =
+            typeof link.sourceUrl !== 'undefined' &&
+            link.sourceUrl !== null
 
         return (
             <li key={link.id}>
                 {isExternal && (
                     <CallToAction name={name} url={link.externalUrl} />
                 )}
-                {!isExternal && (
+                {isEmbed && (
+                    <CallToAction name={name} formUrl={link.sourceUrl} />
+                )}
+                {!isExternal && !isEmbed && (
                     <CallToAction name={name} node={link.internalLink} />
                 )}
             </li>
@@ -112,17 +118,19 @@ const GlobalFooter = () => {
 
     const NavigationItem = ({ link, className }) => {
         const isExternal =
-            typeof link.externalUrl !== 'undefined' || link.externalUrl !== null
+            typeof link.externalUrl !== 'undefined' && link.externalUrl !== null
         const name = link.displayTitle ? link.displayTitle : link.title
         const url = link.externalUrl
         const node = link.internalLink
+        const media = link.internalMedia
 
         const to = !url ? linkResolver.path(node) : url
 
         return (
             <li key={link.id} className={styles.footerResourceLink}>
                 {isExternal && <TextLink children={name} uri={to} />}
-                {!isExternal && <TextLink children={name} node={to} />}
+                {!isExternal && node && <TextLink children={name} node={to} />}
+                {!isExternal && node === null && media && <TextLink children={name} uri={media.file.url} />}
             </li>
         )
     }
