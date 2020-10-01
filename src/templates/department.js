@@ -1,8 +1,7 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { Helmet, HelmetProvider } from "react-helmet-async"
+import { Helmet } from "react-helmet-async"
 import get from 'lodash/get'
-import Img from 'gatsby-image'
 import Layout from '../components/layout'
 import LeadImage from '../components/lead-image'
 import PageLead from '../components/page-lead'
@@ -17,11 +16,9 @@ class DepartmentTemplate extends React.Component {
 
     return (
       <Layout location={this.props.location} >
-        <HelmetProvider>
-            <Helmet>
-              <title>{`${page.title} | ${siteTitle}`}</title>
-            </Helmet>
-        </HelmetProvider>
+        <Helmet>
+            <title>{`${page.title} | ${siteTitle}`}</title>
+        </Helmet>
           <main>
             { hasLeadImage && (
               <LeadImage title={page.leadImage.title} fluid={page.leadImage.fluid} file={page.leadImage.file} />

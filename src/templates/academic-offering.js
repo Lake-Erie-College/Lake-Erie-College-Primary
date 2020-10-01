@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { Helmet } from 'react-helmet-async'
 import get from 'lodash/get'
 import sortBy from 'lodash/sortBy'
 import Layout from '../components/layout'
@@ -43,11 +43,9 @@ class AcademicOfferingTemplate extends React.Component {
 
         return (
             <Layout location={this.props.location}>
-                <HelmetProvider>
-                    <Helmet>
-                        <title>{`${page.title} | ${siteTitle}`}</title>
-                    </Helmet>
-                </HelmetProvider>
+                <Helmet>
+                    <title>{`${page.title} | ${siteTitle}`}</title>
+                </Helmet>
                 <main>
                     <PageHeading
                         primary={page.title}

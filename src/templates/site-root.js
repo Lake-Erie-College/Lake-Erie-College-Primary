@@ -1,8 +1,7 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { Helmet } from 'react-helmet-async'
 import get from 'lodash/get'
-import Img from 'gatsby-image'
 import Layout from '../components/layout'
 import PrimaryContent from '../components/primary-content'
 import RelatedEvents from '../components/related-events'
@@ -17,11 +16,9 @@ class SiteRootTemplate extends React.Component {
 
         return (
             <Layout location={this.props.location}>
-                <HelmetProvider>
-                    <Helmet>
-                        <title>{`${page.title} | ${siteTitle}`}</title>
-                    </Helmet>
-                </HelmetProvider>
+                <Helmet>
+                    <title>{`${page.title} | ${siteTitle}`}</title>
+                </Helmet>
                 <main>
                     <Carousel content={page.heroCarousel} displayDots={true} />
                     <PrimaryContent data={page.primaryContent} />

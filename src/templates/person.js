@@ -1,8 +1,7 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { Helmet, HelmetProvider } from "react-helmet-async"
+import { Helmet } from "react-helmet-async"
 import get from 'lodash/get'
-import Img from 'gatsby-image'
 import Layout from '../components/layout'
 import PrimaryContent from '../components/primary-content'
 import PageHeading from '../components/page-heading'
@@ -18,11 +17,9 @@ class PersonTemplate extends React.Component {
 
     return (
       <Layout location={this.props.location} >
-        <HelmetProvider>
-            <Helmet>
-              <title>{`${page.title} | ${siteTitle}`}</title>
-            </Helmet>
-        </HelmetProvider>
+        <Helmet>
+            <title>{`${page.title} | ${siteTitle}`}</title>
+        </Helmet>
         <main>
           <PageHeading primary={fullName} secondary={page.personType} />
           <ContactPerson person={page} displayName={false} />

@@ -228,7 +228,7 @@ const Container = ({ data, isFullWidth }) => {
 }
 
 const Placeholder = ({ value }) => {
-    return <p>Placeholder Block</p>
+    return <div></div>
 }
 
 function EmbeddedEntry({ node }) {

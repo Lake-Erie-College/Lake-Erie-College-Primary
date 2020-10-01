@@ -67,8 +67,6 @@ const Offering = ({ offering }) => {
             ? offering.summary.summary
             : null
 
-    console.log(offering)
-
     return (
         <div className={styles.offering}>
             {isHidden && (
