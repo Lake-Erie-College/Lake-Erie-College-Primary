@@ -92,7 +92,10 @@ const Navigation = ({ props, className }) => {
                             typeof node.displayTitle !== 'undefined'
                                 ? node.displayTitle
                                 : node.title
-
+                        const isInternalMedia =
+                            node.internalMedia !== null
+                                ? node.internalMedia
+                                : false
                         const isExternal =
                             typeof node.externalUrl !== 'undefined' &&
                             node.externalUrl !== null
@@ -109,6 +112,8 @@ const Navigation = ({ props, className }) => {
                             fields = node.externalUrl
                         } else if (isEmbed) {
                             fields = node.sourceUrl
+                        } else if (isInternalMedia) {
+                            fields = node.internalMedia
                         }
 
                         const icon =
@@ -153,10 +158,18 @@ const Navigation = ({ props, className }) => {
                                     />
                                 )}
 
-                                {!isEmbed && (
+                                {!isEmbed && !isInternalMedia && (
                                     <CallToAction
                                         name={name}
                                         node={fields}
+                                        isHovered={hover}
+                                    />
+                                )}
+
+                                {!isEmbed && isInternalMedia && (
+                                    <CallToAction
+                                        name={name}
+                                        url={fields.file.url}
                                         isHovered={hover}
                                     />
                                 )}
@@ -236,6 +249,10 @@ const Interstitial = ({ props, className }) => {
                                 const isEmbed =
                                     typeof node.sourceUrl !== 'undefined' &&
                                     node.sourceUrl !== null
+                                const isInternalMedia =
+                                    node.internalMedia !== null
+                                        ? node.internalMedia
+                                        : false
 
                                 if (
                                     typeof node.internalLink !== 'undefined' &&
@@ -246,6 +263,8 @@ const Interstitial = ({ props, className }) => {
                                     fields = node.externalUrl
                                 } else if (isEmbed) {
                                     fields = node.sourceUrl
+                                } else if (isInternalMedia) {
+                                    fields = node.internalMedia
                                 }
 
                                 return (
@@ -253,7 +272,7 @@ const Interstitial = ({ props, className }) => {
                                         className={styles.interstitialLink}
                                         key={`spotlight-interstitial-cta-${node.title}`}
                                     >
-                                        {!isEmbed && !isExternal && (
+                                        {!isEmbed && !isExternal && !isInternalMedia && (
                                             <CallToAction
                                                 name={name}
                                                 node={fields}
@@ -264,6 +283,13 @@ const Interstitial = ({ props, className }) => {
                                             <CallToAction
                                                 name={name}
                                                 url={fields}
+                                            />
+                                        )}
+
+                                        {!isEmbed && isInternalMedia && (
+                                            <CallToAction
+                                                name={name}
+                                                url={fields.file.url}
                                             />
                                         )}
 
