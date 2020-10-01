@@ -89,7 +89,7 @@ const NavigationPrimary = () => {
 
     const NavigationLink = ({ level, link, hasPopup, isExpanded, tabIndex }) => {
         const isExternal =
-            typeof link.externalURL !== 'undefined' && link.externalURL !== null
+            typeof link.externalUrl !== 'undefined' && link.externalUrl !== null
 
         if (
             !isExternal &&
@@ -112,7 +112,7 @@ const NavigationPrimary = () => {
 
         const to = !isExternal
             ? linkResolver.path(link.internalLink)
-            : link.externalURL
+            : link.externalUrl
 
         if (isExternal) {
             return (
