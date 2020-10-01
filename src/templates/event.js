@@ -7,19 +7,17 @@ import PageDate from '../components/page-date'
 import PageHeading from '../components/page-heading'
 import PrimaryContent from '../components/primary-content'
 import LeadImage from '../components/lead-image'
+import SEO from '../components/seo'
 
 class EventTemplate extends React.Component {
     render() {
         const page = get(this.props, 'data.contentfulEvent')
-        const siteTitle = get(this.props, 'data.site.siteMetadata.title')
         const hasLeadImage =
             typeof page.leadImage !== 'undefined' && page.leadImage !== null
 
         return (
             <Layout location={this.props.location}>
-                <Helmet>
-                    <title>{`${page.title} | ${siteTitle}`}</title>
-                </Helmet>
+                <SEO title={page.title} description={page.description} />
                 <main>
                     {hasLeadImage && (
                         <LeadImage
@@ -74,29 +72,29 @@ export const pageQuery = graphql`
             startDateAndTime
             endDateAndTime
             primaryContent {
-              raw
-              references {
-                  # contentful_id is required to resolve the references
-                  contentful_id
-                  ...AcademicOffering
-                  ...Asset
-                  ...Department
-                  ...Event
-                  ...Homepage
-                  ...Location
-                  ...Person
-                  ...NavigationItem
-                  ...StandardPage
-                  ...BlockAcademicOfferingListing
-                  ...BlockCarousel
-                  ...BlockEventListing
-                  ...BlockExternalEmbed
-                  ...BlockMediaWithCaption
-                  ...BlockPersonListing
-                  ...BlockQuote
-                  ...BlockSearchResults
-                  ...BlockSpotlightContent
-              }
+                raw
+                references {
+                    # contentful_id is required to resolve the references
+                    contentful_id
+                    ...AcademicOffering
+                    ...Asset
+                    ...Department
+                    ...Event
+                    ...Homepage
+                    ...Location
+                    ...Person
+                    ...NavigationItem
+                    ...StandardPage
+                    ...BlockAcademicOfferingListing
+                    ...BlockCarousel
+                    ...BlockEventListing
+                    ...BlockExternalEmbed
+                    ...BlockMediaWithCaption
+                    ...BlockPersonListing
+                    ...BlockQuote
+                    ...BlockSearchResults
+                    ...BlockSpotlightContent
+                }
             }
             mapLocation {
                 lat

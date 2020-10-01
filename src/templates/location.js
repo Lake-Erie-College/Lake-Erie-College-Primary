@@ -6,18 +6,19 @@ import Layout from '../components/layout'
 import LocationEmbed from '../components/location'
 import PrimaryContent from '../components/primary-content'
 import PageHeading from '../components/page-heading'
+import SEO from '../components/seo'
 
 class LocationTemplate extends React.Component {
     render() {
         const page = get(this.props, 'data.contentfulLocation')
-        const siteTitle = get(this.props, 'data.site.siteMetadata.title')
-        const summary = typeof page.summary !== 'undefined' && page.summary !== null ? page.summary.summary : null
+        const summary =
+            typeof page.summary !== 'undefined' && page.summary !== null
+                ? page.summary.summary
+                : null
 
         return (
             <Layout location={this.props.location}>
-                <Helmet>
-                    <title>{`${page.title} | ${siteTitle}`}</title>
-                </Helmet>
+                <SEO title={page.title} description={page.description} />
                 <main>
                     <PageHeading
                         primary={page.title}

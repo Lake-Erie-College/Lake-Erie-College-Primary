@@ -8,17 +8,15 @@ import RelatedEvents from '../components/related-events'
 import RelatedNews from '../components/related-news'
 import RelatedContent from '../components/related-content'
 import Carousel from '../components/carousel'
+import SEO from '../components/seo'
 
 class SiteRootTemplate extends React.Component {
     render() {
         const page = get(this.props, 'data.contentfulHomepage')
-        const siteTitle = get(this.props, 'data.site.siteMetadata.title')
 
         return (
             <Layout location={this.props.location}>
-                <Helmet>
-                    <title>{`${page.title} | ${siteTitle}`}</title>
-                </Helmet>
+                <SEO title={page.title} description={page.description} />
                 <main>
                     <Carousel content={page.heroCarousel} displayDots={true} />
                     <PrimaryContent data={page.primaryContent} />

@@ -11,6 +11,7 @@ import Divider from '../components/divider'
 import ContactPerson from '../components/contact-person'
 import RelatedOfferings from '../components/related-offerings'
 import BlockPersonListing from '../components/blocks/block-person-listing'
+import SEO from '../components/seo'
 
 class AcademicOfferingTemplate extends React.Component {
     render() {
@@ -21,8 +22,8 @@ class AcademicOfferingTemplate extends React.Component {
 
         const facultyType = 'Faculty'
 
-        const FilterPeople = (person) => {
-            return (person.personType == facultyType);
+        const FilterPeople = person => {
+            return person.personType == facultyType
         }
 
         const SortByLastName = person => {
@@ -32,20 +33,21 @@ class AcademicOfferingTemplate extends React.Component {
         const relatedPeople =
             typeof page.showAllDepartmentFaculty !== 'undefined' &&
             page.showAllDepartmentFaculty
-                ? sortBy(page.category.person.filter(FilterPeople), SortByLastName)
+                ? sortBy(
+                      page.category.person.filter(FilterPeople),
+                      SortByLastName
+                  )
                 : page.relatedFaculty
 
         const relatedPeopleHeading =
             typeof page.showAllDepartmentFaculty !== 'undefined' &&
             page.showAllDepartmentFaculty
-            ? `${page.category.title} ${facultyType}`
-            : `${page.title} ${facultyType}`
+                ? `${page.category.title} ${facultyType}`
+                : `${page.title} ${facultyType}`
 
         return (
             <Layout location={this.props.location}>
-                <Helmet>
-                    <title>{`${page.title} | ${siteTitle}`}</title>
-                </Helmet>
+                <SEO title={page.title} description={page.description} />
                 <main>
                     <PageHeading
                         primary={page.title}
