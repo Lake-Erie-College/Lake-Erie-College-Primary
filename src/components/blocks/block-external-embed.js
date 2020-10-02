@@ -39,14 +39,12 @@ const BlockExternalEmbed = ({
 
         return (
             <div className={styles.contentEmbed}>
-                <HelmetProvider>
-                    <Helmet>
-                        <script
-                            src="https://bbox.blackbaudhosting.com/webforms/bbox-min.js"
-                            type="text/javascript"
-                        />
-                    </Helmet>
-                </HelmetProvider>
+                <Helmet>
+                    <script
+                        src="https://bbox.blackbaudhosting.com/webforms/bbox-min.js"
+                        type="text/javascript"
+                    />
+                </Helmet>
                 <div id={'bbox-root'} className={styles.embed}></div>
             </div>
         )
@@ -60,14 +58,12 @@ const BlockExternalEmbed = ({
     } else if (isAcuity) {
         return (
             <div className={styles.contentEmbed}>
-                <HelmetProvider>
-                    <Helmet>
-                        <script
-                            src="https://embed.acuityscheduling.com/js/embed.js"
-                            type="text/javascript"
-                        />
-                    </Helmet>
-                </HelmetProvider>
+                <Helmet>
+                    <script
+                        src="https://embed.acuityscheduling.com/js/embed.js"
+                        type="text/javascript"
+                    />
+                </Helmet>
                 <iframe
                     className={styles.embed}
                     src={url}
@@ -111,14 +107,9 @@ const BlockExternalEmbed = ({
         return (
             <div className={styles.contentEmbed}>
                 {hasScript && (
-                    <HelmetProvider>
-                        <Helmet>
-                            <script
-                                src={externalScript}
-                                type="text/javascript"
-                            />
-                        </Helmet>
-                    </HelmetProvider>
+                    <Helmet>
+                        <script src={externalScript} type="text/javascript" />
+                    </Helmet>
                 )}
                 <div dangerouslySetInnerHTML={{ __html: html }}></div>
             </div>
