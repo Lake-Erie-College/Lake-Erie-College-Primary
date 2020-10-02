@@ -99,9 +99,10 @@
 
 .map {
     grid-column: left-gutter / end;
-    padding: $spacing-md;
+    padding: $spacing-md $spacing-2xl;
 
     @include respond-to('small') {
+        padding: $spacing-md;
         grid-column: left-gutter / main;
     }
 
@@ -131,9 +132,10 @@
 
 .logo {
     grid-column: left-gutter / end;
-    padding: $spacing-md;
+    padding: $spacing-md $spacing-2xl;
 
     @include respond-to('small') {
+        padding: $spacing-md;
         grid-column: right-main / end;
     }
 
