@@ -57,19 +57,21 @@ const BlockExternalEmbed = ({
         )
     } else if (isAcuity) {
         return (
+            <>
             <div className={styles.contentEmbed}>
-                <Helmet>
-                    <script
-                        src="https://embed.acuityscheduling.com/js/embed.js"
-                        type="text/javascript"
-                    />
-                </Helmet>
                 <iframe
                     className={styles.embed}
                     src={url}
                     width="100%"
                 ></iframe>
             </div>
+            <Helmet>
+                <script
+                    src="https://embed.acuityscheduling.com/js/embed.js"
+                    type="text/javascript"
+                />
+            </Helmet>
+            </>
         )
     } else if (hasSource) {
         if (url.includes('typeform.com/to/') && isPopup) {
