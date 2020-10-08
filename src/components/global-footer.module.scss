@@ -12,8 +12,8 @@
 
     margin: 1rem 0 0 0;
 
-    background-color: #D1E4F2;
-    color: #16405B;
+    background-color: transparentize($palette-link-water, .5);
+    color: $color-ui-05;
 
     @include respond-to('small') {
         grid-template-columns: [left-gutter] 1fr [left-main] 2fr [main] 6fr [right-main] 2fr [right-gutter] 1fr;
@@ -21,12 +21,12 @@
 
     a:link,
     a:visited {
-        color: $color-text-02;
+        color: $color-ui-05;
     }
 
     a:hover,
     a:active {
-        color: $color-text-02;
+        color: $color-ui-05;
     }
 }
 

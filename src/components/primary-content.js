@@ -11,6 +11,7 @@ import BlockEventListing from './blocks/block-event-listing'
 import BlockExternalEmbed from './blocks/block-external-embed'
 import BlockMediaWithCaption from './blocks/block-media-with-caption'
 import BlockPersonListing from './blocks/block-person-listing'
+import BlockQuote from './blocks/block-quote'
 import BlockSearchResults from './blocks/block-search-results'
 import BlockSpotlightContent from './blocks/block-spotlight-content'
 import ContactPerson from './contact-person'
@@ -200,7 +201,7 @@ const blocksHandlers = {
     ContentfulBlockExternalEmbed: value => <ExternalEmbed node={value} />,
     ContentfulBlockMediaWithCaption: value => <MediaWithCaption node={value} />,
     ContentfulBlockPersonListing: value => <PersonListing node={value} />,
-    ContentfulBlockQuote: value => <Placeholder value={value} />,
+    ContentfulBlockQuote: value => <Quote node={value} />,
     ContentfulBlockSearchResults: value => <SearchResults node={value} />,
     ContentfulBlockSpotlightContent: value => <SpotlightContent node={value} />,
     ContentfulPerson: value => <Person node={value} />,
@@ -209,8 +210,7 @@ const blocksHandlers = {
 }
 
 const Container = ({ data, isFullWidth }) => {
-    const hasJSON =
-        data !== null && typeof data !== 'undefined'
+    const hasJSON = data !== null && typeof data !== 'undefined'
 
     if (!hasJSON) {
         return null
@@ -291,7 +291,11 @@ const ExternalEmbed = ({ node }) => {
         <BlockExternalEmbed
             displayTitle={content.displayTitle}
             url={content.sourceUrl}
-            html={content.sourceHtml !== null ? content.sourceHtml.sourceHtml : null}
+            html={
+                content.sourceHtml !== null
+                    ? content.sourceHtml.sourceHtml
+                    : null
+            }
             blackbaud={content.blackbaudFormId}
             simpleCheckout={content.simpleCheckoutPaymentId}
             externalScript={content.externalJavaScript}
@@ -299,8 +303,19 @@ const ExternalEmbed = ({ node }) => {
     )
 }
 const Location = ({ node }) => {
-    const summary = typeof node.summary !== 'undefined' && node.summary !== null ? node.summary.summary : null
-    return <LocationEmbed name={node.title} photo={node.photo} summary={summary} slug={node.slug} category={node.category} />
+    const summary =
+        typeof node.summary !== 'undefined' && node.summary !== null
+            ? node.summary.summary
+            : null
+    return (
+        <LocationEmbed
+            name={node.title}
+            photo={node.photo}
+            summary={summary}
+            slug={node.slug}
+            category={node.category}
+        />
+    )
 }
 
 const MediaWithCaption = ({ node }) => {
@@ -311,7 +326,11 @@ const MediaWithCaption = ({ node }) => {
             internalMedia={content.image}
             externalMedia={content.externalMediaUrl}
             heading={content.mediaHeading}
-            caption={content.mediaCaption !== null ? content.mediaCaption.mediaCaption : null}
+            caption={
+                content.mediaCaption !== null
+                    ? content.mediaCaption.mediaCaption
+                    : null
+            }
             internalLink={content.internaLink}
             callToAction={content.callToAction}
         />
@@ -330,7 +349,18 @@ const PersonListing = ({ node }) => {
     )
 }
 
-const Quote = ({ node }) => {}
+const Quote = ({ node }) => {
+    console.log(node)
+    return (
+        <BlockQuote
+            media={node.associatedMedia}
+            displayType={node.displayType}
+            personName={node.personName}
+            heading={node.quoteHeading}
+            copy={node.quoteCopy ? node.quoteCopy.quoteCopy : null}
+        />
+    )
+}
 
 const SearchResults = ({ node }) => {
     const content = localeScrubber.scrub(node)

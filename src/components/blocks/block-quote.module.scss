@@ -1,0 +1,165 @@
+@import '../../styles/typography';
+@import '../../styles/breakpoint';
+@import '../../styles/spacing';
+@import '../../styles/colors';
+@import '../../styles/grids';
+
+.blockQuote {
+    margin: 0 0 $spacing-md 0;
+}
+
+.message {
+    @include respond-to('small') {
+        display: grid;
+        @include content-grid;
+    }
+    padding: 0;
+    background-color: darken($color-inverse-02, 10);
+    color: $color-inverse-01;
+}
+
+.testimonial {
+    @include respond-to('small') {
+        display: grid;
+        @include content-grid;
+    }
+    padding: 0;
+    background-color: darken($color-inverse-02, 10);
+    color: $color-inverse-01;
+}
+
+.sectionContent {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    padding: $spacing-md $spacing-md $spacing-xs $spacing-md;
+    grid-column: left-gutter / end;
+    text-align: left;
+
+    @include respond-to('small') {
+        margin-left: 0;
+        margin-right: 0;
+        padding: $spacing-lg;
+        grid-column: half-main / end;
+        order: 2;
+    }
+
+    @include respond-to('large') {
+        margin-left: 0;
+        margin-right: 0;
+        padding: $spacing-lg;
+        grid-column: half-main / right-gutter;
+        order: 2;
+    }
+}
+
+.image {
+    position: relative;
+    grid-column: left-gutter / end;
+    color: darken($color-inverse-02, 10);
+
+    @include respond-to('small') {
+        grid-column: left-gutter / half-main;
+
+        &::after {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: $spacing-md;
+            display: block;
+            background: linear-gradient(to right bottom, transparent 49%, currentColor 50%), linear-gradient(-50deg, transparent 16px, transparent 0);
+            content: "";
+        }
+    }
+}
+
+.mediaEmbed {
+    height: 0;
+    overflow: hidden;
+    padding-top: 56.25%;
+    background: white;
+    position: relative;
+    text-align: center;
+
+    @include respond-to('small') {
+        margin-left: 0;
+        margin-right: 0;
+        grid-column: main / right-gutter;
+        order: 2;
+    }
+}
+
+.video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.mediaCaption {
+    padding: $spacing-md $spacing-md $spacing-xs $spacing-md;
+    background-color: rgba($color-brand-03, .75);
+    text-align: center;
+    color: $color-inverse-01;
+
+    @include respond-to('small') {
+        margin-left: 0;
+        margin-right: 0;
+        grid-column: left-gutter / main;
+        background-color: rgba($color-brand-03, 0);
+        text-align: right;
+        color: $color-text-01;
+        order: 1;
+    }
+}
+
+.heading {
+    margin-bottom: $spacing-md;
+    @include font-family-headings;
+    font-weight: 400;
+    @include line-height('heading');
+    @include font-smoothing;
+    @include letter-spacing;
+    @include typescale('h4');
+
+    @include respond-to('small') {
+        @include typescale('h4');
+    }
+}
+
+.overline {
+    display: block;
+
+    @include font-family;
+    font-weight: 400;
+    @include line-height('body');
+    @include letter-spacing-wide;
+    @include typescale('overline');
+
+    text-transform: uppercase;
+    color: $color-inverse-01;
+
+    &:after {
+        content: '\A';
+        white-space: pre;
+    }
+}
+
+.summary {
+    margin-bottom: $spacing-sm;
+    @include font-family;
+    @include font-weight-body;
+    @include line-height('body');
+    @include typescale('body1');
+}
+
+.info {
+    @include line-height('body');
+}
+
+.icon {
+    margin: 0 0 0 $spacing-2xs;
+}
