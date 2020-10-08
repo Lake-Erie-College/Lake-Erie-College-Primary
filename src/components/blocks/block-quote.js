@@ -67,19 +67,19 @@ const Testimonial = ({ media, personName, copy, heading }) => {
     return (
         <div className={styles.testimonial}>
             {media && <Image image={media} />}
-            <div className={styles.sectionContent}>
+            <blockquote className={styles.sectionContent}>
                 {heading && (
                     <h2 className={styles.heading}>
-                        {personName && (
-                            <span className={styles.overline}>
-                                {personName}
-                            </span>
-                        )}
                         {heading}
                     </h2>
                 )}
-                {copy && <p className={styles.summary}>{copy}</p>}
-            </div>
+                {copy && <p className={styles.quote}>{copy}</p>}
+                {personName && (
+                    <p className={styles.attribution}>
+                        {personName}
+                    </p>
+                )}
+            </blockquote>
         </div>
     )
 }
