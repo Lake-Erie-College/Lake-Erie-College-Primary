@@ -110,6 +110,13 @@ exports.createPages = ({ graphql, actions }) => {
                                       }
                                       slug
                                     }
+                                    ... on ContentfulStandardPage {
+                                      id
+                                      category {
+                                        slug
+                                      }
+                                      slug
+                                    }
                                     ... on ContentfulDepartment {
                                       id
                                       slug
