@@ -103,14 +103,27 @@ exports.createPages = ({ graphql, actions }) => {
                                 fromPath
                                 isPermanent
                                 toPath {
-                                    id
-                                    category {
-                                        category {
-                                            slug
-                                        }
+                                    ... on ContentfulAcademicOffering {
+                                      id
+                                      category {
                                         slug
+                                      }
+                                      slug
                                     }
-                                    slug
+                                    ... on ContentfulDepartment {
+                                      id
+                                      slug
+                                      category {
+                                        slug
+                                      }
+                                    }
+                                    ... on ContentfulEvent {
+                                      id
+                                      category {
+                                        slug
+                                      }
+                                      slug
+                                    }
                                 }
                                 statusCode
                             }
