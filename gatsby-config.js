@@ -57,6 +57,21 @@ module.exports = {
           },
         },
         {
+          resolve: `gatsby-plugin-manifest`,
+          options: {
+            name: `Lake Erie College`,
+            short_name: `LEC`,
+            start_url: `/`,
+            background_color: `#094a3e`,
+            theme_color: `#e8f2f8`,
+            display: `standalone`,
+            icon: `static/lec-favicon.svg`, // This path is relative to the root of the site.
+          },
+        },
+        {
+          resolve: `gatsby-plugin-offline`,
+        },
+        {
             resolve: 'gatsby-plugin-google-tagmanager',
             options: {
                 id: 'GTM-57CDPX',

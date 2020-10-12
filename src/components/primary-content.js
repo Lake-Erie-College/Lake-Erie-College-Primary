@@ -350,7 +350,6 @@ const PersonListing = ({ node }) => {
 }
 
 const Quote = ({ node }) => {
-    console.log(node)
     return (
         <BlockQuote
             media={node.associatedMedia}
