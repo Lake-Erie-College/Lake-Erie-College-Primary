@@ -117,6 +117,7 @@ export default ({ node, uri, children, formUrl, className }) => {
             </GatsbyLink>
         )
     } else if (!isExternal && isForm) {
+
         return (
             <span
                 className={cx(styles.textLink, className)}

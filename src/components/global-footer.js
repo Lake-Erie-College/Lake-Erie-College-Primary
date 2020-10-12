@@ -157,7 +157,6 @@ const GlobalFooter = () => {
                             <NavigationCTAItem
                                 key={`footer-nav-cta-${link.id}`}
                                 link={link}
-                                className="test"
                             />
                         ))}
                     </ul>
@@ -167,7 +166,6 @@ const GlobalFooter = () => {
                                 <NavigationItem
                                     key={`footer-nav-link-${link.id}`}
                                     link={link}
-                                    className="test"
                                 />
                             ))}
                         </ul>
