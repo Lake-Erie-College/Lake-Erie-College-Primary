@@ -270,8 +270,7 @@ exports.createPages = ({ graphql, actions }) => {
                         fromPath: redirect.node.fromPath,
                         toPath: path,
                         isPermanent: isPermanent,
-                        statusCode: redirect.node.statusCode,
-                        redirectInBrowser: true
+                        statusCode: redirect.node.statusCode
                     })
                 })
             })
