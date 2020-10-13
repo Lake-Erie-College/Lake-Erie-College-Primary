@@ -5,40 +5,31 @@
 @import '../../styles/grids';
 
 .hit {
-    margin: $spacing-lg 0;
+    margin: 0;
+    padding: $spacing-sm 0;
+    border-bottom: 2px solid $color-ui-03;
 }
 
 .heading {
-    margin: 0 $spacing-md;
-    grid-column: left-gutter / end;
+    margin: 0;
 
     @include font-family-headings;
     font-weight: 400;
     @include line-height('heading');
     @include font-smoothing;
     @include letter-spacing;
-    @include typescale('h5');
+    @include typescale('button');
 
     color: $color-text-02;
 
     @include respond-to('small') {
-        margin-left: 0;
-        margin-right: 0;
-        @include typescale('h4');
-        grid-column: main / right-main;
+        @include typescale('h5');
     }
+}
 
-    a:link,
-    a:visited {
-        display: block;
-        color: $color-text-02;
-    }
-
-    a:hover,
-    a:active {
-        display: block;
-        color: $color-hover-text;
-    }
+.link {
+    display: table;
+    margin: $spacing-xs 0 $spacing-2xs;
 }
 
 .overline {
@@ -46,7 +37,7 @@
     margin: 0 $spacing-2xs 0 0;
     padding: $spacing-2xs $spacing-xs;
     @include font-family;
-    font-weight: 400;
+    @include font-weight-body;
     @include line-height('body');
     @include letter-spacing-wide;
     @include typescale('body2');
@@ -72,21 +63,16 @@
 }
 
 .hitSummary {
-    margin-left: 0;
-    margin-right: 0;
-    margin-bottom: $spacing-xs;
+    margin: 0;
     @include font-family;
     @include font-weight-body;
     @include line-height('body');
-    @include typescale('body1');
+    @include typescale('body2');
 }
 
-.hitUrl {
-    display: block;
-    text-decoration: none;
-
-    .icon {
-        margin-left: $spacing-xs;
-        font-size: .5em;
-    }
+.icon {
+    position: relative;
+    top: -$spacing-2xs;
+    margin-left: $spacing-xs;
+    font-size: .5em;
 }

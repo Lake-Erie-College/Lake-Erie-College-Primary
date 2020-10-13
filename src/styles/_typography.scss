@@ -16,7 +16,7 @@ $typescale-map: (
     'h5': 22.62px,
     'h6': 16px,
     'body1': 16px,
-    'body2': 11.32px,
+    'body2': 14px,
     'subtitle1': 16px,
     'subtitle2': 11.32px,
     'button': 24px,
@@ -47,6 +47,10 @@ $typescale-map: (
 
 @mixin font-family-headings {
     font-family: $font-family-headings;
+}
+
+@mixin font-weight-headings {
+    font-weight: 400;
 }
 
 @mixin font-weight-body {

@@ -3,7 +3,6 @@ import cx from "classnames"
 import Image from "gatsby-image"
 import { Link as GatsbyLink } from "gatsby"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import useContentfulImage from "../hooks/useContentfulImage"
 import styles from "./contact-person.module.scss";
 
 const linkResolver = require('../utils').linkResolver
@@ -25,12 +24,6 @@ const ContactPerson = ({ heading, person, displayName }, ...rest) => {
     const hasHeadshot = typeof person.headshot !== 'undefined' && person.headshot !== null
 
     const hasJobTitles = typeof person.jobTitles !== 'undefined' && person.jobTitles !== null
-
-    if (hasHeadshot && typeof person.headshot.fluid === 'undefined') {
-        person.headshot = useContentfulImage(
-            person.headshot.file.url
-        )
-    }
     
     return (
         <section className={styles.contactPerson}>

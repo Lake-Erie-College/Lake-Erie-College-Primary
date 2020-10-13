@@ -3,10 +3,10 @@ import Carousel from '../carousel'
 
 import styles from './block-carousel.module.scss'
 
-const BlockCarousel = ({ media, displayArrows, displayDots }) => {
+const BlockCarousel = ({ media, images, displayArrows, displayDots }) => {
     return (
         <div>
-            <Carousel content={media} displayArrows={displayArrows} displayDots={displayDots} />
+            <Carousel content={media} images={images} displayArrows={displayArrows} displayDots={displayDots} />
         </div>
     )
 }

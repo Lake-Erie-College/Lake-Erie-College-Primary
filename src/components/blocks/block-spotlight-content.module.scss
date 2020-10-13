@@ -262,6 +262,7 @@ $navigation-color: $color-inverse-01;
 
 .resourceLink {
     margin: 0 0 $spacing-sm 0;
+    @include line-height('body');
 }
 
 .resourceIcon {

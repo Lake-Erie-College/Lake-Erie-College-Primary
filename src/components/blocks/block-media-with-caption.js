@@ -1,13 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import cx from 'classnames'
-import { Link as GatsbyLink } from 'gatsby'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ImageWithSVGSupport from '../image-with-svg-support'
 import ReactPlayer from 'react-player'
 import TextLink from '../text-link'
-import useContentfulImage from '../../hooks/useContentfulImage'
-
-const linkResolver = require('../../utils').linkResolver
 
 import styles from './block-media-with-caption.module.scss'
 
@@ -35,7 +31,7 @@ const BlockMediaWithCaption = (
     const hasRelatedPage =
         ( typeof internalLink !== 'undefined' && internalLink !== null ) || isExteranl
     const primaryHeading = typeof heading !== 'undefined' ? heading : null
-    const summary = typeof caption !== 'undefined' ? caption : null
+    const summary = typeof caption !== 'undefined' && caption !== null ? caption : null
     const primaryImage =
         typeof internalMedia !== 'undefined' ? internalMedia : null
 
@@ -64,20 +60,11 @@ const BlockMediaWithCaption = (
 }
 
 const Image = ({ image }) => {
-    const contentfulImage =
-        typeof image.fluid === 'undefined'
-            ? useContentfulImage(typeof image.data !== 'undefined' ? image.data.target.file.url : image.file.url)
-            : image
+    const contentfulImage = image
 
-    const title =
-        typeof image.title === 'undefined'
-            ? image.data.target.title
-            : image.title
+    const title = image.title
 
-    const file =
-        typeof image.file === 'undefined'
-            ? image.data.target.file
-            : image.file
+    const file = image.file
 
     return (
         <ImageWithSVGSupport
@@ -108,7 +95,7 @@ const Link = ({ node, cta, uri }) => {
     const isExternal = typeof uri !== 'undefined' && uri !== null
 
     return (
-        <p className={cx(styles.info)}>
+        <p className={styles.info}>
             {!isExternal && (
                 <TextLink node={node} children={cta} />
             )}

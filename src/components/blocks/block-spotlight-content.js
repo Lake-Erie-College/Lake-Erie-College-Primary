@@ -1,21 +1,15 @@
 import React, { useState } from 'react'
 import cx from 'classnames'
-import { Link as GatsbyLink } from 'gatsby'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useSpring, animated, config } from 'react-spring' // https://www.react-spring.io/docs/hooks/basics
 import Image from 'gatsby-image'
-import useContentfulImage from '../../hooks/useContentfulImage'
 
 import TextLink from '../text-link'
 import CallToAction from '../call-to-action'
 
 import styles from './block-spotlight-content.module.scss'
 
-const linkResolver = require('../../utils').linkResolver
 
 // Display Types - Navigation, Interstitial, Resource Links
-
-const locale = 'en-US'
 
 const typeClasses = {
     Navigation: 'navigation',
@@ -57,7 +51,10 @@ const Navigation = ({ props, className }) => {
         typeof props.secodnaryHeading !== 'undefined'
             ? props.secodnaryHeading
             : null
-    const summary = typeof props.summary !== 'undefined' ? props.summary : null
+    const summary =
+        typeof props.summary !== 'undefined' && props.summary !== null
+            ? props.summary.summary
+            : null
 
     return (
         <nav className={className}>
@@ -95,7 +92,10 @@ const Navigation = ({ props, className }) => {
                             typeof node.displayTitle !== 'undefined'
                                 ? node.displayTitle
                                 : node.title
-
+                        const isInternalMedia =
+                            node.internalMedia !== null
+                                ? node.internalMedia
+                                : false
                         const isExternal =
                             typeof node.externalUrl !== 'undefined' &&
                             node.externalUrl !== null
@@ -112,28 +112,27 @@ const Navigation = ({ props, className }) => {
                             fields = node.externalUrl
                         } else if (isEmbed) {
                             fields = node.sourceUrl
+                        } else if (isInternalMedia) {
+                            fields = node.internalMedia
                         }
 
                         const icon =
-                            typeof fields.pageIcon !== 'undefined'
-                                ? fields.pageIcon
+                            typeof node.pageIcon !== 'undefined' &&
+                            node.pageIcon !== null
+                                ? node.pageIcon
                                       .toLowerCase()
-                                      .replace(' ', '-')
+                                      .split(' ')
+                                      .join('-')
                                 : false
 
                         const [hover, toggleHover] = useState(false)
-                        const springProps = useSpring({
-                            transform: hover
-                                ? 'translate3d(1rem,0,0) rotate(15deg)'
-                                : 'translate3d(3rem,0,0) rotate(15deg)',
-                        })
 
                         return (
                             <li
                                 className={navClassName}
                                 onMouseEnter={() => toggleHover(true)}
                                 onMouseLeave={() => toggleHover(false)}
-                                key={fields.slug}
+                                key={`spotlight-navigation-${node.title}`}
                             >
                                 {icon && (
                                     <FontAwesomeIcon
@@ -159,7 +158,23 @@ const Navigation = ({ props, className }) => {
                                     />
                                 )}
 
-                                {!isEmbed && (
+                                {!isEmbed && isExternal && (
+                                    <CallToAction
+                                        name={name}
+                                        url={fields}
+                                        isHovered={hover}
+                                    />
+                                )}
+
+                                {!isEmbed && isInternalMedia && (
+                                    <CallToAction
+                                        name={name}
+                                        url={fields.file.url}
+                                        isHovered={hover}
+                                    />
+                                )}
+
+                                {!isEmbed && !isInternalMedia && !isExternal && (
                                     <CallToAction
                                         name={name}
                                         node={fields}
@@ -184,19 +199,26 @@ const Navigation = ({ props, className }) => {
 
 const Interstitial = ({ props, className }) => {
     const hasRelatedPages =
-        typeof props.relatedPages !== 'undefined' &&
+        props.relatedPages !== null &&
         props.relatedPages.length > 0
     const primaryHeading =
-        typeof props.primaryHeading !== 'undefined'
+        props.primaryHeading !== null &&
+        props.primaryHeading !== null
             ? props.primaryHeading
             : null
     const secondaryHeading =
-        typeof props.secondaryHeading !== 'undefined'
+        props.secondaryHeading !== null &&
+        props.secondaryHeading !== null
             ? props.secondaryHeading
             : null
-    const summary = typeof props.summary !== 'undefined' ? props.summary : null
+    const summary =
+        props.summary !== null
+            ? props.summary.summary
+            : null
     const primaryImage =
-        typeof props.primaryImage !== 'undefined' ? props.primaryImage : null
+        props.primaryImage !== null
+            ? props.primaryImage
+            : null
 
     return (
         <div className={className}>
@@ -235,6 +257,10 @@ const Interstitial = ({ props, className }) => {
                                 const isEmbed =
                                     typeof node.sourceUrl !== 'undefined' &&
                                     node.sourceUrl !== null
+                                const isInternalMedia =
+                                    node.internalMedia !== null
+                                        ? node.internalMedia
+                                        : false
 
                                 if (
                                     typeof node.internalLink !== 'undefined' &&
@@ -245,6 +271,8 @@ const Interstitial = ({ props, className }) => {
                                     fields = node.externalUrl
                                 } else if (isEmbed) {
                                     fields = node.sourceUrl
+                                } else if (isInternalMedia) {
+                                    fields = node.internalMedia
                                 }
 
                                 return (
@@ -252,7 +280,7 @@ const Interstitial = ({ props, className }) => {
                                         className={styles.interstitialLink}
                                         key={`spotlight-interstitial-cta-${node.title}`}
                                     >
-                                        {!isEmbed && !isExternal && (
+                                        {!isEmbed && !isExternal && !isInternalMedia && (
                                             <CallToAction
                                                 name={name}
                                                 node={fields}
@@ -263,6 +291,13 @@ const Interstitial = ({ props, className }) => {
                                             <CallToAction
                                                 name={name}
                                                 url={fields}
+                                            />
+                                        )}
+
+                                        {!isEmbed && isInternalMedia && (
+                                            <CallToAction
+                                                name={name}
+                                                url={fields.file.url}
                                             />
                                         )}
 
@@ -284,20 +319,23 @@ const Interstitial = ({ props, className }) => {
 
 const Resources = ({ props, className }) => {
     const hasRelatedPages =
-        typeof props.relatedPages !== 'undefined' &&
+        props.relatedPages !== null &&
         props.relatedPages.length > 0
     const hasRelatedMedia =
-        typeof props.relatedMedia !== 'undefined' &&
+        props.relatedMedia !== null &&
         props.relatedMedia.length > 0
     const primaryHeading =
-        typeof props.primaryHeading !== 'undefined'
+        props.primaryHeading !== null
             ? props.primaryHeading
             : null
     const secondaryHeading =
-        typeof props.secondaryHeading !== 'undefined'
+        props.secondaryHeading !== null
             ? props.secondaryHeading
             : null
-    const summary = typeof props.summary !== 'undefined' ? props.summary : null
+    const summary =
+        typeof props.summary !== 'undefined' && props.summary !== null
+            ? props.summary.summary
+            : null
     const primaryImage =
         typeof props.primaryImage !== 'undefined' ? props.primaryImage : null
 
@@ -316,36 +354,39 @@ const Resources = ({ props, className }) => {
             <ul className={styles.resourceLinks}>
                 {hasRelatedPages &&
                     props.relatedPages.map(fields => {
+
                         const name =
-                            typeof fields.displayTitle !== 'undefined'
+                            fields.displayTitle !== null
                                 ? fields.displayTitle
                                 : fields.title
                         const icon =
-                            typeof fields.pageIcon !== 'undefined'
+                            fields.pageIcon !== null
                                 ? fields.pageIcon
                                       .toLowerCase()
                                       .replace(' ', '-')
                                 : false
                         const internal =
-                            typeof fields.internalLink !== 'undefined'
+                            fields.internalLink !== null
                                 ? fields.internalLink
                                 : false
                         const internalMedia =
-                            typeof fields.internalMedia !== 'undefined'
+                            fields.internalMedia !== null
                                 ? fields.internalMedia
                                 : false
                         const external =
-                            typeof fields.externalUrl !== 'undefined'
+                            fields.externalUrl !== null & fields.externalUrl !== ''
                                 ? fields.externalUrl
                                 : false
-                        const isEmbed =
-                            typeof fields.sourceUrl !== 'undefined' &&
-                            fields.sourceUrl !== null
+                        const isEmbed = typeof fields.sourceUrl !== 'undefined' && fields.sourceUrl !== null
+
+                        if (!isEmbed && !external && !internal && !internalMedia) {
+                            return <span></span>
+                        }
 
                         return (
                             <li
                                 className={styles.resourceLink}
-                                key={fields.slug}
+                                key={`spotlight-resource-link-${fields.title}`}
                             >
                                 {icon && (
                                     <FontAwesomeIcon
@@ -368,7 +409,10 @@ const Resources = ({ props, className }) => {
                                 )}
 
                                 {internalMedia && (
-                                    <TextLink children={name} uri={internalMedia.file.url} />
+                                    <TextLink
+                                        children={name}
+                                        uri={internalMedia.file.url}
+                                    />
                                 )}
 
                                 {external && (
@@ -376,7 +420,10 @@ const Resources = ({ props, className }) => {
                                 )}
 
                                 {isEmbed && (
-                                     <TextLink children={name} formUrl={fields.sourceUrl} />
+                                    <TextLink
+                                        children={name}
+                                        formUrl={fields.sourceUrl}
+                                    />
                                 )}
                             </li>
                         )
@@ -420,13 +467,12 @@ const Summary = ({ summary }) => {
 }
 
 const PrimaryImage = ({ image }) => {
-    const contentfulImage = useContentfulImage(image.file.url)
     return (
         <Image
             className={styles.image}
             title={image.title}
-            fluid={contentfulImage.fluid}
-            svg={contentfulImage.svg}
+            fluid={image.fluid}
+            svg={image.svg}
         />
     )
 }

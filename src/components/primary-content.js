@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import { BLOCKS, MARKS, INLINES } from '@contentful/rich-text-types'
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
+import { renderRichText } from 'gatsby-source-contentful/rich-text'
 import { Link as GatsbyLink } from 'gatsby'
 import cx from 'classnames'
 import get from 'lodash/get'
-import useContentfulImage from '../hooks/useContentfulImage'
 import ImageWithSVGSupport from './image-with-svg-support'
 import BlockAcademicOfferingListing from './blocks/block-academic-offering-listing'
 import BlockCarousel from './blocks/block-carousel'
@@ -12,10 +11,12 @@ import BlockEventListing from './blocks/block-event-listing'
 import BlockExternalEmbed from './blocks/block-external-embed'
 import BlockMediaWithCaption from './blocks/block-media-with-caption'
 import BlockPersonListing from './blocks/block-person-listing'
+import BlockQuote from './blocks/block-quote'
 import BlockSearchResults from './blocks/block-search-results'
 import BlockSpotlightContent from './blocks/block-spotlight-content'
 import ContactPerson from './contact-person'
 import Divider from './divider'
+import LocationEmbed from './location'
 import TabularContent from './tabular-content'
 import TextLink from './text-link'
 
@@ -84,21 +85,23 @@ const options = {
 
             return (
                 <TextLink
+                    className={styles.link}
                     children={children}
-                    node={node.data.target.fields}
+                    node={node.data.target}
                     activeClassName="active"
                 />
             )
         },
         [INLINES.ASSET_HYPERLINK]: (node, children) => {
             const content = localeScrubber.scrub(node)
-            
+
             if (typeof node.data.target.file === 'undefined') {
                 return <span></span>
             }
 
             return (
                 <TextLink
+                    className={styles.link}
                     children={children}
                     uri={node.data.target.file.url}
                     activeClassName="active"
@@ -112,7 +115,11 @@ const options = {
             // <a href={`/pages/${referencedEntry.fields.slug}`}>{children}</a>
             // return 'test';
             return (
-                <TextLink uri={node.data.uri} children={children} />
+                <TextLink
+                    className={styles.link}
+                    uri={node.data.uri}
+                    children={children}
+                />
             )
         },
         [BLOCKS.EMBEDDED_ENTRY]: node => <EmbeddedEntry node={node} />,
@@ -131,9 +138,7 @@ const options = {
 
             switch (mimeGroup) {
                 case 'image':
-                    const contentfulImage = useContentfulImage(
-                        content.data.target.file.url
-                    )
+                    const contentfulImage = content.data.target
 
                     const width = contentfulImage.file.details.image.width
                     const height = contentfulImage.file.details.image.height
@@ -188,24 +193,24 @@ const options = {
 }
 
 const blocksHandlers = {
-    blockAcademicOfferingListing: value => (
+    ContentfulBlockAcademicOfferingListing: value => (
         <AcademicOfferingListing node={value} />
     ),
-    blockCarousel: value => <Carousel node={value} />,
-    blockEventListing: value => <EventListing node={value} />,
-    blockExternalEmbed: value => <ExternalEmbed node={value} />,
-    blockMediaWithCaption: value => <MediaWithCaption node={value} />,
-    blockPersonListing: value => <PersonListing node={value} />,
-    blockQuote: value => <Placeholder value={value} />,
-    blockSearchResults: value => <SearchResults node={value} />,
-    blockSpotlightContent: value => <SpotlightContent node={value} />,
-    person: value => <Person node={value} />,
+    ContentfulBlockCarousel: value => <Carousel node={value} />,
+    ContentfulBlockEventListing: value => <EventListing node={value} />,
+    ContentfulBlockExternalEmbed: value => <ExternalEmbed node={value} />,
+    ContentfulBlockMediaWithCaption: value => <MediaWithCaption node={value} />,
+    ContentfulBlockPersonListing: value => <PersonListing node={value} />,
+    ContentfulBlockQuote: value => <Quote node={value} />,
+    ContentfulBlockSearchResults: value => <SearchResults node={value} />,
+    ContentfulBlockSpotlightContent: value => <SpotlightContent node={value} />,
+    ContentfulPerson: value => <Person node={value} />,
+    ContentfulLocation: value => <Location node={value} />,
     default: value => <Placeholder value={value} />,
 }
 
 const Container = ({ data, isFullWidth }) => {
-    const hasJSON =
-        data !== null && typeof data.json !== 'undefined' && data.json !== null
+    const hasJSON = data !== null && typeof data !== 'undefined'
 
     if (!hasJSON) {
         return null
@@ -217,26 +222,24 @@ const Container = ({ data, isFullWidth }) => {
                 [`${styles.fullWidth}`]: isFullWidth,
             })}
         >
-            {documentToReactComponents(data.json, options)}
+            {renderRichText(data, options)}
         </div>
     )
 }
 
 const Placeholder = ({ value }) => {
-    return <p>Placeholder Block</p>
+    return <div></div>
 }
 
 function EmbeddedEntry({ node }) {
     const type =
         typeof node.data.target.sys.contentType === 'undefined'
-            ? node.data.target.sys.type
+            ? node.data.target.__typename
             : node.data.target.sys.contentType.sys.id
-    const value = get(node, 'data.target.fields')
+    const value = get(node, 'data.target')
     const handler = blocksHandlers[type] || blocksHandlers.default
 
     return <div className={styles.embeddedBlock}>{handler(value)}</div>
-
-    // Inconsequential Edit
 }
 
 // Taken from: https://www.gatsbyjs.org/docs/gatsby-link/
@@ -262,10 +265,17 @@ const AcademicOfferingListing = ({ node }) => {
     )
 }
 
-const Carousel = ({node}) => {
+const Carousel = ({ node }) => {
     const content = localeScrubber.scrub(node)
 
-    return <BlockCarousel media={content.relatedMedia} displayArrows={content.displayArrows} displayDots={content.displayDots} />
+    return (
+        <BlockCarousel
+            media={content.relatedMedia}
+            images={content.relatedImages}
+            displayArrows={content.displayArrows}
+            displayDots={content.displayDots}
+        />
+    )
 }
 
 const EventListing = ({ node }) => {
@@ -274,10 +284,38 @@ const EventListing = ({ node }) => {
     return <BlockEventListing category={content.relatedCategory} />
 }
 
-const ExternalEmbed = ({node}) => {
+const ExternalEmbed = ({ node }) => {
     const content = localeScrubber.scrub(node)
 
-    return <BlockExternalEmbed url={content.sourceUrl} html={content.sourceHtml} blackbaud={content.blackbaudFormId} />
+    return (
+        <BlockExternalEmbed
+            displayTitle={content.displayTitle}
+            url={content.sourceUrl}
+            html={
+                content.sourceHtml !== null
+                    ? content.sourceHtml.sourceHtml
+                    : null
+            }
+            blackbaud={content.blackbaudFormId}
+            simpleCheckout={content.simpleCheckoutPaymentId}
+            externalScript={content.externalJavaScript}
+        />
+    )
+}
+const Location = ({ node }) => {
+    const summary =
+        typeof node.summary !== 'undefined' && node.summary !== null
+            ? node.summary.summary
+            : null
+    return (
+        <LocationEmbed
+            name={node.title}
+            photo={node.photo}
+            summary={summary}
+            slug={node.slug}
+            category={node.category}
+        />
+    )
 }
 
 const MediaWithCaption = ({ node }) => {
@@ -288,7 +326,11 @@ const MediaWithCaption = ({ node }) => {
             internalMedia={content.image}
             externalMedia={content.externalMediaUrl}
             heading={content.mediaHeading}
-            caption={content.mediaCaption}
+            caption={
+                content.mediaCaption !== null
+                    ? content.mediaCaption.mediaCaption
+                    : null
+            }
             internalLink={content.internaLink}
             callToAction={content.callToAction}
         />
@@ -307,7 +349,17 @@ const PersonListing = ({ node }) => {
     )
 }
 
-const Quote = ({ node }) => {}
+const Quote = ({ node }) => {
+    return (
+        <BlockQuote
+            media={node.associatedMedia}
+            displayType={node.displayType}
+            personName={node.personName}
+            heading={node.quoteHeading}
+            copy={node.quoteCopy ? node.quoteCopy.quoteCopy : null}
+        />
+    )
+}
 
 const SearchResults = ({ node }) => {
     const content = localeScrubber.scrub(node)

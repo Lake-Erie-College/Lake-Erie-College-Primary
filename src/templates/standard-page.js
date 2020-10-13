@@ -1,28 +1,23 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { Helmet } from 'react-helmet-async'
 import get from 'lodash/get'
-import Img from 'gatsby-image'
 import Layout from '../components/layout'
 import PageDate from '../components/page-date'
 import PageHeading from '../components/page-heading'
 import PageLead from '../components/page-lead'
 import PrimaryContent from '../components/primary-content'
 import LeadImage from '../components/lead-image'
+import SEO from '../components/seo'
 
 class StandardPageTemplate extends React.Component {
     render() {
         const page = get(this.props, 'data.contentfulStandardPage')
-        const siteTitle = get(this.props, 'data.site.siteMetadata.title')
-        const hasLeadImage = page.leadImage !== null
+        const hasLeadImage = typeof page.leadImage !== 'undefined' && page.leadImage !== null
 
         return (
             <Layout location={this.props.location}>
-                <HelmetProvider>
-                    <Helmet>
-                        <title>{`${page.title} | ${siteTitle}`}</title>
-                    </Helmet>
-                </HelmetProvider>
+                <SEO title={page.title} description={page.description} />
                 <main>
                     {hasLeadImage && (
                         <LeadImage
@@ -88,7 +83,29 @@ export const pageQuery = graphql`
                 lead
             }
             primaryContent {
-                json
+              raw
+              references {
+                  # contentful_id is required to resolve the references
+                  contentful_id
+                  ...AcademicOffering
+                  ...Asset
+                  ...Department
+                  ...Event
+                  ...Homepage
+                  ...Location
+                  ...Person
+                  ...NavigationItem
+                  ...StandardPage
+                  ...BlockAcademicOfferingListing
+                  ...BlockCarousel
+                  ...BlockEventListing
+                  ...BlockExternalEmbed
+                  ...BlockMediaWithCaption
+                  ...BlockPersonListing
+                  ...BlockQuote
+                  ...BlockSearchResults
+                  ...BlockSpotlightContent
+              }
             }
         }
     }

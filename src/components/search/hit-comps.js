@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { Highlight, Snippet } from 'react-instantsearch-dom'
 import { Link } from 'gatsby'
-import { Link as GatsbyLink } from 'gatsby'
+import TextLink from '../text-link'
 import get from 'lodash/get'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -21,11 +21,11 @@ const hitHandlers = {
 
 export const PageHit = clickHandler => ({ hit }) => (
     <div>
-        <Link to={hit.slug} onClick={clickHandler}>
-            <h4>
+        <h4>
+            <TextLink node={hit} onClick={clickHandler} className={styles.link}>
                 <Highlight attribute="title" hit={hit} tagName="mark" />
-            </h4>
-        </Link>
+            </TextLink>
+        </h4>
         <Snippet attribute="excerpt" hit={hit} tagName="mark" />
     </div>
 )
@@ -45,8 +45,6 @@ const AcademicOffering = ({ hit }) => {
         hit.description !== null &&
         hit.description.description !== null
 
-    const hitTo = linkResolver.path(hit)
-
     const hitTitle =
         typeof hit.shortTitle !== 'undefined' && hit.shortTitle !== null
             ? hit.shortTitle
@@ -61,16 +59,17 @@ const AcademicOffering = ({ hit }) => {
                 {hit.category && (
                     <span className={styles.category}>{hit.category.title}</span>
                 )}
-                <GatsbyLink to={hitTo} className={styles.hitUrl}>
+
+                <TextLink node={hit} className={styles.link}>
                     {hitTitle}
                     <nobr>
                         <FontAwesomeIcon
-                            icon="external-link-square-alt"
+                            icon="link"
                             size="xs"
                             className={styles.icon}
                         />
                     </nobr>
-                </GatsbyLink>
+                </TextLink>
             </h2>
 
             {hasDescription && (
@@ -83,15 +82,12 @@ const AcademicOffering = ({ hit }) => {
 }
 
 const StandardPage = ({ hit }) => {
-    
     const hasPrimaryContent =
         typeof hit.primaryContent !== 'undefined' && hit.primaryContent !== null
     const hasDescription =
         typeof hit.description !== 'undefined' &&
         hit.description !== null &&
         hit.description.description !== null
-
-    const hitTo = linkResolver.path(hit)
 
     const hitTitle = hit.title
 
@@ -104,16 +100,16 @@ const StandardPage = ({ hit }) => {
                 {hit.category && (
                     <span className={styles.category}>{hit.category.title}</span>
                 )}
-                <GatsbyLink to={hitTo} className={styles.hitUrl}>
+                <TextLink node={hit} className={styles.link}>
                     {hitTitle}
                     <nobr>
                         <FontAwesomeIcon
-                            icon="external-link-square-alt"
+                            icon="link"
                             size="xs"
                             className={styles.icon}
                         />
                     </nobr>
-                </GatsbyLink>
+                </TextLink>
             </h2>
 
             {hasDescription && (
@@ -134,8 +130,6 @@ const Person = ({ hit }) => {
         hit.description !== null &&
         hit.description.description !== null
 
-    const hitTo = linkResolver.path(hit)
-
     const hitTitle =
         typeof hit.shortTitle !== 'undefined' && hit.shortTitle !== null
             ? hit.shortTitle
@@ -150,16 +144,16 @@ const Person = ({ hit }) => {
                 {hit.department && (
                     <span className={styles.category}>{hit.department.title}</span>
                 )}
-                <GatsbyLink to={hitTo} className={styles.hitUrl}>
+                <TextLink node={hit} className={styles.link}>
                     {hitTitle}
                     <nobr>
                         <FontAwesomeIcon
-                            icon="external-link-square-alt"
+                            icon="link"
                             size="xs"
                             className={styles.icon}
                         />
                     </nobr>
-                </GatsbyLink>
+                </TextLink>
             </h2>
 
             {hasDescription && (
@@ -180,8 +174,6 @@ const Location = ({ hit }) => {
         hit.description !== null &&
         hit.description.description !== null
 
-    const hitTo = linkResolver.path(hit)
-
     const hitTitle =
         typeof hit.shortTitle !== 'undefined' && hit.shortTitle !== null
             ? hit.shortTitle
@@ -196,16 +188,16 @@ const Location = ({ hit }) => {
                 {hit.category && (
                     <span className={styles.category}>{hit.category.title}</span>
                 )}
-                <GatsbyLink to={hitTo} className={styles.hitUrl}>
+                <TextLink node={hit} className={styles.link}>
                     {hitTitle}
                     <nobr>
                         <FontAwesomeIcon
-                            icon="external-link-square-alt"
+                            icon="link"
                             size="xs"
                             className={styles.icon}
                         />
                     </nobr>
-                </GatsbyLink>
+                </TextLink>
             </h2>
 
             {hasDescription && (
@@ -226,8 +218,6 @@ const Event = ({ hit }) => {
         hit.description !== null &&
         hit.description.description !== null
 
-    const hitTo = linkResolver.path(hit)
-
     const hitTitle =
         typeof hit.shortTitle !== 'undefined' && hit.shortTitle !== null
             ? hit.shortTitle
@@ -242,16 +232,16 @@ const Event = ({ hit }) => {
                 {hit.category && (
                     <span className={styles.category}>{hit.category.title}</span>
                 )}
-                <GatsbyLink to={hitTo} className={styles.hitUrl}>
+                <TextLink node={hit} className={styles.link}>
                     {hitTitle}
                     <nobr>
                         <FontAwesomeIcon
-                            icon="external-link-square-alt"
+                            icon="link"
                             size="xs"
                             className={styles.icon}
                         />
                     </nobr>
-                </GatsbyLink>
+                </TextLink>
             </h2>
 
             {hasDescription && (
@@ -271,8 +261,6 @@ const Department = ({ hit }) => {
         hit.description !== null &&
         hit.description.description !== null
 
-    const hitTo = linkResolver.path(hit)
-
     const hitTitle = hit.title
 
     return (
@@ -284,16 +272,16 @@ const Department = ({ hit }) => {
                 {hit.category && (
                     <span className={styles.category}>{hit.category.title}</span>
                 )}
-                <GatsbyLink to={hitTo} className={styles.hitUrl}>
+                <TextLink node={hit} className={styles.link}>
                     {hitTitle}
                     <nobr>
                         <FontAwesomeIcon
-                            icon="external-link-square-alt"
+                            icon="link"
                             size="xs"
                             className={styles.icon}
                         />
                     </nobr>
-                </GatsbyLink>
+                </TextLink>
             </h2>
 
             {hasDescription && (

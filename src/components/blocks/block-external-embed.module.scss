@@ -13,17 +13,58 @@
     }
 }
 
+.container {
+    display: grid;
+    @include content-grid;
+}
+
+.button {
+    margin: 0 $spacing-sm $spacing-sm  $spacing-sm;
+    padding: $spacing-sm $spacing-xs $spacing-sm $spacing-md;
+    background-color: $color-field-01;
+    border: 0px solid transparent;
+    border-radius: 4px;
+    @include font-family;
+    @include font-weight-body-bold;
+    @include line-height('body');
+    @include typescale('body1');
+    color: $color-inverse-01;
+    cursor: pointer;
+
+    @include respond-to('small') {
+        margin-left: 0;
+        margin-right: 0;
+        grid-column: main / half-main;
+    }
+}
+
+.icon {
+    display: inline-block;
+    margin: 0 auto;
+    color: $color-inverse-01;
+}
+
 .contentEmbed {
     display: grid;
     @include content-grid;
     grid-column: left-gutter / end;
+    margin: 0 auto $spacing-sm auto;
 
     .embed {
         height: auto;
 
         @include respond-to('small') {
             height: auto;
-            grid-column: main / right-main;
+            grid-column: left-main / right-gutter;
+        }
+    }
+
+    div {
+        margin: 0 auto;
+
+        @include respond-to('small') {
+            height: auto;
+            grid-column: left-main / right-gutter;
         }
     }
 }

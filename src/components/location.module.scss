@@ -4,10 +4,30 @@
 @import '../styles/spacing';
 @import '../styles/grids';
 
-.person {
-    margin: 0;
+.location {
+    display: grid;
+    @include content-grid;
+    margin: $spacing-md 0;
+
+    @include respond-to('small') {
+        margin-left: 0;
+        margin-right: 0;
+    }
 
     color: $color-text-02;
+}
+
+.locationInfo {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: 0 $spacing-md;
+    grid-column: left-gutter / end;
+
+    border-width: 1px;
+    border-style: solid;
+    border-color: $color-brand-01;
+    border-radius: 4px;
+    overflow: hidden;
 
     @include respond-to('small') {
         grid-template-columns: 2fr 3fr;
@@ -17,15 +37,22 @@
     }
 }
 
-.details {
-    padding: $spacing-md;
-}
-
 .image {
     position: relative;
 }
 
+.details {
+    padding: $spacing-md;
+
+    &:first-child {
+        /* Handles lack of person headshot */
+        grid-column: 1 / span 2;
+    }
+}
+
 .name {
+    margin: 0;
+    grid-column: left-gutter / end;
     @include font-family-headings;
     font-weight: 400;
     @include line-height('heading');
@@ -52,14 +79,11 @@
     }
 }
 
-.jobTitle {
+.summary {
     margin-bottom: $spacing-sm;
     @include font-family;
-    @include font-weight-body-bold;
     @include line-height('body');
     @include typescale('body1');
-    font-style: italic;
-    white-space: pre-wrap;
 }
 
 .info {

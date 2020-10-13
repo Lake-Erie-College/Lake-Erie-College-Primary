@@ -15,102 +15,20 @@ const NavigationPrimary = () => {
                 navigationPrimary {
                     id
                     navigationItems {
-                        id
-                        title
-                        displayTitle
-                        newWindow
-                        externalUrl
-                        internalLink {
-                            ... on ContentfulAcademicOffering {
-                                id
-                                slug
-                                category {
-                                    slug
-                                }
-                            }
-                            ... on ContentfulDepartment {
-                                id
-                                slug
-                            }
-                            ... on ContentfulEvent {
-                                id
-                                slug
-                                category {
-                                    slug
-                                }
-                            }
-                            ... on ContentfulHomepage {
-                                id
-                                slug
-                            }
-                            ... on ContentfulLocation {
-                                id
-                                slug
-                                category {
-                                    slug
-                                }
-                            }
-                            ... on ContentfulPerson {
-                                id
-                                slug
-                            }
-                            ... on ContentfulStandardPage {
-                                id
-                                slug
-                                category {
-                                    slug
-                                }
-                            }
+                        ... on ContentfulBlockExternalEmbed {
+                            ...BlockExternalEmbed
                         }
-                        navigationSubmenu {
-                            id
-                            title
-                            navigationItems {
+                        ... on ContentfulNavigationItem {
+                            ...NavigationItem
+                            navigationSubmenu {
                                 id
                                 title
-                                displayTitle
-                                newWindow
-                                externalUrl
-                                internalLink {
-                                    ... on ContentfulAcademicOffering {
-                                        id
-                                        slug
-                                        category {
-                                            slug
-                                        }
+                                navigationItems {
+                                    ... on ContentfulBlockExternalEmbed {
+                                        ...BlockExternalEmbed
                                     }
-                                    ... on ContentfulDepartment {
-                                        id
-                                        slug
-                                    }
-                                    ... on ContentfulEvent {
-                                        id
-                                        slug
-                                        category {
-                                            slug
-                                        }
-                                    }
-                                    ... on ContentfulHomepage {
-                                        id
-                                        slug
-                                    }
-                                    ... on ContentfulLocation {
-                                        id
-                                        slug
-                                        category {
-                                            slug
-                                        }
-                                    }
-                                    ... on ContentfulPerson {
-                                        id
-                                        slug
-                                    }
-                                    ... on ContentfulStandardPage {
-                                        id
-                                        slug
-                                        category {
-                                            slug
-                                        }
+                                    ... on ContentfulNavigationItem {
+                                        ...NavigationItem
                                     }
                                 }
                             }
@@ -171,7 +89,7 @@ const NavigationPrimary = () => {
 
     const NavigationLink = ({ level, link, hasPopup, isExpanded, tabIndex }) => {
         const isExternal =
-            typeof link.externalURL !== 'undefined' && link.externalURL !== null
+            typeof link.externalUrl !== 'undefined' && link.externalUrl !== null
 
         if (
             !isExternal &&
@@ -194,7 +112,7 @@ const NavigationPrimary = () => {
 
         const to = !isExternal
             ? linkResolver.path(link.internalLink)
-            : link.externalURL
+            : link.externalUrl
 
         if (isExternal) {
             return (

@@ -52,7 +52,7 @@
 .overline {
     display: block;
     grid-column: left-gutter / end;
-    margin: 0 $spacing-md;
+    margin: 0 $spacing-md $spacing-xs $spacing-md;
 
     @include font-family;
     font-weight: 400;
@@ -64,7 +64,8 @@
     color: $color-brand-01;
 
     @include respond-to('small') {
-        margin: 0;
+        margin-left: 0;
+        margin-right: 0;
         grid-column: left-main / right-gutter;
     }
 
