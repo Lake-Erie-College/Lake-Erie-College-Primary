@@ -158,10 +158,10 @@ const Navigation = ({ props, className }) => {
                                     />
                                 )}
 
-                                {!isEmbed && !isInternalMedia && (
+                                {!isEmbed && isExternal && (
                                     <CallToAction
                                         name={name}
-                                        node={fields}
+                                        url={fields}
                                         isHovered={hover}
                                     />
                                 )}
@@ -170,6 +170,14 @@ const Navigation = ({ props, className }) => {
                                     <CallToAction
                                         name={name}
                                         url={fields.file.url}
+                                        isHovered={hover}
+                                    />
+                                )}
+
+                                {!isEmbed && !isInternalMedia && !isExternal && (
+                                    <CallToAction
+                                        name={name}
+                                        node={fields}
                                         isHovered={hover}
                                     />
                                 )}

@@ -26,6 +26,56 @@
     grid-column: left-gutter / end;
     border-bottom: 4px solid $color-support-01;
     text-align: center;
+
+    @include respond-to('small') {
+        grid-column: left-gutter / half-main;
+    }
+}
+
+.ctas {
+    position: relative;
+    margin: 0;
+    padding: $spacing-sm 0;
+    grid-column: left-gutter / end;
+    background-color: $color-ui-03;
+    border-bottom: 4px solid $color-ui-03;
+    @include line-height('body');
+    text-align: center;
+
+    @include respond-to('small') {
+        grid-column: half-main / end;
+        text-align: right;
+    }
+
+    &::after {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        display: none;
+        width: $spacing-2xs;
+        background: linear-gradient(to right bottom, rgba($color-inverse-01, 1) 45%, transparent 50%), linear-gradient(-50deg, transparent 16px, transparent 0);
+        content: "";
+
+        @include respond-to('small') {
+            display: block;
+        }
+    }
+}
+
+.ctaList {
+    display: block;
+}
+
+.ctaLink {
+    position: relative;
+    display: inline-block;
+    padding: 0 $spacing-md;
+    border-right: 1px solid rgba($color-brand-03, .35);
+
+    &:last-child {
+        border-right: none;
+    }
 }
 
 .logo {
