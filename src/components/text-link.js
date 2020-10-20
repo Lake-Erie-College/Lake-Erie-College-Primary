@@ -32,7 +32,7 @@ export default ({ node, uri, children, formUrl, className }) => {
             >
                 <a.span
                     className={styles.linkHoverText}
-                    aria-hidden="hidden"
+                    aria-hidden="true"
                     style={{
                         clipPath: x.to(
                             [1, 0],
@@ -47,7 +47,7 @@ export default ({ node, uri, children, formUrl, className }) => {
                 </a.span>
                 <a.span
                     className={styles.linkHoverUnderline}
-                    aria-hidden="hidden"
+                    aria-hidden="true"
                     style={{
                         y: x.to([0, 1], ['0em', '-0.25em']),
                         opacity: x.to([0, 1], [1, 0]),
@@ -79,7 +79,7 @@ export default ({ node, uri, children, formUrl, className }) => {
             >
                 <a.span
                     className={styles.linkHoverText}
-                    aria-hidden="hidden"
+                    aria-hidden="true"
                     style={{
                         clipPath: x.to(
                             [1, 0],
@@ -94,7 +94,7 @@ export default ({ node, uri, children, formUrl, className }) => {
                 </a.span>
                 <a.span
                     className={styles.linkHoverUnderline}
-                    aria-hidden="hidden"
+                    aria-hidden="true"
                     style={{
                         y: x.to([0, 1], ['0em', '-0.25em']),
                         opacity: x.to([0, 1], [1, 0]),
@@ -127,7 +127,7 @@ export default ({ node, uri, children, formUrl, className }) => {
             >
                 <a.span
                     className={styles.linkHoverText}
-                    aria-hidden="hidden"
+                    aria-hidden="true"
                     style={{
                         clipPath: x.to(
                             [1, 0],
@@ -142,7 +142,7 @@ export default ({ node, uri, children, formUrl, className }) => {
                 </a.span>
                 <a.span
                     className={styles.linkHoverUnderline}
-                    aria-hidden="hidden"
+                    aria-hidden="true"
                     style={{
                         y: x.to([0, 1], ['0em', '-0.25em']),
                         opacity: x.to([0, 1], [1, 0]),
