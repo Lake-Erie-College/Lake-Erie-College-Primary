@@ -60,6 +60,7 @@ const BlockExternalEmbed = ({
             <>
             <div className={styles.contentEmbed}>
                 <iframe
+                    title="Schedule via Acuity"
                     className={styles.embed}
                     src={url}
                     width="100%"
@@ -101,7 +102,7 @@ const BlockExternalEmbed = ({
 
             return <div className={styles.embed} ref={embedRef}></div>
         } else {
-            return <iframe className={styles.contentEmbed} src={url} />
+            return <iframe title={callToAction} className={styles.contentEmbed} src={url} />
         }
     } else if (hasHTML) {
         const hasScript =
