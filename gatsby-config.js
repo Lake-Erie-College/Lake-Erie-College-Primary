@@ -22,12 +22,14 @@ if (!spaceId || !accessToken) {
 module.exports = {
     siteMetadata: {
         title: 'Lake Erie College',
+        siteUrl: `https://www.lec.edu`,
     },
     plugins: [
         'gatsby-transformer-remark',
         'gatsby-transformer-sharp',
         'gatsby-plugin-react-helmet-async',
         'gatsby-plugin-sharp',
+        'gatsby-plugin-sitemap',
         'gatsby-plugin-sass',
         'gatsby-transformer-inline-svg',
         'gatsby-plugin-use-query-params',
