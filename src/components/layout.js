@@ -21,6 +21,7 @@ class Template extends React.Component {
             <Container>
                 <Helmet>
                     <html lang="en" />
+                    <meta name="google-site-verification" content="rqzFQ4nSxKtJktJRsEvcCQlu6maeWntllPVMdsRdO0w" />
                 </Helmet>
                 <GlobalHeader />
                 {children}
