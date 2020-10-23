@@ -132,7 +132,6 @@ exports.createPages = ({ graphql, actions }) => {
                                       slug
                                     }
                                 }
-                                externalUrl
                                 statusCode
                             }
                         }
@@ -271,7 +270,7 @@ exports.createPages = ({ graphql, actions }) => {
                         return
                     }
 
-                    const path = redirect.node.externalUrl ? redirect.node.externalUrl : linkResolver.path(redirect.node.toPath)
+                    const path = linkResolver.path(redirect.node.toPath)
                     const isPermanent = redirect.node.isPermanent !== null ? redirect.node.isPermanent : false
 
                     createRedirect({
