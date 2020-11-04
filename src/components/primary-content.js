@@ -159,6 +159,16 @@ const options = {
                         />
                     )
                 case 'application':
+                    if (mimeSet === 'vnd.ms-excel') {
+                        return (
+                            <div className={styles.csv}>
+                                <TabularContent
+                                    fileUrl={file.url}
+                                    caption={description}
+                                />
+                            </div>
+                        )
+                    }
                     return (
                         <a
                             alt={description ? description : null}
