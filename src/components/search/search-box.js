@@ -8,8 +8,10 @@ import {
     Highlight,
     Pagination,
     connectStateResults,
+    connectHitInsights,
 } from 'react-instantsearch-dom'
 import algoliasearch from 'algoliasearch/lite'
+import aa from 'search-insights'
 import * as hitComps from './hit-comps'
 import SearchInput from './input'
 
@@ -39,11 +41,18 @@ export default function SearchBox({ indices, collapse, hitsAsGrid }) {
         process.env.GATSBY_ALGOLIA_SEARCH_KEY
     )
 
+    aa('init', {
+        appId: process.env.GATSBY_ALGOLIA_APP_ID,
+        apiKey: process.env.GATSBY_ALGOLIA_SEARCH_KEY
+    })
+
     const [focus, setFocus] = useState(false)
     const [hold, setHold] = useState(false)
 
     const indexName = indices[0].name
     const hitComp = indices[0].hitComp
+
+    const hitWithInsights = typeof window !== 'undefined' ? connectHitInsights(aa)(hitComps[hitComp]) : hitComps[hitComp]
 
     const query = 'No More...'
 
@@ -54,7 +63,7 @@ export default function SearchBox({ indices, collapse, hitsAsGrid }) {
                 indexName={indexName}
                 // onSearchStateChange={({ query }) => setQuery(query)}
             >
-                <Configure hitsPerPage={10} />
+                <Configure hitsPerPage={15} clickAnalytics />
                 <div className={styles.search}>
                     <SearchInput setFocus={setFocus} hold={hold} />
                     <h2 className={styles.heading}>
@@ -73,7 +82,7 @@ export default function SearchBox({ indices, collapse, hitsAsGrid }) {
                             <Results>
                                 <Hits
                                     className={styles.hits}
-                                    hitComponent={hitComps[hitComp]}
+                                    hitComponent={hitWithInsights}
                                 />
                                 <Pagination className={styles.pagination} />
                             </Results>
