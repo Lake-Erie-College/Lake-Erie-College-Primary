@@ -7,8 +7,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import styles from './hit-comp.module.scss'
 
-const linkResolver = require('../../utils').linkResolver
-
 const hitHandlers = {
     academicOffering: value => <AcademicOffering hit={value} />,
     standardPage: value => <StandardPage hit={value} />,
@@ -21,7 +19,7 @@ const hitHandlers = {
 
 export const PageHit = clickHandler => ({ hit }) => (
     <div>
-        <h4>
+        <h4 data-object-id={hit.objectID} data-position={hit.__hitIndex}>
             <TextLink node={hit} onClick={clickHandler} className={styles.link}>
                 <Highlight attribute="title" hit={hit} tagName="mark" />
             </TextLink>
@@ -30,11 +28,24 @@ export const PageHit = clickHandler => ({ hit }) => (
     </div>
 )
 
-export const SearchHit = ({ hit }) => {
+export const SearchHit = ({ hit, insights }) => {
     const type = get(hit, 'sys.contentType.sys.contentful_id')
     const handler = hitHandlers[type] || hitHandlers.default
 
-    return <div className={styles.hit}>{handler(hit)}</div>
+    return (
+        <div
+            className={styles.hit}
+            data-object-id={hit.objectID}
+            data-position={hit.__position + 1}
+            onClick={() =>
+                insights('clickedObjectIDsAfterSearch', {
+                  eventName: 'View Page'
+                })
+              }
+        >
+            {handler(hit)}
+        </div>
+    )
 }
 
 const AcademicOffering = ({ hit }) => {
@@ -57,7 +68,9 @@ const AcademicOffering = ({ hit }) => {
                     <span className={styles.overline}>{hit.offeringType}</span>
                 )}
                 {hit.category && (
-                    <span className={styles.category}>{hit.category.title}</span>
+                    <span className={styles.category}>
+                        {hit.category.title}
+                    </span>
                 )}
 
                 <TextLink node={hit} className={styles.link}>
@@ -98,7 +111,9 @@ const StandardPage = ({ hit }) => {
                     <span className={styles.overline}>{hit.shortTitle}</span>
                 )}
                 {hit.category && (
-                    <span className={styles.category}>{hit.category.title}</span>
+                    <span className={styles.category}>
+                        {hit.category.title}
+                    </span>
                 )}
                 <TextLink node={hit} className={styles.link}>
                     {hitTitle}
@@ -122,7 +137,6 @@ const StandardPage = ({ hit }) => {
 }
 
 const Person = ({ hit }) => {
-    
     const hasPrimaryContent =
         typeof hit.primaryContent !== 'undefined' && hit.primaryContent !== null
     const hasDescription =
@@ -142,7 +156,9 @@ const Person = ({ hit }) => {
                     <span className={styles.overline}>{hit.offeringType}</span>
                 )}
                 {hit.department && (
-                    <span className={styles.category}>{hit.department.title}</span>
+                    <span className={styles.category}>
+                        {hit.department.title}
+                    </span>
                 )}
                 <TextLink node={hit} className={styles.link}>
                     {hitTitle}
@@ -166,7 +182,6 @@ const Person = ({ hit }) => {
 }
 
 const Location = ({ hit }) => {
-    
     const hasPrimaryContent =
         typeof hit.primaryContent !== 'undefined' && hit.primaryContent !== null
     const hasDescription =
@@ -186,7 +201,9 @@ const Location = ({ hit }) => {
                     <span className={styles.overline}>{hit.offeringType}</span>
                 )}
                 {hit.category && (
-                    <span className={styles.category}>{hit.category.title}</span>
+                    <span className={styles.category}>
+                        {hit.category.title}
+                    </span>
                 )}
                 <TextLink node={hit} className={styles.link}>
                     {hitTitle}
@@ -210,7 +227,6 @@ const Location = ({ hit }) => {
 }
 
 const Event = ({ hit }) => {
-    
     const hasPrimaryContent =
         typeof hit.primaryContent !== 'undefined' && hit.primaryContent !== null
     const hasDescription =
@@ -230,7 +246,9 @@ const Event = ({ hit }) => {
                     <span className={styles.overline}>{hit.offeringType}</span>
                 )}
                 {hit.category && (
-                    <span className={styles.category}>{hit.category.title}</span>
+                    <span className={styles.category}>
+                        {hit.category.title}
+                    </span>
                 )}
                 <TextLink node={hit} className={styles.link}>
                     {hitTitle}
@@ -270,7 +288,9 @@ const Department = ({ hit }) => {
                     <span className={styles.overline}>{hit.offeringType}</span>
                 )}
                 {hit.category && (
-                    <span className={styles.category}>{hit.category.title}</span>
+                    <span className={styles.category}>
+                        {hit.category.title}
+                    </span>
                 )}
                 <TextLink node={hit} className={styles.link}>
                     {hitTitle}

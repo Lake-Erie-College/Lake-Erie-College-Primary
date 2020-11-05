@@ -14288,6 +14288,11 @@ scss-tokenizer@^0.2.3:
     js-base64 "^2.1.8"
     source-map "^0.4.2"
 
+search-insights@^1.6.3:
+  version "1.6.3"
+  resolved "https://registry.yarnpkg.com/search-insights/-/search-insights-1.6.3.tgz#0a9467615c4929dee42d0a599eb38961c2f6aaad"
+  integrity sha512-Tvqm+M5A7Udw4MgVMYsy1zRbO1f1wb92ZpexADVu01WLX9yCLHek71EpjPsLDSqkbDwlXI3KFjM+1Y+JFQHpsQ==
+
 section-matter@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/section-matter/-/section-matter-1.0.0.tgz#e9041953506780ec01d59f292a19c7b850b84167"
