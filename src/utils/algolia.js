@@ -2,7 +2,7 @@ const pageQuery = `{
     pages: allContentfulStandardPage(filter: {hidden: {ne: true}}) {
         edges {
             node {
-                id
+                objectID: id
                 sys {
                     contentType {
                         sys {
@@ -10,6 +10,7 @@ const pageQuery = `{
                         }
                     }
                 }
+                updatedAt
                 description {
                     description
                 }
@@ -42,7 +43,7 @@ const pageQuery = `{
     people: allContentfulPerson(filter: {hidden: {ne: true}}) {
         edges {
             node {
-                id
+                objectID: id
                 sys {
                     contentType {
                         sys {
@@ -50,6 +51,7 @@ const pageQuery = `{
                         }
                     }
                 }
+                updatedAt
                 firstName
                 headshot {
                     file {
@@ -78,7 +80,7 @@ const pageQuery = `{
     locations: allContentfulLocation(filter: {hidden: {ne: true}}) {
         edges {
             node {
-                id
+                objectID: id
                 sys {
                     contentType {
                         sys {
@@ -86,6 +88,7 @@ const pageQuery = `{
                         }
                     }
                 }
+                updatedAt
                 hidden
                 category {
                     title
@@ -107,7 +110,7 @@ const pageQuery = `{
     events: allContentfulEvent(filter: {hidden: {ne: true}}) {
         edges {
             node {
-                id
+                objectID: id
                 sys {
                     contentType {
                         sys {
@@ -115,6 +118,7 @@ const pageQuery = `{
                         }
                     }
                 }
+                updatedAt
                 campusLocation {
                     shortTitle
                     slug
@@ -144,14 +148,15 @@ const pageQuery = `{
     departments: allContentfulDepartment(filter: {hidden: {ne: true}}) {
         edges {
             node {
-                id
+                objectID: id
                 sys {
-                contentType {
-                    sys {
-                        contentful_id
+                    contentType {
+                        sys {
+                            contentful_id
+                        }
                     }
                 }
-                }
+                updatedAt
                 hidden
                 department {
                     title
@@ -183,14 +188,15 @@ const pageQuery = `{
     offerings: allContentfulAcademicOffering(filter: {hidden: {ne: true}}) {
         edges {
             node {
-                id
+                objectID: id
                 sys {
-                contentType {
-                    sys {
-                    contentful_id
+                    contentType {
+                        sys {
+                        contentful_id
+                        }
                     }
                 }
-                }
+                updatedAt
                 lead {
                 lead
                 }
@@ -237,7 +243,7 @@ const offeringQuery = `{
     offerings: allContentfulAcademicOffering(filter: {hidden: {ne: true}}) {
         edges {
             node {
-                id
+                objectID: id
                 sys {
                     contentType {
                         sys {
@@ -245,6 +251,7 @@ const offeringQuery = `{
                         }
                     }
                 }
+                updatedAt
                 lead {
                     lead
                 }
@@ -288,7 +295,7 @@ const peopleQuery = `{
     people: allContentfulPerson(filter: {hidden: {ne: true}}) {
         edges {
             node {
-                id
+                objectID: id
                 sys {
                   contentType {
                     sys {
@@ -296,6 +303,7 @@ const peopleQuery = `{
                     }
                   }
                 }
+                updatedAt
                 firstName
                 headshot {
                     file {
