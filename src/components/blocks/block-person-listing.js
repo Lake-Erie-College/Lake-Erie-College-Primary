@@ -1,15 +1,9 @@
-import React, { useState } from 'react'
-import cx from "classnames"
-import { Link as GatsbyLink } from "gatsby"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import React from 'react'
 import Person from '../person'
-import GatsbyImage from "gatsby-image"
-
-const linkResolver = require('../../utils').linkResolver
 
 import styles from "./block-person-listing.module.scss";
 
-const BlockPersonListing = ({ title, primaryHeading, people }, ...rest) => {
+const BlockPersonListing = ({ title, primaryHeading, people }) => {
     const hasHeading = typeof primaryHeading !== 'undefined' && primaryHeading !== null
 
     return (
@@ -29,21 +23,6 @@ const BlockPersonListing = ({ title, primaryHeading, people }, ...rest) => {
                 )}
             </ul>
         </section>
-    )
-}
-
-const Link = ({ node, cta }) => {
-    const to = linkResolver.path(node)
-
-    return (
-        <p className={cx(styles.info, styles.building)}>
-            <GatsbyLink to={to} className={styles.internal}>
-                <FontAwesomeIcon icon='arrow-circle-right' size='sm' className={styles.icon} />
-                <span>
-                    {cta}
-                </span>
-            </GatsbyLink>
-        </p>
     )
 }
 

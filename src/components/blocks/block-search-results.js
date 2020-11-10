@@ -1,16 +1,20 @@
 import React from 'react'
 import SearchResults from '../search/search-results'
 
-const BlockSearchResults = () => {
-    const searchIndices = [
-        { name: `prod_LEC_Pages`, title: `Pages`, hitComp: `SearchHit` },
-        { name: `prod_LEC_People`, title: `People`, hitComp: `SearchHit` },
-        { name: `prod_LEC_Offerings`, title: `Offerings`, hitComp: `SearchHit` },
-        // { name: `Posts`, title: `Blog Posts`, hitComp: `PostHit` },
-    ]
-    
+const BlockSearchResults = ({searchType, primaryHeading, summary}) => {
+    const searchIndices = {
+        default: {},
+        Pages: { name: `prod_LEC_Pages`, title: `Pages`, hitComp: `SearchHit` },
+        People: { name: `prod_LEC_People`, title: `People`, hitComp: `SearchHit` },
+        Offerings: { name: `prod_LEC_Offerings`, title: `Offerings`, hitComp: `SearchHit` },
+    }
+
+    const selectedIndex = searchIndices[searchType] || searchIndices.default
+
     return (
-        <SearchResults indices={searchIndices} />
+        <div>
+            <SearchResults index={selectedIndex.name} hitComp={selectedIndex.hitComp} />
+        </div>
     )
 }
 

@@ -5,12 +5,14 @@ import TextLink from '../text-link'
 import get from 'lodash/get'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+import PersonThumb from '../person'
+
 import styles from './hit-comp.module.scss'
 
 const hitHandlers = {
     academicOffering: value => <AcademicOffering hit={value} />,
     standardPage: value => <StandardPage hit={value} />,
-    person: value => <Person hit={value} />,
+    person: value => <PersonThumb person={value} />,
     location: value => <Location hit={value} />,
     event: value => <Event hit={value} />,
     department: value => <Department hit={value} />,
@@ -31,6 +33,25 @@ export const PageHit = clickHandler => ({ hit }) => (
 export const SearchHit = ({ hit, insights }) => {
     const type = get(hit, 'sys.contentType.sys.contentful_id')
     const handler = hitHandlers[type] || hitHandlers.default
+
+    return (
+        <div
+            className={styles.hit}
+            data-object-id={hit.objectID}
+            data-position={hit.__position + 1}
+            onClick={() =>
+                insights('clickedObjectIDsAfterSearch', {
+                  eventName: 'View Page'
+                })
+              }
+        >
+            {handler(hit)}
+        </div>
+    )
+}
+
+export const PersonHit = ({ hit, insights }) => {
+    const handler = hitHandlers['person'] || hitHandlers.default
 
     return (
         <div

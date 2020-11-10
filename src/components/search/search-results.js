@@ -38,12 +38,11 @@ const Stats = connectStateResults(
         `${res.nbHits} result${res.nbHits > 1 ? `s` : ``}`
 )
 
-export default function SearchResults({ indices, collapse, hitsAsGrid }) {
+export default function SearchResults({ index, hitComp, collapse, hitsAsGrid }) {
     const [query, setQuery] = useQueryParam('query', StringParam)
     const [focus, setFocus] = useState(false)
 
-    const indexName = indices[0].name
-    const hitComp = indices[0].hitComp
+    const indexName = index
 
     return (
         <div className={styles.searchResults}>

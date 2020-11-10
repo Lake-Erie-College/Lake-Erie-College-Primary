@@ -374,4 +374,9 @@ export const _BlockSearchResults = graphql`
 fragment BlockSearchResults on ContentfulBlockSearchResults {
     id
     title
+    searchType
+    primaryHeading
+    summary {
+        summary
+    }
 }`

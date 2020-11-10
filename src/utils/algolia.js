@@ -304,28 +304,49 @@ const peopleQuery = `{
                   }
                 }
                 updatedAt
-                firstName
-                headshot {
-                    file {
-                        url
+                department {
+                    category {
+                    slug
                     }
+                    shortTitle
+                    slug
+                    title
                 }
                 emailAddress
+                firstName
+                headshot {
+                        title
+                        file {
+                            contentType
+                            details {
+                                image {
+                                    height
+                                    width
+                                }
+                            }
+                            fileName
+                            url
+                        }
+                        fluid {
+                            base64
+                            aspectRatio
+                            src
+                            srcSet
+                            srcWebp
+                            srcSetWebp
+                            sizes
+                        }
+                }
                 jobTitles {
                     jobTitles
                 }
-                department {
-                    title
-                    shortTitle
-                    slug
-                }
+                lastName
                 office
                 personType
                 phoneNumber
+                preferredFullName
                 shortTitle
-                slug
                 title
-                hidden
             }
         }
     }

@@ -372,9 +372,8 @@ const Quote = ({ node }) => {
 }
 
 const SearchResults = ({ node }) => {
-    const content = localeScrubber.scrub(node)
-
-    return <BlockSearchResults node={content} />
+    console.log(node)
+    return <BlockSearchResults searchType={node.searchType} primaryHeading={node.primaryHeading} summary={node.summary} />
 }
 
 const SpotlightContent = ({ node }) => {
