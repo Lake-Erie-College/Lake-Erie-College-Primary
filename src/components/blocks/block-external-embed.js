@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import * as typeformEmbed from '@typeform/embed' // https://www.npmjs.com/package/@typeform/embed
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -27,15 +27,17 @@ const BlockExternalEmbed = ({
             : 'Submit'
 
     if (isBlackbaud) {
-        if (typeof window !== 'undefined') {
-            if (typeof bbox !== 'undefined') {
-                bbox.showForm(blackbaud)
-            } else {
-                window.bboxInit = function() {
+        useEffect(() => {
+            if (typeof window !== 'undefined') {
+                if (typeof bbox !== 'undefined') {
                     bbox.showForm(blackbaud)
+                } else {
+                    window.bboxInit = function() {
+                        bbox.showForm(blackbaud)
+                    }
                 }
             }
-        }
+        }, []) // <-- empty array means 'run once'
 
         return (
             <div className={styles.contentEmbed}>
@@ -58,20 +60,20 @@ const BlockExternalEmbed = ({
     } else if (isAcuity) {
         return (
             <>
-            <div className={styles.contentEmbed}>
-                <iframe
-                    title="Schedule via Acuity"
-                    className={styles.embed}
-                    src={url}
-                    width="100%"
-                ></iframe>
-            </div>
-            <Helmet>
-                <script
-                    src="https://embed.acuityscheduling.com/js/embed.js"
-                    type="text/javascript"
-                />
-            </Helmet>
+                <div className={styles.contentEmbed}>
+                    <iframe
+                        title="Schedule via Acuity"
+                        className={styles.embed}
+                        src={url}
+                        width="100%"
+                    ></iframe>
+                </div>
+                <Helmet>
+                    <script
+                        src="https://embed.acuityscheduling.com/js/embed.js"
+                        type="text/javascript"
+                    />
+                </Helmet>
             </>
         )
     } else if (hasSource) {
@@ -102,7 +104,13 @@ const BlockExternalEmbed = ({
 
             return <div className={styles.embed} ref={embedRef}></div>
         } else {
-            return <iframe title={callToAction} className={styles.contentEmbed} src={url} />
+            return (
+                <iframe
+                    title={callToAction}
+                    className={styles.contentEmbed}
+                    src={url}
+                />
+            )
         }
     } else if (hasHTML) {
         const hasScript =
