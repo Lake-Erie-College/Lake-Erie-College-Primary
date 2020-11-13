@@ -49,7 +49,7 @@ const CarouselMediaWithCaptions = ({ content, hasControls, hasArrows }) => {
                         heading={media.mediaHeading}
                         caption={media.mediaCaption.mediaCaption}
                         internalLink={media.internalLink}
-                        externalLink={media.externalUrl}
+                        externalUrl={media.externalUrl}
                         callToAction={media.callToAction}
                         isOverlay={true}
                     />

@@ -39,7 +39,7 @@ const BlockMediaWithCaption = ({
         typeof isOverlay !== 'undefined' && isOverlay !== null
             ? styles.overlay
             : ''
-            
+
     return (
         <figure className={cx(styles.blockMedia, overlayClass)}>
             {!isImage && video && <VideoPlayer url={video} />}
