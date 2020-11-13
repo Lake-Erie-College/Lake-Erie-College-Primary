@@ -4,6 +4,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import styles from './block-external-embed.module.scss'
+import { black } from 'chalk'
 
 const BlockExternalEmbed = ({
     displayTitle,
@@ -27,26 +28,20 @@ const BlockExternalEmbed = ({
             : 'Submit'
 
     if (isBlackbaud) {
-        
-        if (typeof window !== 'undefined') {
-            if (typeof bbox !== 'undefined' && typeof bb$ !== 'undefined') {
-                console.log('Running BBOX without Init')
-                bbox.showForm(blackbaud)
-            } else {
-                console.log('Running BBOX with Init')
-                window.bboxInit = function() {
-                    bbox.showForm(blackbaud)
-                }
-            }
-        }
-
         return (
             <div className={styles.contentEmbed}>
                 <div id={'bbox-root'} className={styles.embed}></div>
+                <Helmet 
+                    script={[{ 
+                        type: 'text/javascript', 
+                        innerHTML: `window.bboxInit = function() { bbox.showForm('${blackbaud}') };`
+                    }]} 
+                />
                 <Helmet>
                     <script
                         src="https://bbox.blackbaudhosting.com/webforms/bbox-min.js"
                         type="text/javascript"
+                        async="true"
                     />
                 </Helmet>
             </div>

@@ -22,10 +22,6 @@ class Template extends React.Component {
                 <Helmet>
                     <html lang="en" />
                     <meta name="google-site-verification" content="rqzFQ4nSxKtJktJRsEvcCQlu6maeWntllPVMdsRdO0w" />
-                    <script
-                        src="https://bbox.blackbaudhosting.com/webforms/bbox-min.js"
-                        type="text/javascript"
-                    />
                 </Helmet>
                 <GlobalHeader />
                 {children}
