@@ -30,10 +30,18 @@ const BlockExternalEmbed = ({
         useEffect(() => {
             if (typeof window !== 'undefined') {
                 if (typeof bbox !== 'undefined') {
-                    bbox.showForm(blackbaud)
+                    try {
+                        bbox.showForm(blackbaud)
+                    } catch (error) {
+                        console.error(error)
+                    }
                 } else {
                     window.bboxInit = function() {
-                        bbox.showForm(blackbaud)
+                        try {
+                            bbox.showForm(blackbaud)
+                        } catch (error) {
+                            console.error(error)
+                        }
                     }
                 }
             }
