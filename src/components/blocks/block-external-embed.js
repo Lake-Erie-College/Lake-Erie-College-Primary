@@ -37,17 +37,17 @@ const BlockExternalEmbed = ({
                     }
                 }
             }
-        }, []) // <-- empty array means 'run once'
+        }, [isBlackbaud, blackbaud]) // <-- empty array means 'run once'
 
         return (
             <div className={styles.contentEmbed}>
+                <div id={'bbox-root'} className={styles.embed}></div>
                 <Helmet>
                     <script
                         src="https://bbox.blackbaudhosting.com/webforms/bbox-min.js"
                         type="text/javascript"
                     />
                 </Helmet>
-                <div id={'bbox-root'} className={styles.embed}></div>
             </div>
         )
     } else if (isSimpleCheckout) {
