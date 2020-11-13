@@ -325,6 +325,7 @@ fragment BlockMediaWithCaption on ContentfulBlockMediaWithCaption {
       ...Event
       ...AcademicOffering
     }
+    externalUrl
     mediaCaption {
       mediaCaption
     }

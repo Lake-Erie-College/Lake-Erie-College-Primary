@@ -7,7 +7,7 @@ import styles from './input.module.scss'
 
 const DEBOUNCE_TIME = 400
 
-export default connectSearchBox(({ refine, setFocus, hold }, ...rest) => {
+export default connectSearchBox(({ refine, setFocus, hold, placeholder }) => {
     const [query, setQuery] = useState(null)
     const [category, setCategory] = useState(null)
 
@@ -51,7 +51,7 @@ export default connectSearchBox(({ refine, setFocus, hold }, ...rest) => {
             <input
                 className={styles.input}
                 type={'search'}
-                placeholder={'Search'}
+                placeholder={placeholder}
                 aria-label={'Search'}
                 onChange={e => onSearchQueryChange(targetElement.current.value)}
                 onFocus={e => onInputFocus(targetElement.current.value)}

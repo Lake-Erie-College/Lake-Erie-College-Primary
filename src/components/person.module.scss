@@ -6,19 +6,28 @@
 
 .person {
     margin: 0;
-
+    border: 2px solid $color-ui-03;
+    border-radius: 6px;
     color: $color-text-02;
+    overflow: hidden;
 
     @include respond-to('small') {
+        display: grid;
         grid-template-columns: 2fr 3fr;
         margin-left: 0;
         margin-right: 0;
         grid-column: main / right-main;
+        height: 100%;
     }
 }
 
 .details {
     padding: $spacing-md;
+
+    &:first-child {
+        /* Handles lack of person headshot */
+        grid-column: 1 / span 2;
+    }
 }
 
 .image {
@@ -75,8 +84,15 @@
         color: $color-hover-secondary;
     }
 
+    .text {
+        display: inline-block;
+        padding-right: $spacing-md;
+    }
+
     .icon {
-        margin-right: $spacing-xs;
+        display: inline-block;
+        margin-left: -$spacing-md;
+        transform: translate($spacing-lg);
     }
 
     .external {
@@ -86,10 +102,6 @@
     .internal {
         @include font-weight-body;
         text-decoration: none;
-
-        .icon {
-            margin-left: $spacing-xs;
-        }
     }
 }
 

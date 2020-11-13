@@ -7,19 +7,16 @@ import TextLink from '../text-link'
 
 import styles from './block-media-with-caption.module.scss'
 
-const BlockMediaWithCaption = (
-    {
-        internalMedia,
-        externalMedia,
-        heading,
-        caption,
-        internalLink,
-        externalUrl,
-        callToAction,
-        isOverlay,
-    },
-    ...rest
-) => {
+const BlockMediaWithCaption = ({
+    internalMedia,
+    externalMedia,
+    heading,
+    caption,
+    internalLink,
+    externalUrl,
+    callToAction,
+    isOverlay,
+}) => {
     const isImage =
         typeof internalMedia !== 'undefined' && internalMedia !== null
 
@@ -27,11 +24,14 @@ const BlockMediaWithCaption = (
         typeof externalMedia !== 'undefined' && externalMedia !== null
             ? externalMedia
             : null
-    const isExteranl = typeof externalUrl !== 'undefined' && externalUrl !== null
+    const isExternal =
+        typeof externalUrl !== 'undefined' && externalUrl !== null
     const hasRelatedPage =
-        ( typeof internalLink !== 'undefined' && internalLink !== null ) || isExteranl
+        (typeof internalLink !== 'undefined' && internalLink !== null) ||
+        isExternal
     const primaryHeading = typeof heading !== 'undefined' ? heading : null
-    const summary = typeof caption !== 'undefined' && caption !== null ? caption : null
+    const summary =
+        typeof caption !== 'undefined' && caption !== null ? caption : null
     const primaryImage =
         typeof internalMedia !== 'undefined' ? internalMedia : null
 
@@ -39,19 +39,23 @@ const BlockMediaWithCaption = (
         typeof isOverlay !== 'undefined' && isOverlay !== null
             ? styles.overlay
             : ''
-
+            
     return (
         <figure className={cx(styles.blockMedia, overlayClass)}>
             {!isImage && video && <VideoPlayer url={video} />}
             {isImage && <Image image={primaryImage} />}
-            { (heading || summary) && (
+            {(heading || summary) && (
                 <figcaption className={styles.mediaCaption}>
                     {heading && (
                         <h2 className={styles.heading}>{primaryHeading}</h2>
                     )}
                     {summary && <p className={styles.summary}>{summary}</p>}
                     {hasRelatedPage && callToAction && (
-                        <Link node={internalLink} cta={callToAction} uri={externalUrl} />
+                        <Link
+                            node={internalLink}
+                            cta={callToAction}
+                            uri={externalUrl}
+                        />
                     )}
                 </figcaption>
             )}
@@ -96,12 +100,8 @@ const Link = ({ node, cta, uri }) => {
 
     return (
         <p className={styles.info}>
-            {!isExternal && (
-                <TextLink node={node} children={cta} />
-            )}
-            {isExternal && (
-                <TextLink uri={uri} children={cta} /> 
-            )}
+            {!isExternal && <TextLink node={node} children={cta} />}
+            {isExternal && <TextLink uri={uri} children={cta} />}
             <FontAwesomeIcon
                 icon="arrow-circle-right"
                 size="sm"

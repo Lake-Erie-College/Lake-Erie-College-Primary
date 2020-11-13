@@ -12,7 +12,8 @@ import styles from './hit-comp.module.scss'
 const hitHandlers = {
     academicOffering: value => <AcademicOffering hit={value} />,
     standardPage: value => <StandardPage hit={value} />,
-    person: value => <PersonThumb person={value} />,
+    person: value => <Person hit={value} />,
+    personThumbnail: value => <PersonThumb person={value} />,
     location: value => <Location hit={value} />,
     event: value => <Event hit={value} />,
     department: value => <Department hit={value} />,
@@ -30,28 +31,11 @@ export const PageHit = clickHandler => ({ hit }) => (
     </div>
 )
 
-export const SearchHit = ({ hit, insights }) => {
+export const SearchHit = ({ hit, insights, thumbnail }) => {
     const type = get(hit, 'sys.contentType.sys.contentful_id')
-    const handler = hitHandlers[type] || hitHandlers.default
+    const useThumbnail = thumbnail || false
 
-    return (
-        <div
-            className={styles.hit}
-            data-object-id={hit.objectID}
-            data-position={hit.__position + 1}
-            onClick={() =>
-                insights('clickedObjectIDsAfterSearch', {
-                  eventName: 'View Page'
-                })
-              }
-        >
-            {handler(hit)}
-        </div>
-    )
-}
-
-export const PersonHit = ({ hit, insights }) => {
-    const handler = hitHandlers['person'] || hitHandlers.default
+    const handler = useThumbnail ? hitHandlers[`${type}Thumbnail`] || hitHandlers.default : hitHandlers[type] || hitHandlers.default
 
     return (
         <div
@@ -116,8 +100,6 @@ const AcademicOffering = ({ hit }) => {
 }
 
 const StandardPage = ({ hit }) => {
-    const hasPrimaryContent =
-        typeof hit.primaryContent !== 'undefined' && hit.primaryContent !== null
     const hasDescription =
         typeof hit.description !== 'undefined' &&
         hit.description !== null &&
@@ -128,8 +110,8 @@ const StandardPage = ({ hit }) => {
     return (
         <div className={styles.offeringHit}>
             <h2 className={styles.heading}>
-                {hit.shortTitle && (
-                    <span className={styles.overline}>{hit.shortTitle}</span>
+                {hit.isNews && (
+                    <span className={styles.overline}>News</span>
                 )}
                 {hit.category && (
                     <span className={styles.category}>
@@ -158,8 +140,6 @@ const StandardPage = ({ hit }) => {
 }
 
 const Person = ({ hit }) => {
-    const hasPrimaryContent =
-        typeof hit.primaryContent !== 'undefined' && hit.primaryContent !== null
     const hasDescription =
         typeof hit.description !== 'undefined' &&
         hit.description !== null &&
@@ -173,9 +153,6 @@ const Person = ({ hit }) => {
     return (
         <div className={styles.offeringHit}>
             <h2 className={styles.heading}>
-                {hit.offeringType && (
-                    <span className={styles.overline}>{hit.offeringType}</span>
-                )}
                 {hit.department && (
                     <span className={styles.category}>
                         {hit.department.title}
@@ -263,9 +240,7 @@ const Event = ({ hit }) => {
     return (
         <div className={styles.offeringHit}>
             <h2 className={styles.heading}>
-                {hit.offeringType && (
-                    <span className={styles.overline}>{hit.offeringType}</span>
-                )}
+                <span className={styles.overline}>Event</span>
                 {hit.category && (
                     <span className={styles.category}>
                         {hit.category.title}

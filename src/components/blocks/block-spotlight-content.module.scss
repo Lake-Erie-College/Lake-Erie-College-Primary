@@ -241,14 +241,18 @@ $navigation-color: $color-inverse-01;
     overflow: hidden;
 
     &::after {
+        display: none;
         position: absolute;
         top: -$spacing-sm;
         bottom: -$spacing-sm;
         right: 0;
         width: $spacing-md;
-        display: block;
         background: linear-gradient(to right bottom, #fff 49%, currentColor 50%), linear-gradient(-50deg, #ffffff 16px, #000 0);
         content: "";
+
+        @include respond-to('small') {
+            display: block;
+        }
     }
 
     @include respond-to('small') {

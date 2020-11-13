@@ -342,6 +342,7 @@ const MediaWithCaption = ({ node }) => {
                     : null
             }
             internalLink={content.internaLink}
+            externalUrl={content.externalUrl}
             callToAction={content.callToAction}
         />
     )

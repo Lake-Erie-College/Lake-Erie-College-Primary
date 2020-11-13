@@ -49,6 +49,11 @@
         height: 50vh;
     }
 
+    .hit {
+        padding: $spacing-sm 0;
+        border-bottom: 2px solid $color-ui-03;
+    }
+
     &:after, &:before {
         bottom: 100%;
         left: 50%;
@@ -85,6 +90,26 @@
 
     @include respond-to('small') {
         margin: $spacing-md 0;
+    }
+}
+
+.gridResults {
+    display: flex;
+    flex-wrap: wrap;
+
+    .hit {
+        flex: 0 1 100%;
+        margin: $spacing-md 0 0 0;
+        padding: 0 0 $spacing-xs 0;
+    
+        &:last-child {
+            border-width: 0;
+        }
+    
+        @include respond-to('medium') {
+            flex: 0 1 50%;
+            padding-right: $spacing-sm;
+        }
     }
 }
 

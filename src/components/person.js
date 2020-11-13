@@ -39,14 +39,14 @@ const Person = ({ person, displayName }, ...rest) => {
                 { departmentTo && (
                     <h4 className={cx(styles.info, styles.department)}>
                         <GatsbyLink to={departmentTo} className={styles.internal}>
-                            {person.department.title}<nobr><FontAwesomeIcon icon='external-link-square-alt' size='xs' className={styles.icon} /></nobr>
+                            <span className={styles.text}>{person.department.title}<FontAwesomeIcon icon='external-link-square-alt' size='xs' className={styles.icon} /></span>
                         </GatsbyLink>
                     </h4>
                 )}
                 { buildingTo && (
                     <p className={cx(styles.info, styles.building)}>
                         <GatsbyLink to={buildingTo} className={styles.internal}>
-                            {person.building.title}<nobr><FontAwesomeIcon icon='external-link-square-alt' size='xs' className={styles.icon} /></nobr>
+                            {person.building.title}<FontAwesomeIcon icon='external-link-square-alt' size='xs' className={styles.icon} />
                         </GatsbyLink>
                     </p>
                 )}

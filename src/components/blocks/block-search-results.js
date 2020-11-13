@@ -1,20 +1,24 @@
 import React from 'react'
-import SearchResults from '../search/search-results'
+import SearchBox from '../search/search-box'
 
-const BlockSearchResults = ({searchType, primaryHeading, summary}) => {
-    const searchIndices = {
-        default: {},
-        Pages: { name: `prod_LEC_Pages`, title: `Pages`, hitComp: `SearchHit` },
-        People: { name: `prod_LEC_People`, title: `People`, hitComp: `SearchHit` },
-        Offerings: { name: `prod_LEC_Offerings`, title: `Offerings`, hitComp: `SearchHit` },
-    }
+import styles from './block-search-results.module.scss'
 
-    const selectedIndex = searchIndices[searchType] || searchIndices.default
+const BlockSearchResults = ({ searchType, primaryHeading, summary }) => {
+    const hasContent = primaryHeading || summary
+    const hasSummary = typeof summary !== 'undefined' && typeof summary.summary !== 'undefined'
 
     return (
-        <div>
-            <SearchResults index={selectedIndex.name} hitComp={selectedIndex.hitComp} />
-        </div>
+        <section className={styles.blockSearchResults}>
+            {hasContent && (
+                <div>
+                    {primaryHeading && <h2 className={styles.heading}>{primaryHeading}</h2>}
+                    {hasSummary && <p className={styles.summary}>{summary.summary}</p>}
+                </div>
+            )}
+            <div className={styles.search}>
+                <SearchBox searchType={searchType} hitsAsGrid={true} />
+            </div>
+        </section>
     )
 }
 

@@ -22,8 +22,9 @@
     @include respond-to('small') {
         margin-left: 0;
         margin-right: 0;
-        grid-column: left-main / right-gutter;
+        grid-column: main / right-gutter;
         // grid-area: 1 / 3 / 6 / 5;
+        order: 2;
     }
 }
 
