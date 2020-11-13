@@ -27,13 +27,18 @@ const BlockExternalEmbed = ({
             : 'Submit'
 
     if (isBlackbaud) {
-        useEffect(() => {
-            if (typeof window !== 'undefined') {
+        
+        if (typeof window !== 'undefined') {
+            if (typeof bbox !== 'undefined' && typeof bb$ !== 'undefined') {
+                console.log('Running BBOX without Init')
+                bbox.showForm(blackbaud)
+            } else {
+                console.log('Running BBOX with Init')
                 window.bboxInit = function() {
                     bbox.showForm(blackbaud)
                 }
             }
-        }, [isBlackbaud, blackbaud]) // <-- empty array means 'run once'
+        }
 
         return (
             <div className={styles.contentEmbed}>
