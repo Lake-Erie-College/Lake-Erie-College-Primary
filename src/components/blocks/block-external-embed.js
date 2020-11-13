@@ -29,20 +29,8 @@ const BlockExternalEmbed = ({
     if (isBlackbaud) {
         useEffect(() => {
             if (typeof window !== 'undefined') {
-                if (typeof bbox !== 'undefined') {
-                    try {
-                        bbox.showForm(blackbaud)
-                    } catch (error) {
-                        console.error(error)
-                    }
-                } else {
-                    window.bboxInit = function() {
-                        try {
-                            bbox.showForm(blackbaud)
-                        } catch (error) {
-                            console.error(error)
-                        }
-                    }
+                window.bboxInit = function() {
+                    bbox.showForm(blackbaud)
                 }
             }
         }, [isBlackbaud, blackbaud]) // <-- empty array means 'run once'
