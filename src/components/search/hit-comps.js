@@ -5,12 +5,14 @@ import TextLink from '../text-link'
 import get from 'lodash/get'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+import OfferingThumb from '../offering'
 import PersonThumb from '../person'
 
 import styles from './hit-comp.module.scss'
 
 const hitHandlers = {
     academicOffering: value => <AcademicOffering hit={value} />,
+    academicOfferingThumbnail: value => <OfferingThumb offering={value} isThumb={true} />,
     standardPage: value => <StandardPage hit={value} />,
     person: value => <Person hit={value} />,
     personThumbnail: value => <PersonThumb person={value} />,
@@ -310,6 +312,7 @@ const Department = ({ hit }) => {
 }
 
 export const TestHit = ({ hit }) => {
+    console.log(hit)
     return <div>Test Hit</div>
 }
 

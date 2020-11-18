@@ -98,7 +98,7 @@
 
     .hit {
         flex: 0 1 100%;
-        margin: $spacing-md 0 0 0;
+        margin: $spacing-xs $spacing-sm 0 $spacing-sm;
         padding: 0 0 $spacing-xs 0;
     
         &:last-child {
@@ -107,13 +107,15 @@
     
         @include respond-to('medium') {
             flex: 0 1 50%;
+            margin-left: 0;
+            margin-right: 0;
             padding-right: $spacing-sm;
         }
     }
 }
 
 .introduction {
-    @include respond-to('small') {
+    @include respond-to('medium') {
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr;
@@ -141,12 +143,17 @@
 }
 
 .summary {
-    margin-bottom: $spacing-sm;
+    margin: 0 $spacing-md $spacing-sm $spacing-md ;
     @include font-family;
     @include font-weight-body;
     @include line-height('body');
     @include typescale('body1');
     white-space: pre-wrap;
+
+    @include respond-to('small') {
+        margin-left: 0;
+        margin-right: 0;
+    }
 }
 
 .hits {

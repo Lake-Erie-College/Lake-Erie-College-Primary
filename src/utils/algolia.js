@@ -264,7 +264,10 @@ const offeringQuery = `{
                     slug
                 }
                 description {
-                description
+                    description
+                }
+                summary {
+                    summary
                 }
                 hidden
                 offeringType
