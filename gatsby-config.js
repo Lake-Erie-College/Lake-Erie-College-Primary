@@ -44,10 +44,6 @@ module.exports = {
                 apiKey: process.env.ALGOLIA_ADMIN_KEY,
                 queries,
                 chunkSize: 10000, // default: 1000
-                enablePartialUpdates: true,
-                /* (optional) Fields to use for comparing if the index object is different from the new one */
-                /* By default it uses a field called "modified" which could be a boolean | datetime string */
-                matchFields: ['slug', 'updatedAt'], // Array<String> default: ['modified']
             },
         },
         {

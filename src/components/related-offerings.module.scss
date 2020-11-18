@@ -38,3 +38,118 @@
         grid-column: left-main / right-gutter;
     }
 }
+
+.heading {
+    margin: 0 $spacing-md;
+    grid-column: left-gutter / end;
+
+    @include font-family-headings;
+    font-weight: 400;
+    @include line-height('heading');
+    @include font-smoothing;
+    @include letter-spacing;
+    @include typescale('h4');
+
+    text-align: center;
+
+    color: $color-text-02;
+
+    @include respond-to('small') {
+        margin-left: 0;
+        margin-right: 0;
+        @include typescale('h3');
+        grid-column: main / right-main;
+    }
+}
+
+.overline {
+    display: inline;
+    padding: $spacing-2xs $spacing-xs;
+    @include font-family;
+    font-weight: 400;
+    @include line-height('body');
+    @include letter-spacing-wide;
+    @include typescale('body2');
+    background-color: $color-ui-04;
+    border-radius: 4px;
+    text-transform: uppercase;
+    color: $color-brand-01;
+
+    &:after {
+        content: '\A';
+        white-space: pre;
+    }
+
+    @include respond-to('small') {
+        @include typescale('overline');
+    }
+}
+
+.tags {
+    display: block;
+    padding: $spacing-xs 0;
+    @include font-family;
+    font-weight: 400;
+    @include line-height('body');
+    @include letter-spacing-wide;
+    @include typescale('body2');
+    background-color: $color-ui-01;
+    border-radius: 0;
+    text-transform: uppercase;
+    color: $color-brand-01;
+
+    &:after {
+        content: '\A';
+        white-space: pre;
+    }
+
+    span {
+        margin-right: $spacing-xs;
+        padding-right: $spacing-xs;
+        border-right: 1px solid currentColor;
+    }
+
+    span:last-child {
+        border-right: none;
+    }
+}
+
+.courseHeading {
+    margin: 0 $spacing-md;
+    @include font-family-headings;
+    font-weight: 400;
+    @include line-height('heading');
+    @include font-smoothing;
+    @include letter-spacing;
+    @include typescale('h4');
+
+    @include respond-to('small') {
+        margin-left: 0;
+        margin-right: 0;
+        @include typescale('h3');
+    }
+}
+
+.courseSummary {
+    margin: 0 $spacing-md $spacing-xs $spacing-md;
+    @include font-family;
+    @include font-weight-body;
+    @include line-height('body');
+    @include typescale('body1');
+
+    @include respond-to('small') {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+.internal {
+    text-decoration: none;
+
+    .icon {
+        position: relative;
+        top: -.2em;
+        margin-left: $spacing-xs;
+        font-size: .4em;
+    }
+}
