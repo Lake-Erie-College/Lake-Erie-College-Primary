@@ -9,7 +9,6 @@
     flex-direction: column;
     justify-content: flex-end;
     align-content: center;
-    padding: $spacing-sm;
     height: 100%;
 }
 
@@ -113,10 +112,17 @@
     }
 }
 
+.introduction {
+    @include respond-to('small') {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+    }
+}
+
 .heading {
-    display: none;
     margin: 0 $spacing-md;
-    grid-column: left-gutter / end;
+    padding: $spacing-sm 0 0 0;
 
     @include font-family-headings;
     font-weight: 400;
@@ -131,8 +137,16 @@
         margin-left: 0;
         margin-right: 0;
         @include typescale('h3');
-        grid-column: main / right-main;
     }
+}
+
+.summary {
+    margin-bottom: $spacing-sm;
+    @include font-family;
+    @include font-weight-body;
+    @include line-height('body');
+    @include typescale('body1');
+    white-space: pre-wrap;
 }
 
 .hits {
@@ -154,13 +168,60 @@
 }
 
 .pagination {
-    display: none;
     margin: 0 $spacing-md;
-    grid-column: left-gutter / end;
+    width: 100%;
 
     @include respond-to('small') {
         margin-left: 0;
         margin-right: 0;
-        grid-column: main / right-main;
+    }
+
+    ul {
+        display: block;
+        width: 100%;
+        text-align: center;
+
+        li {
+            display: inline-block;
+            margin: $spacing-2xs;
+            @include font-family;
+            @include font-weight-body-bold;
+            @include line-height('body');
+            @include typescale('body1');
+
+            a {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: $spacing-2xs;
+                width: 2.5rem;
+                height: 2.5rem;
+                background-color: $color-field-01;
+                border-radius: 4px;
+
+                &:link,
+                &:visited {
+                    text-decoration: none;
+                    color: white;
+                }
+
+                &:hover {
+                    background-color: $color-brand-03;
+                }
+            }
+
+            span {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: $spacing-2xs;
+                width: 2.5rem;
+                height: 2.5rem;
+                border-width: 1px;
+                border-style: solid;
+                border-radius: 4px;
+                border-color: $color-field-01;
+            }
+        }
     }
 }

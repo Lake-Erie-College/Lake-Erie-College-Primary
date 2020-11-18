@@ -23,13 +23,17 @@ const Stats = connectStateResults(
 )
 
 const Results = connectStateResults(
-    ({ searchState: state, searchResults: res, children }) =>
-        res && res.nbHits > 0 ? (
-            children
+    ({ searchState: searchState, searchResults: res, children }) =>
+        searchState && searchState.query ? (
+            res && res.nbHits > 0 ? (
+                children
+            ) : (
+                <p className={styles.hits}>
+                    Your search did not return any results.
+                </p>
+            )
         ) : (
-            <p className={styles.hits}>
-                Your search did not return any results.
-            </p>
+            <div></div>
         )
 )
 
@@ -38,6 +42,8 @@ export default function SearchBox({
     indices,
     collapse,
     hitsAsGrid,
+    heading,
+    summary
 }) {
     const searchIndices = {
         default: {
@@ -81,6 +87,9 @@ export default function SearchBox({
     const [focus, setFocus] = useState(false)
     const [hold, setHold] = useState(false)
 
+    const hasContent = heading || summary
+    const hasSummary = typeof summary !== 'undefined' && summary !== null
+
     const indexName = selectedIndex.name
     const hitComp = selectedIndex.hitComp
 
@@ -90,13 +99,26 @@ export default function SearchBox({
                 searchClient={searchClient}
                 indexName={indexName}
             >
-                <Configure hitsPerPage={15} clickAnalytics />
+                <Configure hitsPerPage={10} clickAnalytics />
                 <div className={styles.search}>
-                    <SearchInput
-                        setFocus={setFocus}
-                        hold={hold}
-                        placeholder={selectedIndex.helpText}
-                    />
+                    {hasContent && (
+                        <div className={styles.introduction}>
+                            {heading && <h2 className={styles.heading}>{heading}</h2>}
+                            <SearchInput
+                                setFocus={setFocus}
+                                hold={hold}
+                                placeholder={selectedIndex.helpText}
+                            />
+                            {hasSummary && <p className={styles.summary}>{summary.summary}</p>}
+                        </div>
+                    )}
+                    {!hasContent && (
+                        <SearchInput
+                            setFocus={setFocus}
+                            hold={hold}
+                            placeholder={selectedIndex.helpText}
+                        />
+                    )}
                     <Results>
                         {focus && !hitsAsGrid && (
                             <div
@@ -106,7 +128,6 @@ export default function SearchBox({
                                 onClick={() => setHold(true)}
                             >
                                 <CustomHits hitComp={hitComp} />
-                                <Pagination className={styles.pagination} />
                             </div>
                         )}
                         {hitsAsGrid && (

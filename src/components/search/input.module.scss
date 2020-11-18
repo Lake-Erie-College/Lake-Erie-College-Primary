@@ -6,6 +6,7 @@
 
 .form {
     display: flex;
+    padding: $spacing-sm;
     width: 100%;
 }
 
@@ -29,6 +30,11 @@
     margin: 0 0 0 $spacing-xs;
     background-color: $color-field-01;
     border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $color-brand-03;
+    }
 }
 
 .icon {
