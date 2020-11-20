@@ -55,7 +55,6 @@
 .mediaCaption {
     padding: $spacing-md $spacing-md $spacing-xs $spacing-md;
     background-color: rgba($color-brand-03, .75);
-    text-align: center;
     color: $color-inverse-01;
 
     @include respond-to('small') {

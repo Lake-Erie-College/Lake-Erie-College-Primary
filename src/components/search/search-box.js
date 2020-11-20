@@ -1,5 +1,6 @@
-import React, { useState, useEffect, createRef } from 'react'
+import React from 'react'
 
+import FocusWithin from 'react-focus-within'
 import {
     InstantSearch,
     Configure,
@@ -43,7 +44,7 @@ export default function SearchBox({
     collapse,
     hitsAsGrid,
     heading,
-    summary
+    summary,
 }) {
     const searchIndices = {
         default: {
@@ -84,9 +85,6 @@ export default function SearchBox({
         apiKey: process.env.GATSBY_ALGOLIA_SEARCH_KEY,
     })
 
-    const [focus, setFocus] = useState(false)
-    const [hold, setHold] = useState(false)
-
     const hasContent = heading || summary
     const hasSummary = typeof summary !== 'undefined' && summary !== null
 
@@ -95,53 +93,60 @@ export default function SearchBox({
 
     return (
         <div className={styles.searchBox}>
-            <InstantSearch
-                searchClient={searchClient}
-                indexName={indexName}
-            >
-                <Configure hitsPerPage={10} clickAnalytics />
-                <div className={styles.search}>
-                    {hasContent && (
-                        <div className={styles.introduction}>
-                            {heading && <h2 className={styles.heading}>{heading}</h2>}
-                            <SearchInput
-                                setFocus={setFocus}
-                                hold={hold}
-                                placeholder={selectedIndex.helpText}
-                            />
-                            {hasSummary && <p className={styles.summary}>{summary.summary}</p>}
-                        </div>
-                    )}
-                    {!hasContent && (
-                        <SearchInput
-                            setFocus={setFocus}
-                            hold={hold}
-                            placeholder={selectedIndex.helpText}
-                        />
-                    )}
-                    <Results>
-                        {focus && !hitsAsGrid && (
-                            <div
-                                className={styles.results}
-                                onMouseEnter={() => setHold(true)}
-                                onMouseLeave={() => setHold(false)}
-                                onClick={() => setHold(true)}
-                            >
-                                <CustomHits hitComp={hitComp} />
-                            </div>
-                        )}
-                        {hitsAsGrid && (
-                            <div className={styles.gridResults}>
-                                <CustomHits
-                                    hitComp={hitComp}
-                                    hitsAsGrid={true}
+            <FocusWithin>
+                {({ focusProps, isFocused }) => (
+                    <InstantSearch
+                        searchClient={searchClient}
+                        indexName={indexName}
+                    >
+                        <Configure hitsPerPage={10} clickAnalytics />
+                        <div className={styles.search} {...focusProps} >
+                            {hasContent && (
+                                <div className={styles.introduction}>
+                                    {heading && (
+                                        <h2 className={styles.heading}>
+                                            {heading}
+                                        </h2>
+                                    )}
+                                    <SearchInput
+                                        placeholder={selectedIndex.helpText}
+                                    />
+                                    {hasSummary && (
+                                        <p className={styles.summary}>
+                                            {summary.summary}
+                                        </p>
+                                    )}
+                                </div>
+                            )}
+                            {!hasContent && (
+                                <SearchInput
+                                    placeholder={selectedIndex.helpText}
                                 />
-                                <Pagination className={styles.pagination} />
-                            </div>
-                        )}
-                    </Results>
-                </div>
-            </InstantSearch>
+                            )}
+                            <Results>
+                                {(isFocused) && !hitsAsGrid && (
+                                    <div
+                                        className={styles.results}
+                                    >
+                                        <CustomHits hitComp={hitComp} />
+                                    </div>
+                                )}
+                                {hitsAsGrid && (
+                                    <div className={styles.gridResults}>
+                                        <CustomHits
+                                            hitComp={hitComp}
+                                            hitsAsGrid={true}
+                                        />
+                                        <Pagination
+                                            className={styles.pagination}
+                                        />
+                                    </div>
+                                )}
+                            </Results>
+                        </div>
+                    </InstantSearch>
+                )}
+            </FocusWithin>
         </div>
     )
 }
@@ -152,7 +157,6 @@ const HitWithInsights =
         : hitComps['SearchHit']
 
 const SearchHits = ({ hits, hitsAsGrid }) => {
-
     return (
         <>
             {hitsAsGrid && (
@@ -162,7 +166,11 @@ const SearchHits = ({ hits, hitsAsGrid }) => {
                             key={`search-hit-${hit.objectID}`}
                             className={styles.hit}
                         >
-                            <HitWithInsights key={hit.objectID} hit={hit} thumbnail={true} />
+                            <HitWithInsights
+                                key={hit.objectID}
+                                hit={hit}
+                                thumbnail={true}
+                            />
                         </li>
                     ))}
                 </ol>

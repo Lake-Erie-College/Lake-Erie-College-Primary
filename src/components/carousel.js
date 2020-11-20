@@ -53,7 +53,7 @@ const CarouselMediaWithCaptions = ({ content, hasControls, hasArrows }) => {
                 showElements="1"
                 width="100%"
                 direction="horizontal"
-                autoPlayInterval={5000}
+                autoPlayInterval={10000}
                 pauseOnMouseOver={true}
                 stopOnInteraction={true}
             >
