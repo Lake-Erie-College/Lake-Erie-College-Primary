@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import cx from 'classnames'
 import get from 'lodash/get'
-import FocusLock from 'react-focus-lock'
+import FocusWithin from 'react-focus-within'
 import { Link as GatsbyLink } from 'gatsby'
 import styles from './navigation-primary.module.scss'
 
@@ -56,38 +56,50 @@ const NavigationPrimary = () => {
         const [hover, toggleHover] = useState(false)
 
         return (
-            <li
-                className={cx(styles.navigationItem, {
-                    [`${styles.navigationItemPrimaryLevel}`]: level === 0,
-                    [`${styles.navigationItemOpen}`]: hover
-                })}
-                role="none"
-                onMouseEnter={() => toggleHover(hasPopup && true)}
-                onMouseLeave={() => toggleHover(hasPopup && false)}
-            >
-                <FocusLock disabled={!hover}>
-                    <NavigationLink
-                        level={level}
-                        link={link}
-                        hasPopup={hasPopup}
-                        isExpanded={hover}
-                        tabIndex={currentTabIndex}
-                    />
-                    {hasPopup && (
-                        <NavigationSubmenu
-                            level={level + 1}
-                            links={submenuItems}
-                            label={link.title}
-                            expand={hover}
-                            tabIndex={hover ? 0 : -1}
+            <FocusWithin>
+                {({ isFocused, focusProps }) => (
+                    <li
+                        {...focusProps}
+                        className={cx(styles.navigationItem, {
+                            [`${styles.navigationItemPrimaryLevel}`]:
+                                level === 0,
+                            [`${styles.navigationItemOpen}`]: isFocused || hover,
+                        })}
+                        role="none"
+                        onMouseEnter={() => toggleHover(hasPopup && true)}
+                        onMouseLeave={() => toggleHover(hasPopup && false)}
+                    >
+                        <NavigationLink
+                            level={level}
+                            link={link}
+                            hasPopup={hasPopup}
+                            isExpanded={hover}
+                            tabIndex={currentTabIndex}
+                            {...focusProps}
                         />
-                    )}
-                </FocusLock>
-            </li>
+                        {hasPopup && (
+                            <NavigationSubmenu
+                                level={level + 1}
+                                links={submenuItems}
+                                label={link.title}
+                                expand={hover}
+                                tabIndex={isFocused || hover ? 0 : -1}
+                                {...focusProps}
+                            />
+                        )}
+                    </li>
+                )}
+            </FocusWithin>
         )
     }
 
-    const NavigationLink = ({ level, link, hasPopup, isExpanded, tabIndex }) => {
+    const NavigationLink = ({
+        level,
+        link,
+        hasPopup,
+        isExpanded,
+        tabIndex,
+    }) => {
         const isExternal =
             typeof link.externalUrl !== 'undefined' && link.externalUrl !== null
 
@@ -186,7 +198,6 @@ const NavigationPrimary = () => {
     }
 
     const NavigationSubmenu = ({ level, links, label, expand, tabIndex }) => {
-
         return (
             <ul
                 className={cx(styles.navigationMenu, {
