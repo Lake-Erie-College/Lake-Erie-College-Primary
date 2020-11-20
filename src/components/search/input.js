@@ -6,7 +6,7 @@ import styles from './input.module.scss'
 
 const DEBOUNCE_TIME = 400
 
-export default connectSearchBox(({ refine, placeholder }) => {
+export default connectSearchBox(({ searchType, refine, placeholder }) => {
     const [debouncedSetQuery, setDebouncedSetQuery] = useState(null)
 
     const onSearchQueryChange = updatedSearchQuery => {
@@ -22,22 +22,38 @@ export default connectSearchBox(({ refine, placeholder }) => {
     const targetElement = useRef(null)
 
     return (
-        <form className={styles.form}>
+        <form
+            className={styles.form}
+            role="search"
+            aria-label={`All ${searchType}`}
+        >
+            <label className={styles.label} for={`search-${searchType}`}>
+                {placeholder}
+            </label>
             <input
+                id={`search-${searchType}`}
                 className={styles.input}
                 type={'search'}
                 placeholder={placeholder}
-                aria-label={'Search'}
-                onChange={e => onSearchQueryChange(targetElement.current.value)}
+                // onChange={e => onSearchQueryChange(targetElement.current.value)}
                 ref={targetElement}
+                spellCheck={false}
             />
-            <span className={styles.button} onClick={() => onSearchQueryChange(targetElement.current.value)}>
+            <button
+                type="submit"
+                className={styles.button}
+                onClick={event => {
+                    event.preventDefault()
+                    onSearchQueryChange(targetElement.current.value)
+                }}
+                aria-label="Search"
+            >
                 <FontAwesomeIcon
                     className={styles.icon}
                     icon="chevron-right"
                     size="lg"
                 />
-            </span>
+            </button>
         </form>
     )
 })

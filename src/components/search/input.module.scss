@@ -10,6 +10,10 @@
     width: 100%;
 }
 
+.label {
+    display: none;
+}
+
 .input { 
     flex: 1 4 80%;
     padding: $spacing-2xs $spacing-xs;

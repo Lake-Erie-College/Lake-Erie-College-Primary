@@ -100,7 +100,7 @@ export default function SearchBox({
                         indexName={indexName}
                     >
                         <Configure hitsPerPage={10} clickAnalytics />
-                        <div className={styles.search} {...focusProps} >
+                        <div className={styles.search} {...focusProps}>
                             {hasContent && (
                                 <div className={styles.introduction}>
                                     {heading && (
@@ -110,6 +110,7 @@ export default function SearchBox({
                                     )}
                                     <SearchInput
                                         placeholder={selectedIndex.helpText}
+                                        searchType={selectedIndex.title}
                                     />
                                     {hasSummary && (
                                         <p className={styles.summary}>
@@ -121,18 +122,23 @@ export default function SearchBox({
                             {!hasContent && (
                                 <SearchInput
                                     placeholder={selectedIndex.helpText}
+                                    searchType={selectedIndex.title}
                                 />
                             )}
                             <Results>
-                                {(isFocused) && !hitsAsGrid && (
+                                {isFocused && !hitsAsGrid && (
                                     <div
                                         className={styles.results}
+                                        aria-live="polite"
                                     >
                                         <CustomHits hitComp={hitComp} />
                                     </div>
                                 )}
                                 {hitsAsGrid && (
-                                    <div className={styles.gridResults}>
+                                    <div
+                                        className={styles.gridResults}
+                                        aria-live="polite"
+                                    >
                                         <CustomHits
                                             hitComp={hitComp}
                                             hitsAsGrid={true}

@@ -67,11 +67,12 @@ const CarouselMediaWithCaptions = ({ content, hasControls, hasArrows }) => {
                             // Do Nothing.
                             // setIndex(index + 1)
                         }}
+                        key={`focus-carousel-${media.id}`}
                     >
                         {({ isFocused, focusProps }) => (
                             <div {...focusProps} tabIndex={isFocused ? -1 : 0}>
                                 <BlockMediaWithCaption
-                                    key={`carousel-${media.title}`}
+                                    key={`carousel-${media.id}`}
                                     internalMedia={media.image}
                                     externalMedia={media.externalMediaUrl}
                                     heading={media.mediaHeading}
