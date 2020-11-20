@@ -143,6 +143,7 @@ const GlobalHeader = () => {
                         fluid={page.headerLogo.fluid}
                         file={page.headerLogo.file}
                         svg={page.headerLogo.svg}
+                        alt={page.headerLogo.description}
                     />
                 </GatsbyLink>
             </div>

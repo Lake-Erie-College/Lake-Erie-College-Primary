@@ -64,8 +64,6 @@ const BlockMediaWithCaption = ({
 }
 
 const Image = ({ image }) => {
-    const contentfulImage = image
-
     const title = image.title
 
     const file = image.file
@@ -74,10 +72,11 @@ const Image = ({ image }) => {
         <ImageWithSVGSupport
             className={styles.media}
             title={title}
-            fluid={contentfulImage.fluid}
+            fluid={image.fluid}
             file={file}
-            svg={contentfulImage.svg}
+            svg={image.svg}
             loading={'eager'}
+            alt={image.description}
         />
     )
 }

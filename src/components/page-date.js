@@ -23,7 +23,7 @@ const StartDate = ({ date }) => {
     const isValidTime = time !== '12:00 AM'
 
     return (
-        <time datetime={dateTime}>
+        <time dateTime={dateTime}>
             {dateText}
             {isValidTime && <span> {time} </span>}
         </time>
@@ -43,7 +43,7 @@ const EndDate = ({ startDate, date }) => {
     const isValidTime = time !== '12:00 AM'
 
     return (
-        <time datetime={dateTime}>
+        <time dateTime={dateTime}>
             - {!isSameDay && <span>{dateText}</span>}
             {isValidTime && <span> {time}</span>}
         </time>

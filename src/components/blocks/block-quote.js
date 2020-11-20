@@ -89,20 +89,18 @@ const UnknownType = () => {
 }
 
 const Image = ({ image }) => {
-    const contentfulImage = image
-
     const title = image.title
-
     const file = image.file
 
     return (
         <ImageWithSVGSupport
             className={styles.image}
             title={title}
-            fluid={contentfulImage.fluid}
+            fluid={image.fluid}
             file={file}
-            svg={contentfulImage.svg}
+            svg={image.svg}
             loading={'eager'}
+            alt={image.description}
         />
     )
 }

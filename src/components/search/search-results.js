@@ -44,15 +44,16 @@ export default function SearchResults({ searchType, collapse, hitsAsGrid }) {
 
     const searchIndices = {
         default: {},
-        Pages: { name: `prod_LEC_Pages`, title: `Pages`, hitComp: `SearchHit` },
-        People: { name: `prod_LEC_People`, title: `People`, hitComp: `SearchHit` },
-        Offerings: { name: `prod_LEC_Offerings`, title: `Offerings`, hitComp: `SearchHit` },
+        Pages: { name: `prod_LEC_Pages`, title: `Pages`, hitComp: `SearchHit`, filters: null },
+        People: { name: `prod_LEC_People`, title: `People`, hitComp: `SearchHit`, filters: `NOT personType:Student AND NOT personType:Alumni` },
+        Offerings: { name: `prod_LEC_Offerings`, title: `Offerings`, hitComp: `SearchHit`, filters: null },
     }
 
     const selectedIndex = searchIndices[searchType] || searchIndices.default
     
     const indexName = selectedIndex.name
     const hitComp = selectedIndex.hitComp
+    const filters = selectedIndex.filters
 
     return (
         <div className={styles.searchResults}>
@@ -61,7 +62,7 @@ export default function SearchResults({ searchType, collapse, hitsAsGrid }) {
                 indexName={indexName}
                 // onSearchStateChange={({ query }) => setQuery(query)}
             >
-                <Configure hitsPerPage={10} query={query}/>
+                <Configure hitsPerPage={10} query={query} filters={filters} />
                 <h2 className={styles.heading}>Your search for <mark className={styles.query}>{query}</mark> returned <Stats />.</h2>
                 
                 <Results>

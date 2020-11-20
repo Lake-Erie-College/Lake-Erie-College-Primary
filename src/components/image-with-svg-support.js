@@ -16,6 +16,7 @@ const ImageWithSVGSupport = ({ svg, className, title, fluid, file, alt }, ...res
             className={className}
             title={title}
             fluid={fluid}
+            alt={alt}
             {...rest}
         />
     )

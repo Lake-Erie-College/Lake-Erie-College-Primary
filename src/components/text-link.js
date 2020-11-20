@@ -119,7 +119,8 @@ export default ({ node, uri, children, formUrl, className }) => {
     } else if (!isExternal && isForm) {
 
         return (
-            <span
+            <a
+                href='#'
                 className={cx(styles.textLink, className)}
                 onMouseEnter={() => toggleHover(1)}
                 onMouseLeave={() => toggleHover(0)}
@@ -162,7 +163,7 @@ export default ({ node, uri, children, formUrl, className }) => {
                 >
                     {children}
                 </a.span>
-            </span>
+            </a>
         )
     }
 }

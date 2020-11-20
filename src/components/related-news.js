@@ -61,6 +61,7 @@ const News = ({ newsItem }) => {
                     className={styles.image}
                     title={newsItem.leadImage.description}
                     fluid={newsImage}
+                    alt={newsItem.leadImage.description}
                 />
             )}
             <NewsHeadingWithLink

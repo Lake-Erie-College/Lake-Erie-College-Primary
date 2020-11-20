@@ -24,6 +24,7 @@ class EventTemplate extends React.Component {
                             title={page.leadImage.title}
                             fluid={page.leadImage.fluid}
                             file={page.leadImage.file}
+                            description={page.leadImage.description}
                         />
                     )}
                     <PageHeading

@@ -2267,6 +2267,14 @@
     "@types/prop-types" "*"
     csstype "^3.0.2"
 
+"@types/react@^15.0.0 || ^16.0.0":
+  version "16.9.56"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.56.tgz#ea25847b53c5bec064933095fc366b1462e2adf0"
+  integrity sha512-gIkl4J44G/qxbuC6r2Xh+D3CGZpJ+NdWTItAPmZbR5mUS+JQ8Zvzpl0ea5qT/ZT3ZNTUcDKUVqV3xBE8wv/DyQ==
+  dependencies:
+    "@types/prop-types" "*"
+    csstype "^3.0.2"
+
 "@types/responselike@*":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@types/responselike/-/responselike-1.0.0.tgz#251f4fe7d154d2bad125abe1b429b23afd262e29"
@@ -13328,6 +13336,14 @@ react-focus-lock@^2.3.1:
     react-clientside-effect "^1.2.2"
     use-callback-ref "^1.2.1"
     use-sidecar "^1.0.1"
+
+react-focus-within@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/react-focus-within/-/react-focus-within-2.0.2.tgz#2ce2922b36bb8ebb4167a9e1fd32d2293240225e"
+  integrity sha512-6lqUYJRtcqjEvJtGjypQgBpClqC0bh4g1G6zMCKUSBoENWwjUEfKeiHtIHln9kH937czzzrGPUYTgN4CrvpOow==
+  dependencies:
+    "@types/react" "^15.0.0 || ^16.0.0"
+    prop-types "^15.6.1"
 
 react-helmet-async@^1.0.4:
   version "1.0.7"

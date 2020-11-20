@@ -7,8 +7,7 @@ import styles from "./person.module.scss"
 
 const linkResolver = require('../utils').linkResolver
 
-const Person = ({ person, displayName }, ...rest) => {
-    const hasOverline = typeof overline !== 'undefined'
+const Person = ({ person, displayName }) => {
     const shouldDisplayName = typeof displayName !== 'undefined' ? displayName : true
     const fullName = typeof person.preferredFullName !== 'undefined' && person.preferredFullName !== null ? person.preferredFullName : `${person.firstName} ${person.lastName}`
           

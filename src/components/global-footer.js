@@ -143,6 +143,7 @@ const GlobalFooter = () => {
                     fluid={page.footerImage.fluid}
                     file={page.footerImage.file}
                     svg={page.footerImage.svg}
+                    alt={page.footerImage.description}
                 />
             </div>
 
@@ -179,6 +180,7 @@ const GlobalFooter = () => {
                     fluid={page.footerLogo.fluid}
                     file={page.footerLogo.file}
                     svg={page.footerLogo.svg}
+                    alt={page.footerLogo.description}
                 />
             </div>
 

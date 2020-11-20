@@ -3,7 +3,9 @@ import cx from 'classnames'
 import BlockMediaWithCaption from './blocks/block-media-with-caption'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { Sled, Views, Progress, Control } from 'react-sled'
+import { FocusWithin } from 'react-focus-within'
+
+import { Sled, Views, Control } from 'react-sled'
 // import 'react-sled/dist/main.css'
 
 import styles from './carousel.module.scss'
@@ -37,22 +39,53 @@ const Carousel = ({ content, images, displayDots, displayArrows }) => {
     )
 }
 
+const handleFocus = index => {
+    return console.log('FOCUS', index)
+}
+
 const CarouselMediaWithCaptions = ({ content, hasControls, hasArrows }) => {
+    const [currentIndex, setIndex] = useState(0)
+
     return (
         <Sled>
-            <Views showElements="1" width="100%" direction="horizontal">
+            <Views
+                select={currentIndex}
+                showElements="1"
+                width="100%"
+                direction="horizontal"
+                autoPlayInterval={5000}
+                pauseOnMouseOver={true}
+                stopOnInteraction={true}
+            >
                 {content.map((media, index) => (
-                    <BlockMediaWithCaption
-                        key={`carousel-${media.title}`}
-                        internalMedia={media.image}
-                        externalMedia={media.externalMediaUrl}
-                        heading={media.mediaHeading}
-                        caption={media.mediaCaption.mediaCaption}
-                        internalLink={media.internalLink}
-                        externalUrl={media.externalUrl}
-                        callToAction={media.callToAction}
-                        isOverlay={true}
-                    />
+                    <FocusWithin
+                        onFocus={() => {
+                            // setIndex(index)
+                            // Do Nothing.
+                        }}
+                        onBlur={() => {
+                            // Do Nothing.
+                            // setIndex(index + 1)
+                        }}
+                    >
+                        {({ isFocused, focusProps }) => (
+                            <div {...focusProps} tabIndex={isFocused ? -1 : 0}>
+                                <BlockMediaWithCaption
+                                    key={`carousel-${media.title}`}
+                                    internalMedia={media.image}
+                                    externalMedia={media.externalMediaUrl}
+                                    heading={media.mediaHeading}
+                                    caption={
+                                        media.mediaCaption.mediaCaption
+                                    }
+                                    internalLink={media.internalLink}
+                                    externalUrl={media.externalUrl}
+                                    callToAction={media.callToAction}
+                                    isOverlay={true}
+                                />
+                            </div>
+                        )}
+                    </FocusWithin>
                 ))}
             </Views>
             {hasArrows && (

@@ -307,6 +307,7 @@ const peopleQuery = `{
                   }
                 }
                 updatedAt
+                slug
                 department {
                     category {
                     slug

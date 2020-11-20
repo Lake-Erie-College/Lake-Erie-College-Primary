@@ -35,6 +35,7 @@ export const _Asset = graphql`
 fragment Asset on ContentfulAsset {
     id
     title
+    description
     svg {
       content
       dataURI

@@ -312,7 +312,6 @@ const Department = ({ hit }) => {
 }
 
 export const TestHit = ({ hit }) => {
-    console.log(hit)
     return <div>Test Hit</div>
 }
 

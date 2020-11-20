@@ -156,6 +156,7 @@ const options = {
                             fluid={contentfulImage.fluid}
                             file={file}
                             svg={contentfulImage.svg}
+                            alt={contentfulImage.description}
                         />
                     )
                 case 'application':
@@ -373,8 +374,13 @@ const Quote = ({ node }) => {
 }
 
 const SearchResults = ({ node }) => {
-    console.log(node)
-    return <BlockSearchResults searchType={node.searchType} primaryHeading={node.primaryHeading} summary={node.summary} />
+    return (
+        <BlockSearchResults
+            searchType={node.searchType}
+            primaryHeading={node.primaryHeading}
+            summary={node.summary}
+        />
+    )
 }
 
 const SpotlightContent = ({ node }) => {

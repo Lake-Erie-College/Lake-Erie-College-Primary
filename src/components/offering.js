@@ -33,13 +33,11 @@ const CourseHeadingWithLink = ({ heading, overline, to, tags }) => {
             )}
             <GatsbyLink to={to} className={styles.internal}>
                 {heading}
-                <nobr>
-                    <FontAwesomeIcon
-                        icon="link"
-                        size="xs"
-                        className={styles.icon}
-                    />
-                </nobr>
+                <FontAwesomeIcon
+                    icon="link"
+                    size="xs"
+                    className={styles.icon}
+                />
             </GatsbyLink>
         </h2>
     )

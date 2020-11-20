@@ -41,7 +41,8 @@ const CallToAction = ({ name, node, url, isHovered, formUrl }) => {
                 </a>
             )}
             {!isExternal && isForm && (
-                <span
+                <a
+                    href='#'
                     className={styles.link}
                     onMouseEnter={() => toggleHover(true)}
                     onMouseLeave={() => toggleHover(false)}
@@ -53,7 +54,7 @@ const CallToAction = ({ name, node, url, isHovered, formUrl }) => {
                         className={styles.callToActionMarker}
                     ></animated.span>
                     {name}
-                </span>
+                </a>
             )}
             {!isExternal && !isForm && (
                 <GatsbyLink
