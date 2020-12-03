@@ -32,7 +32,8 @@ class AcademicOfferingTemplate extends React.Component {
 
         const relatedPeople =
             typeof page.showAllDepartmentFaculty !== 'undefined' &&
-            page.showAllDepartmentFaculty
+            page.showAllDepartmentFaculty &&
+            page.category.person
                 ? sortBy(
                       page.category.person.filter(FilterPeople),
                       SortByLastName
