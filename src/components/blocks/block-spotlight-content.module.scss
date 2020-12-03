@@ -11,6 +11,11 @@ $navigation-color: $color-inverse-01;
     padding: 0;
 }
 
+.header {
+    display: flex;
+    flex-direction: column;
+}
+
 .heading {
     @include font-family-headings;
     font-weight: 400;
@@ -18,6 +23,8 @@ $navigation-color: $color-inverse-01;
     @include font-smoothing;
     @include letter-spacing;
     @include typescale('h4');
+
+    order: 1;
 
     @include respond-to('small') {
         @include typescale('h3');
@@ -34,6 +41,8 @@ $navigation-color: $color-inverse-01;
     @include typescale('overline');
 
     text-transform: uppercase;
+
+    order: 0;
 
     &:after {
         content: '\A';

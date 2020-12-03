@@ -27,7 +27,8 @@ class DepartmentTemplate extends React.Component {
                         />
                     )}
                     <PageHeading
-                        primary={page.title}
+                        primary={page.primaryHeading ? page.primaryHeading : page.title}
+                        secondary={page.secondaryHeading ? page.secondaryHeading : null}
                         overline={page.category ? page.category.title : null}
                         linkTo={page.category}
                     />
@@ -59,6 +60,8 @@ export const pageQuery = graphql`
                 shortTitle
                 slug
             }
+            primaryHeading
+            secondaryHeading
             lead {
                 lead
             }

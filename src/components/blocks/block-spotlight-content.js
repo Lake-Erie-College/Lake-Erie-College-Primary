@@ -8,7 +8,6 @@ import CallToAction from '../call-to-action'
 
 import styles from './block-spotlight-content.module.scss'
 
-
 // Display Types - Navigation, Interstitial, Resource Links
 
 const typeClasses = {
@@ -174,13 +173,15 @@ const Navigation = ({ props, className }) => {
                                     />
                                 )}
 
-                                {!isEmbed && !isInternalMedia && !isExternal && (
-                                    <CallToAction
-                                        name={name}
-                                        node={fields}
-                                        isHovered={hover}
-                                    />
-                                )}
+                                {!isEmbed &&
+                                    !isInternalMedia &&
+                                    !isExternal && (
+                                        <CallToAction
+                                            name={name}
+                                            node={fields}
+                                            isHovered={hover}
+                                        />
+                                    )}
 
                                 {isEmbed && (
                                     <CallToAction
@@ -199,26 +200,17 @@ const Navigation = ({ props, className }) => {
 
 const Interstitial = ({ props, className }) => {
     const hasRelatedPages =
-        props.relatedPages !== null &&
-        props.relatedPages.length > 0
+        props.relatedPages !== null && props.relatedPages.length > 0
     const primaryHeading =
-        props.primaryHeading !== null &&
-        props.primaryHeading !== null
+        props.primaryHeading !== null && props.primaryHeading !== null
             ? props.primaryHeading
             : null
     const secondaryHeading =
-        props.secondaryHeading !== null &&
-        props.secondaryHeading !== null
+        props.secondaryHeading !== null && props.secondaryHeading !== null
             ? props.secondaryHeading
             : null
-    const summary =
-        props.summary !== null
-            ? props.summary.summary
-            : null
-    const primaryImage =
-        props.primaryImage !== null
-            ? props.primaryImage
-            : null
+    const summary = props.summary !== null ? props.summary.summary : null
+    const primaryImage = props.primaryImage !== null ? props.primaryImage : null
 
     return (
         <div className={className}>
@@ -280,12 +272,14 @@ const Interstitial = ({ props, className }) => {
                                         className={styles.interstitialLink}
                                         key={`spotlight-interstitial-cta-${node.title}`}
                                     >
-                                        {!isEmbed && !isExternal && !isInternalMedia && (
-                                            <CallToAction
-                                                name={name}
-                                                node={fields}
-                                            />
-                                        )}
+                                        {!isEmbed &&
+                                            !isExternal &&
+                                            !isInternalMedia && (
+                                                <CallToAction
+                                                    name={name}
+                                                    node={fields}
+                                                />
+                                            )}
 
                                         {!isEmbed && isExternal && (
                                             <CallToAction
@@ -319,19 +313,13 @@ const Interstitial = ({ props, className }) => {
 
 const Resources = ({ props, className }) => {
     const hasRelatedPages =
-        props.relatedPages !== null &&
-        props.relatedPages.length > 0
+        props.relatedPages !== null && props.relatedPages.length > 0
     const hasRelatedMedia =
-        props.relatedMedia !== null &&
-        props.relatedMedia.length > 0
+        props.relatedMedia !== null && props.relatedMedia.length > 0
     const primaryHeading =
-        props.primaryHeading !== null
-            ? props.primaryHeading
-            : null
+        props.primaryHeading !== null ? props.primaryHeading : null
     const secondaryHeading =
-        props.secondaryHeading !== null
-            ? props.secondaryHeading
-            : null
+        props.secondaryHeading !== null ? props.secondaryHeading : null
     const summary =
         typeof props.summary !== 'undefined' && props.summary !== null
             ? props.summary.summary
@@ -354,7 +342,6 @@ const Resources = ({ props, className }) => {
             <ul className={styles.resourceLinks}>
                 {hasRelatedPages &&
                     props.relatedPages.map(fields => {
-
                         const name =
                             fields.displayTitle !== null
                                 ? fields.displayTitle
@@ -374,12 +361,20 @@ const Resources = ({ props, className }) => {
                                 ? fields.internalMedia
                                 : false
                         const external =
-                            fields.externalUrl !== null & fields.externalUrl !== ''
+                            (fields.externalUrl !== null) &
+                            (fields.externalUrl !== '')
                                 ? fields.externalUrl
                                 : false
-                        const isEmbed = typeof fields.sourceUrl !== 'undefined' && fields.sourceUrl !== null
+                        const isEmbed =
+                            typeof fields.sourceUrl !== 'undefined' &&
+                            fields.sourceUrl !== null
 
-                        if (!isEmbed && !external && !internal && !internalMedia) {
+                        if (
+                            !isEmbed &&
+                            !external &&
+                            !internal &&
+                            !internalMedia
+                        ) {
                             return <span></span>
                         }
 
@@ -456,10 +451,10 @@ const Resources = ({ props, className }) => {
 }
 
 const Heading = ({ heading, overline }) => (
-    <h2 className={styles.heading}>
-        {overline && <span className={styles.overline}>{overline}</span>}
-        {heading}
-    </h2>
+    <header className={styles.header}>
+        <h3 className={styles.heading}>{heading}</h3>
+        {overline && <p className={styles.overline}>{overline}</p>}
+    </header>
 )
 
 const Summary = ({ summary }) => {
