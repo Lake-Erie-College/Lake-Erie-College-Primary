@@ -39,10 +39,6 @@ const Carousel = ({ content, images, displayDots, displayArrows }) => {
     )
 }
 
-const handleFocus = index => {
-    return console.log('FOCUS', index)
-}
-
 const CarouselMediaWithCaptions = ({ content, hasControls, hasArrows }) => {
     const [currentIndex, setIndex] = useState(0)
 

@@ -18,8 +18,6 @@ const SEO = ({ title, description }) => {
 
     const hasDescription = typeof description !== 'undefined' && description !== null
 
-    console.log(hasDescription)
-
     return (
         <Helmet>
             <title>{`${title} | ${siteTitle}`}</title>
