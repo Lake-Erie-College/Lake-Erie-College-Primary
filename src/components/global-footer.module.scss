@@ -135,13 +135,7 @@
     padding: $spacing-md;
 
     @include respond-to('small') {
-        grid-column: main;
-    }
-
-    @include respond-to('medium') {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-column-gap: $spacing-lg;
+        grid-column: left-main right-main;
     }
 }
 
