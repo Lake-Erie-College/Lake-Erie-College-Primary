@@ -1,11 +1,13 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import get from 'lodash/get'
-import ImageWithSVGSupport from './image-with-svg-support'
-import CallToAction from './call-to-action'
-import TextLink from './text-link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import styles from './global-footer.module.scss'
+
+import BrightEdgeAutoPilot from './brightedge-autopilot'
+import CallToAction from './call-to-action'
+import ImageWithSVGSupport from './image-with-svg-support'
+import TextLink from './text-link'
 
 const linkResolver = require('../utils').linkResolver
 
@@ -63,23 +65,13 @@ const GlobalFooter = () => {
                 navigationConversions {
                     id
                     navigationItems {
-                        ... on ContentfulBlockExternalEmbed {
-                            ...BlockExternalEmbed
-                        }
-                        ... on ContentfulNavigationItem {
-                            ...NavigationItem
-                        }
+                        ...NavigationItem
                     }
                 }
                 navigationFooter {
                     id
                     navigationItems {
-                        ... on ContentfulBlockExternalEmbed {
-                            ...BlockExternalEmbed
-                        }
-                        ... on ContentfulNavigationItem {
-                            ...NavigationItem
-                        }
+                        ...NavigationItem
                     }
                 }
             }
@@ -182,6 +174,10 @@ const GlobalFooter = () => {
                     svg={page.footerLogo.svg}
                     alt={page.footerLogo.description}
                 />
+            </div>
+
+            <div className={styles.relatedLinks}>
+                <BrightEdgeAutoPilot />
             </div>
 
             <section className={styles.contact}>

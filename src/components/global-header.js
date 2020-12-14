@@ -63,12 +63,7 @@ const GlobalHeader = () => {
                 navigationConversions {
                     id
                     navigationItems {
-                        ... on ContentfulBlockExternalEmbed {
-                            ...BlockExternalEmbed
-                        }
-                        ... on ContentfulNavigationItem {
-                            ...NavigationItem
-                        }
+                        ...NavigationItem
                     }
                 }
             }

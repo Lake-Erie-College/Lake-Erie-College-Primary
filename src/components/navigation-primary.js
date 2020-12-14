@@ -15,22 +15,12 @@ const NavigationPrimary = () => {
                 navigationPrimary {
                     id
                     navigationItems {
-                        ... on ContentfulBlockExternalEmbed {
-                            ...BlockExternalEmbed
-                        }
-                        ... on ContentfulNavigationItem {
-                            ...NavigationItem
-                            navigationSubmenu {
-                                id
-                                title
-                                navigationItems {
-                                    ... on ContentfulBlockExternalEmbed {
-                                        ...BlockExternalEmbed
-                                    }
-                                    ... on ContentfulNavigationItem {
-                                        ...NavigationItem
-                                    }
-                                }
+                        ...NavigationItem
+                        navigationSubmenu {
+                            id
+                            title
+                            navigationItems {
+                                ...NavigationItem
                             }
                         }
                     }

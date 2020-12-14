@@ -4,7 +4,6 @@ import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import styles from './block-external-embed.module.scss'
-import { black } from 'chalk'
 
 const BlockExternalEmbed = ({
     displayTitle,
