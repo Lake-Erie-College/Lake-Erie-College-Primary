@@ -3,6 +3,7 @@ import { graphql } from 'gatsby'
 import { Helmet } from 'react-helmet-async'
 import get from 'lodash/get'
 import Layout from '../components/layout'
+import BlockMediaWithCaption from '../components/blocks/block-media-with-caption'
 import PageDate from '../components/page-date'
 import PageHeading from '../components/page-heading'
 import PageLead from '../components/page-lead'
@@ -14,12 +15,13 @@ class StandardPageTemplate extends React.Component {
     render() {
         const page = get(this.props, 'data.contentfulStandardPage')
         const hasLeadImage = typeof page.leadImage !== 'undefined' && page.leadImage !== null
+        const hasCTA = page.leadImage !== null && page.callToAction !== null
 
         return (
             <Layout location={this.props.location}>
                 <SEO title={page.title} description={page.description} />
                 <main>
-                    {hasLeadImage && (
+                    {hasLeadImage && !hasCTA && (
                         <LeadImage
                             title={page.leadImage.title}
                             fluid={page.leadImage.fluid}
@@ -27,12 +29,24 @@ class StandardPageTemplate extends React.Component {
                             description={page.leadImage.description}
                         />
                     )}
-                    <PageHeading
-                        primary={page.primaryHeading}
-                        secondary={page.secondaryHeading}
-                        overline={page.category ? page.category.title : null}
-                        linkTo={page.category}
-                    />
+                    {hasLeadImage && hasCTA && (
+                        <BlockMediaWithCaption
+                            internalMedia={page.leadImage}
+                            heading={page.primaryHeading}
+                            caption={page.lead.lead}
+                            internalLink={page.callToAction.internalLink}
+                            callToAction={page.callToAction.displayTitle}
+                            isOverlay={true}
+                        />
+                    )}
+                    {!hasCTA && (
+                        <PageHeading
+                            primary={page.primaryHeading}
+                            secondary={page.secondaryHeading}
+                            overline={page.category ? page.category.title : null}
+                            linkTo={page.category}
+                        />
+                    )}
                     {page.lead && <PageLead content={page.lead.lead} />}
                     {page.publishDate && <PageDate startDate={page.publishDate} />}
                     <PrimaryContent data={page.primaryContent} />
@@ -68,6 +82,9 @@ export const pageQuery = graphql`
             pageIcon
             primaryHeading
             secondaryHeading
+            callToAction {
+                ...NavigationItem
+            }
             isNews
             publishDate
             leadImage {

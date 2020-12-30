@@ -62,6 +62,9 @@ export const pageQuery = graphql`
             }
             primaryHeading
             secondaryHeading
+            callToAction {
+                ...NavigationItem
+            }
             lead {
                 lead
             }

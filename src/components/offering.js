@@ -10,36 +10,40 @@ const linkResolver = require('../utils').linkResolver
 
 const CourseHeading = ({ heading, overline, tags }) => {
     return (
-        <h2 className={styles.courseHeading}>
-            {overline && <span className={styles.overline}>{overline}</span>}
-            {tags && (
-                <span className={styles.tags}>
-                    {tags && tags.map(tagName => <span>{tagName}</span>)}
-                </span>
-            )}
-            {heading}
-        </h2>
+        <header className={styles.header}>
+            <h3 className={styles.courseHeading}>
+                {overline && <span className={styles.overline}>{overline}</span>}
+                {tags && (
+                    <span className={styles.tags}>
+                        {tags && tags.map(tagName => <span>{tagName}</span>)}
+                    </span>
+                )}
+                {heading}
+            </h3>
+        </header>
     )
 }
 
 const CourseHeadingWithLink = ({ heading, overline, to, tags }) => {
     return (
-        <h2 className={styles.courseHeading}>
-            {overline && <span className={styles.overline}>{overline}</span>}
-            {tags && (
-                <span className={styles.tags}>
-                    {tags && tags.map(tagName => <span>{tagName}</span>)}
-                </span>
-            )}
-            <GatsbyLink to={to} className={styles.internal}>
-                {heading}
-                <FontAwesomeIcon
-                    icon="link"
-                    size="xs"
-                    className={styles.icon}
-                />
-            </GatsbyLink>
-        </h2>
+        <header className={styles.header}>
+            <h3 className={styles.courseHeading}>
+                {overline && <span className={styles.overline}>{overline}</span>}
+                {tags && (
+                    <span className={styles.tags}>
+                        {tags && tags.map(tagName => <span>{tagName}</span>)}
+                    </span>
+                )}
+                <GatsbyLink to={to} className={styles.internal}>
+                    {heading}
+                    <FontAwesomeIcon
+                        icon="link"
+                        size="xs"
+                        className={styles.icon}
+                    />
+                </GatsbyLink>
+            </h3>
+        </header>
     )
 }
 

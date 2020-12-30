@@ -41,6 +41,9 @@ export const pageQuery = graphql`
         }
         contentfulHomepage(slug: { eq: $slug }) {
             title
+            description {
+                description
+            }
             primaryContent {
               raw
               references {

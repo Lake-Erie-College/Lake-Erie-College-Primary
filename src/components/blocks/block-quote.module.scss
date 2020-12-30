@@ -116,6 +116,11 @@
     }
 }
 
+.header {
+    display: flex;
+    flex-direction: column;
+}
+
 .heading {
     margin-bottom: $spacing-md;
     @include font-family-headings;
@@ -124,6 +129,8 @@
     @include font-smoothing;
     @include letter-spacing;
     @include typescale('h4');
+
+    order: 1;
 
     @include respond-to('small') {
         @include typescale('h4');
@@ -141,6 +148,8 @@
 
     text-transform: uppercase;
     color: $color-inverse-01;
+
+    order: 0;
 
     &:after {
         content: '\A';

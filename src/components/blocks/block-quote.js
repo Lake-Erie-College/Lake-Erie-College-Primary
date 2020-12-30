@@ -48,14 +48,16 @@ const Message = ({ media, personName, copy, heading }) => {
             {media && <Image image={media} />}
             <div className={styles.sectionContent}>
                 {heading && (
-                    <h2 className={styles.heading}>
-                        {personName && (
-                            <span className={styles.overline}>
-                                {personName}
-                            </span>
-                        )}
-                        {heading}
-                    </h2>
+                    <header className={styles.header}>
+                        <h3 className={styles.heading}>
+                            {personName && (
+                                <span className={styles.overline}>
+                                    {personName}
+                                </span>
+                            )}
+                            {heading}
+                        </h3>
+                    </header>
                 )}
                 {copy && <p className={styles.summary}>{copy}</p>}
             </div>
@@ -69,9 +71,9 @@ const Testimonial = ({ media, personName, copy, heading }) => {
             {media && <Image image={media} />}
             <blockquote className={styles.sectionContent}>
                 {heading && (
-                    <h2 className={styles.heading}>
+                    <h3 className={styles.heading}>
                         {heading}
-                    </h2>
+                    </h3>
                 )}
                 {copy && <p className={styles.quote}>{copy}</p>}
                 {personName && (
