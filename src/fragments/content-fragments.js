@@ -304,21 +304,7 @@ fragment BlockMediaWithCaption on ContentfulBlockMediaWithCaption {
     callToAction
     externalMediaUrl
     image {
-        title
-        file {
-            contentType
-            details {
-                image {
-                    height
-                    width
-                }
-            }
-            fileName
-            url
-        }
-        fluid {
-            ...GatsbyContentfulFluid_withWebp
-        }
+        ...Asset
     }
     internalLink {
       ...StandardPage

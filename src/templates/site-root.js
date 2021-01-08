@@ -18,6 +18,8 @@ class SiteRootTemplate extends React.Component {
             <Layout location={this.props.location}>
                 <SEO title={page.title} description={page.description} />
                 <main>
+                    {page.primaryHeading && <h1 className={'visually-hidden'}>{page.primaryHeading}</h1>}
+                    {page.secondaryHeading && <h2 className={'visually-hidden'}>{page.secondaryHeading}</h2>}
                     <Carousel content={page.heroCarousel} displayDots={true} />
                     <PrimaryContent data={page.primaryContent} />
                     <RelatedContent>
@@ -44,30 +46,32 @@ export const pageQuery = graphql`
             description {
                 description
             }
+            primaryHeading
+            secondaryHeading
             primaryContent {
-              raw
-              references {
-                  # contentful_id is required to resolve the references
-                  contentful_id
-                  ...AcademicOffering
-                  ...Asset
-                  ...Department
-                  ...Event
-                  ...Homepage
-                  ...Location
-                  ...Person
-                  ...NavigationItem
-                  ...StandardPage
-                  ...BlockAcademicOfferingListing
-                  ...BlockCarousel
-                  ...BlockEventListing
-                  ...BlockExternalEmbed
-                  ...BlockMediaWithCaption
-                  ...BlockPersonListing
-                  ...BlockQuote
-                  ...BlockSearchResults
-                  ...BlockSpotlightContent
-              }
+                raw
+                references {
+                    # contentful_id is required to resolve the references
+                    contentful_id
+                    ...AcademicOffering
+                    ...Asset
+                    ...Department
+                    ...Event
+                    ...Homepage
+                    ...Location
+                    ...Person
+                    ...NavigationItem
+                    ...StandardPage
+                    ...BlockAcademicOfferingListing
+                    ...BlockCarousel
+                    ...BlockEventListing
+                    ...BlockExternalEmbed
+                    ...BlockMediaWithCaption
+                    ...BlockPersonListing
+                    ...BlockQuote
+                    ...BlockSearchResults
+                    ...BlockSpotlightContent
+                }
             }
             heroCarousel {
                 ...BlockMediaWithCaption
