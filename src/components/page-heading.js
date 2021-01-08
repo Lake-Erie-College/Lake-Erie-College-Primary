@@ -9,15 +9,17 @@ const RegularHeading = ({ primary, secondary, overline }) => {
     const hasOverline = typeof overline !== 'undefined'
 
     return (
-        <h1 className={styles.pageHeading}>
-            {hasOverline && (
-                <strong className={styles.overline}>{overline}</strong>
-            )}
-            <span>
-                {primary}
-                {secondary && <em> | {secondary}</em>}
-            </span>
-        </h1>
+        <header className={styles.pageHeading}>
+            <h1 className={styles.pageHeader}>
+                {hasOverline && (
+                    <strong className={styles.overline}>{overline}</strong>
+                )}
+                <span>
+                    {primary}
+                    {secondary && <em> | {secondary}</em>}
+                </span>
+            </h1>
+        </header>
     )
 }
 
@@ -28,7 +30,11 @@ const LinkHeading = ({ primary, secondary, overline, linkTo, currentPage }) => {
 
     return (
         <header className={styles.pageHeading}>
-            <ol vocab="https://schema.org/" typeof="BreadcrumbList" className={styles.breadcrumb}>
+            <ol
+                vocab="https://schema.org/"
+                typeof="BreadcrumbList"
+                className={styles.breadcrumb}
+            >
                 <li property="itemListElement" typeof="ListItem">
                     {hasOverline && (
                         <strong className={styles.overline}>
