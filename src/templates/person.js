@@ -25,6 +25,7 @@ class PersonTemplate extends React.Component {
                     <PageHeading
                         primary={fullName}
                         secondary={page.personType}
+                        currentPage={page}
                     />
                     <ContactPerson person={page} displayName={false} />
                     {page.primaryContent && (

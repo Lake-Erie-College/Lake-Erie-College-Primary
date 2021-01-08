@@ -31,6 +31,7 @@ class DepartmentTemplate extends React.Component {
                         secondary={page.secondaryHeading ? page.secondaryHeading : null}
                         overline={page.category ? page.category.title : null}
                         linkTo={page.category}
+                        currentPage={page}
                     />
                     {page.lead && <PageLead content={page.lead.lead} />}
                     <PrimaryContent data={page.primaryContent} />

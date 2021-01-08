@@ -24,6 +24,7 @@ class LocationTemplate extends React.Component {
                         primary={page.title}
                         overline={page.category ? page.category.title : null}
                         linkTo={page.category}
+                        currentPage={page}
                     />
                     <LocationEmbed photo={page.photo} summary={summary} />
                     <PrimaryContent data={page.primaryContent} />

@@ -45,6 +45,7 @@ class StandardPageTemplate extends React.Component {
                             secondary={page.secondaryHeading}
                             overline={page.category ? page.category.title : null}
                             linkTo={page.category}
+                            currentPage={page}
                         />
                     )}
                     {page.lead && <PageLead content={page.lead.lead} />}

@@ -32,6 +32,7 @@ class EventTemplate extends React.Component {
                         secondary={'Event'}
                         overline={page.category ? page.category.title : null}
                         linkTo={page.category}
+                        currentPage={page}
                     />
                     {page.startDateAndTime && (
                         <PageDate
