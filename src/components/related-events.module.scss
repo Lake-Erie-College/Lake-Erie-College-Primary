@@ -83,6 +83,14 @@
     }
 }
 
+.header {
+    display: flex;
+    flex-direction: column;
+    margin: 0 $spacing-md;
+    padding: $spacing-2xs 0;
+    flex: 1 1 25%;
+}
+
 .heading {
     margin: 0 0 $spacing-sm 0;
 
@@ -96,6 +104,8 @@
     text-align: left;
 
     color: $color-text-02;
+    
+    order: 1;
 
     @include respond-to('small') {
         margin-left: 0;
@@ -116,6 +126,8 @@
     text-transform: uppercase;
     color: $color-brand-01;
 
+    order: 0;
+
     &:after {
         content: '\A';
         white-space: pre;
@@ -123,15 +135,14 @@
 }
 
 .eventHeading {
-    margin: 0 $spacing-md;
-    padding: $spacing-2xs 0;
-    flex: 1 1 25%;
     @include font-family-headings;
     font-weight: 400;
     @include line-height('heading');
     @include font-smoothing;
     @include letter-spacing;
     @include typescale('h5');
+    
+    order: 1;
 
     @include respond-to('small') {
         margin-left: 0;

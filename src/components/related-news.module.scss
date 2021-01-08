@@ -72,6 +72,14 @@
     border-radius: 4px;
 }
 
+.header {
+    display: flex;
+    flex-direction: column;
+    margin: 0 $spacing-md;
+    padding: $spacing-2xs 0;
+    flex: 1 1 25%;
+}
+
 .heading {
     margin: 0 $spacing-md $spacing-sm $spacing-md;
 
@@ -105,6 +113,8 @@
     text-transform: uppercase;
     color: $color-brand-01;
 
+    order: 0;
+
     &:after {
         content: '\A';
         white-space: pre;
@@ -112,15 +122,14 @@
 }
 
 .newsHeading {
-    margin: 0 $spacing-md;
-    padding: $spacing-2xs 0;
-    flex: 1 1 25%;
     @include font-family-headings;
     font-weight: 400;
     @include line-height('heading');
     @include font-smoothing;
     @include letter-spacing;
     @include typescale('h5');
+
+    order: 1;
 
     @include respond-to('small') {
         margin-left: 0;

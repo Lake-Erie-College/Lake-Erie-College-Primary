@@ -15,19 +15,19 @@ const linkResolver = require('../utils').linkResolver
 const NewsHeadingWithLink = ({ heading, overline, to }) => {
     return (
         <GatsbyLink to={to} className={cx(styles.internal, styles.news)}>
-            <h2 className={styles.newsHeading}>
-                {overline && (
-                    <span className={styles.overline}>{overline}</span>
-                )}
-                {heading}
-                <nobr>
-                    <FontAwesomeIcon
-                        icon="external-link-square-alt"
-                        size="xs"
-                        className={styles.icon}
-                    />
-                </nobr>
-            </h2>
+            <header className={styles.header}>
+                <h3 className={styles.newsHeading}>
+                    {heading}
+                    <nobr>
+                        <FontAwesomeIcon
+                            icon="external-link-square-alt"
+                            size="xs"
+                            className={styles.icon}
+                        />
+                    </nobr>
+                </h3>
+                {overline && <p className={styles.overline}>{overline}</p>}
+            </header>
         </GatsbyLink>
     )
 }
@@ -164,10 +164,7 @@ export default ({ category, heading, limit, showViewAll }) => {
             {limitedNewsPages.length > 0 && (
                 <ul className={styles.newsList}>
                     {limitedNewsPages.map(node => (
-                        <News
-                            key={'related-news-' + node.id}
-                            newsItem={node}
-                        />
+                        <News key={'related-news-' + node.id} newsItem={node} />
                     ))}
                 </ul>
             )}
