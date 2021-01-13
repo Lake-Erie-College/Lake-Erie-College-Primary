@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link as GatsbyLink } from 'gatsby'
 import { useStaticQuery, graphql } from 'gatsby'
 import cx from 'classnames'
@@ -10,6 +10,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import styles from './related-events.module.scss'
 
 const linkResolver = require('../utils').linkResolver
+
+import CallToAction from './call-to-action'
 
 const EventHeadingWithLink = ({ heading, overline, month, date, to }) => {
     return (
@@ -137,7 +139,7 @@ export default ({ category, heading, limit, showViewAll }) => {
         typeof showViewAll !== 'undefined' && showViewAll === true
             ? true
             : false
-    const limitEvents = typeof limit !== 'undefined' ? limit : 5
+    const [limitEvents, setLimitEvents] = useState(typeof limit !== 'undefined' ? limit : 5)
 
     const sortedEvents = sortBy(filteredEvents, [
         SortEventsByDate,
@@ -149,6 +151,10 @@ export default ({ category, heading, limit, showViewAll }) => {
         typeof category !== 'undefined' && category !== null
             ? category.shortTitle
             : null
+
+    const clickHandler = () => {
+        setLimitEvents(100)
+    }
 
     return (
         <div className={styles.relatedEvents}>
@@ -167,6 +173,11 @@ export default ({ category, heading, limit, showViewAll }) => {
                 <p className={styles.empty}>
                     There are no upcoming {categoryLabel} events.
                 </p>
+            )}
+            {viewAll && limitEvents < 100 && (
+                <CallToAction url={'#'} onClick={clickHandler}>
+                    View All Upcoming {categoryLabel} Events
+                </CallToAction>
             )}
         </div>
     )

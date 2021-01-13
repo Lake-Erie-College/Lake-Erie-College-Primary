@@ -20,7 +20,7 @@ const BlockEventListing = ({ category, limit, showViewAll }, ...rest) => {
                     </h2>
                 </header>
                 <div className={styles.eventsList}>
-                    <RelatedEvents category={category} showViewAll={false} limit={limit} />
+                    <RelatedEvents category={category} showViewAll={showViewAll} limit={limit} />
                 </div>
             </div>
         </section>

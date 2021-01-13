@@ -291,9 +291,12 @@ export const _BlockEventListing = graphql`
 fragment BlockEventListing on ContentfulBlockEventListing {
     id
     relatedCategory {
+        title
         slug
+        shortTitle
     }
     title
+    limit
     viewAll
 }`
 

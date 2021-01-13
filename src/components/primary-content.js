@@ -292,7 +292,7 @@ const Carousel = ({ node }) => {
 const EventListing = ({ node }) => {
     const content = localeScrubber.scrub(node)
 
-    return <BlockEventListing category={content.relatedCategory} />
+    return <BlockEventListing category={content.relatedCategory} limit={content.limit} showViewAll={content.viewAll} />
 }
 
 const ExternalEmbed = ({ node }) => {

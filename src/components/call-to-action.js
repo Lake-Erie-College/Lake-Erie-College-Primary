@@ -8,7 +8,7 @@ import styles from './call-to-action.module.scss'
 const linkResolver = require('../utils').linkResolver
 
 // Node relates to Fields of object
-const CallToAction = ({ name, node, url, isHovered, formUrl }) => {
+const CallToAction = ({ name, node, url, isHovered, formUrl, children, onClick }) => {
     const [hover, toggleHover] = useState(false)
     const hoverState = typeof isHovered === 'undefined' ? hover : isHovered
 
@@ -23,9 +23,11 @@ const CallToAction = ({ name, node, url, isHovered, formUrl }) => {
 
     const isForm = typeof formUrl !== 'undefined' && formUrl !== null
 
+    const isButton = isExternal && url === '#'
+
     return (
         <p className={styles.callToAction}>
-            {isExternal && !isForm && (
+            {isExternal && !isForm && !isButton && (
                 <a
                     href={to}
                     className={styles.link}
@@ -37,12 +39,27 @@ const CallToAction = ({ name, node, url, isHovered, formUrl }) => {
                         style={springProps}
                         className={styles.callToActionMarker}
                     ></animated.span>
-                    {name}
+                    {name} {children}
                 </a>
+            )}
+            {isExternal && !isForm && isButton && (
+                <span
+                    onClick={onClick}
+                    className={styles.link}
+                    onMouseEnter={() => toggleHover(true)}
+                    onMouseLeave={() => toggleHover(false)}
+                >
+                    <animated.span
+                        config={config.gentle}
+                        style={springProps}
+                        className={styles.callToActionMarker}
+                    ></animated.span>
+                    {name} {children}
+                </span>
             )}
             {!isExternal && isForm && (
                 <a
-                    href='#'
+                    href="#"
                     className={styles.link}
                     onMouseEnter={() => toggleHover(true)}
                     onMouseLeave={() => toggleHover(false)}
@@ -53,7 +70,7 @@ const CallToAction = ({ name, node, url, isHovered, formUrl }) => {
                         style={springProps}
                         className={styles.callToActionMarker}
                     ></animated.span>
-                    {name}
+                    {name} {children}
                 </a>
             )}
             {!isExternal && !isForm && (
@@ -68,11 +85,24 @@ const CallToAction = ({ name, node, url, isHovered, formUrl }) => {
                         style={springProps}
                         className={styles.callToActionMarker}
                     ></animated.span>
-                    {name}
+                    {name} {children}
                 </GatsbyLink>
             )}
         </p>
     )
+}
+
+function Link({ text, status }) {
+    switch (status) {
+        case 'info':
+            return <Info text={text} />
+        case 'warning':
+            return <Warning text={text} />
+        case 'error':
+            return <Error text={text} />
+        default:
+            return null
+    }
 }
 
 export default CallToAction
