@@ -51,10 +51,12 @@
     margin: 0 auto $spacing-sm auto;
 
     .embed {
+        padding: 0 $spacing-sm;
         height: auto;
+        grid-column: left-gutter / end;
 
         @include respond-to('small') {
-            height: auto;
+            padding: 0;
             grid-column: left-main / right-gutter;
         }
     }
