@@ -1,4 +1,5 @@
 const queries = require('./src/utils/algolia')
+const linkResolver = require('./src/utils').linkResolver
 
 require('dotenv').config({
     path: `.env.${process.env.NODE_ENV}`,
@@ -34,6 +35,87 @@ module.exports = {
         'gatsby-transformer-inline-svg',
         'gatsby-plugin-use-query-params',
         {
+            resolve: `gatsby-plugin-feed`,
+            options: {
+                query: `
+                {
+                    site {
+                        siteMetadata {
+                            title
+                            description
+                            siteUrl
+                            site_url: siteUrl
+                        }
+                    }
+                }
+                `,
+                feeds: [
+                    {
+                        serialize: ({
+                            query: { site, allContentfulStandardPage },
+                        }) => {
+                            return allContentfulStandardPage.edges.map(
+                                edge => {
+                                    const path = linkResolver.path(edge.node)
+
+                                    return Object.assign(
+                                        {},
+                                        {
+                                            title: edge.node.title,
+                                            description: edge.node.description ? edge.node.description.description : null,
+                                            date: edge.node.publishDate,
+                                            url:
+                                                site.siteMetadata.siteUrl +
+                                                path,
+                                            guid:
+                                                site.siteMetadata.siteUrl +
+                                                path,
+                                            enclosure: {
+                                                url: edge.node.leadImage ? edge.node.leadImage.file.url : null,
+                                                size: edge.node.leadImage ? edge.node.leadImage.file.details.size : null,
+                                                type: edge.node.leadImage ? edge.node.leadImage.file.contentType : null,
+                                            },
+                                        }
+                                    )
+                                }
+                            )
+                        },
+                        query: `
+                        {
+                            allContentfulStandardPage(filter: {isNews: {eq: true}}, sort: {order: DESC, fields: publishDate}) {
+                                edges {
+                                  node {
+                                    title
+                                    slug
+                                    category {
+                                      slug
+                                    }
+                                    id
+                                    description {
+                                      description
+                                    }
+                                    publishDate(formatString: "ddd, DD MMM Y hh:mm:ss z")
+                                    leadImage {
+                                      file {
+                                        url
+                                        contentType
+                                        details {
+                                          size
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                        }
+                      `,
+                        output: '/rss/campus-news.rss',
+                        title: 'Lake Erie College - Campus News',
+                    },
+                ],
+            },
+        },
+        {
             resolve: 'gatsby-source-contentful',
             options: contentfulConfig,
         },
@@ -51,31 +133,31 @@ module.exports = {
             },
         },
         {
-          resolve: `gatsby-plugin-netlify`,
-          options: {
-            headers: {}, // option to add more headers. `Link` headers are transformed by the below criteria
-            allPageHeaders: [], // option to add headers for all pages. `Link` headers are transformed by the below criteria
-            mergeSecurityHeaders: true, // boolean to turn off the default security headers
-            mergeLinkHeaders: true, // boolean to turn off the default gatsby js headers
-            mergeCachingHeaders: true, // boolean to turn off the default caching headers
-            transformHeaders: (headers, path) => headers, // optional transform for manipulating headers under each path (e.g.sorting), etc.
-            generateMatchPathRewrites: true, // boolean to turn off automatic creation of redirect rules for client only paths
-          },
+            resolve: `gatsby-plugin-netlify`,
+            options: {
+                headers: {}, // option to add more headers. `Link` headers are transformed by the below criteria
+                allPageHeaders: [], // option to add headers for all pages. `Link` headers are transformed by the below criteria
+                mergeSecurityHeaders: true, // boolean to turn off the default security headers
+                mergeLinkHeaders: true, // boolean to turn off the default gatsby js headers
+                mergeCachingHeaders: true, // boolean to turn off the default caching headers
+                transformHeaders: (headers, path) => headers, // optional transform for manipulating headers under each path (e.g.sorting), etc.
+                generateMatchPathRewrites: true, // boolean to turn off automatic creation of redirect rules for client only paths
+            },
         },
         {
-          resolve: `gatsby-plugin-manifest`,
-          options: {
-            name: `Lake Erie College`,
-            short_name: `LEC`,
-            start_url: `/`,
-            background_color: `#094a3e`,
-            theme_color: `#e8f2f8`,
-            display: `standalone`,
-            icon: `static/lec-favicon.svg`, // This path is relative to the root of the site.
-          },
+            resolve: `gatsby-plugin-manifest`,
+            options: {
+                name: `Lake Erie College`,
+                short_name: `LEC`,
+                start_url: `/`,
+                background_color: `#094a3e`,
+                theme_color: `#e8f2f8`,
+                display: `standalone`,
+                icon: `static/lec-favicon.svg`, // This path is relative to the root of the site.
+            },
         },
         {
-          resolve: `gatsby-plugin-offline`,
+            resolve: `gatsby-plugin-offline`,
         },
         {
             resolve: 'gatsby-plugin-google-tagmanager',
