@@ -11,14 +11,14 @@ import PersonThumb from '../person'
 import styles from './hit-comp.module.scss'
 
 const hitHandlers = {
-    academicOffering: value => <AcademicOffering hit={value} />,
-    academicOfferingThumbnail: value => <OfferingThumb offering={value} isThumb={true} />,
-    standardPage: value => <StandardPage hit={value} />,
-    person: value => <Person hit={value} />,
-    personThumbnail: value => <PersonThumb person={value} />,
-    location: value => <Location hit={value} />,
-    event: value => <Event hit={value} />,
-    department: value => <Department hit={value} />,
+    ContentfulAcademicOffering: value => <AcademicOffering hit={value} />,
+    ContentfulAcademicOfferingThumbnail: value => <OfferingThumb offering={value} isThumb={true} />,
+    ContentfulStandardPage: value => <StandardPage hit={value} />,
+    ContentfulPerson: value => <Person hit={value} />,
+    ContentfulPersonThumbnail: value => <PersonThumb person={value} />,
+    ContentfulLocation: value => <Location hit={value} />,
+    ContentfulEvent: value => <Event hit={value} />,
+    ContentfulDepartment: value => <Department hit={value} />,
     default: value => <TestHit hit={value} />,
 }
 
@@ -312,7 +312,7 @@ const Department = ({ hit }) => {
 }
 
 export const TestHit = ({ hit }) => {
-    return <div>Test Hit</div>
+    return <div></div>
 }
 
 export const PostHit = clickHandler => ({ hit }) => (

@@ -1,14 +1,12 @@
+//sys.contentType.sys.contentful_id
 const pageQuery = `{
     pages: allContentfulStandardPage(filter: {hidden: {ne: true}}) {
         edges {
             node {
                 objectID: id
-                sys {
-                    contentType {
-                        sys {
-                        contentful_id
-                        }
-                    }
+                contentful_id
+                internal {
+                  type
                 }
                 updatedAt
                 description {
@@ -44,12 +42,9 @@ const pageQuery = `{
         edges {
             node {
                 objectID: id
-                sys {
-                    contentType {
-                        sys {
-                            contentful_id
-                        }
-                    }
+                contentful_id
+                internal {
+                  type
                 }
                 updatedAt
                 firstName
@@ -81,12 +76,9 @@ const pageQuery = `{
         edges {
             node {
                 objectID: id
-                sys {
-                    contentType {
-                        sys {
-                        contentful_id
-                        }
-                    }
+                contentful_id
+                internal {
+                  type
                 }
                 updatedAt
                 hidden
@@ -111,12 +103,9 @@ const pageQuery = `{
         edges {
             node {
                 objectID: id
-                sys {
-                    contentType {
-                        sys {
-                            contentful_id
-                        }
-                    }
+                contentful_id
+                internal {
+                  type
                 }
                 updatedAt
                 campusLocation {
@@ -149,12 +138,9 @@ const pageQuery = `{
         edges {
             node {
                 objectID: id
-                sys {
-                    contentType {
-                        sys {
-                            contentful_id
-                        }
-                    }
+                contentful_id
+                internal {
+                  type
                 }
                 updatedAt
                 hidden
@@ -189,12 +175,9 @@ const pageQuery = `{
         edges {
             node {
                 objectID: id
-                sys {
-                    contentType {
-                        sys {
-                        contentful_id
-                        }
-                    }
+                contentful_id
+                internal {
+                  type
                 }
                 updatedAt
                 lead {
@@ -244,12 +227,9 @@ const offeringQuery = `{
         edges {
             node {
                 objectID: id
-                sys {
-                    contentType {
-                        sys {
-                            contentful_id
-                        }
-                    }
+                contentful_id
+                internal {
+                  type
                 }
                 updatedAt
                 lead {
@@ -299,12 +279,9 @@ const peopleQuery = `{
         edges {
             node {
                 objectID: id
-                sys {
-                  contentType {
-                    sys {
-                      contentful_id
-                    }
-                  }
+                contentful_id
+                internal {
+                  type
                 }
                 updatedAt
                 slug

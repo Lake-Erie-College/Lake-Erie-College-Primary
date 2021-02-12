@@ -4,6 +4,7 @@
 require('typeface-lato')
 require('typeface-bebas-neue')
 
+import 'regenerator-runtime/runtime'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import {

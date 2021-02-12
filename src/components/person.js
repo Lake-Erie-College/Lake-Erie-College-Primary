@@ -13,7 +13,7 @@ const Person = ({ person, displayName }) => {
           
     const personTo = linkResolver.path(person)
     const departmentTo = person.department ? linkResolver.path(person.department) : null
-    const buildingTo = buildingTo ? linkResolver.path(person.building) : null
+    const buildingTo = person.building ? linkResolver.path(person.building) : null
 
     const hasHeadshot = typeof person.headshot !== 'undefined' && person.headshot !== null
 
