@@ -139,7 +139,7 @@ export default ({ category, heading, limit, showViewAll }) => {
         typeof showViewAll !== 'undefined' && showViewAll === true
             ? true
             : false
-    const [limitEvents, setLimitEvents] = useState(typeof limit !== 'undefined' ? limit : 5)
+    const [limitEvents, setLimitEvents] = useState((typeof limit !== 'undefined') && (limit !== null) ? limit : 5)
 
     const sortedEvents = sortBy(filteredEvents, [
         SortEventsByDate,
