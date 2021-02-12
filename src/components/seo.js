@@ -3,7 +3,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 import { Helmet } from 'react-helmet-async'
 import get from 'lodash/get'
 
-const SEO = ({ title, description }) => {
+const SEO = ({ title, description, robots }) => {
     const data = useStaticQuery(graphql`
         {
             site {
@@ -23,10 +23,13 @@ const SEO = ({ title, description }) => {
             <title>{`${title} | ${siteTitle}`}</title>
             <meta property="og:title" content={title} />
             {hasDescription && (
-                    <meta name="description" content={description.description} />
+                <meta name="description" content={description.description} />
             )}
             {hasDescription && (
-                    <meta property="og:description" content={description.description} />
+                <meta property="og:description" content={description.description} />
+            )}
+            {robots && (
+                <meta name="robots" content={robots} />
             )}
         </Helmet>
     )
