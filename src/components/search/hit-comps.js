@@ -34,7 +34,7 @@ export const PageHit = clickHandler => ({ hit }) => (
 )
 
 export const SearchHit = ({ hit, insights, thumbnail }) => {
-    const type = get(hit, 'sys.contentType.sys.contentful_id')
+    const type = get(hit, 'internal.type')
     const useThumbnail = thumbnail || false
 
     const handler = useThumbnail ? hitHandlers[`${type}Thumbnail`] || hitHandlers.default : hitHandlers[type] || hitHandlers.default
