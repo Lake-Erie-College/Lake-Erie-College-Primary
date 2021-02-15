@@ -58,7 +58,7 @@ const BlockExternalEmbed = ({
                 <div className={styles.contentEmbed}>
                     <iframe
                         title="Schedule via Acuity"
-                        className={styles.embed}
+                        className={styles.acuityEmbed}
                         src={url}
                         width="100%"
                     ></iframe>
