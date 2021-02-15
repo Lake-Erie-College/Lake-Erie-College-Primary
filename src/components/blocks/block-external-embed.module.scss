@@ -61,6 +61,18 @@
         }
     }
 
+    .acuityEmbed {
+        padding: 0 $spacing-sm;
+        height: auto;
+        min-height: 100vh;
+        grid-column: left-gutter / end;
+
+        @include respond-to('small') {
+            padding: 0;
+            grid-column: left-main / right-gutter;
+        }
+    }
+
     div {
         margin: 0 auto;
 
