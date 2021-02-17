@@ -3,6 +3,7 @@ import { graphql } from 'gatsby'
 import { Helmet } from 'react-helmet-async'
 import get from 'lodash/get'
 import Layout from '../components/layout'
+import BlockMediaWithCaption from '../components/blocks/block-media-with-caption'
 import LeadImage from '../components/lead-image'
 import PageLead from '../components/page-lead'
 import PrimaryContent from '../components/primary-content'
@@ -13,12 +14,13 @@ class DepartmentTemplate extends React.Component {
     render() {
         const page = get(this.props, 'data.contentfulDepartment')
         const hasLeadImage = page.leadImage !== null
+        const hasCTA = page.leadImage !== null && page.callToAction !== null
 
         return (
             <Layout location={this.props.location}>
                 <SEO title={page.title} description={page.description} />
                 <main>
-                    {hasLeadImage && (
+                    {hasLeadImage && !hasCTA && (
                         <LeadImage
                             title={page.leadImage.title}
                             fluid={page.leadImage.fluid}
@@ -26,13 +28,32 @@ class DepartmentTemplate extends React.Component {
                             description={page.leadImage.description}
                         />
                     )}
-                    <PageHeading
-                        primary={page.primaryHeading ? page.primaryHeading : page.title}
-                        secondary={page.secondaryHeading ? page.secondaryHeading : null}
-                        overline={page.category ? page.category.title : null}
-                        linkTo={page.category}
-                        currentPage={page}
-                    />
+                    {hasCTA && (
+                        <PageHeading
+                            overline={page.category ? page.category.title : null}
+                            linkTo={page.category}
+                            currentPage={page}
+                        />
+                    )}
+                    {hasLeadImage && hasCTA && (
+                        <BlockMediaWithCaption
+                            internalMedia={page.leadImage}
+                            heading={page.primaryHeading ? page.primaryHeading : page.title}
+                            caption={null}
+                            internalLink={page.callToAction.internalLink}
+                            callToAction={page.callToAction.displayTitle}
+                            isLead={true}
+                        />
+                    )}
+                    {!hasCTA && (
+                        <PageHeading
+                            primary={page.primaryHeading ? page.primaryHeading : page.title}
+                            secondary={page.secondaryHeading ? page.secondaryHeading : null}
+                            overline={page.category ? page.category.title : null}
+                            linkTo={page.category}
+                            currentPage={page}
+                        />
+                    )}
                     {page.lead && <PageLead content={page.lead.lead} />}
                     <PrimaryContent data={page.primaryContent} />
                 </main>

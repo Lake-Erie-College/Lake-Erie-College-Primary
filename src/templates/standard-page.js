@@ -29,6 +29,13 @@ class StandardPageTemplate extends React.Component {
                             description={page.leadImage.description}
                         />
                     )}
+                    {hasCTA && (
+                        <PageHeading
+                            overline={page.category ? page.category.title : null}
+                            linkTo={page.category}
+                            currentPage={page}
+                        />
+                    )}
                     {hasLeadImage && hasCTA && (
                         <BlockMediaWithCaption
                             internalMedia={page.leadImage}
