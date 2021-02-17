@@ -33,10 +33,10 @@ class StandardPageTemplate extends React.Component {
                         <BlockMediaWithCaption
                             internalMedia={page.leadImage}
                             heading={page.primaryHeading}
-                            caption={page.lead.lead}
+                            caption={null}
                             internalLink={page.callToAction.internalLink}
                             callToAction={page.callToAction.displayTitle}
-                            isOverlay={true}
+                            isLead={true}
                         />
                     )}
                     {!hasCTA && (
@@ -48,7 +48,7 @@ class StandardPageTemplate extends React.Component {
                             currentPage={page}
                         />
                     )}
-                    {page.lead && <PageLead content={page.lead.lead} />}
+                    {(page.lead) && <PageLead content={page.lead.lead} />}
                     {page.publishDate && <PageDate startDate={page.publishDate} />}
                     <PrimaryContent data={page.primaryContent} />
                 </main>

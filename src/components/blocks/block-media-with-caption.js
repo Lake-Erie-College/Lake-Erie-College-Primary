@@ -16,6 +16,7 @@ const BlockMediaWithCaption = ({
     externalUrl,
     callToAction,
     isOverlay,
+    isLead,
 }) => {
     const isImage =
         typeof internalMedia !== 'undefined' && internalMedia !== null
@@ -40,8 +41,13 @@ const BlockMediaWithCaption = ({
             ? styles.overlay
             : ''
 
+    const leadClass =
+        typeof isLead !== 'undefined' && isLead !== null
+            ? styles.lead
+            : ''
+
     return (
-        <figure className={cx(styles.blockMedia, overlayClass)}>
+        <figure className={cx(styles.blockMedia, overlayClass, leadClass)}>
             {!isImage && video && <VideoPlayer url={video} />}
             {isImage && <Image image={primaryImage} />}
             {(heading || summary) && (

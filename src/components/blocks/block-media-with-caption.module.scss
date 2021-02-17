@@ -68,6 +68,111 @@
     }
 }
 
+.lead {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    
+    @include respond-to('small') {
+        display: grid;
+    }
+    
+    @include respond-to('large') {
+        border-radius: 6px;
+    }
+
+    .media {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        pointer-events: none;
+        overflow: visible;
+        grid-column: left-gutter / end;
+    
+        @include respond-to('large') {
+            border-radius: 6px;
+            grid-column: left-main / right-gutter;
+        }
+    }
+
+    .mediaCaption {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        flex-direction: column;
+        margin: 0;
+        padding: $spacing-md $spacing-lg $spacing-md $spacing-lg;
+        width: 100%;
+        
+        grid-column: left-gutter / end;
+
+        @include respond-to('small') {
+            align-items: flex-end;
+            width: 50%;
+            background-color: rgba($color-brand-01, .75);
+            text-align: left;
+            color: $color-inverse-01;
+            z-index: 20;
+        }
+    
+        @include respond-to('large') {
+            border-radius: 6px;
+            grid-column: left-main / right-gutter;
+        }
+
+        &::after {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: -$spacing-lg;
+            width: $spacing-lg;
+            display: block;
+            background: linear-gradient(to right bottom, rgba($color-brand-01, .75) 49%, transparent 50%), linear-gradient(-50deg, transparent 16px, transparent 0);
+            content: "";
+        }
+    }
+
+    .heading {
+        @include typescale('h4');
+        text-align: right;
+    
+        @include respond-to('small') {
+            @include typescale('h2');
+        }
+
+        @include respond-to('large') {
+            @include typescale('h2');
+        }
+    }
+
+    .summary {
+        display: none;
+        margin-bottom: $spacing-sm;
+        @include font-family;
+        @include font-weight-body;
+        @include line-height('body');
+
+        @include respond-to('small') {
+            display: block;
+            @include typescale('h6');
+        }
+
+        @include respond-to('medium') {
+            @include typescale('h5');
+        }
+    }
+
+    .info {
+        padding: $spacing-2xs $spacing-sm;
+        border-radius: 6px;
+        background-color: $color-ui-01;
+        color: $color-text-01;
+    }
+}
+
 .overlay {
     position: relative;
     display: block;
