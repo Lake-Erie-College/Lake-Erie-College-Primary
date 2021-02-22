@@ -52,8 +52,11 @@ const BlockMediaWithCaption = ({
             {isImage && <Image image={primaryImage} />}
             {(heading || summary) && (
                 <figcaption className={styles.mediaCaption}>
-                    {heading && (
+                    {heading && !isLead && (
                         <h3 className={styles.heading}>{primaryHeading}</h3>
+                    )}
+                    {heading && isLead && (
+                        <h1 className={styles.heading}>{primaryHeading}</h1>
                     )}
                     {summary && <p className={styles.summary}>{summary}</p>}
                     {hasRelatedPage && callToAction && (

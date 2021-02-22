@@ -137,10 +137,11 @@
 
     .heading {
         @include typescale('h4');
-        text-align: right;
+        text-align: left;
     
         @include respond-to('small') {
             @include typescale('h2');
+            text-align: right;
         }
 
         @include respond-to('large') {
