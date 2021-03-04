@@ -38,7 +38,7 @@ const Text = ({ children }) => <p>{children}</p>
 
 const options = {
     renderMark: {
-        [MARKS.BOLD]: text => <Bold>{text}</Bold>,
+        [MARKS.BOLD]: (text) => <Bold>{text}</Bold>,
     },
     renderNode: {
         [BLOCKS.PARAGRAPH]: (node, children) => (
@@ -122,8 +122,8 @@ const options = {
                 />
             )
         },
-        [BLOCKS.EMBEDDED_ENTRY]: node => <EmbeddedEntry node={node} />,
-        [BLOCKS.EMBEDDED_ASSET]: node => {
+        [BLOCKS.EMBEDDED_ENTRY]: (node) => <EmbeddedEntry node={node} />,
+        [BLOCKS.EMBEDDED_ASSET]: (node) => {
             const content = localeScrubber.scrub(node)
 
             const { title, description, file } = content.data.target
@@ -204,20 +204,24 @@ const options = {
 }
 
 const blocksHandlers = {
-    ContentfulBlockAcademicOfferingListing: value => (
+    ContentfulBlockAcademicOfferingListing: (value) => (
         <AcademicOfferingListing node={value} />
     ),
-    ContentfulBlockCarousel: value => <Carousel node={value} />,
-    ContentfulBlockEventListing: value => <EventListing node={value} />,
-    ContentfulBlockExternalEmbed: value => <ExternalEmbed node={value} />,
-    ContentfulBlockMediaWithCaption: value => <MediaWithCaption node={value} />,
-    ContentfulBlockPersonListing: value => <PersonListing node={value} />,
-    ContentfulBlockQuote: value => <Quote node={value} />,
-    ContentfulBlockSearchResults: value => <SearchResults node={value} />,
-    ContentfulBlockSpotlightContent: value => <SpotlightContent node={value} />,
-    ContentfulPerson: value => <Person node={value} />,
-    ContentfulLocation: value => <Location node={value} />,
-    default: value => <Placeholder value={value} />,
+    ContentfulBlockCarousel: (value) => <Carousel node={value} />,
+    ContentfulBlockEventListing: (value) => <EventListing node={value} />,
+    ContentfulBlockExternalEmbed: (value) => <ExternalEmbed node={value} />,
+    ContentfulBlockMediaWithCaption: (value) => (
+        <MediaWithCaption node={value} />
+    ),
+    ContentfulBlockPersonListing: (value) => <PersonListing node={value} />,
+    ContentfulBlockQuote: (value) => <Quote node={value} />,
+    ContentfulBlockSearchResults: (value) => <SearchResults node={value} />,
+    ContentfulBlockSpotlightContent: (value) => (
+        <SpotlightContent node={value} />
+    ),
+    ContentfulPerson: (value) => <Person node={value} />,
+    ContentfulLocation: (value) => <Location node={value} />,
+    default: (value) => <Placeholder value={value} />,
 }
 
 const Container = ({ data, isFullWidth }) => {
@@ -243,8 +247,15 @@ const Placeholder = ({ value }) => {
 }
 
 function EmbeddedEntry({ node }) {
+    if (typeof node.data.target === 'undefined') {
+        return <span></span>
+    }
+
     const type =
-        typeof node.data.target.sys.contentType === 'undefined'
+        typeof node.data.target === 'undefined' ||
+        typeof node.data.target.sys === 'undefined' ||
+        typeof node.data.target.sys.contentType === 'undefined' ||
+        typeof node.data.target.sys.contentType.sys === 'undefined'
             ? node.data.target.__typename
             : node.data.target.sys.contentType.sys.id
     const value = get(node, 'data.target')
@@ -292,7 +303,13 @@ const Carousel = ({ node }) => {
 const EventListing = ({ node }) => {
     const content = localeScrubber.scrub(node)
 
-    return <BlockEventListing category={content.relatedCategory} limit={content.limit} showViewAll={content.viewAll} />
+    return (
+        <BlockEventListing
+            category={content.relatedCategory}
+            limit={content.limit}
+            showViewAll={content.viewAll}
+        />
+    )
 }
 
 const ExternalEmbed = ({ node }) => {
