@@ -93,9 +93,7 @@ const options = {
             )
         },
         [INLINES.ASSET_HYPERLINK]: (node, children) => {
-            const content = localeScrubber.scrub(node)
-
-            if (typeof node.data.target.file === 'undefined') {
+            if (typeof node.data.target === 'undefined' || typeof node.data.target.file === 'undefined') {
                 return <span></span>
             }
 
