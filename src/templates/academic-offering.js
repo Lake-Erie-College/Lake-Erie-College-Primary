@@ -101,6 +101,9 @@ export const pageQuery = graphql`
         }
         contentfulAcademicOffering(slug: { eq: $slug }) {
             title
+            description {
+                description
+            }
             offeringType
             category {
                 title
