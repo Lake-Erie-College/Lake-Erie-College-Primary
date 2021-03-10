@@ -127,6 +127,9 @@ export default ({ category, heading, limit, showViewAll }) => {
         }
 
         if (typeof category !== 'undefined' && category !== null) {
+            if (event.category === null) {
+                return isValidDate
+            }
             return event.category.slug === category.slug && isValidDate
         } else {
             return isValidDate
