@@ -277,10 +277,8 @@ fragment BlockSpotlightContent on ContentfulBlockSpotlightContent {
         summary
     }
     relatedPages {
-        ...AcademicOffering
         ...BlockExternalEmbed
         ...NavigationItem
-        ...Person
     }
     sys {
         type
