@@ -163,7 +163,7 @@ const CarouselImages = ({ images, hasControls, hasArrows }) => {
             )}
             {hasControls && (
                 <div className={styles.controls}>
-                    {content.map((media, index) => (
+                    {images.map((media, index) => (
                         <Control
                             key={`carousel-control-${media.title}`}
                             select={index}
