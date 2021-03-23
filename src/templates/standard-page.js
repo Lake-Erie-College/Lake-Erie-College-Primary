@@ -113,6 +113,7 @@ export const pageQuery = graphql`
                 references {
                     ...AcademicOffering
                     ...Asset
+                    ...BlockAcademicOfferingListing
                     ...BlockCarousel
                     ...BlockEventListing
                     ...BlockExternalEmbed

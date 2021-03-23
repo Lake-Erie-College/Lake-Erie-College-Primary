@@ -7,6 +7,7 @@
 .relatedOfferings {
     display: grid;
     @include content-grid;
+    margin-bottom: $spacing-lg;
 
     @include respond-to('small') {
         margin-left: 0;
