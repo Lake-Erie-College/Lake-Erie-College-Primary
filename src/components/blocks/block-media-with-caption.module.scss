@@ -5,7 +5,7 @@
 @import '../../styles/grids';
 
 .blockMedia {
-    margin: 0 0 $spacing-md 0;
+    margin: $spacing-lg 0 $spacing-md 0;
 
     @include respond-to('small') {
         display: grid;

@@ -52,6 +52,7 @@ export const pageQuery = graphql`
                 raw
                 references {
                     ...BlockCarousel
+                    ...BlockMediaWithCaption
                     ...BlockSpotlightContent
                 }
             }
