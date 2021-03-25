@@ -44,7 +44,12 @@
     color: $color-inverse-01;
 }
 
-.contentEmbed {
+.iframe {
+    min-height: 180px;
+}
+
+.contentEmbed,
+.iframe {
     display: grid;
     @include content-grid;
     grid-column: left-gutter / end;
