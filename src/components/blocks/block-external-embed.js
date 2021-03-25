@@ -100,7 +100,7 @@ const BlockExternalEmbed = ({
             return <div className={styles.embed} ref={embedRef}></div>
         } else {
             return (
-                <iframes
+                <iframe
                     title={callToAction}
                     className={styles.iframe}
                     src={url}
