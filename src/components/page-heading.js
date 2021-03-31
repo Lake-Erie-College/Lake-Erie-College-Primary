@@ -8,19 +8,23 @@ const linkResolver = require('../utils').linkResolver
 const RegularHeading = ({ primary, secondary, overline }) => {
     const hasOverline = typeof overline !== 'undefined'
 
-    return (
-        <header className={styles.pageHeading}>
-            <h1 className={styles.pageHeader}>
-                {hasOverline && (
-                    <strong className={styles.overline}>{overline}</strong>
-                )}
-                <span>
-                    {primary}
-                    {secondary && <em> | {secondary}</em>}
-                </span>
-            </h1>
-        </header>
-    )
+    if (primary) {
+        return (
+            <header className={styles.pageHeading}>
+                <h1 className={styles.pageHeader}>
+                    {hasOverline && (
+                        <strong className={styles.overline}>{overline}</strong>
+                    )}
+                    <span>
+                        {primary}
+                        {secondary && <em> | {secondary}</em>}
+                    </span>
+                </h1>
+            </header>
+        )
+    } else {
+        return <></>
+    }
 }
 
 const LinkHeading = ({ primary, secondary, overline, linkTo, currentPage }) => {
@@ -69,12 +73,14 @@ const LinkHeading = ({ primary, secondary, overline, linkTo, currentPage }) => {
                     <meta property="position" content="2" />
                 </li>
             </ol>
-            <h1 className={styles.pageHeader}>
-                <span>
-                    {primary}
-                    {secondary && <em>| {secondary}</em>}
-                </span>
-            </h1>
+            {primary && (
+                <h1 className={styles.pageHeader}>
+                    <span>
+                        {primary}
+                        {secondary && <em>| {secondary}</em>}
+                    </span>
+                </h1>
+            )}
         </header>
     )
 }
