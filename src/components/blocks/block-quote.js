@@ -71,7 +71,7 @@ const Testimonial = ({ media, personName, copy, heading }) => {
             {media && <Image image={media} />}
             <blockquote className={styles.sectionContent}>
                 {heading && (
-                    <h3 className={styles.heading}>
+                    <h3 className={styles.testimonialHeading}>
                         {heading}
                     </h3>
                 )}

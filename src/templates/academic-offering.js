@@ -193,6 +193,7 @@ export const pageQuery = graphql`
                     ...Asset
                     ...BlockMediaWithCaption
                     ...BlockPersonListing
+                    ...BlockQuote
                     ...BlockSpotlightContent
                     ...Person
                     ...StandardPage

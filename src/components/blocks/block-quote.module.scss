@@ -137,6 +137,20 @@
     }
 }
 
+.testimonial-heading {
+    margin-bottom: $spacing-md;
+    @include font-family-headings;
+    font-weight: 400;
+    @include line-height('heading');
+    @include font-smoothing;
+    @include letter-spacing;
+    @include typescale('h4');
+
+    @include respond-to('small') {
+        @include typescale('h4');
+    }
+}
+
 .overline {
     display: block;
 
