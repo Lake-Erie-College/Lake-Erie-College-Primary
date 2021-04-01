@@ -88,7 +88,8 @@ const Navigation = ({ props, className }) => {
                         }
 
                         const name =
-                            typeof node.displayTitle !== 'undefined'
+                            typeof node.displayTitle !== 'undefined' &&
+                            node.displayTitle !== null
                                 ? node.displayTitle
                                 : node.title
                         const isInternalMedia =
@@ -128,66 +129,76 @@ const Navigation = ({ props, className }) => {
 
                         return (
                             <li
-                                className={navClassName}
-                                onMouseEnter={() => toggleHover(true)}
-                                onMouseLeave={() => toggleHover(false)}
                                 key={`spotlight-navigation-${node.title}`}
+                                className={navClassName}
                             >
-                                {icon && (
-                                    <FontAwesomeIcon
-                                        icon={icon}
-                                        size="2x"
-                                        className={styles.navigationIcon}
-                                    />
-                                )}
+                                <div
+                                    className={styles.navigationButton}
+                                    onMouseEnter={() => toggleHover(true)}
+                                    onMouseLeave={() => toggleHover(false)}
+                                >
+                                    {icon && (
+                                        <FontAwesomeIcon
+                                            icon={icon}
+                                            size="2x"
+                                            className={styles.navigationIcon}
+                                        />
+                                    )}
 
-                                {!icon && !isExternal && (
-                                    <FontAwesomeIcon
-                                        icon="link"
-                                        size="2x"
-                                        className={styles.navigationIcon}
-                                    />
-                                )}
+                                    {!icon && !isExternal && (
+                                        <FontAwesomeIcon
+                                            icon="link"
+                                            size="2x"
+                                            className={styles.navigationIcon}
+                                        />
+                                    )}
 
-                                {!icon && isExternal && (
-                                    <FontAwesomeIcon
-                                        icon="external-link-square-alt"
-                                        size="2x"
-                                        className={styles.navigationIcon}
-                                    />
-                                )}
+                                    {!icon && isExternal && (
+                                        <FontAwesomeIcon
+                                            icon="external-link-square-alt"
+                                            size="2x"
+                                            className={styles.navigationIcon}
+                                        />
+                                    )}
 
-                                {!isEmbed && isExternal && (
-                                    <CallToAction
-                                        name={name}
-                                        url={fields}
-                                        isHovered={hover}
-                                    />
-                                )}
-
-                                {!isEmbed && isInternalMedia && (
-                                    <CallToAction
-                                        name={name}
-                                        url={fields.file.url}
-                                        isHovered={hover}
-                                    />
-                                )}
-
-                                {!isEmbed &&
-                                    !isInternalMedia &&
-                                    !isExternal && (
+                                    {!isEmbed && isExternal && (
                                         <CallToAction
                                             name={name}
-                                            node={fields}
+                                            url={fields}
                                             isHovered={hover}
                                         />
                                     )}
 
-                                {isEmbed && (
-                                    <CallToAction
-                                        name={name}
-                                        formUrl={fields}
-                                        isHovered={hover}
+                                    {!isEmbed && isInternalMedia && (
+                                        <CallToAction
+                                            name={name}
+                                            url={fields.file.url}
+                                            isHovered={hover}
+                                        />
+                                    )}
+
+                                    {!isEmbed &&
+                                        !isInternalMedia &&
+                                        !isExternal && (
+                                            <CallToAction
+                                                name={name}
+                                                node={fields}
+                                                isHovered={hover}
+                                            />
+                                        )}
+
+                                    {isEmbed && (
+                                        <CallToAction
+                                            name={name}
+                                            formUrl={fields}
+                                            isHovered={hover}
+                                        />
+                                    )}
+                                </div>
+
+                                {node.navigationSubmenu && (
+                                    <RelatedMenu
+                                        menu={node.navigationSubmenu}
                                     />
                                 )}
                             </li>
@@ -279,7 +290,9 @@ const Interstitial = ({ props, className }) => {
                                                 <CallToAction
                                                     name={name}
                                                     node={fields}
-                                                    menu={node.navigationSubmenu}
+                                                    menu={
+                                                        node.navigationSubmenu
+                                                    }
                                                 ></CallToAction>
                                             )}
 
@@ -322,8 +335,10 @@ const Interstitial = ({ props, className }) => {
 const RelatedMenu = ({ menu }) => {
     return (
         <details className={styles.relatedMenu}>
-            <summary className={styles.menuSummary}>Related Information</summary>
-            <ul>
+            <summary className={styles.menuSummary}>
+                Related Information
+            </summary>
+            <ul className={styles.menuList}>
                 {menu.navigationItems &&
                     menu.navigationItems.map((node) => {
                         const fields = node
