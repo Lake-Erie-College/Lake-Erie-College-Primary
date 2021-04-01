@@ -166,6 +166,20 @@ $navigation-color: $color-inverse-01;
     }
 }
 
+.relatedMenu {
+    padding: 0 $spacing-sm $spacing-md;
+    text-align: left;
+
+    .menuSummary {
+        padding: $spacing-md $spacing-sm;
+    }
+}
+
+.relatedMenuLink {
+    margin: 0 0 $spacing-2xs 0;
+    @include line-height('body');
+}
+
 .sectionImage {
     position: relative;
     grid-column: left-gutter / end;

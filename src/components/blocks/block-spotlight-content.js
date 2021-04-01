@@ -27,7 +27,7 @@ const handlers = {
     'Resource Links': (value, className) => (
         <Resources props={value} className={className} />
     ),
-    default: value => <span></span>,
+    default: (value) => <span></span>,
 }
 
 const displayComponent = (type, value) => {
@@ -68,7 +68,7 @@ const Navigation = ({ props, className }) => {
             )}
             <ul className={styles.navigationList}>
                 {hasRelatedPages &&
-                    props.relatedPages.map(node => {
+                    props.relatedPages.map((node) => {
                         let fields = {}
 
                         const modCount = props.relatedPages.length % 3
@@ -235,11 +235,12 @@ const Interstitial = ({ props, className }) => {
                 {hasRelatedPages && (
                     <div className={styles.interstitialLinks}>
                         {hasRelatedPages &&
-                            props.relatedPages.map(node => {
+                            props.relatedPages.map((node) => {
                                 let fields = {}
 
                                 const name =
-                                    typeof node.displayTitle !== 'undefined'
+                                    typeof node.displayTitle !== 'undefined' &&
+                                    node.displayTitle !== null
                                         ? node.displayTitle
                                         : node.title
 
@@ -278,7 +279,8 @@ const Interstitial = ({ props, className }) => {
                                                 <CallToAction
                                                     name={name}
                                                     node={fields}
-                                                />
+                                                    menu={node.navigationSubmenu}
+                                                ></CallToAction>
                                             )}
 
                                         {!isEmbed && isExternal && (
@@ -301,6 +303,12 @@ const Interstitial = ({ props, className }) => {
                                                 formUrl={node.sourceUrl}
                                             />
                                         )}
+
+                                        {node.navigationSubmenu && (
+                                            <RelatedMenu
+                                                menu={node.navigationSubmenu}
+                                            />
+                                        )}
                                     </div>
                                 )
                             })}
@@ -308,6 +316,89 @@ const Interstitial = ({ props, className }) => {
                 )}
             </div>
         </div>
+    )
+}
+
+const RelatedMenu = ({ menu }) => {
+    return (
+        <details className={styles.relatedMenu}>
+            <summary className={styles.menuSummary}>Related Information</summary>
+            <ul>
+                {menu.navigationItems &&
+                    menu.navigationItems.map((node) => {
+                        const fields = node
+
+                        const name =
+                            fields.displayTitle !== null
+                                ? fields.displayTitle
+                                : fields.title
+                        const icon =
+                            fields.pageIcon !== null
+                                ? fields.pageIcon
+                                      .toLowerCase()
+                                      .replace(' ', '-')
+                                : false
+                        const internal =
+                            fields.internalLink !== null
+                                ? fields.internalLink
+                                : false
+                        const internalMedia =
+                            fields.internalMedia !== null
+                                ? fields.internalMedia
+                                : false
+                        const external =
+                            (fields.externalUrl !== null) &
+                            (fields.externalUrl !== '')
+                                ? fields.externalUrl
+                                : false
+                        const isEmbed =
+                            typeof fields.sourceUrl !== 'undefined' &&
+                            fields.sourceUrl !== null
+
+                        return (
+                            <li className={styles.relatedMenuLink}>
+                                {icon && (
+                                    <FontAwesomeIcon
+                                        icon={icon}
+                                        size="xs"
+                                        className={styles.resourceIcon}
+                                    />
+                                )}
+
+                                {!icon && (
+                                    <FontAwesomeIcon
+                                        icon="arrow-circle-right"
+                                        size="xs"
+                                        className={styles.resourceIcon}
+                                    />
+                                )}
+
+                                {internal && (
+                                    <TextLink children={name} node={internal} />
+                                )}
+
+                                {internalMedia && (
+                                    <TextLink
+                                        children={name}
+                                        uri={internalMedia.file.url}
+                                    />
+                                )}
+
+                                {external && (
+                                    <TextLink children={name} uri={external} />
+                                )}
+
+                                {isEmbed && (
+                                    <TextLink
+                                        children={name}
+                                        formUrl={fields.sourceUrl}
+                                    />
+                                )}
+                            </li>
+                        )
+                    })}
+            </ul>
+        </details>
     )
 }
 
@@ -341,7 +432,7 @@ const Resources = ({ props, className }) => {
             </div>
             <ul className={styles.resourceLinks}>
                 {hasRelatedPages &&
-                    props.relatedPages.map(fields => {
+                    props.relatedPages.map((fields) => {
                         const name =
                             fields.displayTitle !== null
                                 ? fields.displayTitle
@@ -424,7 +515,7 @@ const Resources = ({ props, className }) => {
                         )
                     })}
                 {hasRelatedMedia &&
-                    props.relatedMedia.map(fields => {
+                    props.relatedMedia.map((fields) => {
                         const name = fields.title
 
                         return (

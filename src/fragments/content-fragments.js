@@ -209,6 +209,18 @@ fragment Event on ContentfulEvent {
 }
 `
 
+export const _NavigationMenu = graphql`
+fragment NavigationMenu on ContentfulNavigationMenu {
+    # contentful_id is required to resolve the references
+    contentful_id
+    __typename
+    id
+    title
+    navigationItems {
+        ...NavigationItem
+    }
+}`
+
 export const _NavigationItem = graphql`
 fragment NavigationItem on ContentfulNavigationItem {
     # contentful_id is required to resolve the references
@@ -232,6 +244,34 @@ fragment NavigationItem on ContentfulNavigationItem {
     displayTitle
     pageIcon
     newWindow
+    navigationSubmenu {
+        contentful_id
+        __typename
+        id
+        title
+        navigationItems {
+            contentful_id
+            __typename
+            id
+            title
+            internalLink {
+              ...AcademicOffering
+              ...Department
+              ...Homepage
+              ...Location
+              ...Person
+              ...Event
+              ...StandardPage
+            }
+            externalUrl
+            internalMedia {
+                ...Asset
+            }
+            displayTitle
+            pageIcon
+            newWindow
+        }
+    }
 }`
 
 export const _BlockExternalEmbed = graphql`
