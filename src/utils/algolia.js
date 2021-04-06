@@ -340,6 +340,7 @@ const flatten = arr => arr.map(({ node: { ...rest } }) => ({ ...rest }))
 const cleanContent = arr =>
     arr.map(({ primaryContent, ...rest }) => {
         let obj = {}
+        const maxLength = 2000
 
         if (
             typeof primaryContent !== 'undefined' &&
@@ -381,6 +382,8 @@ const cleanContent = arr =>
             primaryContent.raw = primaryContent.raw.split('[').join('')
             primaryContent.raw = primaryContent.raw.split(']').join('')
             primaryContent.raw = primaryContent.raw.split('"').join(' ')
+
+            primaryContent.raw = primaryContent.raw.substr(0, maxLength)
         }
 
         obj = { primaryContent, ...rest }
