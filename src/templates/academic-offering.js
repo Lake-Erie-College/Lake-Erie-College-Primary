@@ -191,6 +191,7 @@ export const pageQuery = graphql`
                 raw
                 references {
                     ...Asset
+                    ...BlockCarousel
                     ...BlockMediaWithCaption
                     ...BlockPersonListing
                     ...BlockQuote
