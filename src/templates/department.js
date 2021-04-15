@@ -41,6 +41,7 @@ class DepartmentTemplate extends React.Component {
                             heading={page.primaryHeading ? page.primaryHeading : page.title}
                             caption={null}
                             internalLink={page.callToAction.internalLink}
+                            externalUrl={page.callToAction.externalUrl}
                             callToAction={page.callToAction.displayTitle}
                             isLead={true}
                         />

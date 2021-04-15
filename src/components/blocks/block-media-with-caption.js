@@ -5,6 +5,8 @@ import ImageWithSVGSupport from '../image-with-svg-support'
 import ReactPlayer from 'react-player'
 import TextLink from '../text-link'
 
+import { TypeFormPopup } from '../blocks/block-external-embed'
+
 import styles from './block-media-with-caption.module.scss'
 
 const BlockMediaWithCaption = ({
@@ -46,6 +48,8 @@ const BlockMediaWithCaption = ({
             ? styles.lead
             : ''
 
+    const isForm = isExternal && externalUrl.includes('typeform.com/to/')
+
     return (
         <figure className={cx(styles.blockMedia, overlayClass, leadClass)}>
             {!isImage && video && <VideoPlayer url={video} />}
@@ -60,11 +64,23 @@ const BlockMediaWithCaption = ({
                     )}
                     {summary && <p className={styles.summary}>{summary}</p>}
                     {hasRelatedPage && callToAction && (
-                        <Link
-                            node={internalLink}
-                            cta={callToAction}
-                            uri={externalUrl}
-                        />
+                        <div>
+                            { isForm && (
+                                <Link
+                                    clickHandler={() => TypeFormPopup(externalUrl)}
+                                    node={internalLink}
+                                    cta={callToAction}
+                                    uri={'#'}
+                                />
+                            )}
+                            { !isForm && (
+                                <Link
+                                    node={internalLink}
+                                    cta={callToAction}
+                                    uri={externalUrl}
+                                />
+                            )}
+                        </div>
                     )}
                 </figcaption>
             )}
@@ -103,11 +119,11 @@ const VideoPlayer = ({ url }) => {
     )
 }
 
-const Link = ({ node, cta, uri }) => {
+const Link = ({ node, cta, uri, clickHandler }) => {
     const isExternal = typeof uri !== 'undefined' && uri !== null
 
     return (
-        <p className={styles.info}>
+        <p className={styles.info} onClick={clickHandler}>
             {!isExternal && <TextLink node={node} children={cta} />}
             {isExternal && <TextLink uri={uri} children={cta} />}
             <FontAwesomeIcon

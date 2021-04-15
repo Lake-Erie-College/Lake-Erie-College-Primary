@@ -198,6 +198,7 @@ const Navigation = ({ props, className }) => {
 
                                 {node.navigationSubmenu && (
                                     <RelatedMenu
+                                        title={name}
                                         menu={node.navigationSubmenu}
                                     />
                                 )}
@@ -290,9 +291,6 @@ const Interstitial = ({ props, className }) => {
                                                 <CallToAction
                                                     name={name}
                                                     node={fields}
-                                                    menu={
-                                                        node.navigationSubmenu
-                                                    }
                                                 ></CallToAction>
                                             )}
 
@@ -319,6 +317,7 @@ const Interstitial = ({ props, className }) => {
 
                                         {node.navigationSubmenu && (
                                             <RelatedMenu
+                                                title={name}
                                                 menu={node.navigationSubmenu}
                                             />
                                         )}
@@ -332,11 +331,11 @@ const Interstitial = ({ props, className }) => {
     )
 }
 
-const RelatedMenu = ({ menu }) => {
+const RelatedMenu = ({ title, menu }) => {
     return (
         <details className={styles.relatedMenu}>
             <summary className={styles.menuSummary}>
-                Related Information
+                View More {title} Links
             </summary>
             <ul className={styles.menuList}>
                 {menu.navigationItems &&
