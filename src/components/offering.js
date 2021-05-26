@@ -12,10 +12,12 @@ const CourseHeading = ({ heading, overline, tags }) => {
     return (
         <header className={styles.header}>
             <h3 className={styles.courseHeading}>
-                {overline && <span className={styles.overline}>{overline}</span>}
+                {overline && (
+                    <span className={styles.overline}>{overline}</span>
+                )}
                 {tags && (
                     <span className={styles.tags}>
-                        {tags && tags.map(tagName => <span>{tagName}</span>)}
+                        {tags && tags.map((tagName) => <span>{tagName}</span>)}
                     </span>
                 )}
                 {heading}
@@ -28,10 +30,12 @@ const CourseHeadingWithLink = ({ heading, overline, to, tags }) => {
     return (
         <header className={styles.header}>
             <h3 className={styles.courseHeading}>
-                {overline && <span className={styles.overline}>{overline}</span>}
+                {overline && (
+                    <span className={styles.overline}>{overline}</span>
+                )}
                 {tags && (
                     <span className={styles.tags}>
-                        {tags && tags.map(tagName => <span>{tagName}</span>)}
+                        {tags && tags.map((tagName) => <span>{tagName}</span>)}
                     </span>
                 )}
                 <GatsbyLink to={to} className={styles.internal}>
@@ -47,7 +51,7 @@ const CourseHeadingWithLink = ({ heading, overline, to, tags }) => {
     )
 }
 
-export default ({ offering, isThumb }) => {
+export default ({ offering, isThumb, short }) => {
     const hasPrimaryContent =
         typeof offering.primaryContent !== 'undefined' &&
         offering.primaryContent !== null
@@ -70,6 +74,9 @@ export default ({ offering, isThumb }) => {
         typeof offering.summary !== 'undefined' && offering.summary !== null
             ? offering.summary.summary
             : null
+
+    const isShort =
+        typeof short !== 'undefined' && short !== null ? short : false
 
     return (
         <div className={styles.offering}>
@@ -96,16 +103,28 @@ export default ({ offering, isThumb }) => {
                 />
             )}
 
-            {!summary && !hasPrimaryContent && hasDescription && (
-                <p className={styles.courseSummary}>
-                    {offering.description.description}
-                </p>
-            )}
+            {!isShort && (
+                <>
+                    {!summary && !hasPrimaryContent && hasDescription && (
+                        <p className={styles.courseSummary}>
+                            {offering.description.description}
+                        </p>
+                    )}
 
-            {summary && (
-                <p className={styles.courseSummary}>
-                    {summary}
-                </p>
+                    {summary && (
+                        <p className={styles.courseSummary}>{summary}</p>
+                    )}
+
+                    {!summary && !hasPrimaryContent && hasDescription && (
+                        <p className={styles.courseSummary}>
+                            {offering.description.description}
+                        </p>
+                    )}
+
+                    {summary && (
+                        <p className={styles.courseSummary}>{summary}</p>
+                    )}
+                </>
             )}
         </div>
     )

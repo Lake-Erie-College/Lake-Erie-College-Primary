@@ -343,6 +343,7 @@ fragment BlockAcademicOfferingListing on ContentfulBlockAcademicOfferingListing 
         }
     }
     offeringType
+    shortDisplay
 }`
 
 export const _BlockCarousel = graphql`

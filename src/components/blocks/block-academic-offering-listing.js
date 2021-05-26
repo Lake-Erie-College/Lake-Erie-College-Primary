@@ -4,7 +4,7 @@ import get from 'lodash/get'
 import sortBy from 'lodash/sortBy'
 import RelatedOfferings from '../related-offerings'
 
-const BlockAcademicOfferingListing = ({ category, offeringType }, ...rest) => {
+const BlockAcademicOfferingListing = ({ category, offeringType, shortDisplay }, ...rest) => {
     const data = useStaticQuery(graphql`
         {
             allContentfulAcademicOffering(
@@ -60,7 +60,7 @@ const BlockAcademicOfferingListing = ({ category, offeringType }, ...rest) => {
     const filteredOfferings = sortBy(offerings.filter(FilterOfferings), SortByTitle)
 
     if (filteredOfferings != null && filteredOfferings.length > 0) {
-        return <RelatedOfferings offerings={filteredOfferings} />
+        return <RelatedOfferings offerings={filteredOfferings} display={shortDisplay} />
     } else {
         return null
     }

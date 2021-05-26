@@ -281,6 +281,7 @@ const AcademicOfferingListing = ({ node }) => {
         <BlockAcademicOfferingListing
             category={content.relatedAcademicCategory}
             offeringType={content.offeringType}
+            shortDisplay={content.shortDisplay}
         />
     )
 }
