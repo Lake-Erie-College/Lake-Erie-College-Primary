@@ -120,10 +120,6 @@ export default ({ offering, isThumb, short }) => {
                             {offering.description.description}
                         </p>
                     )}
-
-                    {summary && (
-                        <p className={styles.courseSummary}>{summary}</p>
-                    )}
                 </>
             )}
         </div>
