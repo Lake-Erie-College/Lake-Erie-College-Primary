@@ -78,6 +78,7 @@ export const pageQuery = graphql`
                 references {
                     ...Asset
                     ...BlockExternalEmbed
+                    ...BlockMediaWithCaption
                     ...BlockSpotlightContent
                     ...Location
                     ...Person
