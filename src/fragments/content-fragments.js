@@ -416,6 +416,10 @@ fragment BlockPersonListing on ContentfulBlockPersonListing {
     relatedPeople {
       ...Person
     }
+    department {
+        slug
+    }
+    personTypeSelection: personType
 }`
 
 export const _BlockQuote = graphql`

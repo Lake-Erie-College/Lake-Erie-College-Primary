@@ -373,6 +373,8 @@ const PersonListing = ({ node }) => {
             title={content.title}
             primaryHeading={content.primaryHeading}
             people={content.relatedPeople}
+            department={content.department}
+            personType={content.personTypeSelection}
         />
     )
 }
