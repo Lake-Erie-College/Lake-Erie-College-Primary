@@ -32,7 +32,7 @@ const BlockPersonListing = ({
         return edge.node
     })
 
-    let filteredPeople = []
+    let filteredPeople = (typeof department !== 'undefined' && department !== null) || (typeof personType !== 'undefined' && personType !== null) ? allPeople : []
 
     const hasHeading =
         typeof primaryHeading !== 'undefined' && primaryHeading !== null
@@ -56,7 +56,7 @@ const BlockPersonListing = ({
             : 'Z'
     }
 
-    if (typeof deparment !== 'undefined' && department !== null) {
+    if (typeof department !== 'undefined' && department !== null) {
         filteredPeople = filteredPeople.filter(FilterPeopleByDepartment)
     }
 
