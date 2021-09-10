@@ -46,7 +46,7 @@ const BlockPersonListing = ({
     }
 
     const FilterPeopleByPersonType = (person) => {
-        const found = personType.indexOf(person.personType)
+        const found = personType.indexOf(person.personType) > -1
         return found
     }
 
