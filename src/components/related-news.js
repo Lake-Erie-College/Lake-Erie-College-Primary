@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link as GatsbyLink } from 'gatsby'
 import Image from 'gatsby-image'
 import { useStaticQuery, graphql } from 'gatsby'
@@ -11,6 +11,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import styles from './related-news.module.scss'
 
 const linkResolver = require('../utils').linkResolver
+
+import CallToAction from './call-to-action'
 
 const NewsHeadingWithLink = ({ heading, overline, to }) => {
     return (
@@ -83,7 +85,7 @@ const SortByTitle = newsPage => {
         : newsPage.title
 }
 
-export default ({ category, heading, limit, showViewAll }) => {
+export default ({ category, heading, limit, showViewAll, viewAllPage }) => {
     const data = useStaticQuery(graphql`
         {
             allContentfulStandardPage(
@@ -128,6 +130,8 @@ export default ({ category, heading, limit, showViewAll }) => {
         return edge.node
     })
 
+    const viewAllTo = viewAllPage ? linkResolver.path(viewAllPage) : null
+
     const FilterNews = newsPage => {
         if (typeof category !== 'undefined' && category !== null) {
             if (
@@ -149,7 +153,7 @@ export default ({ category, heading, limit, showViewAll }) => {
         typeof showViewAll !== 'undefined' && showViewAll === true
             ? true
             : false
-    const limitNews = typeof limit !== 'undefined' ? limit : 6
+    const [limitNews, setlimitNews] = useState((typeof limit !== 'undefined') && (limit !== null) ? limit : 6)
 
     const limitedNewsPages = take(filteredNewsPages, limitNews)
 
@@ -157,6 +161,10 @@ export default ({ category, heading, limit, showViewAll }) => {
         typeof category !== 'undefined' && category !== null
             ? category.shortTitle
             : null
+
+    const clickHandler = () => {
+        setlimitNews(100)
+    }
 
     return (
         <div className={styles.relatedNews}>
@@ -172,6 +180,11 @@ export default ({ category, heading, limit, showViewAll }) => {
                 <p className={styles.empty}>
                     There is no {categoryLabel} news currently available.
                 </p>
+            )}
+            {viewAll && limitNews < 100 && (
+                <CallToAction url={viewAllTo || '#'} onClick={clickHandler}>
+                    View All {categoryLabel} News
+                </CallToAction>
             )}
         </div>
     )

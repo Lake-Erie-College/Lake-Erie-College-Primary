@@ -10,6 +10,7 @@ import BlockCarousel from './blocks/block-carousel'
 import BlockEventListing from './blocks/block-event-listing'
 import BlockExternalEmbed from './blocks/block-external-embed'
 import BlockMediaWithCaption from './blocks/block-media-with-caption'
+import BlockNewsListing from './blocks/block-news-listing'
 import BlockPersonListing from './blocks/block-person-listing'
 import BlockQuote from './blocks/block-quote'
 import BlockSearchResults from './blocks/block-search-results'
@@ -211,6 +212,7 @@ const blocksHandlers = {
     ContentfulBlockMediaWithCaption: (value) => (
         <MediaWithCaption node={value} />
     ),
+    ContentfulBlockNewsListing: (value) => <NewsListing node={value} />,
     ContentfulBlockPersonListing: (value) => <PersonListing node={value} />,
     ContentfulBlockQuote: (value) => <Quote node={value} />,
     ContentfulBlockSearchResults: (value) => <SearchResults node={value} />,
@@ -307,6 +309,7 @@ const EventListing = ({ node }) => {
             category={content.relatedCategory}
             limit={content.limit}
             showViewAll={content.viewAll}
+            viewAllPage={content.viewAllPage}
         />
     )
 }
@@ -361,6 +364,19 @@ const MediaWithCaption = ({ node }) => {
             internalLink={content.internaLink}
             externalUrl={content.externalUrl}
             callToAction={content.callToAction}
+        />
+    )
+}
+
+const NewsListing = ({ node }) => {
+    const content = localeScrubber.scrub(node)
+
+    return (
+        <BlockNewsListing
+            category={content.relatedCategory}
+            limit={content.limit}
+            showViewAll={content.viewAll}
+            viewAllPage={content.viewAllPage}
         />
     )
 }

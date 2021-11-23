@@ -86,7 +86,7 @@ const SortEventsByTitle = event => {
         : event.title
 }
 
-export default ({ category, heading, limit, showViewAll }) => {
+export default ({ category, heading, limit, showViewAll, viewAllPage }) => {
     const data = useStaticQuery(graphql`
         {
             allContentfulEvent(filter: { startDateAndTime: { ne: "" } }) {
@@ -118,6 +118,8 @@ export default ({ category, heading, limit, showViewAll }) => {
     const events = edges.map(edge => {
         return edge.node
     })
+
+    const viewAllTo = viewAllPage ? linkResolver.path(viewAllPage) : null
 
     const FilterEvents = event => {
         let isValidDate = moment().isSameOrBefore(event.startDateAndTime)
@@ -178,7 +180,7 @@ export default ({ category, heading, limit, showViewAll }) => {
                 </p>
             )}
             {viewAll && limitEvents < 100 && (
-                <CallToAction url={'#'} onClick={clickHandler}>
+                <CallToAction url={viewAllTo || '#'} onClick={clickHandler}>
                     View All Upcoming {categoryLabel} Events
                 </CallToAction>
             )}

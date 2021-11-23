@@ -377,6 +377,28 @@ fragment BlockEventListing on ContentfulBlockEventListing {
     title
     limit
     viewAll
+    viewAllPage {
+        ...StandardPage
+    }
+}`
+
+export const _BlockNewsListing = graphql`
+fragment BlockNewsListing on ContentfulBlockNewsListing {
+    # contentful_id is required to resolve the references
+    contentful_id
+    __typename
+    id
+    relatedCategory {
+        title
+        slug
+        shortTitle
+    }
+    title
+    limit
+    viewAll
+    viewAllPage {
+        ...StandardPage
+    }
 }`
 
 export const _BlockMediaWithCaption = graphql`

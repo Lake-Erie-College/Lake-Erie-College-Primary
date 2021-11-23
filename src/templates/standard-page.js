@@ -118,6 +118,7 @@ export const pageQuery = graphql`
                     ...BlockEventListing
                     ...BlockExternalEmbed
                     ...BlockMediaWithCaption
+                    ...BlockNewsListing
                     ...BlockPersonListing
                     ...BlockQuote
                     ...BlockSearchResults

@@ -16,7 +16,7 @@ const BlockEventListing = ({ category, limit, showViewAll }, ...rest) => {
                 <header className={styles.header}>
                     <h2 className={styles.heading}>
                         <span className={styles.overline}>Upcoming</span>
-                        {category.shortTitle} Events
+                        {category ? category.shortTitle : ''} Events
                     </h2>
                 </header>
                 <div className={styles.eventsList}>
