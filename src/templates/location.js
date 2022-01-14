@@ -18,7 +18,7 @@ class LocationTemplate extends React.Component {
 
         return (
             <Layout location={this.props.location}>
-                <SEO title={page.title} description={page.description} />
+                <SEO title={page.title} description={page.description} location={this.props.location} />
                 <main>
                     <PageHeading
                         primary={page.title}

@@ -3,18 +3,20 @@ import { useStaticQuery, graphql } from 'gatsby'
 import { Helmet } from 'react-helmet-async'
 import get from 'lodash/get'
 
-const SEO = ({ title, description, robots }) => {
+const SEO = ({ title, description, robots, location }) => {
     const data = useStaticQuery(graphql`
         {
             site {
                 siteMetadata {
                     title
+                    siteUrl
                 }
             }
         }
     `)
 
     const siteTitle = get(data, 'site.siteMetadata.title')
+    const siteUrl = get(data, 'site.siteMetadata.siteUrl')
 
     const hasDescription = typeof description !== 'undefined' && description !== null
 
@@ -31,6 +33,7 @@ const SEO = ({ title, description, robots }) => {
             {robots && (
                 <meta name="robots" content={robots} />
             )}
+            <link rel="canonical" href={`${siteUrl}${location.pathname}`} />
         </Helmet>
     )
 }

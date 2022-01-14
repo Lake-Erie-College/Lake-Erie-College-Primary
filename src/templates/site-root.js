@@ -17,7 +17,7 @@ class SiteRootTemplate extends React.Component {
 
         return (
             <Layout location={this.props.location}>
-                <SEO title={page.title} description={page.description} />
+                <SEO title={page.title} description={page.description} location={this.props.location} />
                 <main>
                     {page.primaryHeading && <h1 className={'visually-hidden'}>{page.primaryHeading}</h1>}
                     {page.secondaryHeading && <h2 className={'visually-hidden'}>{page.secondaryHeading}</h2>}

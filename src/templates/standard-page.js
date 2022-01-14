@@ -19,7 +19,7 @@ class StandardPageTemplate extends React.Component {
 
         return (
             <Layout location={this.props.location}>
-                <SEO title={page.title} description={page.description} />
+                <SEO title={page.title} description={page.description} location={this.props.location} />
                 <main>
                     {hasLeadImage && !hasCTA && (
                         <LeadImage

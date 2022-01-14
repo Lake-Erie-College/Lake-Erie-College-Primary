@@ -20,7 +20,7 @@ class PersonTemplate extends React.Component {
 
         return (
             <Layout location={this.props.location}>
-                <SEO title={page.title} robots={'noindex'}/>
+                <SEO title={page.title} robots={'noindex'} location={this.props.location}/>
                 <main>
                     <PageHeading
                         primary={fullName}
