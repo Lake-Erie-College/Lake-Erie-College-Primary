@@ -24,7 +24,7 @@ export default ({ node, uri, children, formUrl, className }) => {
     if (isExternal) {
         return (
             <a
-                rel="noopener noreferrer"
+                rel="noopener noreferrer nofollow"
                 className={cx(styles.textLink, className)}
                 href={to}
                 onMouseEnter={() => toggleHover(1)}
