@@ -111,7 +111,6 @@ export const pageQuery = graphql`
             primaryContent {
               raw
                 references {
-                    ...AcademicOffering
                     ...Asset
                     ...BlockAcademicOfferingListing
                     ...BlockCarousel
