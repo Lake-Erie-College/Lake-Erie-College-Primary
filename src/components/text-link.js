@@ -25,6 +25,7 @@ export default ({ node, uri, children, formUrl, className }) => {
         return (
             <a
                 rel="noopener noreferrer nofollow"
+                target="_blank"
                 className={cx(styles.textLink, className)}
                 href={to}
                 onMouseEnter={() => toggleHover(1)}
