@@ -60,7 +60,7 @@
     color: darken($color-inverse-02, 10);
 
     @include respond-to('small') {
-        grid-column: left-gutter / half-main;
+        grid-column: left-main / half-main;
 
         &::after {
             position: absolute;
