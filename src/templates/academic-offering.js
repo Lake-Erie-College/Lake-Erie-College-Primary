@@ -4,6 +4,8 @@ import { Helmet } from 'react-helmet-async'
 import get from 'lodash/get'
 import sortBy from 'lodash/sortBy'
 import Layout from '../components/layout'
+import BlockMediaWithCaption from '../components/blocks/block-media-with-caption'
+import LeadImage from '../components/lead-image'
 import PageLead from '../components/page-lead'
 import PrimaryContent from '../components/primary-content'
 import PageHeading from '../components/page-heading'
@@ -16,7 +18,8 @@ import SEO from '../components/seo'
 class AcademicOfferingTemplate extends React.Component {
     render() {
         const page = get(this.props, 'data.contentfulAcademicOffering')
-        const siteTitle = get(this.props, 'data.site.siteMetadata.title')
+        const hasLeadImage = page.leadImage !== null
+        const hasCTA = page.leadImage !== null && page.callToAction !== null
         const relatedOfferings = page.relatedOfferings
         const primaryContact = page.primaryContact
 
@@ -50,13 +53,41 @@ class AcademicOfferingTemplate extends React.Component {
             <Layout location={this.props.location}>
                 <SEO title={page.title} description={page.description} location={this.props.location} />
                 <main>
-                    <PageHeading
-                        primary={page.title}
-                        secondary={page.offeringType}
-                        overline={page.category ? page.category.title : null}
-                        linkTo={page.category}
-                        currentPage={page}
-                    />
+                    {hasLeadImage && !hasCTA && (
+                        <LeadImage
+                            title={page.leadImage.title}
+                            fluid={page.leadImage.fluid}
+                            file={page.leadImage.file}
+                            description={page.leadImage.description}
+                        />
+                    )}
+                    {hasCTA && (
+                        <PageHeading
+                            overline={page.category ? page.category.title : null}
+                            linkTo={page.category}
+                            currentPage={page}
+                        />
+                    )}
+                    {hasLeadImage && hasCTA && (
+                        <BlockMediaWithCaption
+                            internalMedia={page.leadImage}
+                            heading={page.primaryHeading ? page.primaryHeading : page.title}
+                            caption={page.offeringType}
+                            internalLink={page.callToAction.internalLink}
+                            externalUrl={page.callToAction.externalUrl}
+                            callToAction={page.callToAction.displayTitle}
+                            isLead={true}
+                        />
+                    )}
+                    {!hasCTA && (
+                        <PageHeading
+                            primary={page.primaryHeading ? page.primaryHeading : page.title}
+                            secondary={page.offeringType}
+                            overline={page.category ? page.category.title : null}
+                            linkTo={page.category}
+                            currentPage={page}
+                        />
+                    )}
                     {page.lead && <PageLead content={page.lead.lead} />}
                     <PrimaryContent data={page.primaryContent} />
                     {primaryContact && (
@@ -116,8 +147,21 @@ export const pageQuery = graphql`
                     ...Person
                 }
             }
+            callToAction {
+                ...NavigationItem
+            }
             lead {
                 lead
+            }
+            leadImage {
+                title
+                file {
+                    url
+                    contentType
+                }
+                fluid(maxWidth: 2160) {
+                    ...GatsbyContentfulFluid_withWebp
+                }
             }
             pageIcon
             primaryContact {
