@@ -29,12 +29,7 @@ const Location = ({ name, photo, summary, slug, category }) => {
                 <figcaption className={styles.details}>
                     {hasPhoto && (
                         <h3 className={styles.name}>
-                            <GatsbyLink
-                                to={locationTo}
-                                className={styles.internal}
-                            >
-                                {name}
-                            </GatsbyLink>
+                            {name}
                         </h3>
                     )}
                     {hasSummary && <p className={styles.summary}>{summary}</p>}

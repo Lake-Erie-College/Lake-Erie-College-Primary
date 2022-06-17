@@ -11,15 +11,19 @@ import PrimaryContent from '../components/primary-content'
 import LeadImage from '../components/lead-image'
 import SEO from '../components/seo'
 
+const linkResolver = require('../utils').linkResolver
+
 class StandardPageTemplate extends React.Component {
     render() {
         const page = get(this.props, 'data.contentfulStandardPage')
         const hasLeadImage = typeof page.leadImage !== 'undefined' && page.leadImage !== null
         const hasCTA = page.leadImage !== null && page.callToAction !== null
 
+        let path = linkResolver.path(page)
+
         return (
             <Layout location={this.props.location}>
-                <SEO title={page.title} description={page.description} location={this.props.location} />
+                <SEO title={page.title} description={page.description} location={path} />
                 <main>
                     {hasLeadImage && !hasCTA && (
                         <LeadImage

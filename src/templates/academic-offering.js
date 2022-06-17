@@ -15,6 +15,8 @@ import RelatedOfferings from '../components/related-offerings'
 import BlockPersonListing from '../components/blocks/block-person-listing'
 import SEO from '../components/seo'
 
+const linkResolver = require('../utils').linkResolver
+
 class AcademicOfferingTemplate extends React.Component {
     render() {
         const page = get(this.props, 'data.contentfulAcademicOffering')
@@ -49,9 +51,12 @@ class AcademicOfferingTemplate extends React.Component {
                 ? `${page.category.title} ${facultyType}`
                 : `${page.title} ${facultyType}`
 
+        let path = linkResolver.path(page)
+        console.log(page)
+
         return (
             <Layout location={this.props.location}>
-                <SEO title={page.title} description={page.description} location={this.props.location} />
+                <SEO title={page.title} description={page.description} location={path} />
                 <main>
                     {hasLeadImage && !hasCTA && (
                         <LeadImage
@@ -135,6 +140,7 @@ export const pageQuery = graphql`
             description {
                 description
             }
+            slug
             offeringType
             category {
                 title

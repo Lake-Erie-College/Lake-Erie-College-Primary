@@ -33,7 +33,7 @@ const SEO = ({ title, description, robots, location }) => {
             {robots && (
                 <meta name="robots" content={robots} />
             )}
-            <link rel="canonical" href={`${siteUrl}${location.pathname}`} />
+            <link rel="canonical" href={`${siteUrl}${location.pathname || location}`} />
         </Helmet>
     )
 }

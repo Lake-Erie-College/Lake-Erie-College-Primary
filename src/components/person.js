@@ -44,9 +44,7 @@ const Person = ({ person, displayName }) => {
                 )}
                 { buildingTo && (
                     <p className={cx(styles.info, styles.building)}>
-                        <GatsbyLink to={buildingTo} className={styles.internal}>
-                            {person.building.title}<FontAwesomeIcon icon='external-link-square-alt' size='xs' className={styles.icon} />
-                        </GatsbyLink>
+                        {person.building.title}
                     </p>
                 )}
                 { person.office && (

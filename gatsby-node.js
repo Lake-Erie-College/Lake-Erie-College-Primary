@@ -31,6 +31,7 @@ exports.createPages = ({ graphql, actions }) => {
                         edges {
                             node {
                                 slug
+                                alias
                                 title
                                 hidden
                                 category {
@@ -44,6 +45,7 @@ exports.createPages = ({ graphql, actions }) => {
                             node {
                                 title
                                 slug
+                                alias
                                 hidden
                                 category {
                                     slug
@@ -55,6 +57,7 @@ exports.createPages = ({ graphql, actions }) => {
                         edges {
                             node {
                                 slug
+                                alias
                                 title
                                 hidden
                                 category {
@@ -180,6 +183,16 @@ exports.createPages = ({ graphql, actions }) => {
                             slug: page.node.slug,
                         },
                     })
+
+                    if (page.node.alias) {
+                        createPage({
+                            path: page.node.alias,
+                            component: department,
+                            context: {
+                                slug: page.node.slug,
+                            },
+                        })
+                    }
                 })
 
                 pages.forEach((page, index) => {
@@ -196,6 +209,16 @@ exports.createPages = ({ graphql, actions }) => {
                             slug: page.node.slug,
                         },
                     })
+
+                    if (page.node.alias) {
+                        createPage({
+                            path: page.node.alias,
+                            component: standardpage,
+                            context: {
+                                slug: page.node.slug,
+                            },
+                        })
+                    }
                 })
 
                 offerings.forEach((page, index) => {
@@ -212,22 +235,16 @@ exports.createPages = ({ graphql, actions }) => {
                             slug: page.node.slug,
                         },
                     })
-                })
 
-                locations.forEach((page, index) => {
-                    if (page.node.hidden) {
-                        return
+                    if (page.node.alias) {
+                        createPage({
+                            path: page.node.alias,
+                            component: academicOffering,
+                            context: {
+                                slug: page.node.slug,
+                            },
+                        })
                     }
-
-                    let path = linkResolver.path(page.node)
-
-                    createPage({
-                        path: path,
-                        component: location,
-                        context: {
-                            slug: page.node.slug,
-                        },
-                    })
                 })
 
                 people.forEach((page, index) => {
