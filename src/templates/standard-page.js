@@ -128,8 +128,8 @@ export const pageQuery = graphql`
                     ...BlockSpotlightContent
                     ...Department
                     ...Location
-                    ...NavigationItem
                     ...Person
+                    ...Event
                     ...StandardPage
                 }
             }
