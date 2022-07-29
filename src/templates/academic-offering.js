@@ -52,7 +52,6 @@ class AcademicOfferingTemplate extends React.Component {
                 : `${page.title} ${facultyType}`
 
         let path = linkResolver.path(page)
-        console.log(page)
 
         return (
             <Layout location={this.props.location}>

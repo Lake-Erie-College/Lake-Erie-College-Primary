@@ -142,7 +142,6 @@ exports.createPages = ({ graphql, actions }) => {
                 }
             `).then(result => {
                 if (result.errors) {
-                    console.log(result.errors)
                     reject(result.errors)
                 }
 
@@ -151,7 +150,6 @@ exports.createPages = ({ graphql, actions }) => {
                 const pages = result.data.allContentfulStandardPage.edges
                 const offerings =
                     result.data.allContentfulAcademicOffering.edges
-                const locations = result.data.allContentfulLocation.edges
                 const people = result.data.allContentfulPerson.edges
                 const events = result.data.allContentfulEvent.edges
 
@@ -185,13 +183,15 @@ exports.createPages = ({ graphql, actions }) => {
                     })
 
                     if (page.node.alias) {
-                        createPage({
-                            path: page.node.alias,
-                            component: department,
-                            context: {
-                                slug: page.node.slug,
-                            },
-                        })
+                        if (page.node.alias !== page.node.slug) {
+                            createPage({
+                                path: page.node.alias,
+                                component: department,
+                                context: {
+                                    slug: page.node.slug,
+                                },
+                            })
+                        }
                     }
                 })
 
@@ -211,13 +211,15 @@ exports.createPages = ({ graphql, actions }) => {
                     })
 
                     if (page.node.alias) {
-                        createPage({
-                            path: page.node.alias,
-                            component: standardpage,
-                            context: {
-                                slug: page.node.slug,
-                            },
-                        })
+                        if (page.node.alias !== page.node.slug) {
+                            createPage({
+                                path: page.node.alias,
+                                component: standardpage,
+                                context: {
+                                    slug: page.node.slug,
+                                },
+                            })
+                        }
                     }
                 })
 
@@ -237,13 +239,15 @@ exports.createPages = ({ graphql, actions }) => {
                     })
 
                     if (page.node.alias) {
-                        createPage({
-                            path: page.node.alias,
-                            component: academicOffering,
-                            context: {
-                                slug: page.node.slug,
-                            },
-                        })
+                        if (page.node.alias !== page.node.slug) {
+                            createPage({
+                                path: page.node.alias,
+                                component: academicOffering,
+                                context: {
+                                    slug: page.node.slug,
+                                },
+                            })
+                        }
                     }
                 })
 
