@@ -234,7 +234,6 @@ fragment NavigationItem on ContentfulNavigationItem {
       ...Homepage
       ...Location
       ...Person
-      ...Event
       ...StandardPage
     }
     externalUrl
@@ -260,7 +259,6 @@ fragment NavigationItem on ContentfulNavigationItem {
               ...Homepage
               ...Location
               ...Person
-              ...Event
               ...StandardPage
             }
             externalUrl
@@ -416,7 +414,6 @@ fragment BlockMediaWithCaption on ContentfulBlockMediaWithCaption {
     internalLink {
       ...StandardPage
       ...Person
-      ...Event
       ...AcademicOffering
       ...Department
     }

@@ -79,7 +79,6 @@ export const pageQuery = graphql`
                     ...Asset
                     ...BlockExternalEmbed
                     ...BlockMediaWithCaption
-                    ...BlockSpotlightContent
                     ...Location
                     ...Person
                 }
